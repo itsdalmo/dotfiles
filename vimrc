@@ -1,4 +1,4 @@
-set nocompatible
+se nocompatible
 let mapleader=","
 
 " Basic settings --------------------------------------------------------------
@@ -31,10 +31,11 @@ set noswapfile
 set showtabline=0
 set splitright
 set splitbelow
+set nowrap
 
 " Autocmd ---------------------------------------------------------------------
 " Language specific settings
-autocmd FileType markdown setlocal shiftwidth=4 softtabstop=4 tabstop=4 wrap linebreak nolist wrap lbr colorcolumn=0 synmaxcol=999999
+autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
 
 " Don't add the comment prefix when I hit enter or o/O on a comment line.
 autocmd FileType * setlocal formatoptions-=r formatoptions-=o
@@ -51,6 +52,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Language support
+Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'pangloss/vim-javascript'
 Plug 'moll/vim-node'
@@ -59,6 +61,9 @@ Plug 'motus/pig.vim'
 Plug 'othree/html5.vim'
 Plug 'leshill/vim-json'
 Plug 'tpope/vim-markdown'
+
+" Convenience
+Plug 'SirVer/ultisnips'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -75,6 +80,7 @@ call plug#end()
 
 " Plugin settings ---------------------------------------
 let g:javascript_plugin_jsdoc = 1
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 let g:jsx_ext_required = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
@@ -109,6 +115,7 @@ nnoremap <silent> <Left> :vertical resize +5<cr>
 " Open fzf with ctrl+o and ctrl+p
 nnoremap <C-O> :History<CR>
 nnoremap <C-P> :Files<CR>
+nnoremap <C-I> :Ag<CR>
 
 " stolen from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
 " Keep search matches in the middle of the window.
