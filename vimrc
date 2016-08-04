@@ -1,4 +1,4 @@
-se nocompatible
+set nocompatible
 let mapleader=","
 
 " Basic settings --------------------------------------------------------------
