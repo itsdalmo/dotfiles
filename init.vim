@@ -1,4 +1,4 @@
-set nocompatible
+se nocompatible
 let mapleader=","
 
 " Basic settings --------------------------------------------------------------
@@ -36,12 +36,13 @@ set nowrap
 " Autocmd ---------------------------------------------------------------------
 " Language specific settings
 autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
+autocmd FileType pig setlocal shiftwidth=4 softtabstop=4 tabstop=4
 
-" Don't add the comment prefix when I hit enter or o/O on a comment line.
-autocmd FileType * setlocal formatoptions-=r formatoptions-=o
+" Run neomake on every save
+autocmd! BufWritePost * Neomake
 
 " Plugins ------------------------------------------------
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " File management
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -52,7 +53,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Language support
-Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
 Plug 'ervandew/supertab'
 Plug 'pangloss/vim-javascript'
 Plug 'moll/vim-node'
@@ -64,6 +65,7 @@ Plug 'tpope/vim-markdown'
 
 " Convenience
 Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-surround'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -79,8 +81,8 @@ Plug 'christoomey/vim-tmux-runner'
 call plug#end()
 
 " Plugin settings ---------------------------------------
+let g:neomake_javascript_enabled_makers = ['jshint', 'jscs']
 let g:javascript_plugin_jsdoc = 1
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 let g:jsx_ext_required = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'

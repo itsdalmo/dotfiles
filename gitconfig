@@ -1,0 +1,9 @@
+# This is Git's per-user configuration file.
+[user]
+	name = itsdalmo
+	email = kristian@doingit.no
+
+[alias]
+   unstage = reset HEAD
+   uncommit = reset --soft HEAD^
+   amend = commit --amend
