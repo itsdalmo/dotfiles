@@ -38,8 +38,11 @@ set nowrap
 autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType pig setlocal shiftwidth=4 softtabstop=4 tabstop=4
 
-" Run neomake on every save
-autocmd! BufWritePost * Neomake
+" Run neomake on every enter or save
+autocmd! BufWritePost,BufEnter * Neomake
+
+" Delete trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
 
 " Plugins ------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
@@ -48,7 +51,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Statusbar 
+" Statusbar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -71,7 +74,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 
-" Theme 
+" Theme
 Plug 'altercation/vim-colors-solarized'
 
 " Tmux
@@ -81,14 +84,18 @@ Plug 'christoomey/vim-tmux-runner'
 call plug#end()
 
 " Plugin settings ---------------------------------------
-let g:neomake_javascript_enabled_makers = ['jshint', 'jscs']
 let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 
-" Theme ------------------------------------------------- 
+" Linting
+let g:neomake_javascript_jshint_args = neomake#makers#ft#javascript#jshint()['args'] + ["--config", "~/Github/dotfiles/jshint"]
+" let g:neomake_javascript_jscs_args = neomake#makers#ft#javascript#eslint()['args'] + ["--config", "~/Github/dotfiles/eslint"]
+let g:neomake_javascript_enabled_makers = ['jshint']
+
+" Theme -------------------------------------------------
 set t_Co=256
 set background=dark
 set encoding=utf-8
@@ -118,6 +125,7 @@ nnoremap <silent> <Left> :vertical resize +5<cr>
 nnoremap <C-O> :History<CR>
 nnoremap <C-P> :Files<CR>
 nnoremap <C-I> :Ag<CR>
+nnoremap <C-C> :Commit<CR>
 
 " stolen from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
 " Keep search matches in the middle of the window.
