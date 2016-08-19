@@ -1,5 +1,36 @@
 #!/usr/bin/env node
 'use strict';
 
-console.log(process.argv);
-process.exit(1);
+var util = require('./util');
+
+// Make sure we are not pushing to master
+function checkPush() {
+  util.getCurrentBranch()
+  .then(util.getJiraIssue)
+  .then(issue => {
+    util.getPushRefs()
+    .then(refs => {
+      refs = refs.split(' ');
+      var regx = /[^/]+$/;
+      var ref = {
+        local: regx.exec(refs[0])[0],
+        remote: regx.exec(refs[2])[0]
+      };
+
+      if (ref.local !== ref.remote) {
+        throw new Error('Remote branch must have the same name as the local.');
+      }
+      issue = new RegExp(issue);
+      if (!issue.test(ref.remote)) {
+        throw new Error('Remote branch must contain the JIRA-issue.');
+      }
+
+    });
+  })
+  .catch(error => {
+    console.log('error: ' + error.message);
+    process.exit(1);
+  });
+}
+
+checkPush();

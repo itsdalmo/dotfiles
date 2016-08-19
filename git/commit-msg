@@ -1,58 +1,22 @@
 #!/usr/bin/env node
 'use strict';
 
-const fs = require('fs');
-const exec = require('child_process').exec;
-
-function getCurrentBranch() {
-  return new Promise(function (resolve, reject) {
-    exec('git symbolic-ref --short HEAD', (error, stdout) => {
-      if (error) { 
-        reject(error);
-      }
-      resolve(stdout);
-    });
-  });
-}
-
-function getCommitMessage(file) {
-  return new Promise(function (resolve, reject) {
-    fs.readFile(file, 'utf-8', (error, data) => {
-      if (error) { 
-        reject(error);
-      }
-      resolve(data);
-    }); 
-  }); 
-}
+var util = require('./util');
 
 // Check current branch and commit message
 function checkCommit(file) {
-  getCurrentBranch()
-    .then(branch => {
-      let pattern = /DA-\d+/i;
-      if (!pattern.test(branch)) {
-        let master = /master/i;
-        if (master.test(branch)) {
-          console.log('Not allowed to commit to master branch.');
-        } else {
-          console.log('Branch should contain reference to JIRA-issue.'); 
-        }
-          process.exit(1); 
-      }
-      return pattern.exec(branch)[0];
-    })
+  util.getCurrentBranch()
+    .then(util.getJiraIssue)
     .then(issue => {
-      getCommitMessage(file).
-        then(msg => {
+      util.getCommitMessage(file)
+        .then(msg => {
           let reg = new RegExp('^' + issue, 'i');
-        if (!reg.test(msg)) {
-          console.log(`Commit message should include a reference to the JIRA-issue (${issue}).`);
-          process.exit(1);
-        }
+          if (!reg.test(msg)) {
+            throw new Error(`Commit message should include a reference to the JIRA-issue (${issue}).`);
+          }
       });
     })
-    .catch(error => { 
+    .catch(error => {
       console.log(error.message);
       process.exit(1);
     });
