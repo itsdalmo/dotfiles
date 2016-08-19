@@ -4,11 +4,11 @@
 var util = require('./util');
 
 // Check current branch and commit message
-function checkCommit(file) {
+function checkCommit() {
   util.getCurrentBranch()
     .then(util.getJiraIssue)
     .then(issue => {
-      util.getCommitMessage(file)
+      util.getCommitMessage(process.argv[2])
         .then(msg => {
           let reg = new RegExp('^' + issue, 'i');
           if (!reg.test(msg)) {
@@ -23,5 +23,5 @@ function checkCommit(file) {
 }
 
 // Call
-checkCommit(process.argv[2]);
+checkCommit();
 
