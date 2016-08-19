@@ -17,14 +17,13 @@ function checkPush() {
         remote: regx.exec(refs[2])[0]
       };
 
+      let reg = new RegExp('^' + issue, 'i');
+      if (!reg.test(ref.remote)) {
+        throw new Error('Remote branch must contain the JIRA-issue.');
+      }
       if (ref.local !== ref.remote) {
         throw new Error('Remote branch must have the same name as the local.');
       }
-      issue = new RegExp(issue);
-      if (!issue.test(ref.remote)) {
-        throw new Error('Remote branch must contain the JIRA-issue.');
-      }
-
     });
   })
   .catch(error => {
