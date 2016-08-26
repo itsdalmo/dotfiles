@@ -1,7 +1,7 @@
 # Git aware (color coded) prompt
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source "${GITAWAREPROMPT}/main.sh"
-export PS1="|\t|\u|\w\[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]>>> " 
+export PS1="|\t|\u|\w\[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]>>> "
 
 # Git autocompletion
 if [ -f ~/.git-completion.bash ]; then
@@ -24,13 +24,15 @@ alias vim='/usr/local/bin/vim'
 
 # Tmux setting and shortcut
 alias tmux="TERM=screen-256color-bce tmux"
-alias tmdev="tmux att -t dev-session || tmux new -s dev-session 'tmux source-file ~/.tmux/dev-session.conf'"
-alias tmssh="tmux att -t ssh-session || tmux new -s ssh-session 'tmux source-file ~/.tmux/ssh-session.conf'"
+function dev {
+         tmux att -t ${PWD} || tmux new -s ${PWD} 'tmux source-file ~/.tmux/dev-session.conf'
+}
+alias dev='dev'
 
-# Use silver searcher with FZF 
+# Use silver searcher with FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# AWS CLI setup 
+# AWS CLI setup
 export EC2_HOME="/usr/local/ec2/ec2-api-tools-1.7.5.1"
 export EC2_URL="ec2.eu-west-1.amazonaws.com"
 export PATH="$PATH:$EC2_HOME/bin"
