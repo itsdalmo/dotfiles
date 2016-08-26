@@ -16,7 +16,7 @@ function getCurrentBranch() {
 }
 
 function getJiraIssue(branch) {
-  let pattern = /DA-\d+/i;
+  let pattern = /[a-z]{2,2}-\d+/i;
   if (!pattern.test(branch)) {
     let master = /master/i;
     let error = '';
