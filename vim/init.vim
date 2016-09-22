@@ -101,6 +101,10 @@ set background=dark
 set encoding=utf-8
 colorscheme solarized
 
+" Commands ---------------------------------------------
+command! W write
+command! Q quit
+
 " Maps --------------------------------------------------
 " Send code to tmux
 noremap <leader>fr :VtrFocusRunner<cr>
