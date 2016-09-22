@@ -25,9 +25,10 @@ alias vim='/usr/local/bin/vim'
 # Tmux setting and shortcut
 alias tmux="TERM=screen-256color-bce tmux"
 function dev {
-         tmux att -t ${PWD} || tmux new -s ${PWD} 'tmux source-file ~/.tmux/dev-session.conf'
+         tmux att -t ${PWD} || tmux new -s ${PWD} 'tmux source-file ~/.tmux/dev-session.config'
 }
 alias dev='dev'
+alias ll='ls -la'
 
 # Use silver searcher with FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
