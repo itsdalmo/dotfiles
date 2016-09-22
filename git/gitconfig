@@ -1,5 +1,6 @@
 # This is Git's per-user configuration file.
 [user]
+# Please adapt and uncomment the following lines:
 	name = itsdalmo
 	email = kristian@doingit.no
 
@@ -7,3 +8,4 @@
    unstage = reset HEAD
    uncommit = reset --soft HEAD^
    amend = commit --amend
+   history = log --graph --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
