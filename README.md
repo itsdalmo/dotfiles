@@ -1,21 +1,20 @@
 # dotfiles
 
-My dotfiles. 
+My dotfiles.
 
 #### Requirements
 
-1. [Git aware prompt](https://github.com/jimeh/git-aware-prompt)
-2. [Git completion](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash)
-3. [FZF](https://github.com/junegunn/fz://github.com/junegunn/fzf) - Installed by vim-plug.
-4. [AG (silver searcher)](https://github.com/ggreer/the_silver_searcher)
+1. nvim - installed with homebrew.
+2. [Git aware prompt](https://github.com/jimeh/git-aware-prompt)
+3. [Git completion](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash)
+4. [FZF](https://github.com/junegunn/fz://github.com/junegunn/fzf) - Installed by vim-plug.
+5. [AG (silver searcher)](https://github.com/ggreer/the_silver_searcher)
 
-Everything in homefolder, except:
-```
-init.vim => ~/.config/nvim
-UltiSnips => ~/.config/nvim
-```
+#### Install
 
-Symlink .vimrc:
-```
-ln -s ~/.config/nvim/init.vim ~/.vimrc
+Use the bash script (change "work" directory for git hooks). From dotfiles directory:
+
+```bash
+sudo chmod a+x ./install.sh
+./install.sh
 ```
