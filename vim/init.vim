@@ -91,9 +91,9 @@ let g:airline_theme='solarized'
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 
 " Linting
-let g:neomake_javascript_jshint_args = neomake#makers#ft#javascript#jshint()['args'] + ["--config", "~/Github/dotfiles/jshint"]
-" let g:neomake_javascript_jscs_args = neomake#makers#ft#javascript#eslint()['args'] + ["--config", "~/Github/dotfiles/eslint"]
-let g:neomake_javascript_enabled_makers = ['jshint']
+" let g:neomake_javascript_jshint_args = neomake#makers#ft#javascript#jshint()['args'] + ["--config", "~/Github/dotfiles/lint/jshint"]
+" let g:neomake_javascript_jscs_args = neomake#makers#ft#javascript#eslint()['args'] + ["--config", "~/Github/dotfiles/lint/eslint"]
+let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
 
 " Theme -------------------------------------------------
 set t_Co=256
