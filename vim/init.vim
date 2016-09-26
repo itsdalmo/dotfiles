@@ -39,7 +39,7 @@ autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType pig setlocal shiftwidth=4 softtabstop=4 tabstop=4
 
 " Run neomake on every enter or save
-autocmd! BufWritePost,BufEnter * Neomake
+autocmd! BufWritePost,BufEnter *.js Neomake
 
 " Delete trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
