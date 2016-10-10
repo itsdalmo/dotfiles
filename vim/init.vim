@@ -113,6 +113,10 @@ noremap <leader>rr :VtrSendLinesToRunner<cr>j
 noremap <leader>dr :VtrSendCtrlD<cr>
 noremap <leader>ar :VtrAttachToPane<cr>
 
+" Prettyprint json/prettyindent
+noremap <leader>pp :%!python -m json.tool<cr>
+noremap <leader>ii gg=G
+
 " CTRL movement between windows
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
