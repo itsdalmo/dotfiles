@@ -88,7 +88,7 @@ let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --ignore={.git,node_modules,coverage} --hidden -g "" -U'
 
 " Linting
 " let g:neomake_javascript_jshint_args = neomake#makers#ft#javascript#jshint()['args'] + ["--config", "~/Github/dotfiles/lint/jshint"]
