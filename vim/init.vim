@@ -40,6 +40,7 @@ autocmd FileType pig setlocal shiftwidth=4 softtabstop=4 tabstop=4
 
 " Run neomake on every enter or save
 autocmd! BufWritePost,BufEnter *.js Neomake
+autocmd! BufWritePost,BufEnter *.sh Neomake
 
 " Delete trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -91,8 +92,7 @@ let g:airline_theme='solarized'
 let $FZF_DEFAULT_COMMAND = 'ag --ignore={.git,node_modules,coverage} --hidden -g "" -U'
 
 " Linting
-" let g:neomake_javascript_jshint_args = neomake#makers#ft#javascript#jshint()['args'] + ["--config", "~/Github/dotfiles/lint/jshint"]
-" let g:neomake_javascript_jscs_args = neomake#makers#ft#javascript#eslint()['args'] + ["--config", "~/Github/dotfiles/lint/eslint"]
+let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
 let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
 
 " Theme -------------------------------------------------

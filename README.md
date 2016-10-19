@@ -9,6 +9,7 @@ My dotfiles.
 3. [Git completion](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash)
 4. [FZF](https://github.com/junegunn/fz://github.com/junegunn/fzf) - Installed by vim-plug.
 5. [AG (silver searcher)](https://github.com/ggreer/the_silver_searcher)
+6. [ShellCheck](https://github.com/koalaman/shellcheck/blob/master/README.md)
 
 #### Install
 
