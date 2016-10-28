@@ -37,6 +37,7 @@ set nowrap
 " Language specific settings
 autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType pig setlocal shiftwidth=4 softtabstop=4 tabstop=4
+autocmd FileType sh setlocal shiftwidth=4 softtabstop=4 tabstop=4
 
 " Run neomake on every enter or save
 autocmd! BufWritePost,BufEnter *.js Neomake
@@ -88,7 +89,7 @@ call plug#end()
 let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+let g:airline_theme='base16'
 let $FZF_DEFAULT_COMMAND = 'ag --ignore={.git,node_modules,coverage} --hidden -g "" -U'
 
 " Linting
