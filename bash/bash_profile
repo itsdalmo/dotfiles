@@ -45,3 +45,5 @@ export PATH="//anaconda/bin:$PATH"
 # Add path to PSQL
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 
+# Export path to GDAL
+export PATH=/Library/Frameworks/GDAL.framework/Programs:$PATH
