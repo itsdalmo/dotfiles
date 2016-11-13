@@ -34,6 +34,10 @@ set splitbelow
 set nowrap
 
 " Autocmd ---------------------------------------------------------------------
+" Filetypes
+au BufRead,BufNewFile *.geojson setfiletype json
+au BufRead,BufNewFile *.topojson setfiletype json
+
 " Language specific settings
 autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType pig setlocal shiftwidth=4 softtabstop=4 tabstop=4
@@ -56,19 +60,17 @@ Plug 'junegunn/fzf.vim'
 " Statusbar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 
 " Language support
 Plug 'neomake/neomake'
-Plug 'ervandew/supertab'
-Plug 'pangloss/vim-javascript'
-Plug 'moll/vim-node'
-Plug 'leafgarland/typescript-vim'
 Plug 'motus/pig.vim'
-Plug 'othree/html5.vim'
-Plug 'leshill/vim-json'
-Plug 'tpope/vim-markdown'
+Plug 'pangloss/vim-javascript'
+Plug 'fatih/vim-go'
+Plug 'rust-lang/rust.vim'
 
 " Convenience
+Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
 
@@ -90,6 +92,7 @@ let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='base16'
+let g:SuperTabDefaultCompletionType = "context"
 let $FZF_DEFAULT_COMMAND = 'ag --ignore={.git,node_modules,coverage} --hidden -g "" -U'
 
 " Linting
@@ -108,15 +111,21 @@ command! Q quit
 
 " Maps --------------------------------------------------
 " Send code to tmux
-noremap <leader>fr :VtrFocusRunner<cr>
-noremap <leader>kr :VtrKillRunner<cr>
 noremap <leader>rr :VtrSendLinesToRunner<cr>j
-noremap <leader>dr :VtrSendCtrlD<cr>
 noremap <leader>ar :VtrAttachToPane<cr>
 
-" Prettyprint json/prettyindent
-noremap <leader>pp :%!python -m json.tool<cr>
-noremap <leader>ii gg=G
+" Simple function for reformatting code/json
+function! ReFormat()
+  if &filetype=='json'
+    :%!python -m json.tool
+  else
+    normal! gg=G``
+  endif
+endfunction
+
+noremap <leader>rf :call ReFormat()<cr>
+noremap <leader>gh :Gbrowse<cr>
+noremap <leader>gd :Gdiff<cr>
 
 " CTRL movement between windows
 noremap <C-h> <C-w>h
