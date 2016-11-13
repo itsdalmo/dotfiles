@@ -53,5 +53,5 @@ export GOPATH=$HOME/Github/test-go
 export PATH=$GOPATH/bin:$PATH
 
 # Cargo stuff
-export PATH=/Users/dalmo/.cargo/bin:$PATH
+export PATH=~/.cargo/bin:$PATH
 
