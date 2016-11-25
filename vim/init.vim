@@ -111,7 +111,7 @@ command! Q quit
 
 " Maps --------------------------------------------------
 " Send code to tmux
-noremap <leader>rr :VtrSendLinesToRunner<cr>j
+noremap <leader>rr m`:VtrSendLinesToRunner<cr>``
 noremap <leader>ar :VtrAttachToPane<cr>
 
 " Simple function for reformatting code/json
@@ -126,6 +126,7 @@ endfunction
 noremap <leader>rf :call ReFormat()<cr>
 noremap <leader>gh :Gbrowse<cr>
 noremap <leader>gd :Gdiff<cr>
+imap    <leader>ff <plug>(fzf-complete-path)
 
 " CTRL movement between windows
 noremap <C-h> <C-w>h
