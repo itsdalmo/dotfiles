@@ -1,5 +1,5 @@
 se nocompatible
-let mapleader=","
+let mapleader = "\<SPACE>"
 
 " Basic settings --------------------------------------------------------------
 syntax enable
@@ -73,6 +73,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'scrooloose/nerdtree'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -93,11 +96,13 @@ let g:jsx_ext_required = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='base16'
 let g:SuperTabDefaultCompletionType = "context"
-let $FZF_DEFAULT_COMMAND = 'ag --ignore={.git,node_modules,coverage} --hidden -g "" -U'
 
 " Linting
 let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
 let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
+
+" Path completion etc
+let g:SuperTabDefaultCompletionType = "context"
 
 " Theme -------------------------------------------------
 set t_Co=256
@@ -108,12 +113,9 @@ colorscheme solarized
 " Commands ---------------------------------------------
 command! W write
 command! Q quit
+command! -bang -nargs=* Find call fzf#vim#grep('rg --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
-" Maps --------------------------------------------------
-" Send code to tmux
-noremap <leader>rr m`:VtrSendLinesToRunner<cr>``
-noremap <leader>ar :VtrAttachToPane<cr>
-
+" Functions ---------------------------------------------
 " Simple function for reformatting code/json
 function! ReFormat()
   if &filetype=='json'
@@ -123,11 +125,73 @@ function! ReFormat()
   endif
 endfunction
 
-noremap <leader>rf :call ReFormat()<cr>
-noremap <leader>gh :Gbrowse<cr>
-noremap <leader>gd :Gdiff<cr>
-imap    <leader>ff <plug>(fzf-complete-path)
+" Misc -------------------------------------------------
+" stolen from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
+" indent visual selected code without unselecting and going back to normal mode
+vmap > >gv
+vmap < <gv
+
+" Maps --------------------------------------------------
+" Buffers
+nmap <LEADER><TAB> <C-^>
+nmap <LEADER>bb :buffers<CR>
+nmap <LEADER>bd :bdelete<CR>
+nmap <LEADER>bn :bn<CR>
+nmap <LEADER>bp :bp<CR>
+nmap <LEADER>bR :e<CR>
+
+" Commentary
+nmap <Leader>;  <Plug>Commentary
+nmap <Leader>;; <Plug>CommentaryLine
+omap <Leader>;  <Plug>Commentary
+vmap <Leader>;  <Plug>Commentary
+
+" Errors
+nmap <silent> <Leader>en :lnext<CR>
+nmap <silent> <Leader>ep :lprev<CR>
+
+" Files
+nmap <LEADER>fed :e ~/.vimrc<CR>
+nmap <LEADER>feR :source ~/.vimrc<CR>
+nmap <LEADER>ff :Files<CR>
+nmap <LEADER>fr :History<CR>
+nmap <LEADER>fs :w<CR>
+nmap <LEADER>fS :wa<CR>
+nmap <LEADER>ft :NERDTreeToggle<CR>"
+nmap <LEADER>fR :Move<CR>"
+
+" Git
+nmap <LEADER>gh :Gbrowse<CR>
+nmap <LEADER>gb :Gblame<CR>
+nmap <LEADER>gd :Gdiff<CR>
+nmap <LEADER>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<cr>
+
+" Project
+" nmap <LEADER>pf :CtrlPRoot<CR>
+" nmap <LEADER>pt :call spacemacs#toggleExplorerAtRoot()<CR>
+
+" Search
+nmap <Leader>sc :noh<CR>
+nmap <LEADER>sp :Find<CR>
+
+" Window
+nmap <LEADER>wh :sp<CR>
+nmap <LEADER>wv :vsp<CR>
+nmap <LEADER>w= <C-W>=
+nmap <LEADER>wd :q<CR>
+nmap <LEADER>ww <C-W><C-W>
+
+" Code
+noremap <leader>mf :call ReFormat()<cr>
+noremap <leader>ma :VtrAttachToPane<cr>
+noremap <leader>mr m`:VtrSendLinesToRunner<cr>``
+
+" imap    <leader>ff <plug>(fzf-complete-path)
 " CTRL movement between windows
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
@@ -139,19 +203,4 @@ nnoremap <silent> <Up> :resize -5<cr>
 nnoremap <silent> <Down> :resize +5<cr>
 nnoremap <silent> <Right> :vertical resize -5<cr>
 nnoremap <silent> <Left> :vertical resize +5<cr>
-
-" Open fzf with ctrl+o and ctrl+p
-nnoremap <C-O> :History<CR>
-nnoremap <C-P> :Files<CR>
-nnoremap <C-I> :Ag<CR>
-nnoremap <C-C> :Commit<CR>
-
-" stolen from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
-" Keep search matches in the middle of the window.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-" indent visual selected code without unselecting and going back to normal mode
-vmap > >gv
-vmap < <gv
 

@@ -1,12 +1,17 @@
 # Git aware (color coded) prompt
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source "${GITAWAREPROMPT}/main.sh"
-export PS1="|\t|\u|\w\[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]>>> "
 
 # Git autocompletion
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
+
+# |21:36:02|user|~/Current/path(git_branch)>>>
+export PS1="|\t|\u|\w\[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]>>> "
+
+# Use ripgrep with FZF
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 # Encoding
 export LC_ALL=en_US.UTF-8
@@ -30,7 +35,7 @@ function dev {
 alias dev='dev'
 alias ll='ls -la'
 
-# Use silver searcher with FZF
+# Use FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # AWS CLI setup
@@ -39,19 +44,11 @@ export EC2_URL="ec2.eu-west-1.amazonaws.com"
 export PATH="$PATH:$EC2_HOME/bin"
 export JAVA_HOME="$(/usr/libexec/java_home)"
 
-# Added by Anaconda3 4.1.1 installer
+# Path
 export PATH="//anaconda/bin:$PATH"
-
-# Add path to PSQL
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
-
-# Export path to GDAL
 export PATH=/Library/Frameworks/GDAL.framework/Programs:$PATH
-
-# Export path to GOPATH
 export GOPATH=$HOME/Github/test-go
 export PATH=$GOPATH/bin:$PATH
-
-# Cargo stuff
 export PATH=~/.cargo/bin:$PATH
 
