@@ -11,7 +11,7 @@ fi
 export PS1="|\t|\u|\w\[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]>>> "
 
 # Use ripgrep with FZF
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
 
 # Encoding
 export LC_ALL=en_US.UTF-8
@@ -28,7 +28,6 @@ export EDITOR=nvim
 alias vim='/usr/local/bin/vim'
 
 # Tmux setting and shortcut
-alias tmux="TERM=screen-256color-bce tmux"
 function dev {
          tmux att -t ${PWD} || tmux new -s ${PWD} 'tmux source-file ~/.tmux/dev-session.config'
 }

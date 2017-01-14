@@ -60,7 +60,7 @@ Plug 'junegunn/fzf.vim'
 " Statusbar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim'
 
 " Language support
 Plug 'neomake/neomake'
@@ -83,6 +83,7 @@ Plug 'mhinz/vim-signify'
 
 " Theme
 Plug 'altercation/vim-colors-solarized'
+Plug 'colepeters/spacemacs-theme.vim'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -95,6 +96,7 @@ let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='base16'
+let g:airline_inactive_collapse=1
 let g:SuperTabDefaultCompletionType = "context"
 
 " Linting
@@ -105,15 +107,20 @@ let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
 let g:SuperTabDefaultCompletionType = "context"
 
 " Theme -------------------------------------------------
-set t_Co=256
+if (has("termguicolors"))
+  set termguicolors
+endif
 set background=dark
+colorscheme spacemacs-theme
 set encoding=utf-8
-colorscheme solarized
+" set t_ut=
+hi VertSplit ctermbg=NONE guibg=NONE
 
 " Commands ---------------------------------------------
 command! W write
 command! Q quit
-command! -bang -nargs=* Find call fzf#vim#grep('rg --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+" TODO: Figure out why this is not working...
+" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " Functions ---------------------------------------------
 " Simple function for reformatting code/json
@@ -155,9 +162,10 @@ nmap <silent> <Leader>en :lnext<CR>
 nmap <silent> <Leader>ep :lprev<CR>
 
 " Files
-nmap <LEADER>fed :e ~/.vimrc<CR>
-nmap <LEADER>feR :source ~/.vimrc<CR>
+nmap <LEADER>fed :e ~/.config/nvim/init.vim<CR>
+nmap <LEADER>feR :source ~/.config/nvim/init.vim<CR>
 nmap <LEADER>ff :Files<CR>
+nmap <LEADER>fF :Files ..<CR>
 nmap <LEADER>fr :History<CR>
 nmap <LEADER>fs :w<CR>
 nmap <LEADER>fS :wa<CR>
@@ -175,9 +183,12 @@ nmap <leader>gd :Gdiff<cr>
 " nmap <LEADER>pf :CtrlPRoot<CR>
 " nmap <LEADER>pt :call spacemacs#toggleExplorerAtRoot()<CR>
 
+" Toggles
+nmap <LEADER>tn :set relativenumber!<CR>
+
 " Search
 nmap <Leader>sc :noh<CR>
-nmap <LEADER>sp :Find<CR>
+nmap <LEADER>sp :Ag<CR>
 
 " Window
 nmap <LEADER>wh :sp<CR>
@@ -190,6 +201,12 @@ nmap <LEADER>ww <C-W><C-W>
 noremap <leader>mf :call ReFormat()<cr>
 noremap <leader>ma :VtrAttachToPane<cr>
 noremap <leader>mr m`:VtrSendLinesToRunner<cr>``
+
+" Quit/exit
+nmap <LEADER>qw :q<CR>
+nmap <LEADER>qq :qa<CR>
+nmap <Leader>qQ :qa!<CR>
+nmap <Leader>qs :xa<CR>
 
 " imap    <leader>ff <plug>(fzf-complete-path)
 " CTRL movement between windows
