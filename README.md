@@ -14,6 +14,10 @@ Install [iterm2](https://www.iterm2.com/downloads.html),
 Install [Homebrew](http://brew.sh/index_no.html) and run the following:
 
 ```bash
+# TMUX
+# (https://tmux.github.io/)
+brew install tmux
+
 # NVIM
 # (https://github.com/neovim/neovim))
 brew install neovim/neovim/neovim
