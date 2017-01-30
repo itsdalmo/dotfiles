@@ -60,7 +60,6 @@ Plug 'junegunn/fzf.vim'
 " Statusbar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'edkolev/tmuxline.vim'
 
 " Language support
 Plug 'neomake/neomake'
@@ -76,13 +75,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'scrooloose/nerdtree'
+Plug 'junegunn/vim-easy-align'
 
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 
 " Theme
-Plug 'altercation/vim-colors-solarized'
 Plug 'colepeters/spacemacs-theme.vim'
 
 " Tmux
@@ -143,6 +142,9 @@ vmap > >gv
 vmap < <gv
 
 " Maps --------------------------------------------------
+" No exmode
+nnoremap Q <nop>
+
 " Buffers
 nmap <LEADER><TAB> <C-^>
 nmap <LEADER>bb :buffers<CR>
@@ -201,6 +203,7 @@ nmap <LEADER>ww <C-W><C-W>
 noremap <leader>mf :call ReFormat()<cr>
 noremap <leader>ma :VtrAttachToPane<cr>
 noremap <leader>mr m`:VtrSendLinesToRunner<cr>``
+noremap <leader>ml :EasyAlign*<Bar><cr>
 
 " Quit/exit
 nmap <LEADER>qw :q<CR>
@@ -209,11 +212,11 @@ nmap <Leader>qQ :qa!<CR>
 nmap <Leader>qs :xa<CR>
 
 " imap    <leader>ff <plug>(fzf-complete-path)
-" CTRL movement between windows
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 
 " Use arrowkeys to resize window in normal mode.
 nnoremap <silent> <Up> :resize -5<cr>

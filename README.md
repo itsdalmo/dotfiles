@@ -1,19 +1,76 @@
 # dotfiles
 
-My dotfiles.
+My dotfiles/dev environments.
 
-#### Requirements
+## Prerequisities
 
-1. nvim - installed with homebrew.
-2. [Git aware prompt](https://github.com/jimeh/git-aware-prompt)
-3. [Git completion](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash)
-4. [FZF](https://github.com/junegunn/fz://github.com/junegunn/fzf) - Installed by vim-plug.
-5. [Ripgrep](https://github.com/burntsushi/ripgrep)
-6. [ShellCheck](https://github.com/koalaman/shellcheck/blob/master/README.md)
+Install [Homebrew](http://brew.sh/index_no.html) and run the following:
 
-#### Install
+```bash
+# NVIM
+# (https://github.com/neovim/neovim))
+brew install neovim/neovim/neovim
 
-Use the bash script (change "work" directory for git hooks). From dotfiles directory:
+# FZF
+# (https://github.com/junegunn/fzf)
+brew install fzf
+
+# Ag (Silver searcher)
+# (https://github.com/ggreer/the_silver_searcher)
+brew install the_silver_searcher
+
+# ShellCheck - code analysis for shell
+# (https://github.com/koalaman/shellcheck)
+brew install shellcheck
+
+# Git aware prompt
+# (https://github.com/jimeh/git-aware-prompt)
+mkdir ~/.bash && cd ~/.bash
+git clone git://github.com/jimeh/git-aware-prompt.git
+
+# Git completion
+# (https://github.com/git/git/blob/master/contrib/completion/git-completion.bash)
+curl -o ~/.bash/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+
+# Optional: Spacemacs
+# (https://github.com/syl20bnr/spacemacs)
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+brew linkapps emacs-plus
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+```
+
+## Languages/tools
+
+```bash
+# Node.js
+brew install node
+
+# AWS CLI
+# (http://docs.aws.amazon.com/cli/latest/userguide/installing.html#install-bundle-other-os)
+curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+unzip awscli-bundle.zip
+sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+# Postgres.app
+# (https://postgresapp.com/)
+
+# Rust (Nightly)
+# (https://www.rustup.rs/)
+curl https://sh.rustup.rs -sSf | sh
+
+# Python 2.7/3.5
+# (https://www.continuum.io/downloads#osx)
+# TODO: Commands for environment.
+
+# R/Rstudio
+# (https://cran.r-project.org/)
+# (https://www.rstudio.com/products/rstudio/download/)
+```
+
+## Dotfiles
+
+Clone the repository and run the install script:
 
 ```bash
 sudo chmod a+x ./install.sh

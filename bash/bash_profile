@@ -3,15 +3,12 @@ export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source "${GITAWAREPROMPT}/main.sh"
 
 # Git autocompletion
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+if [ -f ~/.bash/git-completion.bash ]; then
+  . ~/.bash/git-completion.bash
 fi
 
 # |21:36:02|user|~/Current/path(git_branch)>>>
 export PS1="|\t|\u|\w\[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]>>> "
-
-# Use ripgrep with FZF
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
 
 # Encoding
 export LC_ALL=en_US.UTF-8
@@ -24,9 +21,6 @@ export NVM_DIR="~/.nvm"
 # Use nvim as the default editor
 export EDITOR=nvim
 
-# Use homebrew version of vim
-alias vim='/usr/local/bin/vim'
-
 # Tmux setting and shortcut
 function dev {
          tmux att -t ${PWD} || tmux new -s ${PWD} 'tmux source-file ~/.tmux/dev-session.config'
@@ -34,7 +28,7 @@ function dev {
 alias dev='dev'
 alias ll='ls -la'
 
-# Use FZF
+# FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # AWS CLI setup
@@ -43,11 +37,9 @@ export EC2_URL="ec2.eu-west-1.amazonaws.com"
 export PATH="$PATH:$EC2_HOME/bin"
 export JAVA_HOME="$(/usr/libexec/java_home)"
 
-# Path
+# Path stuff
 export PATH="//anaconda/bin:$PATH"
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 export PATH=/Library/Frameworks/GDAL.framework/Programs:$PATH
-export GOPATH=$HOME/Github/test-go
-export PATH=$GOPATH/bin:$PATH
 export PATH=~/.cargo/bin:$PATH
 
