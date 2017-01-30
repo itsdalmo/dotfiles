@@ -4,6 +4,13 @@ My dotfiles/dev environments.
 
 ## Prerequisities
 
+### Terminal
+
+Install [iterm2](https://www.iterm2.com/downloads.html),
+[powerline-fonts](https://github.com/powerline/fonts) and
+[spacemacs-theme](https://github.com/colepeters/spacemacs-theme.vim) for iterm2.
+
+### Homebrew
 Install [Homebrew](http://brew.sh/index_no.html) and run the following:
 
 ```bash
