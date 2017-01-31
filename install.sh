@@ -52,6 +52,5 @@ link_dot_files
 link_vim_snippets
 link_tmux_config
 link_git_hooks
-link_spacemacs_config
 echo "Done!"
 

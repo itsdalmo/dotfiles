@@ -22,6 +22,11 @@ brew install tmux
 # (https://github.com/neovim/neovim))
 brew install neovim/neovim/neovim
 
+# Plug.vim
+# (https://github.com/junegunn/vim-plug)
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 # FZF
 # (https://github.com/junegunn/fzf)
 brew install fzf
@@ -70,9 +75,16 @@ sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 # (https://www.rustup.rs/)
 curl https://sh.rustup.rs -sSf | sh
 
+# After installing rustup:
+rustup install nightly
+rustup default nightly
+
 # Python 2.7/3.5
 # (https://www.continuum.io/downloads#osx)
-# TODO: Commands for environment.
+
+# After installing anaconda:
+conda create -n python2 python=2.7 anaconda
+conda create -n python3 python=3.5 anaconda
 
 # R/Rstudio
 # (https://cran.r-project.org/)
@@ -87,4 +99,14 @@ Clone the repository and run the install script:
 sudo chmod a+x ./install.sh
 ./install.sh
 ```
+
+## Finishing touch
+
+For nvim python support:
+
+```bash
+pip install neovim
+```
+
+Launch nvim/dev, ignore any errors and type :PlugInstall. Restart nvim and you should be good to go.
 
