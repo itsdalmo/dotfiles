@@ -40,4 +40,5 @@ export PATH="$PATH:$EC2_HOME/bin"
 export PATH="/Users/dalmo/anaconda/bin:$PATH"
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 export PATH=~/.cargo/bin:$PATH
+export RUST_SRC_PATH=~/.multirust/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src
 

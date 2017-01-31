@@ -79,6 +79,10 @@ curl https://sh.rustup.rs -sSf | sh
 rustup install nightly
 rustup default nightly
 
+# For autocomplete in Rust:
+cargo install racer
+rustup component add rust-src
+
 # Python 2.7/3.5
 # (https://www.continuum.io/downloads#osx)
 
@@ -109,4 +113,19 @@ pip install neovim
 ```
 
 Launch nvim/dev, ignore any errors and type :PlugInstall. Restart nvim and you should be good to go.
+
+## Mac OS Sierra
+
+OS X Sierra botches tmux + clipboard integration. The fix is:
+
+```bash
+brew install reattach-to-user-namespace
+```
+
+And add the following to tmux.conf:
+
+```
+set -g default-shell $SHELL
+set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+```
 
