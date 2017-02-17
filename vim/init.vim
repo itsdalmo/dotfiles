@@ -224,3 +224,10 @@ nnoremap <silent> <Down> :resize +5<cr>
 nnoremap <silent> <Right> :vertical resize -5<cr>
 nnoremap <silent> <Left> :vertical resize +5<cr>
 
+" Fix for C-h in Neovim
+if has('nvim')
+    nmap <BS> :<C-u>TmuxNavigateLeft<CR>
+else
+    nmap <C-h> <C-w>h
+endif
+
