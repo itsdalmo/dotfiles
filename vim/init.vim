@@ -40,6 +40,7 @@ au BufRead,BufNewFile *.topojson setfiletype json
 
 " Language specific settings
 autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4 tabstop=4
+autocmd FileType py setlocal shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType pig setlocal shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType sh setlocal shiftwidth=4 softtabstop=4 tabstop=4
 
