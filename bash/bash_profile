@@ -31,6 +31,11 @@ alias ll='ls -la'
 # FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# GOLANG
+export GOPATH="$HOME/Github/go"
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
 # AWS CLI setup
 export EC2_HOME="/usr/local/ec2/ec2-api-tools-1.7.5.1"
 export EC2_URL="ec2.eu-west-1.amazonaws.com"
@@ -42,3 +47,5 @@ export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 export PATH=~/.cargo/bin:$PATH
 export RUST_SRC_PATH=~/.multirust/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src
 
+# Rust/Docker
+alias rust-musl-builder='docker run --rm -it -v "$(pwd)":/home/rust/src ekidd/rust-musl-builder:nightly'
