@@ -1,0 +1,20 @@
+---
+- name: Link emacs-plus to applications (if it is installed).
+  shell: brew linkapps emacs-plus
+  ignore_errors: true
+  when: "'emacs-plus' in homebrew_installed_packages"
+
+- name: Link dotfiles into home folder.
+  file:
+    src: "{{ playbook_dir }}/files/{{ item }}"
+    dest: "~/{{ item }}"
+    state: link
+    force: true
+  become: no
+  with_items: "{{ dotfiles }}"
+
+- name: Install spacemacs.
+  git:
+    repo: 'https://github.com/syl20bnr/spacemacs.git'
+    dest: ~/.emacs.d
+    update: yes

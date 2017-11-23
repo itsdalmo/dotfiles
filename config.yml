@@ -1,0 +1,115 @@
+---
+# Ansible config
+downloads: ~/.ansible-downloads/
+
+# Dotfiles config
+dotfiles:
+  - .bash_profile
+  - .gitconfig
+  - .spacemacs
+  - .osx
+  - .vimrc
+
+# Homebrew config
+homebrew_installed_packages:
+  - dockutil # Required for dockitems task.
+  # - awscli
+  # - vaulted
+  # - emacs-plus
+  # - git
+  # - bash-completion
+  # - shellcheck
+  # - tmux
+  # - neovim
+  # - fzf
+  # - the_silver_searcher
+  # - r
+  # - go
+  # - node
+  # - nvm
+  # - npm
+  # - anaconda
+  # - postgres
+
+homebrew_taps:
+  - d12frosted/emacs-plus
+  - homebrew/core
+  - homebrew/science
+  - caskroom/cask
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps: []
+  # - google-chrome
+  # - iterm2
+  # - keybase
+  # - 1password
+  # - rstudio
+  # - visual-studio-code
+  # - docker
+  # - slack
+  # - spotify
+
+# OSX config
+osx_script: "~/.osx --no-restart"
+
+# OSX Dock
+dockitems_to_remove:
+  - Launchpad
+  - Safari
+  - Contacts
+  - Notes
+  - Reminders
+  - Maps
+  - Photos
+  - Messages
+  - FaceTime
+  - iTunes
+  - iBooks
+  - App Store
+  - System Preferences
+
+dockitems_to_persist:
+  - name: Google Chrome
+    path: /Applications/Google Chrome.app
+    pos: 1
+  - name: Mail
+    path: /Applications/Mail.app
+    pos: 2
+  - name: Calendar
+    path: /Applications/Calendar.app
+    pos: 3
+  - name: Slack
+    path: /Applications/Slack.app
+    pos: 4
+  - name: Visual Studio Code
+    path: /Applications/Visual Studio Code.app
+    pos: 5
+  - name: Rstudio
+    path: /Applications/Rstudio.app
+    pos: 6
+  - name: Emacs
+    path: /Applications/Emacs
+    pos: 7
+  - name: iTerm
+    path: /Applications/iTerm.app
+    pos: 8
+  - name: 1password 6
+    path: /Applications/1password 6.app
+    pos: 9
+  - name: Spotify
+    path: /Applications/Spotify.app
+    pos: 10
+
+# Node
+npm_packages: 
+  - name: grunt
+    state: latest
+
+# Python
+pip_packages: []
+
+# Rust
+rust_packages: []
+  # - racer
+  # - clippy
+  # - rustfmt
