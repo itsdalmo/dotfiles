@@ -1,0 +1,42 @@
+---
+- name: Link emacs-plus to applications (if it is installed).
+  shell: brew linkapps emacs-plus
+  ignore_errors: true
+  when: "'emacs-plus' in homebrew_installed_packages"
+
+- name: Install spacemacs.
+  git:
+    repo: 'https://github.com/syl20bnr/spacemacs.git'
+    dest: ~/.emacs.d
+    update: yes
+  when: "'emacs-plus' in homebrew_installed_packages"
+
+- name: Create directory for vim-plug.
+  file:
+    path: ~/.local/share/nvim/site/autoload
+    state: directory
+  become: yes
+  when: "'nvim' in homebrew_installed_packages"
+
+- name: Install vim-plug.
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: ~/.local/share/nvim/site/autoload/plug.vim
+    mode: 0655
+  when: "'nvim' in homebrew_installed_packages"
+
+- name: Create directory for vim-plug (regular vim).
+  file:
+    path: ~/.vim/autoload/
+    state: directory
+  become: yes
+
+- name: Install vim-plug (regular vim).
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: ~/.vim/autoload/plug.vim
+    mode: 0655
+
+- name: Install oh my zsh.
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  when: "'zsh' in homebrew_installed_packages"

@@ -16,4 +16,3 @@ Ansible playbook for setting up my dev environment on Mac OS X (heavily inspired
 
 1. Change font/theme in iTerm.
 2. Install Cinch from app store.
-
