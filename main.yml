@@ -11,6 +11,7 @@
   tasks:
     - include_tasks: tasks/ansible.yml
     - include_tasks: tasks/symlinks.yml
+    - include_tasks: tasks/misc.yml
     - include_tasks: tasks/rust.yml
     - include_tasks: tasks/packages.yml
     - include_tasks: tasks/osx.yml

@@ -28,9 +28,3 @@
     force: true
   become: no
   when: "'.vimrc' in dotfiles"
-
-- name: Install spacemacs.
-  git:
-    repo: 'https://github.com/syl20bnr/spacemacs.git'
-    dest: ~/.emacs.d
-    update: yes
