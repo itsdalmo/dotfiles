@@ -16,6 +16,7 @@ homebrew_installed_packages:
   - dockutil # Required for dockitems task.
   # - vaulted
   # - emacs-plus
+  # - exa
   # - git
   # - shellcheck
   # - neovim
