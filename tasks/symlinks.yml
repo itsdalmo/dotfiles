@@ -1,0 +1,30 @@
+---
+- name: Link emacs-plus to applications (if it is installed).
+  shell: brew linkapps emacs-plus
+  ignore_errors: true
+  when: "'emacs-plus' in homebrew_installed_packages"
+
+- name: Link dotfiles into home folder.
+  file:
+    src: "{{ playbook_dir }}/files/{{ item }}"
+    dest: "~/{{ item }}"
+    state: link
+    force: true
+  become: no
+  with_items: "{{ dotfiles }}"
+
+- name: Create nvim configuration folder.
+  file:
+    path: ~/.config/nvim
+    state: directory
+  become: yes
+  when: "'.vimrc' in dotfiles"
+
+- name: Link .vimrc to nvim configuration.
+  file:
+    src: "{{ playbook_dir }}/files/.vimrc"
+    dest: "~/.config/nvim/init.vim"
+    state: link
+    force: true
+  become: no
+  when: "'.vimrc' in dotfiles"

@@ -231,4 +231,3 @@ if has('nvim')
 else
     nmap <C-h> <C-w>h
 endif
-

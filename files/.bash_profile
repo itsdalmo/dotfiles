@@ -49,3 +49,5 @@ export RUST_SRC_PATH=~/.multirust/toolchains/nightly-x86_64-apple-darwin/lib/rus
 
 # Rust/Docker
 alias rust-musl-builder='docker run --rm -it -v "$(pwd)":/home/rust/src ekidd/rust-musl-builder:nightly'
+
+export PATH="$HOME/.cargo/bin:$PATH"

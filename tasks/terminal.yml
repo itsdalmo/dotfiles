@@ -1,0 +1,11 @@
+---
+# Install iterm theme.
+- name: Ensure custom Terminal profile is added.
+  shell: open themes/iterm2-colors-solarized/Solarized\ Dark.itermcolors
+  changed_when: false
+
+# Install fonts.
+- name: Ensure custom Terminal profile is added.
+  shell: fonts/install.sh SourceCodePro
+  changed_when: false
+

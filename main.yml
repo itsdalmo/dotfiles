@@ -1,0 +1,19 @@
+---
+- hosts: all
+  connection: local
+
+  vars_files:
+    - config.yml
+
+  roles:
+    - role: geerlingguy.homebrew
+
+  tasks:
+    - include_tasks: tasks/ansible.yml
+    - include_tasks: tasks/symlinks.yml
+    - include_tasks: tasks/rust.yml
+    - include_tasks: tasks/packages.yml
+    - include_tasks: tasks/misc.yml
+    - include_tasks: tasks/osx.yml
+    - include_tasks: tasks/dock.yml
+    - include_tasks: tasks/terminal.yml
