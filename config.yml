@@ -4,7 +4,7 @@ downloads: ~/.ansible-downloads/
 
 # Dotfiles config
 dotfiles:
-  - .bash_profile
+  - .zshrc
   - .gitconfig
   - .spacemacs
   - .osx
@@ -12,11 +12,11 @@ dotfiles:
 
 # Homebrew config
 homebrew_installed_packages:
+  # - zsh
   - dockutil # Required for dockitems task.
   # - vaulted
   # - emacs-plus
   # - git
-  # - bash-completion
   # - shellcheck
   # - neovim
   # - ripgrep
@@ -28,6 +28,7 @@ homebrew_installed_packages:
   # - npm
   # - go
   # - terraform
+  # - terragrunt
   # - packer
   # - r
   # - postgres
