@@ -112,9 +112,11 @@ npm_packages:
 pip_packages:
   - name: boto
     state: latest
+  - name: neovim
+    state: latest
 
 # Rust
-rust_packages: []
+rust_packages:
   - racer
   - clippy
   - rustfmt

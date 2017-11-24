@@ -13,10 +13,17 @@
   become: no
   with_items: "{{ dotfiles }}"
 
-- name: Also link .vimrc to neovim config.
+- name: Create nvim configuration folder.
+  file:
+    path: ~/.config/nvim
+    state: directory
+  become: yes
+  when: "'.vimrc' in dotfiles"
+
+- name: Link .vimrc to nvim configuration.
   file:
     src: "{{ playbook_dir }}/files/.vimrc"
-    dest: "~/{{ item }}"
+    dest: "~/.config/nvim/init.vim"
     state: link
     force: true
   become: no
