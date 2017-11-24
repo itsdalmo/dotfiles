@@ -28,6 +28,7 @@ homebrew_installed_packages:
   # - npm
   # - go
   # - terraform
+  # - terragrunt
   # - packer
   # - r
   # - postgres
