@@ -13,6 +13,15 @@
   become: no
   with_items: "{{ dotfiles }}"
 
+- name: Also link .vimrc to neovim config.
+  file:
+    src: "{{ playbook_dir }}/files/.vimrc"
+    dest: "~/{{ item }}"
+    state: link
+    force: true
+  become: no
+  when: "'.vimrc' in dotfiles"
+
 - name: Install spacemacs.
   git:
     repo: 'https://github.com/syl20bnr/spacemacs.git'

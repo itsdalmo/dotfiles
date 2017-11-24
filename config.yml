@@ -13,22 +13,21 @@ dotfiles:
 # Homebrew config
 homebrew_installed_packages:
   - dockutil # Required for dockitems task.
-  # - awscli
   # - vaulted
   # - emacs-plus
   # - git
   # - bash-completion
   # - shellcheck
-  # - tmux
   # - neovim
+  # - ripgrep
   # - fzf
   # - the_silver_searcher
-  # - r
-  # - go
+  # - awscli
   # - node
   # - nvm
   # - npm
-  # - anaconda
+  # - go
+  # - r
   # - postgres
 
 homebrew_taps:
@@ -50,7 +49,7 @@ homebrew_cask_apps: []
   # - spotify
 
 # OSX config
-osx_script: "~/.osx --no-restart"
+osx_script: "~/.osx"
 
 # OSX Dock
 dockitems_to_remove:
@@ -104,12 +103,18 @@ dockitems_to_persist:
 npm_packages: 
   - name: grunt
     state: latest
+  - name: jshint
+    state: latest
+  - name: jsonlint
+    state: latest
 
 # Python
-pip_packages: []
+pip_packages:
+  - name: boto
+    state: latest
 
 # Rust
 rust_packages: []
-  # - racer
-  # - clippy
-  # - rustfmt
+  - racer
+  - clippy
+  - rustfmt
