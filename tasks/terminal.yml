@@ -6,6 +6,6 @@
 
 # Install fonts.
 - name: Ensure custom Terminal profile is added.
-  shell: open themes/solarized/iterm2-colors-solarized/Solarized\ Dark.itermcolors
+  shell: fonts/install.sh SourceCodePro
   changed_when: false
 
