@@ -10,11 +10,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Go path
-export GOPATH="$HOME/Github/go"
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-
 # Aliases
 alias ll='exa -la --group-directories-first --all'
 alias rust-musl-builder='docker run --rm -it -v "$(pwd)":/home/rust/src ekidd/rust-musl-builder:nightly'

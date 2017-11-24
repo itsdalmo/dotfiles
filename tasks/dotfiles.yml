@@ -10,10 +10,19 @@
 
 - name: Create nvim configuration folder.
   file:
-    path: ~/.config/nvim
+    path: "~/.config/nvim"
     state: directory
   become: yes
   when: "'.vimrc' in dotfiles"
+
+- name: Also link .profile to .zprofile.
+  file:
+    src: "{{ playbook_dir }}/files/.profile"
+    dest: "~/.zprofile"
+    state: link
+    force: true
+  become: no
+  when: "'.profile' in dotfiles"
 
 - name: Link .vimrc to nvim configuration.
   file:

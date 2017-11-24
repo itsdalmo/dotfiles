@@ -4,15 +4,12 @@
   with_items: "{{ rust_packages }}"
   failed_when: false
 
-- name: Update rust (cargo) packages.
-  shell: cargo install-update -a
-
 - name: Install global Pip packages.
   pip:
     name: "{{ item.name | default(item) }}"
     state: "{{ item.state | default('present') }}"
     version: "{{ item.version | default(omit) }}"
-    executable: "{{ item.executable | default(omit) }}"
+    executable: "/usr/local/bin/pip3"
   with_items: "{{ pip_packages }}"
 
 - name: Install global NPM packages.

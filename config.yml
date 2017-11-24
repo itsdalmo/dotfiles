@@ -4,6 +4,7 @@ downloads: ~/.ansible-downloads/
 
 # Dotfiles config
 dotfiles:
+  - .profile
   - .zshrc
   - .gitconfig
   - .spacemacs
@@ -41,7 +42,7 @@ homebrew_taps:
   - caskroom/cask
 
 homebrew_cask_appdir: /Applications
-homebrew_cask_apps: []
+homebrew_cask_apps:
   - google-chrome
   - iterm2
   - keybase
@@ -104,7 +105,7 @@ dockitems_to_persist:
     pos: 10
 
 # Node
-npm_packages: 
+npm_packages:
   - name: grunt
     state: latest
   - name: jshint

@@ -83,7 +83,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 
 " Theme
-Plug 'colepeters/spacemacs-theme.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -107,11 +107,8 @@ let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
 let g:SuperTabDefaultCompletionType = "context"
 
 " Theme -------------------------------------------------
-if (has("termguicolors"))
-  set termguicolors
-endif
 set background=dark
-colorscheme spacemacs-theme
+colorscheme solarized
 set encoding=utf-8
 " set t_ut=
 hi VertSplit ctermbg=NONE guibg=NONE

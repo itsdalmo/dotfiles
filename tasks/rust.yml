@@ -1,6 +1,7 @@
 ---
 - name: Check if rustup is installed.
   shell: command -v rustup
+  failed_when: false
   register: check_rustup
 
 - name: Install rustup (if needed).
