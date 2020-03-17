@@ -1,18 +1,15 @@
 # dotfiles
 
-Ansible playbook for setting up my dev environment on Mac OS X (heavily inspired by https://github.com/geerlingguy/mac-dev-playbook).
+My setup for development on OS X.
 
-## Prerequisities
+## Installation
 
-1. `xcode-select --install`
-2. `pip install ansible` (might have to `sudo easy_install pip` first)
-3. `ansible-galaxy install geerlingguy.homebrew`
+Run the installer:
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/master/install.sh)"
+```
 
-## Install
-
-`ansible-playbook main.yml -i inventory -K`
-
-## Manual steps
-
-1. Change font/theme in iTerm.
-2. Install Cinch from app store.
+After rebooting do the following:
+- Load `iterm2` preferencees from the repository.
+- Install `cinch` and `1password` from the App store. 
+- Set up VS Code from the settings gist.
