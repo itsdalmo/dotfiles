@@ -10,6 +10,11 @@ SSH_KEY="${HOME}/.ssh/id_rsa"
 install() {
   printf "Installing itsdalmo/dotfiles...\n"
 
+  if ! command -v "brew" > /dev/null; then
+    printf " * Installing homebrew\n"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  fi
+
   mkdir -p "$(dirname $SSH_KEY)"
   if [ ! -f "${SSH_KEY}" ]; then
     printf " * Generating SSH key\n"
@@ -26,16 +31,6 @@ install() {
     git clone "${DOTFILES_REPO}" "${DOTFILES_PATH}" --recurse-submodules 
   fi
 
-  if ! env | grep -q ZSH; then
-    printf " * Installing oh my ZSH\n"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  fi
-
-  if ! command -v "brew" > /dev/null; then
-    printf " * Installing homebrew\n"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  fi
-
   printf " * Linking files\n"
   local dotfiles=(".Brewfile" ".gitconfig" ".vimrc" ".zprofile" ".zshrc")
   for file in "${dotfiles[@]}"; do
@@ -44,6 +39,11 @@ install() {
 
   printf " * Installing brew bundle\n"
   brew bundle --global | sed 's/^/    ~ /' 
+
+  if ! env | grep -q ZSH; then
+    printf " * Installing oh my ZSH\n"
+    /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
 
   if [[ $(command -v "fzf") ]] && [ ! -f ~/.fzf.zsh ]; then
     printf " * Installing FZF keybindings\n"
