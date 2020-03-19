@@ -1,11 +1,18 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
-	name = itsdalmo
+	name  = itsdalmo
 	email = kristian@doingit.no
 
 [alias]
-   unstage = reset HEAD
-   uncommit = reset --soft HEAD^
-   amend = commit --amend
-   history = log --graph --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
+	unstage  = reset HEAD
+	uncommit = reset --soft HEAD^
+	amend    = commit --amend
+	history  = log --graph --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
+
+[core]
+	editor = code --wait
+
+[diff]
+	tool = default-difftool
+
+[difftool "default-difftool"]
+	cmd = code --wait --diff $LOCAL $REMOTE
