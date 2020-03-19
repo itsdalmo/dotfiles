@@ -16,6 +16,8 @@ cask "signal"
 cask "viber"
 
 # Packages
+brew "mas"
+brew "dockutil"
 brew "go"
 brew "packer"
 brew "awscli"
@@ -27,3 +29,7 @@ brew "vim"
 brew "vaulted"
 brew "shellcheck"
 brew "go-task/tap/go-task"
+
+# Mac store
+mas "cinch", id: 412529613
+mas "1Password", id: 1333542190

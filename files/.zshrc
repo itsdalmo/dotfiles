@@ -18,4 +18,4 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,
 # Aliases
 alias ll='exa -la --group-directories-first --all'
 alias awsv='AWS_SESSION_TOKEN_TTL=30m aws-vault exec --duration=1h'
-alias upgrade='brew update && brew bundle --global && brew bundle cleanup --global --force && upgrade_oh_my_zsh'
+alias upgrade='brew update && brew bundle --global && brew bundle cleanup --force --global && upgrade_oh_my_zsh'
