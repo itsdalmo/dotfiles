@@ -33,3 +33,4 @@ brew "go-task/tap/go-task"
 # Mac store
 mas "cinch", id: 412529613
 mas "1Password", id: 1333542190
+mas "MobilePASS", id: 972648459
