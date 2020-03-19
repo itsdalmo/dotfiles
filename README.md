@@ -14,6 +14,7 @@ After rebooting, complete the following manual steps:
   - `Sharing > Computer name`.
   - `Security & Privacy > Firewall > Turn on Firewall`
   - `Security & Privacy > General > Require password immediately after sleep or screen saver begins`
+  - `Displays > Night Shift > Schedule: Sunset to Sunrise`
   - Enable "stacks" on the desktop.
   - Show battery percentage.
 - Open and configure `cinch` to start on boot.
