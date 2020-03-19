@@ -23,7 +23,8 @@ install() {
 
     printf "   \n"
     printf "   Public key copied to clipboard.\n"
-    printf "   Visit https://github.com/settings/ssh/new to set up new key!\n"
+    printf "   Visit https://github.com/settings/ssh/new to add the new key and then rerun the installer!\n"
+    exit 0
   fi
 
   if [ ! -d "${DOTFILES_PATH}" ]; then
