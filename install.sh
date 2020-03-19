@@ -62,8 +62,6 @@ install() {
 
   printf " * Configuring OS X\n"
   source "${DOTFILES_PATH}/files/.macos"
-
-  printf "\n"
   printf "Done. Note that some of these changes require a logout/restart to take effect.\n"
 }
 
