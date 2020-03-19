@@ -54,14 +54,30 @@ install() {
   mkdir -p "${HOME}/.vim/colors"
   ln -sf "${DOTFILES_PATH}/colors/colors/solarized.vim" "${HOME}/.vim/colors/solarized.vim"
 
-  printf " * Installing iterm theme\n"
-  open "${DOTFILES_PATH}/themes/iterm2-colors-solarized/Solarized Dark.itermcolors"
-
   printf " * Copying fonts\n"
   "${DOTFILES_PATH}/fonts/install.sh" "Meslo LG M Regular for Powerline" > /dev/null
 
   printf " * Configuring OS X\n"
   source "${DOTFILES_PATH}/files/.macos"
+
+  printf " * Configuring iTerm\n"
+  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${DOTFILES_PATH}/iterm2"
+  defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+  printf " * Configuring dock\n"
+  dockutil --no-restart --remove all --allhomes
+  dockutil --no-restart --add "/Applications/Google Chrome.app"
+  dockutil --no-restart --add "/System/Applications/Mail.app"
+  dockutil --no-restart --add "/System/Applications/Calendar.app"
+  dockutil --no-restart --add "/System/Applications/Messages.app"
+  dockutil --no-restart --add "/System/Applications/Photos.app"
+  dockutil --no-restart --add "/Applications/Discord.app"
+  dockutil --no-restart --add "/Applications/Slack.app"
+  dockutil --no-restart --add "/Applications/Visual Studio Code.app"
+  dockutil --no-restart --add "/Applications/iTerm.app"
+  dockutil --no-restart --add "/Applications/1Password 7.app"
+  dockutil --no-restart --add "/Applications/Spotify.app"
+
   printf "Done. Note that some of these changes require a logout/restart to take effect.\n"
 }
 
