@@ -21,3 +21,4 @@ After rebooting, complete the following manual steps:
 - Open and configure `cinch` to start on boot.
 - Open VS Code, install [Settings Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync) and configure it with personal access token (with `gist` scope) to sync.
 - Install [Citrix Workspace](https://www.citrix.no/downloads/workspace-app/mac/workspace-app-for-mac-latest.html).
+- Transfer `.aws/config`.
