@@ -88,6 +88,11 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `glyv`
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
+# Enable stacks (group similar objects on e.g. desktop)
+defaults write com.apple.finder.DesktopViewSettings.GroupBy -string "Kind"
+defaults write com.apple.finder.DesktopViewSettings.IconViewSettings.arrangeBy -string "dateAdded"
+defaults write com.apple.finder.FXPreferredGroupBy -string "Kind"
+
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 
