@@ -15,6 +15,8 @@ After rebooting, complete the following manual steps:
   - `Security & Privacy > Firewall > Turn on Firewall`
   - `Security & Privacy > General > Require password immediately after sleep or screen saver begins`
   - `Displays > Night Shift > Schedule: Sunset to Sunrise`
+  - `Sound > Show volume in menu bar`
+  - `Bluetooth > Show Bluetooth in menu bar`
   - Enable "stacks" on the desktop.
   - Show battery percentage.
   - Hide input menu.
