@@ -19,3 +19,8 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,
 alias ll='exa -la --group-directories-first --all'
 alias awsv='AWS_SESSION_TOKEN_TTL=1h aws-vault exec --duration=30m'
 alias upgrade='brew update && brew bundle --global && brew bundle cleanup --force --global && upgrade_oh_my_zsh'
+
+# HACK: Assume AWS organization access role given an account ID.
+aws-org-login() {
+    sed -i.bak -E "s/^(role_arn[ ]*= arn:aws:iam::)[0-9]{12}(:role\/OrganizationAccountAccessRole)/\1$1\2/g" ~/.aws/config && aws-vault login org-access-role
+}
