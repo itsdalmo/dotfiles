@@ -2,6 +2,7 @@
 tap "homebrew/cask"
 tap "go-task/tap"
 tap "github/gh"
+tap "goreleaser/tap"
 
 # Apps
 cask "google-chrome"
@@ -33,6 +34,7 @@ brew "vaulted"
 brew "shellcheck"
 brew "go-task/tap/go-task"
 brew "github/gh/gh"
+brew "goreleaser/tap/goreleaser"
 
 # Mac store
 mas "cinch", id: 412529613
