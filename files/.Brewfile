@@ -16,7 +16,6 @@ cask "discord"
 cask "spotify"
 cask "signal"
 cask "viber"
-cask "webex-meetings"
 
 # Packages
 brew "mas"
