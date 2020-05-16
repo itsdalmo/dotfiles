@@ -3,6 +3,7 @@ tap "homebrew/cask"
 tap "go-task/tap"
 tap "github/gh"
 tap "goreleaser/tap"
+tap "itsdalmo/tap"
 
 # Apps
 cask "google-chrome"
