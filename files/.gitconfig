@@ -1,6 +1,7 @@
 [user]
-	name  = itsdalmo
-	email = kristian@doingit.no
+	name       = itsdalmo
+	email      = kristian@doingit.no
+	signingkey = 59C070C1
 
 [alias]
 	unstage  = reset HEAD
@@ -20,3 +21,9 @@
 [credential]
 	helper      = !aws codecommit credential-helper $@
 	UseHttpPath = true
+
+[commit]
+	gpgSign = true
+
+[tag]
+	gpgSign = true

@@ -21,6 +21,7 @@ cask "viber"
 # Packages
 brew "mas"
 brew "dockutil"
+brew "gpg"
 brew "go"
 brew "packer"
 brew "awscli"
