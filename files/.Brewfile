@@ -4,6 +4,7 @@ tap "go-task/tap"
 tap "github/gh"
 tap "goreleaser/tap"
 tap "itsdalmo/tap"
+tap "telia-oss/tap"
 
 # Apps
 cask "google-chrome"
@@ -37,6 +38,7 @@ brew "shellcheck"
 brew "go-task/tap/go-task"
 brew "github/gh/gh"
 brew "goreleaser/tap/goreleaser"
+brew "telia-oss/tap/aws-auth"
 
 # Mac store
 mas "cinch", id: 412529613
