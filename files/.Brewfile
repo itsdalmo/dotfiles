@@ -30,6 +30,7 @@ brew "awscli"
 brew "azure-cli"
 brew "tfenv"
 brew "fzf"
+brew "jq"
 brew "ripgrep"
 brew "exa"
 brew "vim"
@@ -39,6 +40,7 @@ brew "go-task/tap/go-task"
 brew "github/gh/gh"
 brew "goreleaser/tap/goreleaser"
 brew "telia-oss/tap/aws-auth"
+brew "telia-oss/tap/cloud-connect"
 
 # Mac store
 mas "cinch", id: 412529613
