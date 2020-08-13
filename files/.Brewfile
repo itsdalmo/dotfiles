@@ -17,7 +17,6 @@ cask "slack"
 cask "discord"
 cask "spotify"
 cask "signal"
-cask "viber"
 
 # Packages
 brew "mas"
@@ -27,7 +26,6 @@ brew "pinentry-mac"
 brew "go"
 brew "packer"
 brew "awscli"
-brew "azure-cli"
 brew "tfenv"
 brew "fzf"
 brew "jq"
@@ -45,4 +43,3 @@ brew "telia-oss/tap/cloud-connect"
 # Mac store
 mas "cinch", id: 412529613
 mas "1Password", id: 1333542190
-mas "MobilePASS", id: 972648459
