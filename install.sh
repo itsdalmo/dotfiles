@@ -18,7 +18,7 @@ install() {
   mkdir -p "$(dirname $SSH_KEY)"
   if [ ! -f "${SSH_KEY}" ]; then
     printf " * Generating SSH key\n"
-    ssh-keygen -t rsa -b 4096 -C "kristian@doingit.no" -f "${SSH_KEY}"
+    ssh-keygen -t rsa -b 4096 -C "kristian@dalmo.me" -f "${SSH_KEY}"
     pbcopy < "${SSH_KEY}.pub"
 
     printf "   \n"
