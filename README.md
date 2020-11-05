@@ -22,6 +22,5 @@ After rebooting, complete the following manual steps:
   - Hide input menu.
 - Open and configure `cinch` to start on boot.
 - Open VS Code, install [Settings Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync) and configure it with personal access token (with `gist` scope) to sync.
-- Install [Citrix Workspace](https://www.citrix.no/downloads/workspace-app/mac/workspace-app-for-mac-latest.html).
 - Transfer `.aws/config` and add new credentials with `aws-vault add <jump-profile-name>`.
 - Finish setting up GPG as described [here](https://withblue.ink/2020/05/17/how-and-why-to-sign-git-commits.html).
