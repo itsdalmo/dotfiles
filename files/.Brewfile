@@ -18,6 +18,7 @@ cask "slack"
 cask "discord"
 cask "spotify"
 cask "signal"
+cask "postman"
 
 # Packages
 brew "mas"
