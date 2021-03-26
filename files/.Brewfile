@@ -19,6 +19,7 @@ cask "discord"
 cask "spotify"
 cask "signal"
 cask "postman"
+cask "zoom"
 
 # Packages
 brew "mas"
