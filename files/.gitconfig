@@ -1,7 +1,7 @@
 [user]
 	name       = itsdalmo
 	email      = kristian@dalmo.me
-	signingkey = F458BFDE
+	signingkey = 6BE2B57F
 
 [alias]
 	unstage  = reset HEAD
