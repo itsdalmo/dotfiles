@@ -4,7 +4,7 @@ export LC_ALL=en_US.UTF-8
 
 # ZSH config
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 plugins=(
     git
 )
