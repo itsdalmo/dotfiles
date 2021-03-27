@@ -1,5 +1,5 @@
 syntax enable
-colorscheme solarized
+colorscheme onedark
 
 " Basic settings --------------------------------------------------------------
 set background=dark

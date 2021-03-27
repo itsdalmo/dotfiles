@@ -51,9 +51,10 @@ install() {
     yes | "$(brew --prefix)"/opt/fzf/install
   fi
 
-  printf " * Linking solarized theme for VIM\n"
-  mkdir -p "${HOME}/.vim/colors"
-  ln -sf "${DOTFILES_PATH}/colors/colors/solarized.vim" "${HOME}/.vim/colors/solarized.vim"
+  printf " * Linking one dark theme for VIM\n"
+  mkdir -p "${HOME}/.vim/colors" && mkdir -p "${HOME}/.vim/autoload"
+  ln -sf "${DOTFILES_PATH}/colors/colors/onedark.vim" "${HOME}/.vim/colors/onedark.vim"
+  ln -sf "${DOTFILES_PATH}/colors/autoload/onedark.vim" "${HOME}/.vim/autoload/onedark.vim"
 
   printf " * Copying fonts\n"
   "${DOTFILES_PATH}/fonts/install.sh" "Meslo LG M Regular for Powerline" > /dev/null
