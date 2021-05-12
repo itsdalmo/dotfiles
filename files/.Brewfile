@@ -46,6 +46,7 @@ brew "gh"
 brew "hugo"
 brew "go-task/tap/go-task"
 brew "goreleaser/tap/goreleaser"
+brew "telia-oss/tap/aws-env"
 brew "telia-oss/tap/aws-auth"
 brew "telia-oss/tap/cloud-connect"
 
