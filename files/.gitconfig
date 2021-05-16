@@ -22,6 +22,9 @@
 	helper      = !aws codecommit credential-helper $@
 	UseHttpPath = true
 
+[pull]
+	ff = only
+
 [commit]
 	gpgSign = true
 
