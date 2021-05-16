@@ -8,6 +8,7 @@ tap "adoptopenjdk/openjdk"
 
 # Apps
 cask "google-chrome"
+cask "brave-browser"
 cask "iterm2"
 cask "visual-studio-code"
 cask "aws-vault"
