@@ -5,6 +5,7 @@ tap "goreleaser/tap"
 tap "itsdalmo/tap"
 tap "telia-oss/tap"
 tap "adoptopenjdk/openjdk"
+tap "warrensbox/tap"
 
 # Apps
 cask "brave-browser"
@@ -33,7 +34,6 @@ brew "yarn"
 brew "python"
 brew "packer"
 brew "awscli"
-brew "tfenv"
 brew "fzf"
 brew "jq"
 brew "maven"
@@ -49,6 +49,7 @@ brew "goreleaser/tap/goreleaser"
 brew "telia-oss/tap/aws-env"
 brew "telia-oss/tap/aws-auth"
 brew "telia-oss/tap/cloud-connect"
+brew "warrensbox/tap/tfswitch"
 
 # Mac store
 mas "cinch", id: 412529613
