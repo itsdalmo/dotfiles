@@ -68,7 +68,7 @@ install() {
 
   printf " * Configuring dock\n"
   dockutil --no-restart --remove all --allhomes
-  dockutil --no-restart --add "/Applications/Google Chrome.app"
+  dockutil --no-restart --add "/Applications/Brave Browser.app"
   dockutil --no-restart --add "/System/Applications/Mail.app"
   dockutil --no-restart --add "/System/Applications/Calendar.app"
   dockutil --no-restart --add "/System/Applications/Messages.app"
