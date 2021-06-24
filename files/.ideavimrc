@@ -1,0 +1,346 @@
+""" General
+let mapleader = " "
+set showmode
+set clipboard+=unnamed
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set surround
+set ideajoin
+set commentary
+set idearefactormode keep 
+set ideastatusicon gray
+
+" (Optional) My own vim commands
+nnoremap Y y$
+
+" (Optional) Comma for major mode
+nmap , <leader>m
+vmap , <leader>m
+
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l 
+
+" Keep search matches in the middle of the window.
+" (source: https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc)
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" indent visual selected code without unselecting and going back to normal mode
+vmap > >gv
+vmap < <gv
+
+""" Settings for https://plugins.jetbrains.com/plugin/15976-idea-which-key
+set which-key
+set notimeout
+let g:WhichKey_ShowVimActions = "true"
+
+""" Leader
+let g:WhichKeyDesc_Leader = "<leader> key"
+
+let g:WhichKeyDesc_Leader_LastBuffer = "<leader><Tab> last-buffer"
+nnoremap <leader><Tab>    <C-S-6>
+vnoremap <leader><Tab>    <Esc><C-S-6>
+
+let g:WhichKeyDesc_Leader_Space = "<leader><Space> commands"
+nnoremap <leader><Space>    :action GotoAction<CR>
+vnoremap <leader><Space>    :action GotoAction<CR>
+
+let g:WhichKeyDesc_Leader_OpenShell = "<leader>! show-terminal"
+nnoremap <leader>!    :action ActivateTerminalToolWindow<CR>
+vnoremap <leader>!    :action ActivateTerminalToolWindow<CR>
+
+let g:WhichKeyDesc_Leader_SearchProject = "<leader>/ search-project"
+nnoremap <leader>/    :action FindInPath<CR>
+vnoremap <leader>/    :action FindInPath<CR>
+
+let g:WhichKeyDesc_Leader_SearchProjectAlt = "<leader>* search-project"
+nnoremap <leader>*    :action FindInPath<CR>
+vnoremap <leader>*    :action FindInPath<CR>
+
+""" Buffers
+let g:WhichKeyDesc_Buffers = "<leader>b    +buffers"
+
+let g:WhichKeyDesc_Buffers_KillBuffer = "<leader>bd    close-active-buffer"
+nnoremap <leader>bd    :action CloseContent<CR>
+vnoremap <leader>bd    <Esc>:action CloseContent<CR>
+
+let g:WhichKeyDesc_Buffers_KillOtherBuffers = "<leader>bM    close-other-buffers"
+nnoremap <leader>bM    :action CloseAllEditorsButActive<CR>
+vnoremap <leader>bM    :action CloseAllEditorsButActive<CR>
+
+let g:WhichKeyDesc_Buffers_NewScratchBuffer = "<leader>bn    new-scratch-buffer"
+nnoremap <leader>bn    :action NewScratchBuffer<CR>
+vnoremap <leader>bn    <Esc>:action NewScratchBuffer<CR>
+
+let g:WhichKeyDesc_Buffers_ChangeScratchLanguage = "<leader>bl    change-scratch-language"
+nnoremap <leader>bl    :action Scratch.ChangeLanguage<CR>
+vnoremap <leader>bl    <Esc>:action Scratch.ChangeLanguage<CR>
+
+let g:WhichKeyDesc_Buffers_ReopenLastKilledBuffer = "<leader>bu    reopen-closed-buffer"
+nnoremap <leader>bu    :action ReopenClosedTab<CR>
+vnoremap <leader>bu    <Esc>:action ReopenClosedTab<CR>
+
+""" Debug
+let g:WhichKeyDesc_Debug = "<leader>d    +debug"
+
+let g:WhichKeyDesc_Debug_Debug = "<leader>dd debug"
+nnoremap <leader>dd    :action Debug<CR>
+vnoremap <leader>dd    <Esc>:action Debug<CR>
+
+let g:WhichKeyDesc_Debug_SelectDebugConfiguration = "<leader>dD select-debug-configuration"
+nnoremap <leader>dD    :action ChooseDebugConfiguration<CR>
+vnoremap <leader>dD    <Esc>:action ChooseDebugConfiguration<CR>
+
+let g:WhichKeyDesc_Debug_Continue = "<leader>dc continue"
+nnoremap <leader>dc    :action Resume<CR>
+vnoremap <leader>dc    <Esc>:action Resume<CR>
+
+let g:WhichKeyDesc_Debug_ToggleBreakpoint = "<leader>db toggle-breakpoint"
+nnoremap <leader>db    :action ToggleLineBreakpoint<CR>
+vnoremap <leader>db    <Esc>:action ToggleLineBreakpoint<CR>
+
+let g:WhichKeyDesc_Debug_ViewBreakpoints = "<leader>dB view-breakpoints"
+nnoremap <leader>dB    :action ViewBreakpoints<CR>
+vnoremap <leader>dB    <Esc>:action ViewBreakpoints<CR>
+
+let g:WhichKeyDesc_Debug_ClearAllBreakpoints = "<leader>dC clear-all-breakpoints"
+nnoremap <leader>dC    :action Debugger.RemoveAllBreakpointsInFile<CR>
+vnoremap <leader>dC    <Esc>:action Debugger.RemoveAllBreakpointsInFile<CR>
+
+""" Errors
+let g:WhichKeyDesc_Errors = "<leader>e    +errors"
+
+let g:WhichKeyDesc_Errors_ListErrors = "<leader>el list-errors"
+nnoremap <leader>el    :action CodeInspection.OnEditor<CR>
+vnoremap <leader>el    :action CodeInspection.OnEditor<CR>
+
+let g:WhichKeyDesc_Errors_InspectCode = "<leader>eL inspect-code"
+nnoremap <leader>eL    :action InspectCode<CR>
+vnoremap <leader>eL    :action InspectCode<CR>
+
+let g:WhichKeyDesc_Errors_NextError = "<leader>en next-error"
+nnoremap <leader>en    :action GotoNextError<CR>
+vnoremap <leader>en    <Esc>:action GotoNextError<CR>
+
+let g:WhichKeyDesc_Errors_PreviousError = "<leader>ep previous-error"
+nnoremap <leader>ep    :action GotoPreviousError<CR>
+vnoremap <leader>ep    <Esc>:action GotoPreviousError<CR>
+
+""" File
+let g:WhichKeyDesc_File = "<leader>f    +file"
+
+let g:WhichKeyDesc_File_GotoFile = "<leader>ff open-file"
+nnoremap <leader>ff    :action GotoFile<CR>
+vnoremap <leader>ff    :action GotoFile<CR>
+
+let g:WhichKeyDesc_File_NewFile = "<leader>fn new-file"
+nnoremap <leader>fn    :action NewFile<CR>
+vnoremap <leader>fn    :action NewFile<CR>
+
+let g:WhichKeyDesc_File_Recent = "<leader>fr recent-files"
+nnoremap <leader>fr    :action RecentFiles<CR>
+vnoremap <leader>fr    :action RecentFiles<CR>
+
+let g:WhichKeyDesc_File_LocateInTree = "<leader>fl locate-file"
+nnoremap <leader>fl    :action SelectInProjectView<CR>
+vnoremap <leader>fl    :action SelectInProjectView<CR>
+
+let g:WhichKeyDesc_File_FileTree = "<leader>ft file-tree"
+nnoremap <leader>ft    :action ActivateProjectToolWindow<CR>
+vnoremap <leader>ft    :action ActivateProjectToolWindow<CR>
+
+let g:WhichKeyDesc_File_LocateFileExplorer = "<leader>fL locate-file-explorer"
+nnoremap <leader>fL    :action RevealIn<CR>
+vnoremap <leader>fL    :action RevealIn<CR>
+
+let g:WhichKeyDesc_File_Rename = "<leader>fR rename-file"
+nnoremap <leader>fR    :action RenameFile<CR>
+vnoremap <leader>fR    :action RenameFile<CR>
+
+""" Git
+let g:WhichKeyDesc_Git = "<leader>g    +git"
+
+let g:WhichKeyDesc_Git_Status = "<leader>gs status"
+nnoremap <leader>gs    :action ActivateCommitToolWindow<CR>
+vnoremap <leader>gs    :action ActivateCommitToolWindow<CR>
+
+let g:WhichKeyDesc_Git_Status = "<leader>gd diff"
+nnoremap <leader>gd    :action Compare.SameVersion<CR>
+vnoremap <leader>gd    :action Compare.SameVersion<CR>
+
+let g:WhichKeyDesc_Git_Status = "<leader>gR revert"
+nnoremap <leader>gR    :action ChangesView.Revert<CR>
+vnoremap <leader>gR    :action ChangesView.Revert<CR>
+
+let g:WhichKeyDesc_Git_ShowHistory = "<leader>gh show-history"
+nnoremap <leader>gh    :action Vcs.ShowTabbedFileHistory<CR>
+vnoremap <leader>gh    <Esc>:action Vcs.ShowTabbedFileHistory<CR>
+
+let g:WhichKeyDesc_Git_ShowLog = "<leader>gl show-log"
+nnoremap <leader>gl    :action Vcs.Show.Log<CR>
+vnoremap <leader>gl    :action Vcs.Show.Log<CR>
+
+let g:WhichKeyDesc_Git_Stage = "<leader>gS stage"
+nnoremap <leader>gS    :action ChangesView.AddUnversioned<CR>
+vnoremap <leader>gS    :action ChangesView.AddUnversioned<CR>
+
+let g:WhichKeyDesc_Git_SelectOperation = "<leader>gg select-operation"
+nnoremap <leader>gg    :action Vcs.QuickListPopupAction<CR>
+vnoremap <leader>gg    :action Vcs.QuickListPopupAction<CR>
+
+let g:WhichKeyDesc_Git_Blame = "<leader>gb toggle-git-blame"
+nnoremap <leader>gb    :action Annotate<CR>
+vnoremap <leader>gb    <Esc>:action Annotate<CR>
+
+""" Major
+let g:WhichKeyDesc_Major = "<leader>m    +major"
+
+let g:WhichKeyDesc_Major_ShowAllCommands = "<leader>m<space> show-all-commands"
+nnoremap <leader>m<space>    :action CodeMenu<CR>
+vnoremap <leader>m<space>    :action CodeMenu<CR>
+
+let g:WhichKeyDesc_Major_QuickFix = "<leader>m. quick-fix"
+nnoremap <leader>m.    :action ShowIntentionActions<CR>
+vnoremap <leader>m.    :action ShowIntentionActions<CR>
+
+let g:WhichKeyDesc_Major_PeekDefinition = "<leader>md peek-definition"
+nnoremap <leader>md      :action QuickJavaDoc<CR>
+vnoremap <leader>md      <Esc>:action QuickJavaDoc<CR>
+
+let g:WhichKeyDesc_Major_Format = "<leader>m= format-buffer"
+nnoremap <leader>m=    :action ReformatCode<CR>
+vnoremap <leader>m=    :action ReformatCode<CR>
+
+let g:WhichKeyDesc_Major_TestClass = "<leader>mt test"
+nnoremap <leader>mt    :action RunClass<CR>
+vnoremap <leader>mt    :action RunClass<CR>
+
+let g:WhichKeyDesc_Major_RecentLocations = "<leader>ml recent-locations"
+nnoremap <leader>mh    :action RecentLocations<CR>
+vnoremap <leader>mh    :action RecentLocations<CR>
+
+let g:WhichKeyDesc_Major_QuickImplementation = "<leader>mi quick-implementation"
+nnoremap <leader>mi    :action QuickImplementations<CR>
+vnoremap <leader>mi    :action QuickImplementations<CR>
+
+let g:WhichKeyDesc_Major_Refactor = "<leader>mr refactor"
+nnoremap <leader>mr      :action Refactorings.QuickListPopupAction<CR>
+vnoremap <leader>mr      <Esc>:action Refactorings.QuickListPopupAction<CR>
+
+let g:WhichKeyDesc_Major_Rename = "<leader>mR rename"
+nnoremap <leader>mR      :action RenameElement<CR>
+vnoremap <leader>mR      :action RenameElement<CR>
+
+let g:WhichKeyDesc_Major_FindAllReferencesInPanel = "<leader>mu find-usages"
+nnoremap <leader>mu    :action FindUsages<CR>
+vnoremap <leader>mu    :action FindUsages<CR>
+
+let g:WhichKeyDesc_Major_JumpToSymbol = "<leader>mj jump-to-symbol-in-buffer"
+nnoremap <leader>mj    :action FileStructurePopup<CR>
+vnoremap <leader>mj    :action FileStructurePopup<CR>
+
+let g:WhichKeyDesc_Major_JumpToSymbolSearch = "<leader>mJ jump-to-symbol"
+nnoremap <leader>mJ    :action GotoSymbol<CR>
+vnoremap <leader>mJ    :action GotoSymbol<CR>
+
+" Goto
+let g:WhichKeyDesc_Major_Goto = "<leader>mg    +goto"
+
+let g:WhichKeyDesc_Major_Goto_Declaration = "<leader>mf declaration"
+nnoremap <leader>mgd    :action GotoDeclaration<CR>
+vnoremap <leader>mgd    :action GotoDeclaration<CR>
+
+let g:WhichKeyDesc_Major_Goto_TypeDeclaration = "<leader>mgt type-declaration"
+nnoremap <leader>mgt      :action GotoTypeDeclaration<CR>
+vnoremap <leader>mgt      <Esc>:action GotoTypeDeclaration<CR>
+
+let g:WhichKeyDesc_Major_Goto_Implementation = "<leader>mgi implementation"
+nnoremap <leader>mgi      :action GotoImplementation<CR>
+vnoremap <leader>mgi      <Esc>:action GotoImplementation<CR>
+
+""" Project
+let g:WhichKeyDesc_Project = "<leader>p    +project"
+
+let g:WhichKeyDesc_Project_BuildProject = "<leader>pb build-project"
+nnoremap <leader>pb    :action ChooseRunConfiguration<CR>
+vnoremap <leader>pb    :action ChooseRunConfiguration<CR>
+
+let g:WhichKeyDesc_Project_SwitchProject = "<leader>pp switch-project"
+nnoremap <leader>pp    :action ManageRecentProjects<CR>
+vnoremap <leader>pp    :action ManageRecentProjects<CR>
+
+let g:WhichKeyDesc_Project_TestProject = "<leader>pt test-project"
+nnoremap <leader>pt    :action RerunTests<CR>
+vnoremap <leader>pt    <Esc>:action RerunTests<CR>
+
+""" Window
+let g:WhichKeyDesc_Window = "<leader>w    +window"
+
+let g:WhichKeyDesc_Window_SwitchFrame = "<leader>wo switch-frame"
+nnoremap <leader>wo    :action NextProjectWindow<CR>
+vnoremap <leader>wo    :action NextProjectWindow<CR>
+
+let g:WhichKeyDesc_Window_SplitWindowBelow = "<leader>ws split-window-below"
+nnoremap <leader>ws    <C-w>s<C-w>j
+vnoremap <leader>ws    <Esc><C-w>s<C-w>j
+
+let g:WhichKeyDesc_Window_SplitWindowRight = "<leader>wv split-window-right"
+nnoremap <leader>wv    <C-w>v<C-w>l
+vnoremap <leader>wv    <Esc><C-w>v<C-w>l
+
+let g:WhichKeyDesc_Window_DeleteWindow = "<leader>wd close-window"
+nnoremap <leader>wd    :action CloseAllEditors<CR>
+vnoremap <leader>wd    <Esc>:action CloseAllEditors<CR>
+
+let g:WhichKeyDesc_Window_CloseAllOtherWindows = "<leader>wm close-all-other-windows"
+nnoremap <leader>wm    :action HideAllWindows<CR>
+vnoremap <leader>wm    :action HideAllWindows<CR>
+
+""" Search/symbol
+let g:WhichKeyDesc_Search = "<leader>s    +search/symbol"
+
+let g:WhichKeyDesc_Search_Modal = "<leader>ss search"
+nnoremap <leader>ss    :action FindInPath<CR>
+vnoremap <leader>ss    :action FindInPath<CR>
+
+let g:WhichKeyDesc_Search_Replace = "<leader>sr search-and-replace"
+nnoremap <leader>sr    :action ReplaceInPath<CR>
+vnoremap <leader>sr    :action ReplaceInPath<CR>
+
+""" Toggle
+let g:WhichKeyDesc_Toggles = "<leader>t    +toggles"
+
+let g:WhichKeyDesc_Toggles_GutterIcons = "<leader>tg gutter-icons"
+nnoremap <leader>tg    :action EditorToggleShowGutterIcons<CR>
+vnoremap <leader>tg    :action EditorToggleShowGutterIcons<CR>
+
+let g:WhichKeyDesc_Toggles_SoftWraps = "<leader>tl soft-wraps"
+nnoremap <leader>tl    :action EditorToggleUseSoftWraps<CR>
+vnoremap <leader>tl    :action EditorToggleUseSoftWraps<CR>
+
+let g:WhichKeyDesc_Toggles_ShowWhitespace = "<leader>tw show-whitespace"
+nnoremap <leader>tw    :action EditorToggleShowWhitespaces<CR>
+vnoremap <leader>tw    :action EditorToggleShowWhitespaces<CR>
+
+""" Quit
+let g:WhichKeyDesc_Quit = "<leader>q    +quit"
+
+let g:WhichKeyDesc_Quit_CloseProject = "<leader>qq close-project"
+nnoremap <leader>qq    :action CloseProject<CR>
+vnoremap <leader>qq    <Esc>:action CloseProject<CR>
+
+let g:WhichKeyDesc_Quit_CloseAllProjects = "<leader>qQ close-all-projects"
+nnoremap <leader>qQ    :action Exit<CR>
+vnoremap <leader>qQ    <Esc>:action Exit<CR>
+
+let g:WhichKeyDesc_Quit_Restart = "<leader>qr restart"
+nnoremap <leader>qr    :action InvalidateCaches<CR>
+vnoremap <leader>qr    <Esc>:action InvalidateCaches<CR>
+
+let g:WhichKeyDesc_Quit_ReloadIdeavim = "<leader>qR reload-ideavim"
+nnoremap <leader>qR    :source ~/.ideavimrc<CR>
+vnoremap <leader>qR    <Esc>:source ~/.ideavimrc<CR>

@@ -33,7 +33,7 @@ install() {
   fi
 
   printf " * Linking files\n"
-  local dotfiles=(".Brewfile" ".gitconfig" ".vimrc" ".zprofile" ".zshrc" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
+  local dotfiles=(".Brewfile" ".gitconfig" ".vimrc" ".ideavimrc" ".zprofile" ".zshrc" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
   for file in "${dotfiles[@]}"; do
     ln -sf "${DOTFILES_PATH}/files/${file}" "${HOME}/${file}"
   done
