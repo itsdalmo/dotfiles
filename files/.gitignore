@@ -1,0 +1,6 @@
+# Finder (OSX)
+.DS_Store
+
+# Editors
+.vscode
+.idea
