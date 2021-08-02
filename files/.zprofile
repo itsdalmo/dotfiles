@@ -11,3 +11,6 @@ export AWS_PAGER=
 
 # aws-vault
 export AWS_MIN_TTL=20m
+
+# Homebrew (Required on M1: https://github.com/Homebrew/discussions/discussions/446)
+eval "$(/opt/homebrew/bin/brew shellenv)"
