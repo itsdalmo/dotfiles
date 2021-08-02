@@ -32,6 +32,9 @@ install() {
     git clone "${DOTFILES_REPO}" "${DOTFILES_PATH}" --recurse-submodules 
   fi
 
+  printf " * Creating .gnupg directory"
+  mkdir -p "${HOME}/.gnupg"
+
   printf " * Linking files\n"
   local dotfiles=(".Brewfile" ".gitconfig" ".gitignore" ".vimrc" ".ideavimrc" ".zprofile" ".zshrc" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
   for file in "${dotfiles[@]}"; do
