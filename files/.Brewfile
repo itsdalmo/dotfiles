@@ -20,6 +20,7 @@ cask "spotify"
 cask "signal"
 cask "postman"
 cask "zoom"
+cask "google-cloud-sdk"
 
 # Packages
 brew "mas"
