@@ -203,6 +203,10 @@ let g:WhichKeyDesc_Major_ShowAllCommands = "<leader>m<space> show-all-commands"
 nnoremap <leader>m<space>    :action CodeMenu<CR>
 vnoremap <leader>m<space>    :action CodeMenu<CR>
 
+let g:WhichKeyDesc_Major_LastLocation = "<leader><Tab> last-location"
+nnoremap <leader>m<tab>    :action Back<CR>
+vnoremap <leader>m<tab>    :action Back<CR>
+
 let g:WhichKeyDesc_Major_QuickFix = "<leader>m. quick-fix"
 nnoremap <leader>m.    :action ShowIntentionActions<CR>
 vnoremap <leader>m.    :action ShowIntentionActions<CR>
@@ -264,6 +268,10 @@ vnoremap <leader>mgi      <Esc>:action GotoImplementation<CR>
 
 """ Project
 let g:WhichKeyDesc_Project = "<leader>p    +project"
+
+let g:WhichKeyDesc_Project_PreviousProject = "<leader>pb previous-project"
+nnoremap <leader>p<tab>    :action PreviousProjectWindow<CR>
+vnoremap <leader>p<tab>    :action PreviousProjectWindow<CR>
 
 let g:WhichKeyDesc_Project_BuildProject = "<leader>pb build-project"
 nnoremap <leader>pb    :action ChooseRunConfiguration<CR>
