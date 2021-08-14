@@ -6,7 +6,7 @@ tap "itsdalmo/tap"
 tap "warrensbox/tap"
 
 # Apps
-cask "brave-browser"
+cask "firefox"
 cask "iterm2"
 cask "visual-studio-code"
 cask "intellij-idea"
