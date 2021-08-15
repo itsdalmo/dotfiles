@@ -219,10 +219,6 @@ let g:WhichKeyDesc_Major_Format = "<leader>m= format-buffer"
 nnoremap <leader>m=    :action ReformatCode<CR>
 vnoremap <leader>m=    :action ReformatCode<CR>
 
-let g:WhichKeyDesc_Major_TestClass = "<leader>mt test"
-nnoremap <leader>mt    :action RunClass<CR>
-vnoremap <leader>mt    :action RunClass<CR>
-
 let g:WhichKeyDesc_Major_RecentLocations = "<leader>ml recent-locations"
 nnoremap <leader>mh    :action RecentLocations<CR>
 vnoremap <leader>mh    :action RecentLocations<CR>
@@ -231,13 +227,13 @@ let g:WhichKeyDesc_Major_QuickImplementation = "<leader>mi quick-implementation"
 nnoremap <leader>mi    :action QuickImplementations<CR>
 vnoremap <leader>mi    :action QuickImplementations<CR>
 
-let g:WhichKeyDesc_Major_Refactor = "<leader>mr refactor"
-nnoremap <leader>mr      :action Refactorings.QuickListPopupAction<CR>
-vnoremap <leader>mr      <Esc>:action Refactorings.QuickListPopupAction<CR>
+let g:WhichKeyDesc_Major_Rename = "<leader>mr rename"
+nnoremap <leader>mr      :action RenameElement<CR>
+vnoremap <leader>mr      :action RenameElement<CR>
 
-let g:WhichKeyDesc_Major_Rename = "<leader>mR rename"
-nnoremap <leader>mR      :action RenameElement<CR>
-vnoremap <leader>mR      :action RenameElement<CR>
+let g:WhichKeyDesc_Major_Refactor = "<leader>mR refactor"
+nnoremap <leader>mR      :action Refactorings.QuickListPopupAction<CR>
+vnoremap <leader>mR      <Esc>:action Refactorings.QuickListPopupAction<CR>
 
 let g:WhichKeyDesc_Major_FindAllReferencesInPanel = "<leader>mu find-usages"
 nnoremap <leader>mu    :action FindUsages<CR>
@@ -334,6 +330,10 @@ let g:WhichKeyDesc_Toggles_ShowWhitespace = "<leader>tw show-whitespace"
 nnoremap <leader>tw    :action EditorToggleShowWhitespaces<CR>
 vnoremap <leader>tw    :action EditorToggleShowWhitespaces<CR>
 
+let g:WhichKeyDesc_Toggles_ShowWhitespace = "<leader>ti ideavim-track-actions"
+nnoremap <leader>ti    :action VimFindActionIdAction<CR>
+vnoremap <leader>ti    :action VimFindActionIdAction<CR>
+
 """ Quit
 let g:WhichKeyDesc_Quit = "<leader>q    +quit"
 
@@ -345,10 +345,10 @@ let g:WhichKeyDesc_Quit_CloseAllProjects = "<leader>qQ close-all-projects"
 nnoremap <leader>qQ    :action Exit<CR>
 vnoremap <leader>qQ    <Esc>:action Exit<CR>
 
-let g:WhichKeyDesc_Quit_Restart = "<leader>qr restart"
-nnoremap <leader>qr    :action InvalidateCaches<CR>
-vnoremap <leader>qr    <Esc>:action InvalidateCaches<CR>
+let g:WhichKeyDesc_Quit_ReloadIdeavim = "<leader>qr reload-ideavim"
+nnoremap <leader>qr    :source ~/.ideavimrc<CR>
+vnoremap <leader>qr    <Esc>:source ~/.ideavimrc<CR>
 
-let g:WhichKeyDesc_Quit_ReloadIdeavim = "<leader>qR reload-ideavim"
-nnoremap <leader>qR    :source ~/.ideavimrc<CR>
-vnoremap <leader>qR    <Esc>:source ~/.ideavimrc<CR>
+let g:WhichKeyDesc_Quit_Restart = "<leader>qR restart"
+nnoremap <leader>qR    :action InvalidateCaches<CR>
+vnoremap <leader>qR    <Esc>:action InvalidateCaches<CR>
