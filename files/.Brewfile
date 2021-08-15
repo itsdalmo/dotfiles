@@ -21,6 +21,7 @@ cask "signal"
 cask "postman"
 cask "zoom"
 cask "google-cloud-sdk"
+cask "sensiblesidebuttons"
 
 # Packages
 brew "mas"
