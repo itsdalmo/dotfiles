@@ -9,6 +9,9 @@ export AWS_PAGER=
 # aws-vault
 export AWS_MIN_TTL=20m
 
+# tfswitch
+export PATH=$PATH:$HOME/bin
+
 # GCP
 source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
