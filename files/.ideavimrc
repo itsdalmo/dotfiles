@@ -350,5 +350,5 @@ nnoremap <leader>qr    :source ~/.ideavimrc<CR>
 vnoremap <leader>qr    <Esc>:source ~/.ideavimrc<CR>
 
 let g:WhichKeyDesc_Quit_Restart = "<leader>qR restart"
-nnoremap <leader>qR    :action InvalidateCaches<CR>
-vnoremap <leader>qR    <Esc>:action InvalidateCaches<CR>
+nnoremap <leader>qR    :action RestartIde<CR>
+vnoremap <leader>qR    <Esc>:action RestartIde<CR>
