@@ -20,7 +20,7 @@ nmap , <leader>m
 vmap , <leader>m
 
 noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
+noremap <C-j> :action ActivateTerminalToolWindow<CR>
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l 
 
@@ -152,6 +152,10 @@ vnoremap <leader>fl    :action SelectInProjectView<CR>
 let g:WhichKeyDesc_File_FileTree = "<leader>ft file-tree"
 nnoremap <leader>ft    :action ActivateProjectToolWindow<CR>
 vnoremap <leader>ft    :action ActivateProjectToolWindow<CR>
+
+let g:WhichKeyDesc_File_FileStructure = "<leader>fs file-structure"
+nnoremap <leader>fs    :action ActivateStructureToolWindow<CR>
+vnoremap <leader>fs    :action ActivateStructureToolWindow<CR>
 
 let g:WhichKeyDesc_File_LocateFileExplorer = "<leader>fL locate-file-explorer"
 nnoremap <leader>fL    :action RevealIn<CR>
