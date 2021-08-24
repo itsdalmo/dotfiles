@@ -39,6 +39,8 @@ install() {
 
   printf " * Creating .gnupg directory\n"
   mkdir -p "${HOME}/.gnupg"
+  chmod -R 600 "${HOME}/.gnupg"
+  chmod 700 "${HOME}/.gnupg"
 
   printf " * Linking files\n"
   local dotfiles=(".Brewfile" ".gitconfig" ".gitignore" ".vimrc" ".ideavimrc" ".zprofile" ".zshrc" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
