@@ -15,6 +15,11 @@ install() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
 
+  if [ ! -d "/usr/libexec/rosetta" ]; then
+    printf " * Installing rosetta\n"
+    softwareupdate --install-rosetta --agree-to-license
+  fi
+
   mkdir -p "$(dirname $SSH_KEY)"
   if [ ! -f "${SSH_KEY}" ]; then
     printf " * Generating SSH key\n"
