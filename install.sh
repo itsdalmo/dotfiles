@@ -37,7 +37,7 @@ install() {
     git clone "${DOTFILES_REPO}" "${DOTFILES_PATH}" --recurse-submodules 
   fi
 
-  printf " * Creating .gnupg directory"
+  printf " * Creating .gnupg directory\n"
   mkdir -p "${HOME}/.gnupg"
 
   printf " * Linking files\n"
