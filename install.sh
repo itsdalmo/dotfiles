@@ -49,7 +49,7 @@ install() {
   printf " * Installing brew bundle\n"
   brew bundle --global | sed 's/^/    ~ /' 
 
-  if ! env | grep -q ZSH; then
+  if [ ! -d "${HOME}/.oh-my-zsh" ]; then
     printf " * Installing oh my ZSH\n"
     /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
