@@ -84,6 +84,7 @@ install() {
   dockutil --no-restart --add "/System/Applications/Messages.app"
   dockutil --no-restart --add "/System/Applications/Photos.app"
   dockutil --no-restart --add "/Applications/Discord.app"
+  dockutil --no-restart --add "/Applications/Signal.app"
   dockutil --no-restart --add "/Applications/Slack.app"
   dockutil --no-restart --add "/Applications/GoLand.app"
   dockutil --no-restart --add "/Applications/Visual Studio Code.app"
