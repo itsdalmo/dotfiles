@@ -1,6 +1,3 @@
-[submodule "fonts"]
-	path = fonts
-	url = https://github.com/powerline/fonts.git
 [submodule "colors"]
 	path = colors
 	url = git@github.com:joshdick/onedark.vim.git

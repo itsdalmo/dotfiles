@@ -66,9 +66,6 @@ install() {
   ln -sf "${DOTFILES_PATH}/colors/colors/onedark.vim" "${HOME}/.vim/colors/onedark.vim"
   ln -sf "${DOTFILES_PATH}/colors/autoload/onedark.vim" "${HOME}/.vim/autoload/onedark.vim"
 
-  printf " * Copying fonts\n"
-  "${DOTFILES_PATH}/fonts/install.sh" "Meslo LG M Regular for Powerline" > /dev/null
-
   printf " * Configuring OS X\n"
   source "${DOTFILES_PATH}/files/.macos"
 

@@ -4,8 +4,10 @@ tap "go-task/tap"
 tap "goreleaser/tap"
 tap "itsdalmo/tap"
 tap "warrensbox/tap"
+tap "homebrew/cask-fonts"	
 
 # Apps
+cask "font-jetbrains-mono-nerd-font"
 cask "firefox"
 cask "iterm2"
 cask "visual-studio-code"
