@@ -1,0 +1,43 @@
+env:
+  ZSH_TMUX_AUTOSTART: 'true'
+
+font:
+  normal:
+    family: 'JetBrainsMono Nerd Font Mono'
+    style: Regular
+  bold:
+    style: Regular
+  italic:
+    style: Regular
+  bold_italic:
+    style: Regular
+  size: 13
+
+window:
+  startup_mode: Maximized
+  decorations: full
+  padding:
+    x: 4
+    y: 2
+  dynamic_padding: false
+
+# source: https://github.com/alacritty/alacritty/wiki/Color-schemes
+colors:
+  primary:
+    background: '#282c34'
+    foreground: '#abb2bf'
+  cursor:
+    text: CellBackground
+    cursor: '#528bff'
+  selection:
+    text: CellForeground
+    background: '#3e4451'
+  normal:
+    black: '#5c6370'
+    red: '#e06c75'
+    green: '#98c379'
+    yellow: '#e5c07b'
+    blue: '#61afef'
+    magenta: '#c678dd'
+    cyan: '#56b6c2'
+    white: '#828997'

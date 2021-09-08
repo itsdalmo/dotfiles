@@ -7,6 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 plugins=(
     git
+    tmux
     vi-mode
 )
 ZSH_DISABLE_COMPFIX=true

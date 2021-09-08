@@ -42,8 +42,11 @@ install() {
   chmod -R 600 "${HOME}/.gnupg"
   chmod 700 "${HOME}/.gnupg"
 
+  printf " * Creating .config directory\n"
+  mkdir -p "${HOME}/.config"
+
   printf " * Linking files\n"
-  local dotfiles=(".Brewfile" ".gitconfig" ".gitignore" ".vimrc" ".ideavimrc" ".zprofile" ".zshrc" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
+  local dotfiles=(".Brewfile" ".gitconfig" ".gitignore" ".vimrc" ".ideavimrc" ".zprofile" ".zshrc" ".tmux.conf" ".config/alacritty.toml" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
   for file in "${dotfiles[@]}"; do
     ln -sf "${DOTFILES_PATH}/files/${file}" "${HOME}/${file}"
   done
@@ -69,10 +72,6 @@ install() {
   printf " * Configuring OS X\n"
   source "${DOTFILES_PATH}/files/.macos"
 
-  printf " * Configuring iTerm\n"
-  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${DOTFILES_PATH}/iterm2"
-  defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-
   printf " * Configuring dock\n"
   dockutil --no-restart --remove all --allhomes
   dockutil --no-restart --add "/Applications/Firefox.app"
@@ -85,7 +84,7 @@ install() {
   dockutil --no-restart --add "/Applications/Slack.app"
   dockutil --no-restart --add "/Applications/GoLand.app"
   dockutil --no-restart --add "/Applications/Visual Studio Code.app"
-  dockutil --no-restart --add "/Applications/iTerm.app"
+  dockutil --no-restart --add "/Applications/Alacritty.app"
   dockutil --no-restart --add "/Applications/1Password 7.app"
   dockutil --no-restart --add "/Applications/Spotify.app"
 
