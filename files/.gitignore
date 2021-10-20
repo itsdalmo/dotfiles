@@ -1,6 +1,9 @@
 # Finder (OSX)
 .DS_Store
 
-# Editors
+# VS Code 
 .vscode
+*.code-workspace
+
+# GoLand
 .idea
