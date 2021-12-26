@@ -42,11 +42,8 @@ install() {
   chmod -R 600 "${HOME}/.gnupg"
   chmod 700 "${HOME}/.gnupg"
 
-  printf " * Creating .config directory\n"
-  mkdir -p "${HOME}/.config"
-
   printf " * Linking files\n"
-  local dotfiles=(".Brewfile" ".gitconfig" ".gitignore" ".vimrc" ".ideavimrc" ".zprofile" ".zshrc" ".config/.wezterm.lua" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
+  local dotfiles=(".Brewfile" ".gitconfig" ".gitignore" ".vimrc" ".ideavimrc" ".zprofile" ".zshrc" ".wezterm.lua" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
   for file in "${dotfiles[@]}"; do
     ln -sf "${DOTFILES_PATH}/files/${file}" "${HOME}/${file}"
   done
