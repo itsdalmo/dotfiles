@@ -10,7 +10,7 @@ SSH_KEY="${HOME}/.ssh/id_rsa"
 install() {
   printf "Installing itsdalmo/dotfiles...\n"
 
-  if ! command -v "brew" > /dev/null; then
+  if ! command -v "brew" >/dev/null; then
     printf " * Installing homebrew\n"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
@@ -24,7 +24,7 @@ install() {
   if [ ! -f "${SSH_KEY}" ]; then
     printf " * Generating SSH key\n"
     ssh-keygen -t rsa -b 4096 -C "kristian@dalmo.me" -f "${SSH_KEY}"
-    pbcopy < "${SSH_KEY}.pub"
+    pbcopy <"${SSH_KEY}.pub"
 
     printf "   \n"
     printf "   Public key copied to clipboard.\n"
@@ -34,7 +34,7 @@ install() {
 
   if [ ! -d "${DOTFILES_PATH}" ]; then
     printf " * Cloning repository\n"
-    git clone "${DOTFILES_REPO}" "${DOTFILES_PATH}" --recurse-submodules 
+    git clone "${DOTFILES_REPO}" "${DOTFILES_PATH}" --recurse-submodules
   fi
 
   printf " * Creating .gnupg directory\n"
@@ -46,13 +46,13 @@ install() {
   mkdir -p "${HOME}/.config"
 
   printf " * Linking files\n"
-  local dotfiles=(".Brewfile" ".gitconfig" ".gitignore" ".vimrc" ".ideavimrc" ".zprofile" ".zshrc" ".tmux.conf" ".config/alacritty.toml" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
+  local dotfiles=(".Brewfile" ".gitconfig" ".gitignore" ".vimrc" ".ideavimrc" ".zprofile" ".zshrc" ".config/.wezterm.lua" ".gnupg/gpg.conf" ".gnupg/gpg-agent.conf")
   for file in "${dotfiles[@]}"; do
     ln -sf "${DOTFILES_PATH}/files/${file}" "${HOME}/${file}"
   done
 
   printf " * Installing brew bundle\n"
-  brew bundle --global | sed 's/^/    ~ /' 
+  brew bundle --global | sed 's/^/    ~ /'
 
   if [ ! -d "${HOME}/.oh-my-zsh" ]; then
     printf " * Installing oh my ZSH\n"
@@ -84,7 +84,7 @@ install() {
   dockutil --no-restart --add "/Applications/Slack.app"
   dockutil --no-restart --add "/Applications/GoLand.app"
   dockutil --no-restart --add "/Applications/Visual Studio Code.app"
-  dockutil --no-restart --add "/Applications/Alacritty.app"
+  dockutil --no-restart --add "/Applications/WezTerm.app"
   dockutil --no-restart --add "/Applications/1Password 7.app"
   dockutil --no-restart --add "/Applications/Spotify.app"
 
