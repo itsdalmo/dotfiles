@@ -5,6 +5,7 @@ tap "goreleaser/tap"
 tap "itsdalmo/tap"
 tap "warrensbox/tap"
 tap "homebrew/cask-fonts"	
+tap "adoptopenjdk/openjdk"
 
 # Apps
 cask "alacritty"
@@ -22,6 +23,7 @@ cask "signal"
 cask "postman"
 cask "google-cloud-sdk"
 cask "sensiblesidebuttons"
+cask "adoptopenjdk11"
 
 # Packages
 brew "mas"
