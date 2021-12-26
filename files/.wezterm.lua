@@ -3,6 +3,8 @@ local wezterm = require 'wezterm';
 local cfg = {}
 
 -- General
+cfg.initial_cols = 180
+cfg.initial_rows = 48
 
 -- Colors
 cfg.color_scheme = "OneHalfDark"
