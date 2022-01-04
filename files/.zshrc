@@ -33,3 +33,6 @@ alias upgrade='brew update && brew bundle --global && brew bundle cleanup --forc
 aws-org-login() {
     sed -i.bak -E "s/^(role_arn[ ]*= arn:aws:iam::)[0-9]{12}(:role\/OrganizationAccountAccessRole)/\1$1\2/g" ~/.aws/config && aws-vault login org-access-role
 }
+
+# Disable sounds
+unsetopt BEEP
