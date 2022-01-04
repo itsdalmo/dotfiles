@@ -18,7 +18,8 @@ gpgconf --launch gpg-agent
 
 # FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='fd --follow'
+export FZF_CTRL_T_COMMAND='fd --follow'
 
 # NVM config
 export NVM_DIR=~/.nvm
