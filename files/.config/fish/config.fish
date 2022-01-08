@@ -16,7 +16,7 @@ fish_add_path "$HOME/bin"
 fish_add_path "$HOME/go/bin"
 
 # Environment
-set -gx EDITOR vim
+set -gx EDITOR nvim
 set -gx LC_ALL 'en_US.UTF-8'
 set -gx GOPATH "$HOME/go"
 set -gx AWS_DEFAULT_REGION eu-west-1
