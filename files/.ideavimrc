@@ -57,12 +57,16 @@ let g:WhichKeyDesc_Leader_SearchProject = "<leader>/ search-project"
 nnoremap <leader>/    :action FindInPath<CR>
 vnoremap <leader>/    :action FindInPath<CR>
 
-let g:WhichKeyDesc_Leader_SearchProjectAlt = "<leader>* search-project"
-nnoremap <leader>*    :action FindInPath<CR>
-vnoremap <leader>*    :action FindInPath<CR>
+let g:WhichKeyDesc_Leader_SearchProjectAlt = "<leader>* search-project-with-selection"
+nnoremap <leader>*    :action FindSelectionInPath<CR>
+vnoremap <leader>*    :action FindSelectionInPath<CR>
 
 """ Buffers
 let g:WhichKeyDesc_Buffers = "<leader>b    +buffers"
+
+let g:WhichKeyDesc_Buffers_KillBuffer = "<leader>bb    show-all-buffers"
+nnoremap <leader>bb    :action Switcher<CR>
+vnoremap <leader>bb    <Esc>:action Switcher<CR>
 
 let g:WhichKeyDesc_Buffers_KillBuffer = "<leader>bd    close-active-buffer"
 nnoremap <leader>bd    :action CloseContent<CR>
@@ -73,8 +77,8 @@ nnoremap <leader>bM    :action CloseAllEditorsButActive<CR>
 vnoremap <leader>bM    :action CloseAllEditorsButActive<CR>
 
 let g:WhichKeyDesc_Buffers_NewScratchBuffer = "<leader>bn    new-scratch-buffer"
-nnoremap <leader>bn    :action NewScratchBuffer<CR>
-vnoremap <leader>bn    <Esc>:action NewScratchBuffer<CR>
+nnoremap <leader>bs    :action NewScratchBuffer<CR>
+vnoremap <leader>bs    <Esc>:action NewScratchBuffer<CR>
 
 let g:WhichKeyDesc_Buffers_ChangeScratchLanguage = "<leader>bl    change-scratch-language"
 nnoremap <leader>bl    :action Scratch.ChangeLanguage<CR>
@@ -215,10 +219,6 @@ let g:WhichKeyDesc_Major_QuickFix = "<leader>m. quick-fix"
 nnoremap <leader>m.    :action ShowIntentionActions<CR>
 vnoremap <leader>m.    :action ShowIntentionActions<CR>
 
-let g:WhichKeyDesc_Major_PeekDefinition = "<leader>md peek-definition"
-nnoremap <leader>md      :action QuickJavaDoc<CR>
-vnoremap <leader>md      <Esc>:action QuickJavaDoc<CR>
-
 let g:WhichKeyDesc_Major_Format = "<leader>m= format-buffer"
 nnoremap <leader>m=    :action ReformatCode<CR>
 vnoremap <leader>m=    :action ReformatCode<CR>
@@ -226,10 +226,6 @@ vnoremap <leader>m=    :action ReformatCode<CR>
 let g:WhichKeyDesc_Major_RecentLocations = "<leader>ml recent-locations"
 nnoremap <leader>mh    :action RecentLocations<CR>
 vnoremap <leader>mh    :action RecentLocations<CR>
-
-let g:WhichKeyDesc_Major_QuickImplementation = "<leader>mi quick-implementation"
-nnoremap <leader>mi    :action QuickImplementations<CR>
-vnoremap <leader>mi    :action QuickImplementations<CR>
 
 let g:WhichKeyDesc_Major_Rename = "<leader>mr rename"
 nnoremap <leader>mr      :action RenameElement<CR>
@@ -239,36 +235,44 @@ let g:WhichKeyDesc_Major_Refactor = "<leader>mR refactor"
 nnoremap <leader>mR      :action Refactorings.QuickListPopupAction<CR>
 vnoremap <leader>mR      <Esc>:action Refactorings.QuickListPopupAction<CR>
 
-let g:WhichKeyDesc_Major_FindAllReferencesInPanel = "<leader>mu find-usages"
-nnoremap <leader>mu    :action FindUsages<CR>
-vnoremap <leader>mu    :action FindUsages<CR>
-
-let g:WhichKeyDesc_Major_JumpToSymbol = "<leader>mj jump-to-symbol-in-buffer"
-nnoremap <leader>mj    :action FileStructurePopup<CR>
-vnoremap <leader>mj    :action FileStructurePopup<CR>
-
-let g:WhichKeyDesc_Major_JumpToSymbolSearch = "<leader>mJ jump-to-symbol"
-nnoremap <leader>mJ    :action GotoSymbol<CR>
-vnoremap <leader>mJ    :action GotoSymbol<CR>
-
 " Goto
 let g:WhichKeyDesc_Major_Goto = "<leader>mg    +goto"
 
-let g:WhichKeyDesc_Major_Goto_Declaration = "<leader>mf declaration"
+let g:WhichKeyDesc_Major_Goto_PeekDefinition = "<leader>mgi quick-implementation"
+nnoremap <leader>mgi      :action QuickImplementations<CR>
+vnoremap <leader>mgi      <Esc>:action QuickImplementations<CR>
+
+let g:WhichKeyDesc_Major_Goto_Implementation = "<leader>mgI implementation"
+nnoremap <leader>mgI      :action GotoImplementation<CR>
+vnoremap <leader>mgI      <Esc>:action GotoImplementation<CR>
+
+let g:WhichKeyDesc_Major_Goto_Declaration = "<leader>mgd declaration"
 nnoremap <leader>mgd    :action GotoDeclaration<CR>
 vnoremap <leader>mgd    :action GotoDeclaration<CR>
 
-let g:WhichKeyDesc_Major_Goto_TypeDeclaration = "<leader>mgt type-declaration"
-nnoremap <leader>mgt      :action GotoTypeDeclaration<CR>
-vnoremap <leader>mgt      <Esc>:action GotoTypeDeclaration<CR>
+let g:WhichKeyDesc_Major_Goto_TypeDeclaration = "<leader>mgt quick-type-declaration"
+nnoremap <leader>mgt      :action QuickTypeDefinition<CR>
+vnoremap <leader>mgt      <Esc>:action QuickTypeDefinition<CR>
 
-let g:WhichKeyDesc_Major_Goto_Implementation = "<leader>mgi implementation"
-nnoremap <leader>mgi      :action GotoImplementation<CR>
-vnoremap <leader>mgi      <Esc>:action GotoImplementation<CR>
+let g:WhichKeyDesc_Major_Goto_TypeDeclaration = "<leader>mgt type-declaration"
+nnoremap <leader>mgT      :action GotoTypeDeclaration<CR>
+vnoremap <leader>mgT      <Esc>:action GotoTypeDeclaration<CR>
 
 let g:WhichKeyDesc_Major_Goto_Hierarchy = "<leader>mgh hierarchy"
 nnoremap <leader>mgh      :action CallHierarchy<CR>
 vnoremap <leader>mgh      <Esc>:action CallHierarchy<CR>
+
+let g:WhichKeyDesc_Major_Goto_FindAllReferencesInPanel = "<leader>mgu find-usages"
+nnoremap <leader>mgu    :action FindUsages<CR>
+vnoremap <leader>mgu    :action FindUsages<CR>
+
+let g:WhichKeyDesc_Major_Goto_JumpToSymbol = "<leader>mgj jump-to-symbol-in-buffer"
+nnoremap <leader>mgj    :action FileStructurePopup<CR>
+vnoremap <leader>mgj    :action FileStructurePopup<CR>
+
+let g:WhichKeyDesc_Major_Goto_JumpToSymbolSearch = "<leader>mgJ jump-to-symbol"
+nnoremap <leader>mgJ    :action GotoSymbol<CR>
+vnoremap <leader>mgJ    :action GotoSymbol<CR>
 
 """ Project
 let g:WhichKeyDesc_Project = "<leader>p    +project"
@@ -322,6 +326,14 @@ vnoremap <leader>ss    :action FindInPath<CR>
 let g:WhichKeyDesc_Search_Replace = "<leader>sr search-and-replace"
 nnoremap <leader>sr    :action ReplaceInPath<CR>
 vnoremap <leader>sr    :action ReplaceInPath<CR>
+
+let g:WhichKeyDesc_Search_JumpToSymbol = "<leader>sj jump-to-symbol-in-buffer"
+nnoremap <leader>sj    :action FileStructurePopup<CR>
+vnoremap <leader>sj    :action FileStructurePopup<CR>
+
+let g:WhichKeyDesc_Search_JumpToSymbolSearch = "<leader>sJ jump-to-symbol"
+nnoremap <leader>sJ    :action GotoSymbol<CR>
+vnoremap <leader>sJ    :action GotoSymbol<CR>
 
 """ Toggle
 let g:WhichKeyDesc_Toggles = "<leader>t    +toggles"
