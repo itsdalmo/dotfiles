@@ -250,6 +250,14 @@ let g:WhichKeyDesc_Major_Goto_Declaration = "<leader>mgd declaration"
 nnoremap <leader>mgd    :action GotoDeclaration<CR>
 vnoremap <leader>mgd    :action GotoDeclaration<CR>
 
+let g:WhichKeyDesc_Major_Goto_References = "<leader>mgr references"
+nnoremap <leader>mgr    :action GotoDeclaration<CR>
+vnoremap <leader>mgr    :action GotoDeclaration<CR>
+
+let g:WhichKeyDesc_Major_Goto_FindAllReferencesInPanel = "<leader>mgR find-usages"
+nnoremap <leader>mgR    :action FindUsages<CR>
+vnoremap <leader>mgR    :action FindUsages<CR>
+
 let g:WhichKeyDesc_Major_Goto_TypeDeclaration = "<leader>mgt quick-type-declaration"
 nnoremap <leader>mgt      :action QuickTypeDefinition<CR>
 vnoremap <leader>mgt      <Esc>:action QuickTypeDefinition<CR>
@@ -261,10 +269,6 @@ vnoremap <leader>mgT      <Esc>:action GotoTypeDeclaration<CR>
 let g:WhichKeyDesc_Major_Goto_Hierarchy = "<leader>mgh hierarchy"
 nnoremap <leader>mgh      :action CallHierarchy<CR>
 vnoremap <leader>mgh      <Esc>:action CallHierarchy<CR>
-
-let g:WhichKeyDesc_Major_Goto_FindAllReferencesInPanel = "<leader>mgu find-usages"
-nnoremap <leader>mgu    :action FindUsages<CR>
-vnoremap <leader>mgu    :action FindUsages<CR>
 
 let g:WhichKeyDesc_Major_Goto_JumpToSymbol = "<leader>mgj jump-to-symbol-in-buffer"
 nnoremap <leader>mgj    :action FileStructurePopup<CR>
