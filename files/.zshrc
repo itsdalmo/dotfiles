@@ -32,7 +32,7 @@ source $(brew --prefix nvm)/nvm.sh
 # Aliases
 alias ll='exa -la --group-directories-first'
 alias awsv='aws-vault exec'
-alias upgrade='brew update && brew bundle install --global && brew bundle cleanup --force --global'
+alias upgrade='brew update && brew bundle install --global && brew bundle cleanup --force --global && omz update'
 
 # HACK: Assume AWS organization access role given an account ID.
 aws-org-login() {
