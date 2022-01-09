@@ -18,9 +18,9 @@ gpgconf --launch gpg-agent
 
 # FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='fd --follow'
-export FZF_CTRL_T_COMMAND='fd --follow'
-export FZF_ALT_C_COMMAND='fd --follow --type d . $HOME'
+export FZF_DEFAULT_COMMAND='fd --hidden --follow'
+export FZF_CTRL_T_COMMAND='fd --hidden --follow'
+export FZF_ALT_C_COMMAND='fd --hidden --follow --type d . $HOME'
 
 # Zoxide config
 eval "$(zoxide init zsh)"
