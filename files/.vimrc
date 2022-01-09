@@ -2,6 +2,7 @@ syntax enable
 colorscheme onedark
 
 " Basic settings --------------------------------------------------------------
+set belloff=all
 set termguicolors
 set background=dark
 set nocompatible
