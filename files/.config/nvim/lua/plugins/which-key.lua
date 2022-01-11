@@ -3,27 +3,12 @@ local wk = require("which-key")
 local major = {
     name = '+major',
 
-    ['<tab>'] = {'<C-o>', 'Go back'},
-    ["."] = {':lua vim.lsp.buf.code_action()<CR>', 'Quick fix'},
-    [" "] = {':lua vim.lsp.buf.code_action()<CR>', 'Code action'},
-
-    r = {'<cmd>lua vim.lsp.buf.rename()<CR>', 'Rename'},
-    g = {
-        name = '+goto',
-        r = {':lua require("telescope.builtin").lsp_references()<CR>', 'Go to references'},
-        d = {':lua require("telescope.builtin").lsp_definitions()<CR>', 'Go to definition'},
-        i = {':lua require("telescope.builtin").lsp_implementations()<CR>', 'Go to implementation'},
-        t = {':lua require("telescope.builtin").lsp_type_definitions()<CR>', 'Go to type definition'},
-        j = {':lua require("telescope.builtin").lsp_document_symbols()<CR>', 'Jump to symbol'},
-        J = {':lua require("telescope.builtin").lsp_workspace_symbols()<CR>', 'Jump to symbol in workspace'}
-    }
+    ['<tab>'] = {'<C-o>', 'Go back'}
 }
 
 local leader = {
     ['<leader>'] = {':lua require("telescope.builtin").commands()<CR>', 'Commands'},
     ['<tab>'] = {':e #<cr>lua', 'Last buffer'},
-
-    m = major, -- Identical to the major (localleader) bindings.
 
     b = {
         name = "+buffers",
@@ -43,9 +28,7 @@ local leader = {
     },
     s = {
         name = "+search",
-        s = {':lua require("telescope.builtin").live_grep()<CR>', 'Search in files'},
-        j = {':lua require("telescope.builtin").lsp_document_symbols()<CR>', 'Jump to symbol'},
-        J = {':lua require("telescope.builtin").lsp_workspace_symbols()<CR>', 'Jump to symbol in workspace'}
+        s = {':lua require("telescope.builtin").live_grep()<CR>', 'Search in files'}
     },
     q = {
         name = "+quit",

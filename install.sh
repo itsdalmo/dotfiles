@@ -44,8 +44,8 @@ install() {
   printf " * Configuring fish\n"
   configure_fish
 
-  printf " * Configuring vim\n"
-  configure_vim
+  printf " * Configuring nvim\n"
+  configure_nvim
 
   printf " * Configuring osx\n"
   source "${DOTFILES_PATH}/files/.macos"
@@ -88,7 +88,7 @@ configure_fish() {
 
   if ! grep -q "${fish_bin}" </etc/shells; then
     printf " * Adding fish to /etc/shells\n"
-    echo "${fish_bin}" | sudo tee -a /etc/shells > /dev/null
+    echo "${fish_bin}" | sudo tee -a /etc/shells >/dev/null
 
     printf " * Setting fish as default shell\n"
     chsh -s "${fish_bin}"
@@ -107,12 +107,11 @@ configure_fish() {
   fi
 }
 
-configure_vim() {
-  mkdir -p "${HOME}/.vim/colors"
-  ln -sf "${DOTFILES_PATH}/colors/colors/onedark.vim" "${HOME}/.vim/colors/onedark.vim"
-
-  mkdir -p "${HOME}/.vim/autoload"
-  ln -sf "${DOTFILES_PATH}/colors/autoload/onedark.vim" "${HOME}/.vim/autoload/onedark.vim"
+configure_nvim() {
+  if [ ! -d "${HOME}/.config/nvim/plugin" ]; then
+    printf " * Installing nvim plugins\n"
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' &>/dev/null
+  fi
 }
 
 configure_dock() {
