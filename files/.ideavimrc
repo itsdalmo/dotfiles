@@ -9,7 +9,7 @@ set smartcase
 set surround
 set ideajoin
 set commentary
-set idearefactormode keep 
+set idearefactormode keep
 set ideastatusicon gray
 
 " (Optional) My own vim commands
@@ -22,7 +22,7 @@ vmap , <leader>m
 noremap <C-h> <C-w>h
 noremap <C-j> :action ActivateTerminalToolWindow<CR>
 noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l 
+noremap <C-l> <C-w>l
 
 " Keep search matches in the middle of the window.
 " (source: https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc)
@@ -176,11 +176,19 @@ let g:WhichKeyDesc_Git_Status = "<leader>gs status"
 nnoremap <leader>gs    :action ActivateCommitToolWindow<CR>
 vnoremap <leader>gs    :action ActivateCommitToolWindow<CR>
 
-let g:WhichKeyDesc_Git_Status = "<leader>gd diff"
+let g:WhichKeyDesc_Git_Checkout = "<leader>gc checkout"
+nnoremap <leader>gc    :action Git.Branches<CR>
+vnoremap <leader>gc    :action Git.Branches<CR>
+
+let g:WhichKeyDesc_Git_Commit = "<leader>gC commit"
+nnoremap <leader>gC    :action Git.Commit.Stage<CR>
+vnoremap <leader>gC    :action Git.Commit.Stage<CR>
+
+let g:WhichKeyDesc_Git_Diff = "<leader>gd diff"
 nnoremap <leader>gd    :action Compare.SameVersion<CR>
 vnoremap <leader>gd    :action Compare.SameVersion<CR>
 
-let g:WhichKeyDesc_Git_Status = "<leader>gR revert"
+let g:WhichKeyDesc_Git_Revert = "<leader>gR revert"
 nnoremap <leader>gR    :action ChangesView.Revert<CR>
 vnoremap <leader>gR    :action ChangesView.Revert<CR>
 
@@ -203,6 +211,14 @@ vnoremap <leader>gg    :action Vcs.QuickListPopupAction<CR>
 let g:WhichKeyDesc_Git_Blame = "<leader>gb toggle-git-blame"
 nnoremap <leader>gb    :action Annotate<CR>
 vnoremap <leader>gb    <Esc>:action Annotate<CR>
+
+let g:WhichKeyDesc_Git_Pull = "<leader>gp pull"
+nnoremap <leader>gp    :action Git.Fetch<CR>
+vnoremap <leader>gp    <Esc>:action Git.Fetch<CR>
+
+let g:WhichKeyDesc_Git_Push = "<leader>gP push"
+nnoremap <leader>gP    :action Vcs.Push<CR>
+vnoremap <leader>gP    <Esc>:action Vcs.Push<CR>
 
 """ Major
 let g:WhichKeyDesc_Major = "<leader>m    +major"
