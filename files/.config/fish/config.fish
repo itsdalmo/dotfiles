@@ -9,6 +9,7 @@ abbr -a gc 'git checkout'
 abbr -a ga 'git add -p'
 abbr -a gp 'git pull'
 abbr -a gr 'git stash; and git pull --rebase; and git stash pop'
+abbr -a gl 'git log --oneline --graph --max-count 20'
 abbr -a awsv 'aws-vault exec'
 abbr -a upgrade 'brew update; and brew bundle install --global; and brew bundle cleanup --force --global'
 
