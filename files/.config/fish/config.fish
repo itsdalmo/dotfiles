@@ -27,8 +27,7 @@ eval (/opt/homebrew/bin/brew shellenv)
 
 # FZF
 set -gx FZF_DEFAULT_COMMAND 'fd --follow --hidden'
-set -gx FZF_CTRL_T_COMMAND 'fd --follow --hidden'
-set -gx FZF_ALT_C_COMMAND 'fd --follow --type d . $HOME'
+set -gx FZF_CTRL_T_COMMAND 'fd --follow --hidden . $HOME'
 
 # Zoxide
 zoxide init fish | source
