@@ -7,6 +7,11 @@ local options = {
                 ["q"] = require('telescope.actions').close
             }
         }
+    },
+    pickers = {
+        find_files = {
+            find_command = {"fd", "--type", "f", "--strip-cwd-prefix"}
+        }
     }
 }
 
