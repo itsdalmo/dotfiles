@@ -4,12 +4,13 @@ set fish_greeting ""
 abbr -a l ll
 abbr -a g git
 abbr -a tf terraform
+abbr -a gs 'git status'
 abbr -a gc 'git checkout'
 abbr -a ga 'git add -p'
+abbr -a gp 'git pull'
 abbr -a gr 'git stash; and git pull --rebase; and git stash pop'
-abbr -a gs 'git status'
 abbr -a awsv 'aws-vault exec'
-abbr -a upgrade 'brew update && brew bundle install --global && brew bundle cleanup --force --global'
+abbr -a upgrade 'brew update; and brew bundle install --global; and brew bundle cleanup --force --global'
 
 # Path
 fish_add_path "$HOME/bin"
