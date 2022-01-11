@@ -41,8 +41,8 @@ install() {
   printf " * Configuring .gnupg\n"
   configure_gpg
 
-  printf " * Configuring zsh\n"
-  configure_zsh
+  printf " * Configuring fish\n"
+  configure_fish
 
   printf " * Configuring vim\n"
   configure_vim
@@ -82,12 +82,26 @@ configure_gpg() {
   chmod 700 "${HOME}/.gnupg"
 }
 
-configure_zsh() {
-  if [ ! -d "${HOME}/.oh-my-zsh" ]; then
-    /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+configure_fish() {
+  declare fish_bin
+  fish_bin="$(which fish)"
+
+  if ! grep -q "${fish_bin}" </etc/shells; then
+    printf " * Adding fish to /etc/shells\n"
+    echo "${fish_bin}" | sudo tee -a /etc/shells > /dev/null
+
+    printf " * Setting fish as default shell\n"
+    chsh -s "${fish_bin}"
+
+    sudo -k # Revoke sudo permissions
   fi
 
-  if [[ $(command -v "fzf") ]] && [ ! -f ~/.fzf.zsh ]; then
+  if ! grep -q "jorgebucaran/fisher" <"${HOME}/.config/fish/fish_plugins"; then
+    printf " * Installing fisher\n"
+    fish -c "curl -fsSL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+  fi
+
+  if [[ $(command -v "fzf") ]] && [ ! -f ~/.config/fish/functions/fzf_key_bindings.fish ]; then
     printf " * Installing FZF keybindings\n"
     yes | "$(brew --prefix)"/opt/fzf/install
   fi

@@ -8,9 +8,9 @@ tap "homebrew/cask-fonts"
 tap "adoptopenjdk/openjdk"
 
 # Apps
-cask "wezterm"
-cask "font-jetbrains-mono-nerd-font"
 cask "firefox"
+cask "font-jetbrains-mono-nerd-font"
+cask "wezterm"
 cask "visual-studio-code"
 cask "goland"
 cask "aws-vault"
@@ -26,6 +26,7 @@ cask "sensiblesidebuttons"
 cask "adoptopenjdk11"
 
 # Packages
+brew "fish"
 brew "mas"
 brew "dockutil"
 brew "gpg"
