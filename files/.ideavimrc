@@ -12,6 +12,10 @@ set commentary
 set idearefactormode keep
 set ideastatusicon gray
 
+" Disable bell/sounds
+" source: https://superuser.com/a/677312
+set visualbell
+
 " (Optional) My own vim commands
 nnoremap Y y$
 
