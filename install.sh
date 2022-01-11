@@ -96,11 +96,6 @@ configure_fish() {
     sudo -k # Revoke sudo permissions
   fi
 
-  if ! grep -q "jorgebucaran/fisher" <"${HOME}/.config/fish/fish_plugins"; then
-    printf " * Installing fisher\n"
-    fish -c "curl -fsSL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
-  fi
-
   if [[ $(command -v "fzf") ]] && [ ! -f ~/.config/fish/functions/fzf_key_bindings.fish ]; then
     printf " * Installing FZF keybindings\n"
     yes | "$(brew --prefix)"/opt/fzf/install
