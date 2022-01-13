@@ -9,7 +9,7 @@
 
 [core]
 	editor       = code --wait
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.config/git/ignore
 
 [diff]
 	tool = default-difftool
