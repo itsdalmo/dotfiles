@@ -60,7 +60,6 @@ brew "goreleaser/tap/goreleaser"
 brew "warrensbox/tap/tfswitch"
 
 # Mac store
-mas "cinch", id: 412529613
 mas "1Password", id: 1333542190
 mas "Microsoft Word", id: 462054704
 mas "Microsoft Excel", id: 462058435
