@@ -29,7 +29,7 @@ eval (/opt/homebrew/bin/brew shellenv)
 
 # FZF
 set -gx FZF_DEFAULT_COMMAND 'fd --follow --hidden'
-set -gx FZF_CTRL_T_COMMAND 'fd --follow --hidden . $HOME'
+set -gx FZF_CTRL_T_COMMAND 'fd --follow --hidden . $dir'
 
 # Zoxide
 zoxide init fish | source
