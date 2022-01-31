@@ -8,7 +8,7 @@ tap "homebrew/cask-fonts"
 tap "adoptopenjdk/openjdk"
 
 # Apps
-cask "amethyst"
+cask "rectangle"
 cask "firefox"
 cask "font-jetbrains-mono-nerd-font"
 cask "wezterm"
