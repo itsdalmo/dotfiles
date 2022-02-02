@@ -123,6 +123,7 @@ configure_dock() {
     dockutil --no-restart --add "/Applications/GoLand.app"
     dockutil --no-restart --add "/Applications/Visual Studio Code.app"
     dockutil --no-restart --add "/Applications/WezTerm.app"
+    dockutil --no-restart --add "/Applications/Agenda.app"
     dockutil --no-restart --add "/Applications/1Password 7.app"
     dockutil --no-restart --add "/Applications/Spotify.app"
   fi
