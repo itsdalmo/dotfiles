@@ -10,6 +10,12 @@ end
 map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
 
--- indent visual selected code without unselecting and going back to normal mode
+-- Indent visual selected code without unselecting and going back to normal mode
 map('v', '>', '>gv')
 map('v', '<', '<gv')
+
+-- Jump between splits
+map('n', '<C-k>', ':wincmd k<CR>')
+map('n', '<C-j>', ':wincmd j<CR>')
+map('n', '<C-h>', ':wincmd h<CR>')
+map('n', '<C-l>', ':wincmd l<CR>')

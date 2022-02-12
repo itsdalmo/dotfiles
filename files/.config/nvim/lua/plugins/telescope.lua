@@ -1,10 +1,17 @@
 local telescope = require('telescope')
+local actions = require('telescope.actions')
 
 local options = {
     defaults = {
         mappings = {
             n = {
-                ["q"] = require('telescope.actions').close
+                ["q"] = actions.close,
+                ["<C-j>"] = actions.preview_scrolling_down,
+                ["<C-k>"] = actions.preview_scrolling_up
+            },
+            i = {
+                ["<C-j>"] = actions.preview_scrolling_down,
+                ["<C-k>"] = actions.preview_scrolling_up
             }
         }
     },
