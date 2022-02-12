@@ -5,6 +5,8 @@ local cfg = {}
 -- General
 cfg.initial_cols = 180
 cfg.initial_rows = 48
+cfg.audible_bell = "Disabled"
+cfg.hide_tab_bar_if_only_one_tab = true
 
 -- Colors
 cfg.color_scheme = "OneHalfDark"
