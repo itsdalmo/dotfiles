@@ -11,6 +11,7 @@ end
 dashboard.section.buttons.val = {
     dashboard.button('n', ' New file', ':ene <BAR> startinsert<CR>'),
     dashboard.button('f', ' Find file', ':lua require("telescope.builtin").find_files({ hidden = true })<CR>'),
+    dashboard.button('r', '  Recent files', ':lua require("telescope.builtin").oldfiles()<CR>'),
     dashboard.button('s', ' Settings', ':e $MYVIMRC<CR>'),
     dashboard.button('u', ' Update plugins', ':PackerUpdate<CR>'),
     dashboard.button('q', ' Quit', ':qa<CR>')

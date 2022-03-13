@@ -12,12 +12,16 @@ local options = {
             left = '',
             right = ''
         },
-        disabled_filetypes = {}
+        disabled_filetypes = {"NvimTree"}
     },
     sections = {
         lualine_a = {'mode'},
         lualine_b = {'branch', 'diff', 'diagnostics'},
-        lualine_c = {'filename'},
+        lualine_c = {{
+            'filename',
+            file_status = true,
+            path = 1
+        }},
         lualine_x = {'encoding', 'filetype'},
         lualine_y = {'progress'},
         lualine_z = {'location'}
@@ -25,10 +29,14 @@ local options = {
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {'filename'},
-        lualine_x = {'location'},
+        lualine_c = {{
+            'filename',
+            file_status = true,
+            path = 1
+        }},
+        lualine_x = {},
         lualine_y = {},
-        lualine_z = {}
+        lualine_z = {'location'}
     },
     tabline = {}
 }

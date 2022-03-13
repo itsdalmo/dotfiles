@@ -18,7 +18,9 @@ local leader = {
     f = {
         name = "+files",
         f = {':lua require("telescope.builtin").find_files({ hidden = true })<CR>', 'Find file'},
-        r = {':lua require("telescope.builtin").oldfiles()<CR>', 'Open Recent file'},
+        r = {':lua require("telescope.builtin").oldfiles()<CR>', 'Recent files'},
+        t = {':lua require("nvim-tree").toggle(false)<CR>', 'File tree'},
+        l = {':lua require("nvim-tree").find_file(true)<CR>', 'Show active file in tree'},
         n = {':enew<cr>', 'New file'}
     },
     g = {
@@ -28,7 +30,8 @@ local leader = {
     },
     s = {
         name = "+search",
-        s = {':lua require("telescope.builtin").live_grep()<CR>', 'Search in files'}
+        s = {':lua require("telescope.builtin").live_grep()<CR>', 'Search in files'},
+        c = {':noh<CR>', 'Clear search'}
     },
     q = {
         name = "+quit",
