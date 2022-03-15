@@ -23,6 +23,7 @@ set -gx LC_ALL 'en_US.UTF-8'
 set -gx GOPATH "$HOME/go"
 set -gx AWS_DEFAULT_REGION eu-west-1
 set -gx AWS_PAGER ''
+set -gx GOPRIVATE 'gitlab.com/pexip/*,github.com/pexip/*'
 
 # Homebrew (Required on M1: https://github.com/Homebrew/discussions/discussions/446)
 eval (/opt/homebrew/bin/brew shellenv)
