@@ -343,6 +343,10 @@ vnoremap <leader>wm    :action HideAllWindows<CR>
 """ Search/symbol
 let g:WhichKeyDesc_Search = "<leader>s    +search/symbol"
 
+let g:WhichKeyDesc_Search_Clear = "<leader>sc clear"
+nnoremap <leader>sc    :noh<CR>
+vnoremap <leader>sc    :noh<CR>
+
 let g:WhichKeyDesc_Search_Modal = "<leader>ss search"
 nnoremap <leader>ss    :action FindInPath<CR>
 vnoremap <leader>ss    :action FindInPath<CR>
