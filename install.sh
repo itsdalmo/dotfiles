@@ -103,7 +103,7 @@ configure_fish() {
 
   if ! echo "${SHELL}" | grep -q "fish"; then
     printf " * Setting fish as default shell\n"
-    sudo chsh -s "${fish_bin}"
+    chsh -s "${fish_bin}"
   fi
 
   sudo -k # Revoke sudo permissions
