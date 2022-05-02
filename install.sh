@@ -4,28 +4,11 @@ set -euo pipefail
 
 declare DOTFILES_PATH DOTFILES_REPO SSH_KEY
 DOTFILES_PATH="${HOME}/code/github.com/itsdalmo/dotfiles"
-DOTFILES_REPO="git@github.com:itsdalmo/dotfiles.git"
+DOTFILES_REPO="https://github.com/itsdalmo/dotfiles.git"
 SSH_KEY="${HOME}/.ssh/id_rsa"
 
 install() {
   printf "Installing itsdalmo/dotfiles...\n"
-
-  mkdir -p "$(dirname "$SSH_KEY")"
-  if [ ! -f "${SSH_KEY}" ]; then
-    printf " * Generating SSH key\n"
-    ssh-keygen -t rsa -b 4096 -C "kristian@dalmo.me" -f "${SSH_KEY}"
-    pbcopy <"${SSH_KEY}.pub"
-
-    printf "   \n"
-    printf "   Public key copied to clipboard.\n"
-    printf "   Visit https://github.com/settings/ssh/new to add the new key and then rerun the installer!\n"
-    exit 0
-  fi
-
-  if [ ! -d "/usr/libexec/rosetta" ]; then
-    printf " * Installing rosetta\n"
-    softwareupdate --install-rosetta --agree-to-license
-  fi
 
   if [ ! -d "${DOTFILES_PATH}" ]; then
     printf " * Cloning repository\n"
@@ -35,11 +18,30 @@ install() {
   printf " * Linking dotfiles\n"
   link_dotfiles
 
-  printf " * Configuring homebrew\n"
-  configure_homebrew
+  case $(uname) in
+  'Linux') ;;
 
-  printf " * Configuring .gnupg\n"
-  configure_gpg
+  'Darwin')
+    if [ ! -d "/usr/libexec/rosetta" ]; then
+      printf " * Installing rosetta\n"
+      softwareupdate --install-rosetta --agree-to-license
+    fi
+
+    printf " * Configuring homebrew\n"
+    configure_homebrew
+
+    printf " * Configuring osx\n"
+    source "${DOTFILES_PATH}/files/.macos"
+
+    printf " * Configuring dock\n"
+    configure_dock
+    ;;
+
+  *)
+    printf "OS not supported.\n"
+    exit 1
+    ;;
+  esac
 
   printf " * Configuring fish\n"
   configure_fish
@@ -47,12 +49,20 @@ install() {
   printf " * Configuring nvim\n"
   configure_nvim
 
-  printf " * Configuring osx\n"
-  source "${DOTFILES_PATH}/files/.macos"
+  printf " * Configuring gpg\n"
+  configure_gpg
 
-  printf " * Configuring dock\n"
-  configure_dock
+  mkdir -p "$(dirname "$SSH_KEY")"
+  if [ ! -f "${SSH_KEY}" ]; then
+    printf " * Generating SSH key\n"
+    ssh-keygen -t rsa -b 4096 -C "kristian@dalmo.me" -f "${SSH_KEY}"
 
+    printf "   \n"
+    printf "   Public key copied to clipboard.\n"
+    printf "   Visit https://github.com/settings/ssh/new to add the new key!\n"
+  fi
+
+  printf "\n"
   printf "Done. Note that some of these changes require a logout/restart to take effect.\n"
 }
 
@@ -89,14 +99,15 @@ configure_fish() {
   if ! grep -q "${fish_bin}" </etc/shells; then
     printf " * Adding fish to /etc/shells\n"
     echo "${fish_bin}" | sudo tee -a /etc/shells >/dev/null
-
-    printf " * Setting fish as default shell\n"
-    chsh -s "${fish_bin}"
-
-    sudo -k # Revoke sudo permissions
   fi
 
-  if [[ $(command -v "fzf") ]] && [ ! -f ~/.config/fish/functions/fzf_key_bindings.fish ]; then
+  if ! echo "${SHELL}" | grep -q "fish"; then
+    printf " * Setting fish as default shell\n"
+    chsh -s "${fish_bin}"
+  fi
+
+  sudo -k # Revoke sudo permissions
+  if [[ $(command -v "fzf") && $(command -v "homebrew") ]] && [ ! -f ~/.config/fish/functions/fzf_key_bindings.fish ]; then
     printf " * Installing FZF keybindings\n"
     yes | "$(brew --prefix)"/opt/fzf/install
   fi
