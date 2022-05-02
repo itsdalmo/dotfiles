@@ -1,15 +1,17 @@
 # dotfiles
 
-My setup for development on OS X.
+My setup for development on OS X (and remote development on Linux).
 
 ## Installation
 
 Run the installer (restart until it completes) and then reboot:
+
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/master/install.sh)"
 ```
 
 After rebooting, complete the following manual steps:
+
 - System settings:
   - `Sharing > Computer name`.
   - `Security & Privacy > Firewall > Turn on Firewall`
