@@ -54,12 +54,16 @@ install() {
 
   mkdir -p "$(dirname "$SSH_KEY")"
   if [ ! -f "${SSH_KEY}" ]; then
-    printf " * Generating SSH key\n"
-    ssh-keygen -t rsa -b 4096 -C "kristian@dalmo.me" -f "${SSH_KEY}"
+    if [ -t 0 ]; then
+      printf " * Generating SSH key\n"
+      ssh-keygen -t rsa -b 4096 -C "kristian@dalmo.me" -f "${SSH_KEY}"
 
-    printf "   \n"
-    printf "   Public key copied to clipboard.\n"
-    printf "   Visit https://github.com/settings/ssh/new to add the new key!\n"
+      printf "   \n"
+      printf "   Public key copied to clipboard.\n"
+      printf "   Visit https://github.com/settings/ssh/new to add the new key!\n"
+    else
+      printf " * Skipping SSH key (executing non-interactively)\n"
+    fi
   fi
 
   printf "\n"
@@ -114,9 +118,9 @@ configure_fish() {
 }
 
 configure_nvim() {
-  if [ ! -d "${HOME}/.config/nvim/plugin" ]; then
+  if [[ $(command -v "nvim") ]] && [ ! -d "${HOME}/.config/nvim/plugin" ]; then
     printf " * Installing nvim plugins\n"
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' &>/dev/null
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
   fi
 }
 
