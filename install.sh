@@ -92,8 +92,11 @@ configure_homebrew() {
 }
 
 configure_gpg() {
-  chmod -R 600 "${HOME}/.gnupg"
+  chown -R "$(whoami)" "${HOME}/.gnupg/"
   chmod 700 "${HOME}/.gnupg"
+
+  find "${HOME}/.gnupg" -type f -exec chmod 600 {} \;
+  find "${HOME}~/.gnupg" -type d -exec chmod 700 {} \;
 }
 
 configure_fish() {
