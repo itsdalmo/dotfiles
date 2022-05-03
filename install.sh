@@ -58,9 +58,9 @@ install() {
       printf " * Generating SSH key\n"
       ssh-keygen -t rsa -b 4096 -C "kristian@dalmo.me" -f "${SSH_KEY}"
 
-      printf "   \n"
-      printf "   Public key copied to clipboard.\n"
-      printf "   Visit https://github.com/settings/ssh/new to add the new key!\n"
+      printf "\n"
+      printf "Visit https://github.com/settings/ssh/new to add the new key:\n"
+      cat "${SSH_KEY}.pub"
     else
       printf " * Skipping SSH key (executing non-interactively)\n"
     fi
