@@ -96,7 +96,7 @@ configure_gpg() {
   chmod 700 "${HOME}/.gnupg"
 
   find "${HOME}/.gnupg" -type f -exec chmod 600 {} \;
-  find "${HOME}~/.gnupg" -type d -exec chmod 700 {} \;
+  find "${HOME}/.gnupg" -type d -exec chmod 700 {} \;
 }
 
 configure_fish() {
