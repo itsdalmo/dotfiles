@@ -9,3 +9,6 @@ fish_add_path /usr/local/go/bin
 
 # FZF
 source /usr/share/doc/fzf/examples/key-bindings.fish
+
+# Start SSH agent
+eval (ssh-agent -c)
