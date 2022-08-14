@@ -30,5 +30,12 @@
 [tag]
 	gpgSign = true
 
+[includeIf "gitdir:~/code/gitlab.com/pexip/"]
+	path = ~/code/gitlab.com/pexip/.gitconfig
+
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/
+
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
