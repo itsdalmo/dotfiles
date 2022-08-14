@@ -6,6 +6,7 @@ tap "itsdalmo/tap"
 tap "warrensbox/tap"
 tap "homebrew/cask-fonts"	
 tap "adoptopenjdk/openjdk"
+tap "bufbuild/buf"
 
 # Apps
 cask "rectangle"
@@ -30,6 +31,7 @@ cask "adoptopenjdk11"
 
 # Packages
 brew "fish"
+brew "coreutils"
 brew "mas"
 brew "dockutil"
 brew "gpg"
@@ -40,6 +42,8 @@ brew "nvm"
 brew "typescript"
 brew "yarn"
 brew "python"
+brew "poetry"
+brew "gnu-sed"
 brew "packer"
 brew "awscli"
 brew "fzf"
@@ -61,6 +65,7 @@ brew "protobuf"
 brew "go-task/tap/go-task"
 brew "goreleaser/tap/goreleaser"
 brew "warrensbox/tap/tfswitch"
+brew "bufbuild/buf/buf"
 
 # Mac store
 mas "Microsoft Word", id: 462054704
