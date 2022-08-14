@@ -8,7 +8,7 @@
 	uncommit = reset --soft HEAD^
 
 [core]
-	editor       = code --wait
+	editor       = nvim
 	excludesfile = ~/.config/git/ignore
 
 [diff]
