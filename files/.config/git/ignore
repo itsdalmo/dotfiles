@@ -10,3 +10,6 @@
 
 # Terraform
 .terraform
+
+# Pyenv
+.python-version
