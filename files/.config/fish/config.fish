@@ -37,3 +37,6 @@ zoxide init fish | source
 # GPG
 set -gx GPG_TTY (tty)
 gpgconf --launch gpg-agent
+
+# Pyenv
+pyenv init - | source

@@ -10,15 +10,15 @@ cfg.enable_tab_bar = false
 cfg.enable_scroll_bar = false
 cfg.window_close_confirmation = "NeverPrompt"
 cfg.window_padding = {
-    bottom = 0
+  bottom = 0
 }
 
 -- Colors
-cfg.color_scheme = "OneHalfDark"
+cfg.color_scheme = "tokyonight"
 
 -- Font
 cfg.font = wezterm.font("JetBrainsMono Nerd Font Mono", {
-    weight = "Medium"
+  weight = "Medium"
 })
 cfg.font_size = 13.0
 cfg.line_height = 1.2

@@ -1,12 +1,3 @@
-require('settings')
-require('keymaps')
-require('plugins/packer')
-require('plugins/alpha')
-require('plugins/comment')
-require('plugins/gitsigns')
-require('plugins/onedark')
-require('plugins/nvim-treesitter')
-require('plugins/nvim-tree')
-require('plugins/lualine')
-require('plugins/telescope')
-require('plugins/which-key')
+require "settings"
+require "keymaps"
+require "plugins"
