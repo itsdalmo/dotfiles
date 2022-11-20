@@ -26,18 +26,28 @@ packer.init {
 
 packer.startup(function(use)
   use { "wbthomason/packer.nvim" }
-  use { "nvim-lua/plenary.nvim" }
-  use { "L3MON4D3/LuaSnip" }
 
-  use({
+  use {
+    "nvim-lua/plenary.nvim",
+    commit = "4b7e520",
+  }
+
+  use {
+    "L3MON4D3/LuaSnip",
+    commit = "2373292",
+  }
+
+  use {
     "kylechui/nvim-surround",
+    commit = "9338071",
     config = function()
       require("nvim-surround").setup({})
     end,
-  })
+  }
 
   use {
     "windwp/nvim-autopairs",
+    commit = "6b6e35f",
     config = function()
       require "plugins.nvim-autopairs"
     end
@@ -45,6 +55,7 @@ packer.startup(function(use)
 
   use {
     "kyazdani42/nvim-web-devicons",
+    commit = "3b1b794",
     config = function()
       require "plugins.nvim-web-devicons"
     end,
@@ -52,6 +63,7 @@ packer.startup(function(use)
 
   use {
     "folke/tokyonight.nvim",
+    commit = "62b4e89",
     config = function()
       require "plugins.tokyonight"
     end,
@@ -59,6 +71,7 @@ packer.startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter",
+    commit = "596fd67",
     run = ":TSUpdate",
     config = function()
       require "plugins.nvim-treesitter"
@@ -67,6 +80,7 @@ packer.startup(function(use)
 
   use {
     "kyazdani42/nvim-tree.lua",
+    commit = "cc18122",
     config = function()
       require "plugins.nvim-tree"
     end,
@@ -74,6 +88,7 @@ packer.startup(function(use)
 
   use {
     "lewis6991/gitsigns.nvim",
+    commit = "9ff7dfb",
     config = function()
       require "plugins.gitsigns"
     end,
@@ -81,6 +96,7 @@ packer.startup(function(use)
 
   use {
     "onsails/lspkind-nvim",
+    commit = "c68b3a0",
     config = function()
       require "plugins.lspkind"
     end,
@@ -88,6 +104,7 @@ packer.startup(function(use)
 
   use {
     "hrsh7th/nvim-cmp",
+    commit = "8a9e8a8",
     requires = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path", "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip" },
     config = function()
       require "plugins.cmp"
@@ -96,6 +113,7 @@ packer.startup(function(use)
 
   use {
     "neovim/nvim-lspconfig",
+    commit = "04b672b",
     config = function()
       require "plugins.lspconfig"
     end,
@@ -103,6 +121,7 @@ packer.startup(function(use)
 
   use {
     "jose-elias-alvarez/null-ls.nvim",
+    commit = "07d4ed4",
     config = function()
       require "plugins.null-ls"
     end,
@@ -117,6 +136,7 @@ packer.startup(function(use)
 
   use {
     "williamboman/mason-lspconfig.nvim",
+    commit = "a1e2219",
     after = "mason.nvim",
     config = function()
       require "plugins.mason-lspconfig"
@@ -125,6 +145,7 @@ packer.startup(function(use)
 
   use {
     "folke/trouble.nvim",
+    commit = "897542f",
     config = function()
       require "plugins.trouble"
     end,
@@ -132,6 +153,7 @@ packer.startup(function(use)
 
   use {
     "TimUntersberger/neogit",
+    commit = "c1a2a1a",
     config = function()
       require "plugins.neogit"
     end,
@@ -139,6 +161,7 @@ packer.startup(function(use)
 
   use {
     "nvim-lualine/lualine.nvim",
+    commit = "3325d5d",
     config = function()
       require "plugins.lualine"
     end,
@@ -146,6 +169,7 @@ packer.startup(function(use)
 
   use {
     "numToStr/Comment.nvim",
+    commit = "5f01c1a",
     config = function()
       require "plugins.comment"
     end,
@@ -153,17 +177,26 @@ packer.startup(function(use)
 
   use {
     "nvim-telescope/telescope.nvim",
+    commit = "7a4ffef",
     config = function()
       require "plugins.telescope"
     end,
   }
 
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    commit = "65c0ee3",
+    run = "make",
+  }
 
-  use { 'nvim-telescope/telescope-ui-select.nvim' }
+  use {
+    "nvim-telescope/telescope-ui-select.nvim",
+    commit = "62ea5e5",
+  }
 
   use {
     "folke/which-key.nvim",
+    commit = "61553ae",
     config = function()
       require "plugins.which-key"
     end,
@@ -171,6 +204,7 @@ packer.startup(function(use)
 
   use {
     "goolord/alpha-nvim",
+    commit = "a858e4e",
     config = function()
       require "plugins.alpha"
     end,
