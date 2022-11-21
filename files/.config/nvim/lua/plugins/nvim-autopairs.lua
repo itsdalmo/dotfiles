@@ -11,5 +11,7 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done()
 )
 
-local options = {}
+local options = {
+  check_ts = true,
+}
 autopairs.setup(options)
