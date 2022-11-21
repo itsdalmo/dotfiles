@@ -129,6 +129,7 @@ packer.startup(function(use)
 
   use {
     "williamboman/mason.nvim",
+    commit = "9f84d49",
     config = function()
       require "plugins.mason"
     end,
