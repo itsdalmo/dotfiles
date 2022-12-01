@@ -16,7 +16,7 @@ local options = {
   background = "dark",
   encoding = "utf-8",
   laststatus = 2,
-  cmdheight = 1,
+  cmdheight = 0,
   clipboard = "unnamed",
   autoindent = true,
   smartindent = true,
@@ -44,6 +44,9 @@ local options = {
   splitbelow = true,
   wrap = false,
   completeopt = "menu,menuone,noselect",
+  fillchars = {
+    vert = "│",
+  }
 }
 
 for k, v in pairs(options) do
