@@ -18,6 +18,7 @@ set -gx LC_ALL 'en_US.UTF-8'
 set -gx AWS_DEFAULT_REGION eu-west-1
 set -gx AWS_PAGER ''
 set -gx GOPRIVATE 'gitlab.com/pexip/*,github.com/pexip/*'
+set -gx USE_GKE_GCLOUD_AUTH_PLUGIN 'True'
 
 # FZF
 set -gx FZF_DEFAULT_COMMAND 'fd --follow --hidden'
