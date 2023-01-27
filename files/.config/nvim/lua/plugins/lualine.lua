@@ -26,13 +26,13 @@ local options = {
     },
   },
   sections = {
-    lualine_a = { "mode" },
-    lualine_b = { "branch" },
-    lualine_c = { {
+    lualine_a = { {
       "filename",
       file_status = false,
-      path = 0,
+      path = 1,
     } },
+    lualine_b = {},
+    lualine_c = {},
     lualine_x = { "diagnostics" },
     lualine_y = { "filetype" },
     lualine_z = { "location" },
@@ -49,7 +49,14 @@ local options = {
     lualine_y = {},
     lualine_z = { "location" },
   },
-  tabline = {},
+  tabline = {
+    lualine_a = { "branch" },
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = { "tabs" }
+  },
   extensions = { tree_extension },
 }
 
