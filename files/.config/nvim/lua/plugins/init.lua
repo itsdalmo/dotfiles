@@ -80,6 +80,7 @@ packer.startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    commit = "e2ee8fd",
   }
 
   use {
@@ -108,7 +109,7 @@ packer.startup(function(use)
 
   use {
     "hrsh7th/nvim-cmp",
-    commit = "8a9e8a8",
+    commit = "11a9579",
     requires = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path", "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip" },
     config = function()
       require "plugins.cmp"
@@ -117,7 +118,7 @@ packer.startup(function(use)
 
   use {
     "neovim/nvim-lspconfig",
-    commit = "04b672b",
+    commit = "8ebe689",
     config = function()
       require "plugins.lspconfig"
     end,
@@ -125,7 +126,7 @@ packer.startup(function(use)
 
   use {
     "jose-elias-alvarez/null-ls.nvim",
-    commit = "07d4ed4",
+    commit = "9155589",
     config = function()
       require "plugins.null-ls"
     end,
@@ -133,7 +134,7 @@ packer.startup(function(use)
 
   use {
     "williamboman/mason.nvim",
-    commit = "9f84d49",
+    commit = "95569b6",
     config = function()
       require "plugins.mason"
     end,
@@ -141,7 +142,7 @@ packer.startup(function(use)
 
   use {
     "williamboman/mason-lspconfig.nvim",
-    commit = "a1e2219",
+    commit = "43c7f40",
     after = "mason.nvim",
     config = function()
       require "plugins.mason-lspconfig"
@@ -150,7 +151,7 @@ packer.startup(function(use)
 
   use {
     "folke/trouble.nvim",
-    commit = "897542f",
+    commit = "83ec606",
     config = function()
       require "plugins.trouble"
     end,
@@ -158,7 +159,7 @@ packer.startup(function(use)
 
   use {
     "TimUntersberger/neogit",
-    commit = "c1a2a1a",
+    commit = "981207e",
     config = function()
       require "plugins.neogit"
     end,
@@ -166,7 +167,7 @@ packer.startup(function(use)
 
   use {
     "nvim-lualine/lualine.nvim",
-    commit = "3325d5d",
+    commit = "0050b30",
     config = function()
       require "plugins.lualine"
     end,
