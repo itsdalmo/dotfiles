@@ -75,7 +75,7 @@ local leader = {
     f = { ':lua require("telescope.builtin").find_files({ hidden = true })<CR>', "Find file" },
     r = { ':lua require("telescope.builtin").oldfiles({ only_cwd = true })<CR>', "Recent files" },
     t = { ':lua require("nvim-tree").toggle(false)<CR>', "File tree" },
-    l = { ':lua require("nvim-tree").find_file(true)<CR>', "Show active file in tree" },
+    l = { ':lua require("nvim-tree").open({ find_file = true })<CR>', "Show active file in tree" },
     n = { ":enew<cr>", "New file" },
   },
   g = {
