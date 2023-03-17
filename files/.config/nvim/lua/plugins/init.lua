@@ -29,17 +29,17 @@ packer.startup(function(use)
 
   use {
     "nvim-lua/plenary.nvim",
-    commit = "4b7e520",
+    commit = "9d81624",
   }
 
   use {
     "L3MON4D3/LuaSnip",
-    commit = "2373292",
+    commit = "500981f",
   }
 
   use {
     "kylechui/nvim-surround",
-    commit = "9338071",
+    commit = "abccb23",
     config = function()
       require("nvim-surround").setup({})
     end,
@@ -47,7 +47,7 @@ packer.startup(function(use)
 
   use {
     "windwp/nvim-autopairs",
-    commit = "6b6e35f",
+    commit = "45ae312",
     config = function()
       require "plugins.nvim-autopairs"
     end
@@ -63,7 +63,7 @@ packer.startup(function(use)
 
   use {
     "folke/tokyonight.nvim",
-    commit = "62b4e89",
+    commit = "e52c413",
     config = function()
       require "plugins.tokyonight"
     end,
@@ -71,7 +71,7 @@ packer.startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter",
-    commit = "596fd67",
+    commit = "69388e8",
     run = ":TSUpdate",
     config = function()
       require "plugins.nvim-treesitter"
@@ -80,12 +80,12 @@ packer.startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    commit = "e2ee8fd",
+    commit = "e4a3a29",
   }
 
   use {
     "kyazdani42/nvim-tree.lua",
-    commit = "cc18122",
+    commit = "02fdc26",
     config = function()
       require "plugins.nvim-tree"
     end,
@@ -93,7 +93,7 @@ packer.startup(function(use)
 
   use {
     "lewis6991/gitsigns.nvim",
-    commit = "9ff7dfb",
+    commit = "bb808fc",
     config = function()
       require "plugins.gitsigns"
     end,
@@ -109,7 +109,7 @@ packer.startup(function(use)
 
   use {
     "hrsh7th/nvim-cmp",
-    commit = "11a9579",
+    commit = "cfafe0a",
     requires = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path", "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip" },
     config = function()
       require "plugins.cmp"
@@ -118,7 +118,7 @@ packer.startup(function(use)
 
   use {
     "neovim/nvim-lspconfig",
-    commit = "8ebe689",
+    commit = "255e07c",
     config = function()
       require "plugins.lspconfig"
     end,
@@ -126,7 +126,7 @@ packer.startup(function(use)
 
   use {
     "jose-elias-alvarez/null-ls.nvim",
-    commit = "9155589",
+    commit = "3b8eed2",
     config = function()
       require "plugins.null-ls"
     end,
@@ -134,7 +134,7 @@ packer.startup(function(use)
 
   use {
     "williamboman/mason.nvim",
-    commit = "95569b6",
+    commit = "0efc7ce",
     config = function()
       require "plugins.mason"
     end,
@@ -142,7 +142,7 @@ packer.startup(function(use)
 
   use {
     "williamboman/mason-lspconfig.nvim",
-    commit = "43c7f40",
+    commit = "7a97a77",
     after = "mason.nvim",
     config = function()
       require "plugins.mason-lspconfig"
@@ -151,7 +151,7 @@ packer.startup(function(use)
 
   use {
     "folke/trouble.nvim",
-    commit = "83ec606",
+    commit = "2fceec1",
     config = function()
       require "plugins.trouble"
     end,
@@ -159,7 +159,7 @@ packer.startup(function(use)
 
   use {
     "TimUntersberger/neogit",
-    commit = "981207e",
+    commit = "089d388",
     config = function()
       require "plugins.neogit"
     end,
@@ -183,7 +183,7 @@ packer.startup(function(use)
 
   use {
     "nvim-telescope/telescope.nvim",
-    commit = "7a4ffef",
+    commit = "c1a2af0",
     config = function()
       require "plugins.telescope"
     end,
@@ -202,7 +202,7 @@ packer.startup(function(use)
 
   use {
     "folke/which-key.nvim",
-    commit = "61553ae",
+    commit = "16ed12a",
     config = function()
       require "plugins.which-key"
     end,
@@ -210,7 +210,7 @@ packer.startup(function(use)
 
   use {
     "goolord/alpha-nvim",
-    commit = "a858e4e",
+    commit = "f4aa42b",
     config = function()
       require "plugins.alpha"
     end,
