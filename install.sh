@@ -32,9 +32,6 @@ install() {
 
     printf " * Configuring osx\n"
     source "${DOTFILES_PATH}/files/.macos"
-
-    printf " * Configuring dock\n"
-    configure_dock
     ;;
 
   *)
@@ -124,26 +121,6 @@ configure_nvim() {
   if [[ $(command -v "nvim") ]] && [ ! -d "${HOME}/.config/nvim/plugin" ]; then
     printf " * Installing nvim plugins\n"
     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-  fi
-}
-
-configure_dock() {
-  if ! dockutil --list | grep -q "GoLand"; then
-    dockutil --no-restart --remove all --allhomes
-    dockutil --no-restart --add "/Applications/Firefox.app"
-    dockutil --no-restart --add "/System/Applications/Mail.app"
-    dockutil --no-restart --add "/System/Applications/Calendar.app"
-    dockutil --no-restart --add "/System/Applications/Messages.app"
-    dockutil --no-restart --add "/System/Applications/Photos.app"
-    dockutil --no-restart --add "/Applications/Discord.app"
-    dockutil --no-restart --add "/Applications/Signal.app"
-    dockutil --no-restart --add "/Applications/Slack.app"
-    dockutil --no-restart --add "/Applications/GoLand.app"
-    dockutil --no-restart --add "/Applications/Visual Studio Code.app"
-    dockutil --no-restart --add "/Applications/WezTerm.app"
-    dockutil --no-restart --add "/Applications/Agenda.app"
-    dockutil --no-restart --add "/Applications/1Password 7.app"
-    dockutil --no-restart --add "/Applications/Spotify.app"
   fi
 }
 
