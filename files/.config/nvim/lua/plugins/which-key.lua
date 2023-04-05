@@ -10,22 +10,17 @@ local options = {
     separator = "  ",
     group = "+",
   },
-
   popup_mappings = {
     scroll_down = "<c-d>",
     scroll_up = "<c-u>",
   },
-
   window = {
     border = "none",
   },
-
   layout = {
     spacing = 6,
   },
-
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
-
   triggers_blacklist = {
     i = { "j", "k" },
     v = { "j", "k" },
@@ -34,12 +29,10 @@ local options = {
 
 local major = {
   name = "+major",
-
   ["<tab>"] = { "<C-o>", "Go back" },
   ["."] = { ":lua vim.lsp.buf.code_action()<CR>", "Quick fix" },
   [" "] = { ":lua vim.lsp.buf.code_action()<CR>", "Code action" },
   ["="] = { ":lua vim.lsp.buf.format({ async = true })<CR>", "Format code" },
-
   r = { ":lua vim.lsp.buf.rename()<CR>", "Rename" },
   k = { ":lua vim.lsp.buf.hover()<CR>", "Hover" },
   g = {
@@ -56,7 +49,6 @@ local major = {
 local leader = {
   ["<leader>"] = { ':lua require("telescope.builtin").commands()<CR>', "Commands" },
   ["<tab>"] = { ":e #<cr>lua", "Last buffer" },
-
   b = {
     name = "+buffers",
     b = { ':lua require("telescope.builtin").buffers()<CR>', "Show all buffers" },
@@ -74,8 +66,8 @@ local leader = {
     name = "+files",
     f = { ':lua require("telescope.builtin").find_files({ hidden = true })<CR>', "Find file" },
     r = { ':lua require("telescope.builtin").oldfiles({ only_cwd = true })<CR>', "Recent files" },
-    t = { ':lua require("nvim-tree").toggle(false)<CR>', "File tree" },
-    l = { ':lua require("nvim-tree").open({ find_file = true })<CR>', "Show active file in tree" },
+    t = { ':lua require("nvim-tree.api").tree.toggle({ find_file = false, focus = true })<CR>', "File tree" },
+    l = { ':lua require("nvim-tree.api").tree.open({ find_file = true , focus = true})<CR>', "Show active file in tree" },
     n = { ":enew<cr>", "New file" },
   },
   g = {
