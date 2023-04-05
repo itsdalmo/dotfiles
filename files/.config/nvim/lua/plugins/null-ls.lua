@@ -38,6 +38,7 @@ local options = {
     nls.builtins.formatting.packer,
     nls.builtins.diagnostics.buf,
     nls.builtins.diagnostics.fish,
+    nls.builtins.diagnostics.terraform_validate,
   },
   on_attach = on_attach,
 }

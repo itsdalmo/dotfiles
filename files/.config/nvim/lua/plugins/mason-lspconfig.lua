@@ -14,6 +14,7 @@ local options = {
     "yamlls",
     "dockerls",
     "terraformls",
+    "tflint",
     "denols",
     "html",
   },

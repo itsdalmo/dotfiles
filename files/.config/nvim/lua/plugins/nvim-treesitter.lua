@@ -14,10 +14,12 @@ local options = {
     disable = {},
   },
   ensure_installed = {
+    "vim",
     "lua",
     "go",
     "gomod",
     "hcl",
+    "terraform",
     "python",
     "dockerfile",
     "bash",
