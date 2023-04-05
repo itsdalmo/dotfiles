@@ -75,6 +75,11 @@ lspconfig.jsonls.setup {
 
 lspconfig.yamlls.setup {
   on_attach = on_attach,
+  settings = {
+    yaml = {
+      keyOrdering = false,
+    }
+  }
 }
 
 lspconfig.dockerls.setup {
@@ -116,6 +121,7 @@ local signs = {
   Hint = " ",
   Info = " ",
 }
+
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, {
