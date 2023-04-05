@@ -7,7 +7,6 @@ end
 vim.g.nvim_tree_width_allow_resize = 1
 
 local options = {
-  open_on_setup = true,
   update_cwd = true,
   actions = {
     open_file = {
