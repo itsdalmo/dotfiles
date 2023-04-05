@@ -7,7 +7,7 @@ end
 local options = {
   automatic_installation = true,
   ensure_installed = {
-    "sumneko_lua",
+    "lua_ls",
     "gopls",
     "pyright",
     "jsonls",
