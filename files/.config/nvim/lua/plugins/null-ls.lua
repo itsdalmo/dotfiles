@@ -35,7 +35,10 @@ local options = {
     nls.builtins.diagnostics.shellcheck,
     nls.builtins.diagnostics.jsonlint,
     nls.builtins.formatting.buf,
-    nls.builtins.formatting.packer,
+    nls.builtins.formatting.terraform_fmt.with({
+      -- NOTE: Using terraformls to format actual terraform files
+      filetypes = { "hcl" },
+    }),
     nls.builtins.diagnostics.buf,
     nls.builtins.diagnostics.fish,
     nls.builtins.diagnostics.terraform_validate,
