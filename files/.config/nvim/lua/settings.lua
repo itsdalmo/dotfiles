@@ -1,13 +1,3 @@
--- General settings
-local settings = {
-  mapleader = " ",
-  maplocalleader = ",",
-}
-
-for k, v in pairs(settings) do
-  vim.g[k] = v
-end
-
 -- Options
 local options = {
   belloff = "all",
