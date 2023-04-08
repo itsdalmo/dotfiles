@@ -57,6 +57,7 @@ lspconfig.lua_ls.setup {
 
 lspconfig.gopls.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     gopls = {
       ["gofumpt"] = true,
@@ -67,14 +68,17 @@ lspconfig.gopls.setup {
 
 lspconfig.pyright.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 lspconfig.jsonls.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 lspconfig.yamlls.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     yaml = {
       keyOrdering = false,
@@ -84,14 +88,17 @@ lspconfig.yamlls.setup {
 
 lspconfig.dockerls.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 lspconfig.terraformls.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 lspconfig.tflint.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 lspconfig.denols.setup {

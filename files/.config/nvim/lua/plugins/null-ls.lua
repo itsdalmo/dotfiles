@@ -34,6 +34,7 @@ local options = {
     nls.builtins.diagnostics.golangci_lint,
     nls.builtins.diagnostics.shellcheck,
     nls.builtins.diagnostics.jsonlint,
+    nls.builtins.formatting.prettier,
     nls.builtins.formatting.buf,
     nls.builtins.formatting.terraform_fmt.with({
       -- NOTE: Using terraformls to format actual terraform files
