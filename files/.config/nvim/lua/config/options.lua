@@ -1,3 +1,7 @@
+-- Leader key
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
 -- Options
 local options = {
   belloff = "all",
@@ -36,44 +40,12 @@ local options = {
   completeopt = "menu,menuone,noselect",
   fillchars = {
     vert = "│",
-  }
+  },
 }
 
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
--- disable builtins plugins
-local disabled = {
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "gzip",
-  "zip",
-  "zipPlugin",
-  "tar",
-  "tarPlugin",
-  "getscript",
-  "getscriptPlugin",
-  "vimball",
-  "vimballPlugin",
-  "2html_plugin",
-  "logipat",
-  "rrhelper",
-  "spellfile_plugin",
-  "matchit",
-}
-
-for _, plugin in pairs(disabled) do
-  vim.g["loaded_" .. plugin] = 1
-end
-
 -- disable nvim intro
-vim.opt.shortmess:append "c"
-
--- strip trailing whitespace on write
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
-})
+vim.opt.shortmess:append("c")
