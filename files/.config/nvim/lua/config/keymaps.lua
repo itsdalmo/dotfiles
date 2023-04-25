@@ -2,7 +2,7 @@
 local function map(mode, shortcut, command, opts)
   opts = opts or {}
   opts = vim.tbl_deep_extend("keep", opts, { noremap = true, silent = true })
-  vim.api.nvim_set_keymap(mode, shortcut, command, opts)
+  vim.keymap.set(mode, shortcut, command, opts)
 end
 
 -- Keep search matches in the middle of the window.
