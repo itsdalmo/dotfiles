@@ -62,6 +62,9 @@ return {
             ["<C-j>"] = actions.preview_scrolling_down,
             ["<C-k>"] = actions.preview_scrolling_up,
             ["<C-d>"] = actions.delete_buffer,
+            ["<c-t>"] = function(...)
+              return require("trouble.providers.telescope").open_with_trouble(...)
+            end,
           },
         },
         vimgrep_arguments = {

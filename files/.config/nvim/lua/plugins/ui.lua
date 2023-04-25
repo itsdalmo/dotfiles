@@ -129,7 +129,7 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
-      local icons = require("util").icons
+      local icons = require("util.icons")
 
       return {
         options = {
@@ -192,7 +192,7 @@ return {
     lazy = true,
     init = function()
       vim.g.navic_silence = true
-      require("util").on_attach(function(client, buffer)
+      require("util.lsp").autocmd_on_attach(function(client, buffer)
         if client.server_capabilities.documentSymbolProvider then
           require("nvim-navic").attach(client, buffer)
         end
@@ -203,7 +203,7 @@ return {
         separator = " ",
         highlight = true,
         depth_limit = 5,
-        icons = require("util").icons.kinds,
+        icons = require("util.icons").kinds,
       }
     end,
   },
