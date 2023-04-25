@@ -30,8 +30,8 @@ return {
           settings = {
             Lua = {
               diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { "vim" },
+                -- Get the language server to recognize the `vim` and `jit` globals
+                globals = { "vim", "jit" },
               },
               workspace = {
                 checkThirdParty = false,
