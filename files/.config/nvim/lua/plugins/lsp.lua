@@ -7,6 +7,7 @@ return {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
+      "jose-elias-alvarez/typescript.nvim",
     },
     opts = {
       diagnostics = {
@@ -23,7 +24,7 @@ return {
         formatting_options = nil,
         timeout_ms = nil,
       },
-      -- TODO: Separate this out to mason lspconfig?
+      -- TODO: Separate this out to mason lspconfig? Seems to live here so server install/setup is handled consistently?
       servers = {
         jsonls = {},
         lua_ls = {
@@ -42,8 +43,77 @@ return {
             },
           },
         },
+        pyright = {},
+        gopls = {
+          settings = {
+            gopls = {
+              ["gofumpt"] = true,
+              ["local"] = "github.com/itsdalmo,github.com/telia-oss",
+            },
+          },
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              keyOrdering = false,
+            },
+          },
+        },
+        dockerls = {},
+        terraformls = {},
+        tflint = {},
+        html = {},
+        eslint = {
+          settings = {
+            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+            workingDirectory = { mode = "auto" },
+          },
+        },
+        tsserver = {
+          settings = {
+            typescript = {
+              format = {
+                indentSize = vim.o.shiftwidth,
+                convertTabsToSpaces = vim.o.expandtab,
+                tabSize = vim.o.tabstop,
+              },
+            },
+            javascript = {
+              format = {
+                indentSize = vim.o.shiftwidth,
+                convertTabsToSpaces = vim.o.expandtab,
+                tabSize = vim.o.tabstop,
+              },
+            },
+            completions = {
+              completeFunctionCalls = true,
+            },
+          },
+        },
       },
-      setup = {},
+      setup = {
+        eslint = function()
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            callback = function(event)
+              if require("lspconfig.util").get_active_client_by_name(event.buf, "eslint") then
+                vim.cmd("EslintFixAll")
+              end
+            end,
+          })
+        end,
+        tsserver = function(_, opts)
+          require("util.lsp").autocmd_on_attach(function(client, buffer)
+            if client.name == "tsserver" then
+              -- stylua: ignore
+              vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
+              -- stylua: ignore
+              vim.keymap.set("n", "<leader>cR", "<cmd>TypescriptRenameFile<CR>", { desc = "Rename File", buffer = buffer })
+            end
+          end)
+          require("typescript").setup({ server = opts })
+          return true
+        end,
+      },
     },
     config = function(_, opts)
       local Util = require("util.lsp")
@@ -134,10 +204,23 @@ return {
       return {
         root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
         sources = {
-          nls.builtins.formatting.fish_indent,
+          nls.builtins.diagnostics.buf,
           nls.builtins.diagnostics.fish,
-          nls.builtins.formatting.stylua,
+          nls.builtins.diagnostics.golangci_lint,
+          nls.builtins.diagnostics.jsonlint,
+          nls.builtins.diagnostics.shellcheck,
+          nls.builtins.diagnostics.terraform_validate,
+          nls.builtins.formatting.buf,
+          nls.builtins.formatting.fish_indent,
+          nls.builtins.formatting.prettier.with({
+            extra_args = { "--single-quote" }, -- Single quote is a string literal and is a better default
+          }),
           nls.builtins.formatting.shfmt,
+          nls.builtins.formatting.stylua,
+          nls.builtins.formatting.terraform_fmt.with({
+            -- NOTE: Using terraformls to format actual terraform files
+            filetypes = { "hcl" },
+          }),
         },
       }
     end,

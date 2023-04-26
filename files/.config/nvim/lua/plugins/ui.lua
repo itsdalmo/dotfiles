@@ -51,9 +51,11 @@ return {
         ["<leader>e"] = { name = "+errors/diagnostics" },
         ["<leader>f"] = { name = "+file/find" },
         ["<leader>g"] = { name = "+git" },
+        ["<leader>l"] = { name = "+lsp" },
         ["<leader>gh"] = { name = "+hunks" },
         ["<leader>s"] = { name = "+search" },
         ["<leader>q"] = { name = "+quit/session" },
+        ["<localleader>g"] = { name = "+goto" },
       },
     },
     config = function(_, opts)
@@ -78,7 +80,7 @@ return {
 
       -- menu
       dashboard.section.buttons.val = {
-        dashboard.button("n", " New file", ":ene <BAR> startinsert<CR>"),
+        dashboard.button("n", " New file", "<cmd>ene <BAR> startinsert<CR>"),
         dashboard.button("f", " Find file", "<cmd> Telescope find_files hidden=true<CR>"),
         dashboard.button(
           "r",
@@ -86,8 +88,8 @@ return {
           ':lua require("telescope.builtin").oldfiles({ only_cwd = true })<CR>'
         ),
         dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
-        dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-        dashboard.button("q", " Quit", ":qa<CR>"),
+        dashboard.button("l", "󰒲 " .. " Lazy", "<cmd>Lazy<CR>"),
+        dashboard.button("q", " Quit", "<cmd>qa<CR>"),
       }
 
       dashboard.section.footer.val = footer()

@@ -94,8 +94,12 @@ function M.keymap_on_attach(client, buffer)
     "n",
     "<localleader>gt",
     "<cmd>Telescope lsp_type_definitions<cr>",
-    { desc = "Goto T[y]pe Definition", buffer = buffer }
+    { desc = "Goto Type Definition", buffer = buffer }
   )
+
+  -- TODO: Stick to d for diagnostics?
+  vim.keymap.set("n", "]d", M.diagnostic_goto(true), { desc = "Next Diagnostic", buffer = buffer })
+  vim.keymap.set("n", "[d", M.diagnostic_goto(false), { desc = "Prev Diagnostic", buffer = buffer })
 
   if client.server_capabilities.codeActionProvider then
     vim.keymap.set({ "n", "v" }, "<localleader>.", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer })
@@ -128,6 +132,16 @@ function M.keymap_on_attach(client, buffer)
 
   if client.server_capabilities.documentRangeFormattingProvider then
     vim.keymap.set("v", "<localleader>=", format, { desc = "Format Range", buffer = buffer })
+  end
+end
+
+function M.float_term(cmd, opts)
+  opts = vim.tbl_deep_extend("force", {
+    size = { width = 0.9, height = 0.9 },
+  }, opts or {})
+  local float = require("lazy.util").float_term(cmd, opts)
+  if opts.esc_esc == false then
+    vim.keymap.set("t", "<esc>", "<esc>", { buffer = float.buf, nowait = true })
   end
 end
 
