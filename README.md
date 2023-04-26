@@ -22,4 +22,3 @@ After rebooting, complete the following manual steps:
   - Enable "stacks" on the desktop.
 - Open and configure `cinch`/`sensiblesidebuttons` to start on boot.
 - Transfer `.aws/config` and add new credentials with `aws-vault add <jump-profile-name>`.
-- Finish setting up GPG as described [here](https://withblue.ink/2020/05/17/how-and-why-to-sign-git-commits.html).

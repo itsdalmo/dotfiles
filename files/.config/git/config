@@ -1,7 +1,7 @@
 [user]
 	name       = itsdalmo
 	email      = kristian@dalmo.me
-    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSRWGrBG1gY2Sz8CdPqnqKiJJXqpG1+RgJ5cHXZluIU
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSRWGrBG1gY2Sz8CdPqnqKiJJXqpG1+RgJ5cHXZluIU
 
 [alias]
 	unstage  = reset HEAD
@@ -35,4 +35,5 @@
 
 [gpg "ssh"]
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+  allowedSignersFile = ~/.config/git/allowed_signers
 

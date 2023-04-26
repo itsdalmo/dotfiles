@@ -46,9 +46,6 @@ install() {
   printf " * Configuring nvim\n"
   configure_nvim
 
-  printf " * Configuring gpg\n"
-  configure_gpg
-
   mkdir -p "$(dirname "$SSH_KEY")"
   if [ ! -f "${SSH_KEY}" ]; then
     if [ -t 0 ]; then
@@ -86,14 +83,6 @@ configure_homebrew() {
 
   printf " * Installing brew bundle\n"
   brew bundle install --global | sed 's/^/    ~ /'
-}
-
-configure_gpg() {
-  chown -R "$(whoami)" "${HOME}/.gnupg/"
-  chmod 700 "${HOME}/.gnupg"
-
-  find "${HOME}/.gnupg" -type f -exec chmod 600 {} \;
-  find "${HOME}/.gnupg" -type d -exec chmod 700 {} \;
 }
 
 configure_fish() {
