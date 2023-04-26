@@ -71,9 +71,9 @@ return {
       use_diagnostic_signs = true,
     },
     keys = {
-      { "<leader>ee", "<cmd>TroubleToggle<cr>", desc = "Show errors" },
-      { "<leader>el", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "List document errors" },
-      { "<leader>eL", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "List workspace errors" },
+      { "<leader>dd", "<cmd>TroubleToggle<cr>", desc = "Show diagnostics" },
+      { "<leader>dl", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "List diagnostics" },
+      { "<leader>dL", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "List workspace diagnostics" },
     },
   },
 
@@ -118,12 +118,11 @@ return {
         map("n", "[h", gs.prev_hunk, "Prev Hunk")
         map({ "n", "v" }, "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk")
         map({ "n", "v" }, "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk")
-        map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
         map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-        map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
         map("n", "<leader>ghd", gs.preview_hunk, "Diff Hunk")
-        map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>ghb", function() gs.blame_line() end, "Blame Line")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<cr>", "GitSigns Select Hunk")
+        map("n", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle line blame")
       end,
     },
   },

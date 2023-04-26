@@ -18,32 +18,42 @@ map("n", "<C-j>", "<cmd>wincmd j<cr>")
 map("n", "<C-h>", "<cmd>wincmd h<cr>")
 map("n", "<C-l>", "<cmd>wincmd l<cr>")
 
--- Lazygit
-map("n", "<leader>gg", function()
-  require("util.lsp").float_term({ "lazygit" }, { esc_esc = false })
-end, { desc = "Lazygit" })
-
--- LSP
-map("n", "li", "<cmd>LspInfo<cr>", { desc = "Info" })
-map("n", "lr", "<cmd>LspRestart<cr>", { desc = "Restart" })
-
--- Files
-map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
-
 -- Buffers
 map("n", "]b", "<cmd>bprev<cr>", { desc = "Next buffer" })
 map("n", "[b", "<cmd>bnext<cr>", { desc = "Previous buffer" })
 map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Close active buffer" })
 
--- Tabs
-map("n", "]<tab>", "<cmd>tabnext<cr>", { desc = "Next tab" })
-map("n", "[<tab>", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+-- Files
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
 
--- Search
-map("n", "<leader>sc", "<cmd>noh<CR>", { desc = "Clear search" })
+-- LSP
+map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "Info" })
+map("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart" })
+
+-- Lazygit
+map("n", "<leader>gg", function()
+  require("utils").float_term({ "lazygit" }, { esc_esc = false })
+end, { desc = "Lazygit" })
 
 -- Quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
--- TODO: Window management
--- TODO: Toggles (diagnostics, autoformat etc)
+-- Search
+map("n", "<leader>sc", "<cmd>noh<CR>", { desc = "Clear search" })
+
+-- Tabs
+map("n", "]<tab>", "<cmd>tabnext<cr>", { desc = "Next tab" })
+map("n", "[<tab>", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+
+-- Toggles
+map("n", "<leader>tf", require("utils").toggle_autoformat, { desc = "Autoformat" })
+map("n", "<leader>tc", require("utils").toggle_conceal, { desc = "Conceal" })
+map("n", "<leader>td", require("utils").toggle_diagnostics, { desc = "Diagnostics" })
+
+-- Window
+map("n", "<leader>wv", "<cmd>vsplit<cr>", { desc = "Split vertical" })
+map("n", "<leader>ws", "<cmd>split<cr>", { desc = "Split horizontal" })
+map("n", "<leader>w<left>", "<C-w><", { desc = "Resize left" })
+map("n", "<leader>w<right>", "<C-w>>", { desc = "Resize right" })
+map("n", "<leader>w<up>", "<C-w>+", { desc = "Resize up" })
+map("n", "<leader>w<down>", "<C-w>-", { desc = "Resize down" })

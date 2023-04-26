@@ -48,13 +48,15 @@ return {
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
         ["<leader>b"] = { name = "+buffer" },
-        ["<leader>e"] = { name = "+errors/diagnostics" },
+        ["<leader>e"] = { name = "+error/diagnostic" },
         ["<leader>f"] = { name = "+file/find" },
         ["<leader>g"] = { name = "+git" },
+        ["<leader>gh"] = { name = "+hunk" },
         ["<leader>l"] = { name = "+lsp" },
-        ["<leader>gh"] = { name = "+hunks" },
-        ["<leader>s"] = { name = "+search" },
         ["<leader>q"] = { name = "+quit/session" },
+        ["<leader>s"] = { name = "+search" },
+        ["<leader>t"] = { name = "+toggle" },
+        ["<leader>w"] = { name = "+window" },
         ["<localleader>g"] = { name = "+goto" },
       },
     },
@@ -120,9 +122,6 @@ return {
     -- stylua: ignore
     keys = {
       { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
-      -- TODO: Consider removing these?
-      { "<c-j>", function() if not require("noice.lsp").scroll(4) then return "<c-j>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
-      { "<c-k>", function() if not require("noice.lsp").scroll(-4) then return "<c-k>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
     },
   },
 
@@ -131,7 +130,7 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
-      local icons = require("util.icons")
+      local icons = require("config.icons")
 
       return {
         options = {
@@ -194,7 +193,7 @@ return {
     lazy = true,
     init = function()
       vim.g.navic_silence = true
-      require("util.lsp").autocmd_on_attach(function(client, buffer)
+      require("utils").lsp_attach_autocmd(function(client, buffer)
         if client.server_capabilities.documentSymbolProvider then
           require("nvim-navic").attach(client, buffer)
         end
@@ -205,7 +204,7 @@ return {
         separator = " ",
         highlight = true,
         depth_limit = 5,
-        icons = require("util.icons").kinds,
+        icons = require("config.icons").kinds,
       }
     end,
   },
