@@ -6,7 +6,7 @@ My setup for development on OS X (and remote development on Linux).
 
 Run the installer (restart until it completes) and then reboot:
 
-```
+```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/master/install.sh)"
 ```
 
