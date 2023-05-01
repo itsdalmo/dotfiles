@@ -39,6 +39,7 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
+      { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
     },
     opts = function()
       local cmp = require("cmp")
@@ -70,12 +71,12 @@ return {
           { name = "path" },
         }),
         formatting = {
-          format = function(_, item)
+          format = function(entry, item)
             local icons = require("config.icons").kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
             end
-            return item
+            return require("tailwindcss-colorizer-cmp").formatter(entry, item)
           end,
         },
         experimental = {
@@ -84,6 +85,15 @@ return {
           },
         },
       }
+    end,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    event = "VeryLazy",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("nvim-ts-autotag").setup()
     end,
   },
 }

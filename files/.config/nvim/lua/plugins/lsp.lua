@@ -9,6 +9,7 @@ return {
     end,
   },
 
+  -- NOTE: Installed servers are defined in config/lsp.lua
   {
     "williamboman/mason-lspconfig.nvim",
     event = "VeryLazy",
@@ -31,38 +32,7 @@ return {
     end,
   },
 
-  -- Null ls dependencies are managed by Homebrew.
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-        sources = {
-          nls.builtins.diagnostics.buf,
-          nls.builtins.diagnostics.fish,
-          nls.builtins.diagnostics.golangci_lint,
-          nls.builtins.diagnostics.jsonlint,
-          nls.builtins.diagnostics.shellcheck,
-          nls.builtins.diagnostics.terraform_validate,
-          nls.builtins.formatting.buf,
-          nls.builtins.formatting.fish_indent,
-          nls.builtins.formatting.prettier.with({
-            -- Single quote is a string literal and is a better default
-            extra_args = { "--single-quote" },
-          }),
-          nls.builtins.formatting.shfmt,
-          nls.builtins.formatting.stylua,
-          nls.builtins.formatting.terraform_fmt.with({
-            -- Using terraformls to format actual terraform files
-            filetypes = { "hcl" },
-          }),
-        },
-      }
-    end,
-  },
-
+  -- NOTE: Server configuration are defined in config/lsp.lua
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -70,7 +40,6 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
-      "jose-elias-alvarez/typescript.nvim",
     },
     opts = {
       diagnostics = {
@@ -174,6 +143,39 @@ return {
         }, config or {})
         require("lspconfig")[server].setup(cfg)
       end
+    end,
+  },
+
+  -- NOTE: null-ls executables are installed by Homebrew.
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = function()
+      local nls = require("null-ls")
+      return {
+        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
+        sources = {
+          nls.builtins.diagnostics.buf,
+          nls.builtins.diagnostics.fish,
+          -- Issue with workspaces: https://github.com/golangci/golangci-lint/issues/2654
+          nls.builtins.diagnostics.golangci_lint,
+          nls.builtins.diagnostics.jsonlint,
+          nls.builtins.diagnostics.shellcheck,
+          nls.builtins.diagnostics.terraform_validate,
+          nls.builtins.formatting.buf,
+          nls.builtins.formatting.fish_indent,
+          nls.builtins.formatting.prettier.with({
+            -- Single quote is a string literal and is a better default
+            extra_args = { "--single-quote" },
+          }),
+          nls.builtins.formatting.shfmt,
+          nls.builtins.formatting.stylua,
+          nls.builtins.formatting.terraform_fmt.with({
+            -- Using terraformls to format actual terraform files
+            filetypes = { "hcl" },
+          }),
+        },
+      }
     end,
   },
 }

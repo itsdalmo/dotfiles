@@ -28,6 +28,7 @@ M.servers = {
   },
   pyright = {},
   terraformls = {},
+  tailwindcss = {},
   tflint = {},
   tsserver = {
     settings = {
