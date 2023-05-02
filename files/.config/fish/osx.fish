@@ -9,7 +9,12 @@ fish_add_path "$HOME/bin"
 fish_add_path "$HOME/go/bin"
 
 # Homebrew (Required on M1: https://github.com/Homebrew/discussions/discussions/446)
-eval (/opt/homebrew/bin/brew shellenv)
+switch (uname -m)
+    case arm64
+        eval (/opt/homebrew/bin/brew shellenv)
+    case x86_64
+        eval (/usr/local/bin/brew shellenv)
+end
 
 # GCP
-source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+source (brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
