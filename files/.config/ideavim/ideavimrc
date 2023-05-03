@@ -38,6 +38,17 @@ nnoremap N Nzzzv
 vmap > >gv
 vmap < <gv
 
+" next error/diagnostic
+nnoremap ]e :action GotoNextError<CR>
+nnoremap [e :action GotoPreviousError<CR>
+nnoremap ]d :action GotoNextError<CR>
+nnoremap [d :action GotoPreviousError<CR>
+
+" next occurence (todos/spelling/etc)
+nnoremap ]o :action NextOccurence<CR>
+nnoremap [o :action PreviousOccurence<CR>
+
+
 """ Settings for https://plugins.jetbrains.com/plugin/15976-idea-which-key
 set which-key
 set notimeout
