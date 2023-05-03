@@ -178,8 +178,8 @@ vnoremap <leader>fR    :action RenameFile<CR>
 let g:WhichKeyDesc_Git = "<leader>g    +git"
 
 let g:WhichKeyDesc_Git_Status = "<leader>gs status"
-nnoremap <leader>gs    :action CheckinProject<CR>
-vnoremap <leader>gs    :action CheckinProject<CR>
+nnoremap <leader>gs    :action ActivateCommitToolWindow<CR>
+vnoremap <leader>gs    :action ActivateCommitToolWindow<CR>
 
 let g:WhichKeyDesc_Git_Checkout = "<leader>gc checkout"
 nnoremap <leader>gc    :action Git.Branches<CR>
@@ -419,7 +419,7 @@ nnoremap <leader>qQ    :action Exit<CR>
 vnoremap <leader>qQ    <Esc>:action Exit<CR>
 
 let g:WhichKeyDesc_Quit_ReloadIdeavim = "<leader>qr reload-ideavim"
-nnoremap <leader>qr    :source ~/.ideavimrc<CR>
+nnoremap <leader>qr    :source ~/.config/ideavim/ideavimrc<CR>
 vnoremap <leader>qr    <Esc>:source ~/.ideavimrc<CR>
 
 let g:WhichKeyDesc_Quit_Restart = "<leader>qR restart"
