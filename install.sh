@@ -2,10 +2,9 @@
 
 set -euo pipefail
 
-declare DOTFILES_PATH DOTFILES_REPO SSH_KEY
+declare DOTFILES_PATH DOTFILES_REPO
 DOTFILES_PATH="${HOME}/code/github.com/itsdalmo/dotfiles"
 DOTFILES_REPO="https://github.com/itsdalmo/dotfiles.git"
-SSH_KEY="${HOME}/.ssh/id_rsa"
 
 install() {
   printf "Installing itsdalmo/dotfiles...\n"
@@ -45,20 +44,6 @@ install() {
 
   printf " * Configuring nvim\n"
   configure_nvim
-
-  mkdir -p "$(dirname "$SSH_KEY")"
-  if [ ! -f "${SSH_KEY}" ]; then
-    if [ -t 0 ]; then
-      printf " * Generating SSH key\n"
-      ssh-keygen -t rsa -b 4096 -C "kristian@dalmo.me" -f "${SSH_KEY}"
-
-      printf "\n"
-      printf "Visit https://github.com/settings/ssh/new to add the new key:\n"
-      cat "${SSH_KEY}.pub"
-    else
-      printf " * Skipping SSH key (executing non-interactively)\n"
-    fi
-  fi
 
   printf "\n"
   printf "Done. Note that some of these changes require a logout/restart to take effect.\n"
