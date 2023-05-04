@@ -94,7 +94,7 @@ configure_fish() {
 configure_nvim() {
   if [[ $(command -v "nvim") ]] && [ ! -d "${HOME}/.config/nvim/plugin" ]; then
     printf " * Installing nvim plugins\n"
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    nvim --headless "+Lazy! sync" +qa
   fi
 }
 
