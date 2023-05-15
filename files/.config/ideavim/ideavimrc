@@ -247,6 +247,10 @@ let g:WhichKeyDesc_Major_LastLocation = "<leader><Tab> last-location"
 nnoremap <leader>m<tab>    :action Back<CR>
 vnoremap <leader>m<tab>    :action Back<CR>
 
+let g:WhichKeyDesc_Major_Hover = "<leader>m, hover"
+nnoremap <leader>mk    :action QuickJavaDoc<CR>
+vnoremap <leader>mk    :action QuickJavaDoc<CR>
+
 let g:WhichKeyDesc_Major_QuickFix = "<leader>m. quick-fix"
 nnoremap <leader>m.    :action ShowIntentionActions<CR>
 vnoremap <leader>m.    :action ShowIntentionActions<CR>
