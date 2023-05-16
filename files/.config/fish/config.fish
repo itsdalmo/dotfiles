@@ -10,9 +10,9 @@ abbr -a ga 'git add -p'
 abbr -a gp 'git pull'
 abbr -a gr 'git stash; and git pull --rebase; and git stash pop'
 abbr -a gl 'git log --oneline --graph --max-count 20'
+abbr -a gg lazygit
 abbr -a awsv 'aws-vault exec'
 abbr -a lv 'NVIM_APPNAME=lazyvim nvim'
-abbr -a lg lazygit
 
 # Environment
 set -gx EDITOR nvim
