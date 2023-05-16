@@ -72,6 +72,7 @@ brew "tflint"
 brew "typescript"
 brew "vaulted"
 brew "warrensbox/tap/tfswitch"
+brew "itsdalmo/tap/tfcheck"
 brew "yarn"
 brew "zoxide"
 
