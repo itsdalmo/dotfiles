@@ -75,6 +75,8 @@ brew "warrensbox/tap/tfswitch"
 brew "itsdalmo/tap/tfcheck"
 brew "yarn"
 brew "zoxide"
+brew "vhs"
+brew "maven"
 
 # Mac store
 mas "Agenda", id: 1287445660
