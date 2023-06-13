@@ -16,6 +16,8 @@ M.servers = {
     },
   },
   html = {},
+  cssls = {},
+  svelte = {},
   jsonls = {},
   lua_ls = {
     settings = {
@@ -28,7 +30,6 @@ M.servers = {
   },
   pyright = {},
   terraformls = {},
-  tailwindcss = {},
   tflint = {},
   tsserver = {
     settings = {
