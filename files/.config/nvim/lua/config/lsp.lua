@@ -19,6 +19,7 @@ M.servers = {
   cssls = {},
   svelte = {},
   jsonls = {},
+  nil_ls = {},
   lua_ls = {
     settings = {
       Lua = {

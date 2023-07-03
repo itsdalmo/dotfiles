@@ -1,36 +1,21 @@
 # Taps
 tap "1password/tap"
-tap "adoptopenjdk/openjdk"
-tap "bufbuild/buf"
-tap "go-task/tap"
-tap "goreleaser/tap"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-tap "itsdalmo/tap"
-tap "warrensbox/tap"
 
 # Apps
 cask "1password/tap/1password-cli"
 cask "brave-browser"
 cask "discord"
-cask "docker"
 cask "firefox"
 cask "font-jetbrains-mono"
-cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
-cask "goland"
-cask "google-cloud-sdk"
-cask "intellij-idea"
 cask "keybase"
-cask "multipass"
-cask "numi"
-cask "postman"
 cask "rectangle"
 cask "sensiblesidebuttons"
 cask "signal"
 cask "slack"
 cask "spotify"
-cask "visual-studio-code"
 cask "wezterm"
 cask "webex"
 
@@ -81,8 +66,4 @@ brew "ykman"
 brew "zoxide"
 
 # Mac store
-mas "Agenda", id: 1287445660
-mas "Microsoft Excel", id: 462058435
-mas "Microsoft Powerpoint", id: 462062816
-mas "Microsoft Word", id: 462054704
 mas "Xcode", id: 497799835

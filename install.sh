@@ -85,11 +85,38 @@ link_dotfiles() {
   declare files
   files="$(find "${DOTFILES_PATH}/files" -type f)"
 
-  for file in $files; do
-    local path="${file##"${DOTFILES_PATH}/files/"}"
-    mkdir -p "$(dirname "${HOME}/${path}")"
-    ln -sf "${file}" "${HOME}/${path}"
-  done
+  _distro=$(grep -oP '(?<=^ID=).*' /etc/os-release)
+  _version=$(grep -oP '(?<=^VERSION_ID=).*' /etc/os-release)
+
+  case "$_distro" in
+  'nixos')
+    # Ships with nix, but we need to activate flakes.
+    printf "TODO: nixos switch and such\n"
+    # configure_nvim
+    ;;
+  *)
+    if [[ "$_distro" == "debian" ]]; then
+      # Debian does not ship with git and curl
+      if ! command -v "git" >/dev/null; then
+        sudo apt install git
+      fi
+      if ! command -v "curl" >/dev/null; then
+        sudo apt install curl
+      fi
+    fi
+    if [[ "$_distro" == "fedora" ]]; then
+      if ! command -v "chsh" >/dev/null; then
+        sudo dnf install util-linux-user
+      fi
+    fi
+
+    clone_dotfiles
+    install_nix
+    install_flake
+    configure_shell
+    configure_nvim
+    ;;
+  esac
 }
 
 install_brew() {
@@ -98,8 +125,17 @@ install_brew() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
 
+  clone_dotfiles
+  install_nix
+  install_flake
+  configure_shell
+  configure_nvim
+
   printf " * Installing brew bundle\n"
   brew bundle install --global | sed 's/^/    ~ /'
+
+  printf " * Configuring osx\n"
+  source "${_dotfiles_path}/files/.macos"
 }
 
 install_nix() {
