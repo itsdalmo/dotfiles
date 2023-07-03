@@ -1,0 +1,36 @@
+general {
+  colors = true
+  interval = 5
+  color_good = "#7dcfff"
+  color_bad = "#f7768e"
+  color_degraded = "#e0af68"
+}
+
+order += "disk /"
+order += "ethernet _first_"
+order += "load"
+order += "memory"
+order += "tztime local"
+
+disk / {
+  format = " %avail/%total"
+}
+
+ethernet _first_ {
+  format_down = "⍆: down"
+  format_up = "⍆: %ip (%speed)"
+}
+
+load {
+  format = " %1min"
+}
+
+memory {
+  format = "%used"
+  threshold_degraded = "1G"
+}
+
+tztime local {
+  format = "%Y-%m-%d %H:%M:%S"
+}
+
