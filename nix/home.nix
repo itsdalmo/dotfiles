@@ -1,11 +1,8 @@
 { config, user, pkgs, ... }:
 let
-  nerdfonts = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; };
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
 in
 {
-  home.username = user;
-  home.homeDirectory = homeDirectory;
   home.stateVersion = "23.11";
 
   home.sessionPath = [ "$HOME/bin" "$HOME/go/bin" ];
@@ -37,33 +34,33 @@ in
         {
           name = file.name + "_source";
           value = {
-            source = ./files + ("/" + file.name);
+            source = ../files + ("/" + file.name);
             onChange = ''cp -f $HOME/${file.name}_source $HOME/${file.name} && chmod ${file.permissions} $HOME/${file.name}'';
           };
         };
     in
-    builtins.listToAttrs (map copy files) // (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ./files/.Brewfile; } else { });
+    builtins.listToAttrs (map copy files) // (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ../files/.Brewfile; } else { });
 
   xdg.enable = true;
   xdg.configFile = {
-    "fd".source = ./files/.config/fd;
-    "git".source = ./files/.config/git;
-    "ideavim".source = ./files/.config/ideavim;
-    "nvim".source = ./files/.config/nvim;
-    "nix".source = ./files/.config/nix;
-    "ripgrep".source = ./files/.config/ripgrep;
-    "starship.toml".source = ./files/.config/starship.toml;
-    "wezterm".source = ./files/.config/wezterm;
-    "zk".source = ./files/.config/zk;
+    "fd".source = ../files/.config/fd;
+    "git".source = ../files/.config/git;
+    "ideavim".source = ../files/.config/ideavim;
+    "nvim".source = ../files/.config/nvim;
+    "nix".source = ../files/.config/nix;
+    "ripgrep".source = ../files/.config/ripgrep;
+    "starship.toml".source = ../files/.config/starship.toml;
+    "wezterm".source = ../files/.config/wezterm;
+    "zk".source = ../files/.config/zk;
 
     # The root fish config has to be managed by home-manager
     # (in order to add fzf/zoxide/etc)
-    "fish/osx.fish".source = ./files/.config/fish/osx.fish;
-    "fish/linux.fish".source = ./files/.config/fish/linux.fish;
-    "fish/functions".source = ./files/.config/fish/functions;
+    "fish/osx.fish".source = ../files/.config/fish/osx.fish;
+    "fish/linux.fish".source = ../files/.config/fish/linux.fish;
+    "fish/functions".source = ../files/.config/fish/functions;
 
     # Home manager wants to install the theme under the bat directory
-    "bat/config".source = ./files/.config/bat/config;
+    "bat/config".source = ../files/.config/bat/config;
   };
 
   home.packages = with pkgs; [
@@ -78,10 +75,8 @@ in
     go
     go-task
     goreleaser
-    jetbrains-mono
     jq
     lazygit
-    nerdfonts
     ripgrep
     teleport
     tfcheck
@@ -115,15 +110,12 @@ in
     # vhs
   ];
 
-  # Enable user fonts
-  fonts.fontconfig.enable = true;
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.fish = {
     enable = true;
-    shellInit = builtins.readFile ./files/.config/fish/config.fish;
+    shellInit = builtins.readFile ../files/.config/fish/config.fish;
   };
 
   programs.fzf = {
@@ -214,20 +206,20 @@ in
     enableFishIntegration = true;
   };
 
-  programs.bat = {
-    enable = true;
-    themes = {
-      tokyonight = {
-        src = pkgs.fetchFromGitHub {
-          owner = "folke";
-          repo = "tokyonight.nvim";
-          rev = "b0e7c7382a7e8f6456f2a95655983993ffda745e";
-          sha256 = "sha256-5QeY3EevOQzz5PHDW2CUVJ7N42TRQdh7QOF9PH1YxkU=";
-        };
-        file = "extras/sublime/tokyonight_night.tmTheme";
-      };
-    };
-  };
+  # programs.bat = {
+  #   enable = true;
+  #   themes = {
+  #     tokyonight = {
+  #       src = pkgs.fetchFromGitHub {
+  #         owner = "folke";
+  #         repo = "tokyonight.nvim";
+  #         rev = "b0e7c7382a7e8f6456f2a95655983993ffda745e";
+  #         sha256 = "sha256-5QeY3EevOQzz5PHDW2CUVJ7N42TRQdh7QOF9PH1YxkU=";
+  #       };
+  #       file = "extras/sublime/tokyonight_night.tmTheme";
+  #     };
+  #   };
+  # };
 
   programs.starship = {
     enable = true;
@@ -242,3 +234,4 @@ in
     # enableFishIntegration = true;
   };
 }
+

@@ -1,24 +1,54 @@
 # dotfiles
 
-My setup for development on OS X (and remote development on Linux).
+My setup for development on macOS (and NixOS).
 
 ## Installation
 
-Run the installer (restart until it completes) and then reboot:
+### MacOS
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/master/install.sh)"
+# Run the bootstrap script
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/refs/heads/master/scripts/bootstrap_macos.sh)"
+
+# Run the initial install
+nix run nix-darwin -- switch --flake github:itsdalmo/dotfiles#dalmobook
+
+# Afterwards we can use darwin-rebuild directly
+darwin-rebuild switch --flake github:itsdalmo/dotfiles#dalmobook
 ```
 
 After rebooting, complete the following manual steps:
 
 - System settings:
-  - `Sharing > Computer name`.
-  - `Security & Privacy > Firewall > Turn on Firewall`
-  - `Security & Privacy > General > Require password immediately after sleep or screen saver begins`
   - `Displays > Night Shift > Schedule: Sunset to Sunrise`
   - `Sound > Show volume in menu bar`
-  - `Bluetooth > Show Bluetooth in menu bar`
   - Enable "stacks" on the desktop.
-- Open and configure `cinch`/`sensiblesidebuttons` to start on boot.
-- Transfer `.aws/config` and add new credentials with `aws-vault add <jump-profile-name>`.
+
+### NixOS
+
+```sh
+# Run the bootstrap script
+nix-shell -p curl --run /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/refs/heads/master/scripts/bootstrap_nixos.sh)"
+
+# Run the initial install with a reboot
+nixos-rebuild boot --flake github:itsdalmo/dotfiles#nixos-vm && reboot
+
+# Do normal rebuilds to update
+sudo nixos-rebuild switch --flake github:itsdalmo/dotfiles#nixos-vm
+```
+
+### VM (NixOS)
+
+```sh
+# Create the vm
+./scripts/vm.sh create ~/Desktop/isos/nixos-minimal-24.05.6668.e8c38b73aeb2-aarch64-linux.iso
+
+# Install nixos (after you have manually set the root password)
+./scripts/vm.sh install
+
+# Rebuild and reboot
+./scripts/vm.sh rebuild-and-reboot
+
+# Rebuild on updates
+./scripts/vm.sh rebuild
+```
