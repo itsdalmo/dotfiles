@@ -8,9 +8,13 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs:
     let
       # Import nixpkgs with the correct config/overlays.
       mkPkgs = system: import nixpkgs {
@@ -55,9 +59,45 @@
           system = "aarch64-linux";
           user = "dalmo";
         };
-        "dalmo@amd64-linux" = mkHome {
-          system = "x86_64-linux";
-          user = "dalmo";
+
+        # Parallels VM (with built-in ISO)
+        "parallels@arm64-linux" = mkHome {
+          system = "aarch64-linux";
+          user = "parallels";
+        };
+      };
+
+      nixosConfigurations = {
+        parallels-vm = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          pkgs = mkPkgs "aarch64-linux";
+          modules = [
+            ./nix/hosts/nixos/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.dalmo = import ./home.nix;
+              home-manager.extraSpecialArgs = { user = "dalmo"; };
+            }
+          ];
+        };
+      };
+
+      darwinConfigurations = {
+        dalmoBook = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          pkgs = mkPkgs "aarch64-darwin";
+          modules = [
+            ./nix/hosts/darwin/configuration.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.dalmo = import ./home.nix;
+              home-manager.extraSpecialArgs = { user = "dalmo"; };
+            }
+          ];
         };
       };
     };
