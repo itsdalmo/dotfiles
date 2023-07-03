@@ -10,9 +10,6 @@ main() {
   printf "Installing itsdalmo/dotfiles...\n"
 
   case $(uname) in
-  'Linux')
-    install_linux
-    ;;
   'Darwin')
     install_darwin
     ;;
@@ -26,32 +23,11 @@ main() {
   printf "Done. Note that some of these changes require a logout/restart to take effect.\n"
 }
 
-install_linux() {
-  local _distro
-
-  _distro=$(grep -oP '(?<=^ID=).*' /etc/os-release)
-
-  case "$_distro" in
-  'fedora') ;;
-  'pop') ;;
-  'ubuntu') ;;
-  *)
-    printf "Distro not supported.\n"
-    exit 1
-    ;;
-  esac
-
-  clone_dotfiles
-  install_nix
-  install_flake
-  configure_shell
-  configure_nvim
-}
-
 install_darwin() {
   if ! xcode-select -p &>/dev/null; then
-    printf " * Installing xcode\n"
+    printf " * Installing xcode (rerun the installer after installation is complete)\n"
     xcode-select --install
+    exit 0
   fi
   if [ ! -d "/usr/libexec/rosetta" ]; then
     printf " * Installing rosetta\n"
@@ -61,12 +37,7 @@ install_darwin() {
   clone_dotfiles
   install_brew
   install_nix
-  install_flake
-  configure_shell
-  configure_nvim
-
-  printf " * Configuring osx\n"
-  source "${_dotfiles_path}/files/.macos"
+  install_nix_darwin
 }
 
 clone_dotfiles() {
@@ -84,9 +55,6 @@ install_brew() {
     printf " * Adding brew to path\n"
     eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
-
-  printf " * Installing brew bundle\n"
-  brew bundle install --global | sed 's/^/    ~ /'
 }
 
 install_nix() {
@@ -104,49 +72,13 @@ install_nix() {
   mkdir -p ~/.local/state/nix/profiles
 }
 
-install_flake() {
-  local _os
-  local _user
-  local _arch
-
-  _os=$(uname | tr '[:upper:]' '[:lower:]')
-  _user=$(whoami)
-
-  case $(uname -m) in
-  aarch64 | arm64)
-    _arch="arm64"
-    ;;
-  x86_64 | amd64)
-    _arch="amd64"
-    ;;
-  *)
-    printf "Architecture not supported.\n"
-    exit 1
-    ;;
-  esac
-
-  nix run github:nix-community/home-manager/release-24.05 -- switch --flake "${_dotfiles_path}#${_user}@${_arch}-${_os}"
-}
-
-configure_shell() {
-  declare fish_bin
-  fish_bin="$(which fish)"
-
-  if ! grep -q "${fish_bin}" </etc/shells; then
-    printf " * Adding fish to /etc/shells\n"
-    echo "${fish_bin}" | sudo tee -a /etc/shells >/dev/null
-  fi
-
-  if ! echo "${SHELL}" | grep -q "fish"; then
-    printf " * Setting fish as default shell\n"
-    chsh -s "${fish_bin}"
-  fi
-}
-
-configure_nvim() {
-  if [[ $(command -v "nvim") ]] && [ ! -d "${HOME}/.config/nvim/plugin" ]; then
-    printf " * Installing nvim plugins\n"
-    nvim --headless "+Lazy! restore" +qa
+install_nix_darwin() {
+  if command -v "darwin-rebuild" >/dev/null; then
+    printf " * Updating nix-darwin configuration\n"
+    darwin-rebuild switch --flake "${_dotfiles_path}#dalmobook"
+  else
+    printf " * Installing nix-darwin configuration\n"
+    nix run nix-darwin -- switch --flake "${_dotfiles_path}#dalmobook"
   fi
 }
 
