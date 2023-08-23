@@ -79,7 +79,7 @@ return {
 
   -- magit for neovim
   {
-    "TimUntersberger/neogit",
+    "NeogitOrg/neogit",
     cmd = { "Neogit" },
     keys = {
       { "<leader>gs", "<cmd>Neogit<cr>", desc = "Status" },
