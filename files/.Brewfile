@@ -11,7 +11,6 @@ tap "warrensbox/tap"
 
 # Apps
 cask "1password/tap/1password-cli"
-cask "adoptopenjdk11"
 cask "brave-browser"
 cask "discord"
 cask "docker"
