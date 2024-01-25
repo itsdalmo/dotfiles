@@ -1,4 +1,4 @@
-# ll with exa (instead of ls)
+# ll with eza (instead of ls)
 function ll
-    exa -la --icons --group-directories-first $argv
+    eza -la --icons --group-directories-first $argv
 end
