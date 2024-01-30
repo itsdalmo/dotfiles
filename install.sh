@@ -2,10 +2,9 @@
 
 set -euo pipefail
 
-declare _dotfiles_path _dotfiles_repo _dotfiles_branch
+declare _dotfiles_path _dotfiles_repo
 _dotfiles_path="${HOME}/code/github.com/itsdalmo/dotfiles"
 _dotfiles_repo="https://github.com/itsdalmo/dotfiles.git"
-_dotfiles_branch="linux-support"
 
 main() {
   printf "Installing itsdalmo/dotfiles...\n"
@@ -34,6 +33,7 @@ install_linux() {
 
   case "$_distro" in
   'pop') ;;
+  'fedora') ;;
   *)
     printf "Distro not supported.\n"
     exit 1
@@ -77,7 +77,7 @@ install_darwin() {
 clone_dotfiles() {
   if [ ! -d "${_dotfiles_path}" ]; then
     printf " * Cloning repository\n"
-    git clone -b "${_dotfiles_branch}" "${_dotfiles_repo}" "${_dotfiles_path}"
+    git clone "${_dotfiles_repo}" "${_dotfiles_path}"
   fi
 }
 
