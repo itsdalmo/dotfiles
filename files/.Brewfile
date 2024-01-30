@@ -81,4 +81,3 @@ brew "zoxide"
 
 # Mac store
 mas "Agenda", id: 1287445660
-mas "Xcode", id: 497799835
