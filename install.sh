@@ -83,10 +83,10 @@ clone_dotfiles() {
 
 link_dotfiles() {
   declare files
-  files="$(find "${DOTFILES_PATH}/files" -type f)"
+  files="$(find "${_dotfiles_path}/files" -type f)"
 
   for file in $files; do
-    local path="${file##"${DOTFILES_PATH}/files/"}"
+    local path="${file##"${_dotfiles_path}/files/"}"
     mkdir -p "$(dirname "${HOME}/${path}")"
     ln -sf "${file}" "${HOME}/${path}"
   done
