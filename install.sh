@@ -95,7 +95,7 @@ install_nix() {
   fi
 
   # Make it available in the current shell
-  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
   # Create required folder for home-manager (nix-installer does not create it).
   mkdir -p ~/.local/state/nix/profiles
