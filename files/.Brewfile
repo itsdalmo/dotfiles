@@ -4,7 +4,6 @@ tap "adoptopenjdk/openjdk"
 tap "bufbuild/buf"
 tap "go-task/tap"
 tap "goreleaser/tap"
-tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "itsdalmo/tap"
 tap "warrensbox/tap"
@@ -82,7 +81,4 @@ brew "zoxide"
 
 # Mac store
 mas "Agenda", id: 1287445660
-mas "Microsoft Excel", id: 462058435
-mas "Microsoft Powerpoint", id: 462062816
-mas "Microsoft Word", id: 462054704
 mas "Xcode", id: 497799835

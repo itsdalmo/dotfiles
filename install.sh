@@ -96,6 +96,9 @@ install_brew() {
   if ! command -v "brew" >/dev/null; then
     printf " * Installing homebrew\n"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+    printf " * Adding brew to path\n"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
   printf " * Installing brew bundle\n"
