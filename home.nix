@@ -30,6 +30,7 @@ in {
     "nvim".source = ./files/.config/nvim;
     "ideavim".source = ./files/.config/ideavim;
     "wezterm".source = ./files/.config/wezterm;
+    "alacritty".source = ./files/.config/alacritty;
 
     # The root fish config has to be managed by home-manager
     # (in order to add fzf/zoxide/etc)
