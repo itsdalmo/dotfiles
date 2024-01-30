@@ -157,7 +157,7 @@ configure_shell() {
 configure_nvim() {
   if [[ $(command -v "nvim") ]] && [ ! -d "${HOME}/.config/nvim/plugin" ]; then
     printf " * Installing nvim plugins\n"
-    nvim --headless "+Lazy! install" +qa
+    nvim --headless "+Lazy! restore" +qa
   fi
 }
 
