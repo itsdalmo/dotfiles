@@ -21,7 +21,8 @@ in {
 
   home.file = {
     ".ssh/allowed_signers".source = ./files/.ssh/allowed_signers;
-  };
+  } ++ (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ./files/.Brewfile; } else {});
+
 
   xdg.enable = true;
   xdg.configFile = {
