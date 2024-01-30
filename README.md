@@ -74,7 +74,7 @@ mkdir -p ~/.local/state/nix/profiles
 $ nix run github:nix-community/home-manager/release-23.05 -- switch --flake github:itsdalmo/dotfiles/home-manager#parallels@arm64-linux
 
 # Update system packages
-$ sudo dnf distro-sync
+$ sudo dnf upgrade
 
 # Install Jetbrains Mono and Nerdfont symbols
 $ sudo dnf install jetbrains-mono-fonts-all

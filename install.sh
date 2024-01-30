@@ -84,18 +84,8 @@ install_brew() {
     eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
-  clone_dotfiles
-  install_nix
-  # install_flake
-  # configure_shell
-  nix run github:nix-community/home-manager/release-23.11 -- switch --flake "${_dotfiles_path}#${_user}@${_arch}-${_os}"
-  configure_nvim
-
   printf " * Installing brew bundle\n"
   brew bundle install --global | sed 's/^/    ~ /'
-
-  printf " * Configuring osx\n"
-  source "${_dotfiles_path}/files/.macos"
 }
 
 install_nix() {

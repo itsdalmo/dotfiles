@@ -59,11 +59,9 @@
           system = "aarch64-linux";
           user = "dalmo";
         };
-
-        # Parallels VM (with built-in ISO)
-        "parallels@arm64-linux" = mkHome {
-          system = "aarch64-linux";
-          user = "parallels";
+        "dalmo@amd64-linux" = mkHome {
+          system = "x86_64-linux";
+          user = "dalmo";
         };
       };
 
