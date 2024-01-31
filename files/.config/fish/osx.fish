@@ -8,6 +8,3 @@ switch (uname -m)
     case x86_64
         eval (/usr/local/bin/brew shellenv)
 end
-
-# GCP
-source (brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
