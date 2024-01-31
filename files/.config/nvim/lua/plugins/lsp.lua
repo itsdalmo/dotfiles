@@ -15,18 +15,10 @@ return {
     event = "VeryLazy",
     dependencies = { "williamboman/mason.nvim" },
     opts = function()
-      local servers = require("config.lsp").servers
-      local n = 0
-
       local opts = {
         ensure_installed = {},
-        automatic_installation = true,
+        automatic_installation = false,
       }
-
-      for server, _ in pairs(servers) do
-        n = n + 1
-        opts.ensure_installed[n] = server
-      end
 
       return opts
     end,

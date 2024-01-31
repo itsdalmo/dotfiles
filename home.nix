@@ -75,6 +75,16 @@ in {
     gcc
     nodejs
 
+    # Language servers 
+    dockerfile-language-server-nodejs
+    gopls
+    lua-language-server
+    nil
+    nodePackages.vscode-json-languageserver
+    terraform-ls
+    tflint
+    yaml-language-server
+
     # Installed another way (brew/package manager):
     # vscode
 
