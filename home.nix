@@ -21,7 +21,7 @@ in {
 
   home.file = {
     ".ssh/allowed_signers".source = ./files/.ssh/allowed_signers;
-  } // (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ./files/.Brewfile; } else {});
+  } // (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ./files/.Brewfile; } else { });
 
 
   xdg.enable = true;
@@ -36,6 +36,7 @@ in {
 
     # The root fish config has to be managed by home-manager
     # (in order to add fzf/zoxide/etc)
+    "fish/osx.fish".source = ./files/.config/fish/osx.fish;
     "fish/functions".source = ./files/.config/fish/functions;
   };
 
