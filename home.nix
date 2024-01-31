@@ -5,22 +5,24 @@ in {
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
   home.stateVersion = "23.11";
 
+  home.sessionPath = [ "$HOME/bin" "$HOME/go/bin" ];
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
-    LC_CTYPE = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
+    LC_CTYPE = "en_US.UTF-8";
 
     # Could consider moving these back to fish.config?
     EDITOR = "nvim";
     PAGER = "less -FirSwX";
+    GOPATH = "$HOME/go";
     AWS_PAGER = "";
     AWS_DEFAULT_REGION = "eu-west-1";
   };
 
-  home.sessionPath = [ "$HOME/bin" ];
   home.file = {
     ".ssh/allowed_signers".source = ./files/.ssh/allowed_signers;
-  };
+  } // (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ./files/.Brewfile; } else {});
+
 
   xdg.enable = true;
   xdg.configFile = {

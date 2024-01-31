@@ -58,17 +58,11 @@ install_darwin() {
   fi
 
   clone_dotfiles
-  link_dotfiles
   install_brew
+  install_nix
+  install_flake
   configure_shell
   configure_nvim
-
-  # Add fzf to fish
-  sudo -k # Revoke sudo permissions
-  if [[ $(command -v "fzf") && $(command -v "homebrew") ]] && [ ! -f ~/.config/fish/functions/fzf_key_bindings.fish ]; then
-    printf " * Installing FZF keybindings\n"
-    yes | "$(brew --prefix)"/opt/fzf/install
-  fi
 
   printf " * Configuring osx\n"
   source "${_dotfiles_path}/files/.macos"
@@ -79,17 +73,6 @@ clone_dotfiles() {
     printf " * Cloning repository\n"
     git clone "${_dotfiles_repo}" "${_dotfiles_path}"
   fi
-}
-
-link_dotfiles() {
-  declare files
-  files="$(find "${_dotfiles_path}/files" -type f)"
-
-  for file in $files; do
-    local path="${file##"${_dotfiles_path}/files/"}"
-    mkdir -p "$(dirname "${HOME}/${path}")"
-    ln -sf "${file}" "${HOME}/${path}"
-  done
 }
 
 install_brew() {
@@ -109,10 +92,10 @@ install_nix() {
   if ! command -v "nix" >/dev/null; then
     printf " * Installing nix\n"
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-  fi
 
-  # Make it available in the current shell
-  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    # Make it available in the current shell
+    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  fi
 
   # Create required folder for home-manager (nix-installer does not create it).
   mkdir -p ~/.local/state/nix/profiles
