@@ -94,7 +94,9 @@ install_nix() {
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
     # Make it available in the current shell
+    set +u
     source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    set -u
   fi
 
   # Create required folder for home-manager (nix-installer does not create it).
