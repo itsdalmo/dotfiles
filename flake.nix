@@ -45,7 +45,6 @@
     in
     {
       formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
-      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
 
       homeConfigurations = {
         "dalmo@arm64-darwin" = mkHome {
