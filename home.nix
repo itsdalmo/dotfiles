@@ -37,6 +37,7 @@ in {
     # The root fish config has to be managed by home-manager
     # (in order to add fzf/zoxide/etc)
     "fish/osx.fish".source = ./files/.config/fish/osx.fish;
+    "fish/linux.fish".source = ./files/.config/fish/linux.fish;
     "fish/functions".source = ./files/.config/fish/functions;
   };
 
@@ -120,13 +121,6 @@ in {
     shellInit = builtins.readFile ./files/.config/fish/config.fish;
   };
 
-  programs.direnv = {
-    enable = true;
-
-    # Read-only as it is enabled by default:
-    # enableFishIntegration = true;
-  };
-
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
@@ -137,5 +131,12 @@ in {
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  programs.direnv = {
+    enable = true;
+
+    # Read-only as it is enabled by default:
+    # enableFishIntegration = true;
   };
 }

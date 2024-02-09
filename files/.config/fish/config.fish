@@ -21,4 +21,6 @@ abbr -a awsv 'aws-vault exec'
 switch (uname)
     case Darwin
         source (dirname (status --current-filename))/osx.fish
+    case Linux
+        source (dirname (status --current-filename))/linux.fish
 end
