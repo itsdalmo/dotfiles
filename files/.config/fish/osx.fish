@@ -8,3 +8,8 @@ switch (uname -m)
     case x86_64
         eval (/usr/local/bin/brew shellenv)
 end
+
+# Jetbrains toolbox
+if test -d "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+    fish_add_path "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+end
