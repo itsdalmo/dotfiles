@@ -1,11 +1,10 @@
 {
-  description = "development environment using nix (for itsdalmo)";
+  description = "Nix as a package manager";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -16,17 +15,7 @@
       mkPkgs = system: import nixpkgs {
         inherit system;
         config = { allowUnfree = true; };
-        overlays = [
-          (import ./nix/overlays)
-          (final: prev:
-            let
-              unstable = import inputs.unstable { system = prev.system; config = prev.config; };
-            in
-            {
-              # Use some packages from unstable
-              neovim = unstable.neovim;
-            })
-        ];
+        overlays = [ (import ./nix/overlays) ];
       };
 
       # Create home-manager configuration for system/user.
