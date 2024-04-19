@@ -32,8 +32,9 @@ install_linux() {
   _distro=$(grep -oP '(?<=^ID=).*' /etc/os-release)
 
   case "$_distro" in
-  'pop') ;;
   'fedora') ;;
+  'pop') ;;
+  'ubuntu') ;;
   *)
     printf "Distro not supported.\n"
     exit 1
