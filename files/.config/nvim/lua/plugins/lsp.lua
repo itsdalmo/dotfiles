@@ -71,10 +71,10 @@ return {
 
         map("n", "<localleader>k", vim.lsp.buf.hover, "Hover")
         map("n", "<localleader>d", vim.diagnostic.open_float, "Line Diagnostics")
-        map("n", "<localleader>gr", "<cmd>Telescope lsp_references<cr>", "References")
+        map("n", "<localleader>gr", "<cmd>Trouble lsp_references<cr>", "References")
         map("n", "<localleader>gD", vim.lsp.buf.declaration, "Goto Declaration")
-        map("n", "<localleader>gi", "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation")
-        map("n", "<localleader>gt", "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition")
+        map("n", "<localleader>gi", "<cmd>Trouble lsp_implementations<cr>", "Goto Implementation")
+        map("n", "<localleader>gt", "<cmd>Trouble lsp_type_definitions<cr>", "Goto Type Definition")
 
         map("n", "]d", utils.diagnostic_goto(true), "Next Diagnostic")
         map("n", "[d", utils.diagnostic_goto(false), "Prev Diagnostic")
@@ -96,7 +96,7 @@ return {
         end
 
         if client.server_capabilities.definitionProvider then
-          map("n", "<localleader>gd", "<cmd>Telescope lsp_definitions<cr>", "Goto Definition")
+          map("n", "<localleader>gd", "<cmd>Trouble lsp_definitions<cr>", "Goto Definition")
         end
 
         local forced_format = function()

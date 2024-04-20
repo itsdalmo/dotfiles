@@ -93,18 +93,18 @@ end
 function M.keymap_on_attach(client, bufnr)
   vim.keymap.set("n", "<localleader>k", vim.lsp.buf.hover, { desc = "Hover", buffer = bufnr })
   vim.keymap.set("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics", buffer = bufnr })
-  vim.keymap.set("n", "<localleader>gr", "<cmd>Telescope lsp_references<cr>", { desc = "References", buffer = bufnr })
+  vim.keymap.set("n", "<localleader>gr", "<cmd>Trouble lsp_references<cr>", { desc = "References", buffer = bufnr })
   vim.keymap.set("n", "<localleader>gD", vim.lsp.buf.declaration, { desc = "Goto Declaration", buffer = bufnr })
   vim.keymap.set(
     "n",
     "<localleader>gi",
-    "<cmd>Telescope lsp_implementations<cr>",
+    "<cmd>Trouble lsp_implementations<cr>",
     { desc = "Goto Implementation", buffer = bufnr }
   )
   vim.keymap.set(
     "n",
     "<localleader>gt",
-    "<cmd>Telescope lsp_type_definitions<cr>",
+    "<cmd>Trouble lsp_type_definitions<cr>",
     { desc = "Goto Type Definition", buffer = bufnr }
   )
 
@@ -131,7 +131,7 @@ function M.keymap_on_attach(client, bufnr)
     vim.keymap.set(
       "n",
       "<localleader>gd",
-      "<cmd>Telescope lsp_definitions<cr>",
+      "<cmd>Trouble lsp_definitions<cr>",
       { desc = "Goto Definition", buffer = bufnr }
     )
   end
