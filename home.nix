@@ -1,4 +1,4 @@
-{ user, pkgs, ... }:
+{ config, user, pkgs, ... }:
 let nerdfonts = pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; };
 in {
   home.username = user;
@@ -30,10 +30,13 @@ in {
     "fd".source = ./files/.config/fd;
     "git".source = ./files/.config/git;
     "nix".source = ./files/.config/nix;
-    "nvim".source = ./files/.config/nvim;
     "ideavim".source = ./files/.config/ideavim;
     "wezterm".source = ./files/.config/wezterm;
     "alacritty".source = ./files/.config/alacritty;
+
+
+    # Neovim has to be writeable since we use lazyvim to install plugins
+    "nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/code/github.com/itsdalmo/dotfiles/files/.config/nvim";
 
     # The root fish config has to be managed by home-manager
     # (in order to add fzf/zoxide/etc)
