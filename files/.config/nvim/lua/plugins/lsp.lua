@@ -138,6 +138,31 @@ return {
     end,
   },
 
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local lint = require("lint")
+
+      lint.linters_by_ft = {
+        fish = { "fish" },
+        proto = { "buf_lint" },
+        sh = { "shellcheck" },
+
+        -- TODO: Move to lsp?
+        go = { "golangcilint" },
+      }
+
+      local group = vim.api.nvim_create_augroup("lint", { clear = true })
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+        group = group,
+        callback = function()
+          require("lint").try_lint()
+        end,
+      })
+    end,
+  },
+
   -- NOTE: null-ls executables are installed by Homebrew.
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -147,13 +172,6 @@ return {
       return {
         root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
         sources = {
-          nls.builtins.diagnostics.buf,
-          nls.builtins.diagnostics.fish,
-          -- Issue with workspaces: https://github.com/golangci/golangci-lint/issues/2654
-          nls.builtins.diagnostics.golangci_lint,
-          nls.builtins.diagnostics.jsonlint,
-          nls.builtins.diagnostics.shellcheck,
-          nls.builtins.diagnostics.terraform_validate,
           nls.builtins.formatting.buf,
           nls.builtins.formatting.fish_indent,
           nls.builtins.formatting.prettier.with({

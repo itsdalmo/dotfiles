@@ -48,6 +48,7 @@ in {
   home.packages = with pkgs; [
     aws-vault
     awscli2
+    buf
     eza
     fd
     gh
@@ -100,7 +101,6 @@ in {
 
     # Use nix.shell instead:
     # apache-maven
-    # buf
     # helm
     # hugo
     # kubectl
