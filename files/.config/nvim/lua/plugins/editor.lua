@@ -77,22 +77,6 @@ return {
     },
   },
 
-  -- magit for neovim
-  {
-    "NeogitOrg/neogit",
-    cmd = { "Neogit" },
-    keys = {
-      { "<leader>gs", "<cmd>Neogit<cr>", desc = "Status" },
-    },
-    opts = {
-      integrations = {
-        diffview = false,
-      },
-    },
-    config = function(_, opts)
-      require("neogit").setup(opts)
-    end,
-  },
   -- git signs
   {
     "lewis6991/gitsigns.nvim",
