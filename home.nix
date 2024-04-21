@@ -65,15 +65,14 @@ in {
     lazygit
     neovim
     nerdfonts
-    nodePackages.jsonlint
     nodePackages.prettier
     ripgrep
     shellcheck
     shfmt
     stylua
     tfcheck
-    tflint
     tfswitch
+    typescript
     yubikey-manager
 
     # Mason/TS dependencies (neovim)
@@ -86,10 +85,11 @@ in {
     gopls
     lua-language-server
     nil
-    nodePackages.vscode-json-languageserver
     terraform-ls
     tflint
+    vscode-langservers-extracted # markdown, eslint, css, json, html
     yaml-language-server
+    nodePackages.typescript-language-server
 
     # Installed another way (brew/package manager):
     # vscode

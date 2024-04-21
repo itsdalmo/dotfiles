@@ -1,36 +1,9 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    event = "VeryLazy",
-    build = ":MasonUpdate", -- :MasonUpdate updates registry contents
-    config = function(_, opts)
-      require("mason").setup(opts)
-    end,
-  },
-
-  -- NOTE: Installed servers are defined in config/lsp.lua
-  {
-    "williamboman/mason-lspconfig.nvim",
-    event = "VeryLazy",
-    dependencies = { "williamboman/mason.nvim" },
-    opts = function()
-      local opts = {
-        ensure_installed = {},
-        automatic_installation = false,
-      }
-
-      return opts
-    end,
-  },
-
   -- NOTE: Server configuration are defined in config/lsp.lua
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
     opts = {
@@ -92,7 +65,6 @@ return {
         end
       end)
 
-      -- server setup (must be installed with mason-lspconfig)
       local capabilities = vim.tbl_deep_extend(
         "force",
         {},
