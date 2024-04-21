@@ -56,7 +56,7 @@ return {
       -- diagnostics
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-      -- signs
+      -- signs --TODO: These need to be set irrespective of the LSP now?
       for name, icon in pairs(require("config.icons").diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
@@ -70,18 +70,10 @@ return {
         end
 
         map("n", "<localleader>k", vim.lsp.buf.hover, "Hover")
-        map("n", "<localleader>d", vim.diagnostic.open_float, "Line Diagnostics")
         map("n", "<localleader>gr", "<cmd>Trouble lsp_references<cr>", "References")
         map("n", "<localleader>gD", vim.lsp.buf.declaration, "Goto Declaration")
         map("n", "<localleader>gi", "<cmd>Trouble lsp_implementations<cr>", "Goto Implementation")
         map("n", "<localleader>gt", "<cmd>Trouble lsp_type_definitions<cr>", "Goto Type Definition")
-
-        map("n", "]d", utils.diagnostic_goto(true), "Next Diagnostic")
-        map("n", "[d", utils.diagnostic_goto(false), "Prev Diagnostic")
-        map("n", "]w", utils.diagnostic_goto(true, "WARN"), "Next Warning")
-        map("n", "[w", utils.diagnostic_goto(false, "WARN"), "Prev Warning")
-        map("n", "]e", utils.diagnostic_goto(true, "ERROR"), "Next Error")
-        map("n", "[e", utils.diagnostic_goto(false, "ERROR"), "Prev Error")
 
         if client.server_capabilities.codeActionProvider then
           map({ "n", "v" }, "<localleader>.", vim.lsp.buf.code_action, "Code Action")
@@ -97,27 +89,6 @@ return {
 
         if client.server_capabilities.definitionProvider then
           map("n", "<localleader>gd", "<cmd>Trouble lsp_definitions<cr>", "Goto Definition")
-        end
-
-        local forced_format = function()
-          utils.format({ force = true })
-        end
-
-        if client.server_capabilities.documentFormattingProvider then
-          map("n", "<localleader>=", forced_format, "Format Document")
-
-          -- Enable automatic formatting
-          if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              group = vim.api.nvim_create_augroup("LspFormat." .. bufnr, {}),
-              buffer = bufnr,
-              callback = utils.format,
-            })
-          end
-        end
-
-        if client.server_capabilities.documentRangeFormattingProvider then
-          map("v", "<localleader>=", forced_format, "Format Range")
         end
       end)
 
@@ -146,11 +117,9 @@ return {
 
       lint.linters_by_ft = {
         fish = { "fish" },
+        go = { "golangcilint" }, -- TODO: Move to lsp?
         proto = { "buf_lint" },
         sh = { "shellcheck" },
-
-        -- TODO: Move to lsp?
-        go = { "golangcilint" },
       }
 
       local group = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -163,29 +132,33 @@ return {
     end,
   },
 
-  -- NOTE: null-ls executables are installed by Homebrew.
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
-        sources = {
-          nls.builtins.formatting.buf,
-          nls.builtins.formatting.fish_indent,
-          nls.builtins.formatting.prettier.with({
-            -- Single quote is a string literal and is a better default
-            extra_args = { "--single-quote" },
-          }),
-          nls.builtins.formatting.shfmt,
-          nls.builtins.formatting.stylua,
-          nls.builtins.formatting.terraform_fmt.with({
-            -- Using terraformls to format actual terraform files
-            filetypes = { "hcl" },
-          }),
-        },
-      }
-    end,
+    opts = {
+      format = {
+        timeout_ms = 3000,
+        async = false,
+        quiet = false,
+        lsp_fallback = true,
+      },
+      formatters_by_ft = {
+        fish = { "fish_indent" },
+        hcl = { "terraform_fmt" },
+        lua = { "stylua" },
+        proto = { "buf" },
+        sh = { "shfmt" },
+      },
+    },
+    keys = {
+      {
+        "<localleader>=",
+        function()
+          require("utils").format({ force = true })
+        end,
+      },
+    },
+    -- TODO: Create the autocmd during config?
+    config = true,
   },
 }

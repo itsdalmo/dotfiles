@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 local function map(mode, shortcut, command, opts)
   opts = opts or {}
   opts = vim.tbl_deep_extend("keep", opts, { noremap = true })
@@ -29,6 +31,15 @@ map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
 -- LSP
 map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "Info" })
 map("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart" })
+
+-- Diagnostics
+map("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "]d", utils.diagnostic_goto(true), { desc = "Next Diagnostic" })
+map("n", "[d", utils.diagnostic_goto(false), { desc = "Prev Diagnostic" })
+map("n", "]w", utils.diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+map("n", "[w", utils.diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+map("n", "]e", utils.diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+map("n", "[e", utils.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 
 -- Lazygit
 map("n", "<leader>gg", function()
