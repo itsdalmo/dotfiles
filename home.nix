@@ -22,6 +22,7 @@ in {
   home.file = {
     ".ssh/config".source = ./files/.ssh/config;
     ".ssh/allowed_signers".source = ./files/.ssh/allowed_signers;
+    ".ssh/authorized_keys".source = ./files/.ssh/authorized_keys;
   } // (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ./files/.Brewfile; } else { });
 
 
