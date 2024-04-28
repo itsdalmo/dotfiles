@@ -19,12 +19,29 @@ in {
     AWS_DEFAULT_REGION = "eu-west-1";
   };
 
-  home.file = {
-    ".ssh/config".source = ./files/.ssh/config;
-    ".ssh/allowed_signers".source = ./files/.ssh/allowed_signers;
-    ".ssh/authorized_keys".source = ./files/.ssh/authorized_keys;
-  } // (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ./files/.Brewfile; } else { });
-
+  # FIXME: Workaround since we cannot set the correct mode on symlinks (see SO answer):
+  # https://github.com/nix-community/home-manager/issues/322#issuecomment-1856128020
+  home.file =
+    let
+      files = [
+        { path = ./files/.ssh/config; permissions = "600"; }
+        { path = ./files/.ssh/allowed_signers; permissions = "644"; }
+        { path = ./files/.ssh/authorized_keys; permissions = "600"; }
+      ];
+      copy = file:
+        let
+          filename = builtins.baseNameOf file.path;
+          permission = file.permissions;
+        in
+        {
+          name = ".ssh/${filename}_source";
+          value = {
+            source = file.path;
+            onChange = ''cat ~/.ssh/${filename}_source > ~/.ssh/${filename} && chmod ${permission} ~/.ssh/${filename}'';
+          };
+        };
+    in
+    builtins.listToAttrs (map copy files) // (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ./files/.Brewfile; } else { });
 
   xdg.enable = true;
   xdg.configFile = {
