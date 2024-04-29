@@ -88,6 +88,7 @@ return {
       local lint = require("lint")
 
       lint.linters_by_ft = {
+        bzl = { "buildifier" },
         fish = { "fish" },
         go = { "golangcilint" }, -- TODO: Move to lsp?
         proto = { "buf_lint" },
@@ -115,6 +116,7 @@ return {
         lsp_fallback = true,
       },
       formatters_by_ft = {
+        bzl = { "buildifier" },
         fish = { "fish_indent" },
         hcl = { "terraform_fmt" },
         lua = { "stylua" },
