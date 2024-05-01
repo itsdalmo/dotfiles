@@ -1,9 +1,9 @@
 # Taps
-tap "1password/tap"
 tap "homebrew/cask-fonts"
 
 # Apps
-cask "1password/tap/1password-cli"
+# cask "1password"
+cask "1password-cli"
 cask "brave-browser"
 cask "discord"
 cask "docker"
@@ -30,3 +30,4 @@ brew "mas"
 # Mac store
 mas "Agenda", id: 1287445660
 mas "Bear Markdown Notes", id: 1091189122
+mas "Tailscale", id: 1475387142
