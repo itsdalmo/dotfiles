@@ -28,6 +28,7 @@ cask "webex"
 brew "mas"
 
 # Mac store
+mas "AdGuard for Safari", id: 1440147259
 mas "Agenda", id: 1287445660
 mas "Bear Markdown Notes", id: 1091189122
 mas "Tailscale", id: 1475387142
