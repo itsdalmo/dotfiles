@@ -120,8 +120,10 @@ return {
         fish = { "fish_indent" },
         hcl = { "terraform_fmt" },
         lua = { "stylua" },
+        markdown = { "prettier" },
         proto = { "buf" },
         sh = { "shfmt" },
+        yaml = { "prettier" },
       },
     },
     keys = {
