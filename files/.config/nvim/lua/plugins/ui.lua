@@ -138,14 +138,14 @@ return {
           theme = "auto",
           globalstatus = true,
           icons_enabled = true,
-          component_separators = "|",
-          section_separators = "",
+          component_separators = "",
+          section_separators = { left = "", right = "" }, -- left = ""
           disabled_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
           lualine_a = { "mode" },
           lualine_b = {
-            { "branch", icon = "" },
+            { "branch" }, -- icon = ""
             {
               "diff",
               colored = false,
@@ -159,10 +159,10 @@ return {
           lualine_c = {
             { "filename", path = 1, file_status = false, newfile_status = false },
             -- stylua: ignore
-            {
-              function() return require("nvim-navic").get_location() end,
-              cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
-            },
+            -- {
+            --   function() return require("nvim-navic").get_location() end,
+            --   cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
+            -- },
           },
           lualine_x = {
             {
@@ -204,25 +204,25 @@ return {
     end,
   },
 
-  -- lsp symbol navigation for lualine
-  {
-    "SmiteshP/nvim-navic",
-    lazy = true,
-    init = function()
-      vim.g.navic_silence = true
-      require("utils").lsp_attach_autocmd(function(client, buffer)
-        if client.server_capabilities.documentSymbolProvider then
-          require("nvim-navic").attach(client, buffer)
-        end
-      end)
-    end,
-    opts = function()
-      return {
-        separator = " ",
-        highlight = true,
-        depth_limit = 5,
-        icons = require("config.icons").kinds,
-      }
-    end,
-  },
+  -- -- lsp symbol navigation for lualine
+  -- {
+  --   "SmiteshP/nvim-navic",
+  --   lazy = true,
+  --   init = function()
+  --     vim.g.navic_silence = true
+  --     require("utils").lsp_attach_autocmd(function(client, buffer)
+  --       if client.server_capabilities.documentSymbolProvider then
+  --         require("nvim-navic").attach(client, buffer)
+  --       end
+  --     end)
+  --   end,
+  --   opts = function()
+  --     return {
+  --       separator = " ",
+  --       highlight = true,
+  --       depth_limit = 5,
+  --       icons = require("config.icons").kinds,
+  --     }
+  --   end,
+  -- },
 }
