@@ -108,24 +108,6 @@ return {
   {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      format = {
-        timeout_ms = 3000,
-        async = false,
-        quiet = false,
-        lsp_fallback = true,
-      },
-      formatters_by_ft = {
-        bzl = { "buildifier" },
-        fish = { "fish_indent" },
-        hcl = { "terraform_fmt" },
-        lua = { "stylua" },
-        markdown = { "prettier" },
-        proto = { "buf" },
-        sh = { "shfmt" },
-        yaml = { "prettier" },
-      },
-    },
     keys = {
       {
         "<localleader>=",
@@ -134,7 +116,37 @@ return {
         end,
       },
     },
-    -- TODO: Create the autocmd during config?
-    config = true,
+    opts = {
+      format = {
+        timeout_ms = 3000,
+        async = false,
+        quiet = false,
+        lsp_fallback = true,
+      },
+      formatters = {
+        injected = {
+          options = {
+            ignore_errors = true,
+            lang_to_ext = {
+              bash = "sh",
+            },
+            lang_to_formatters = {
+              bash = { "shfmt" },
+            },
+          },
+        },
+      },
+      formatters_by_ft = {
+        bzl = { "buildifier" },
+        fish = { "fish_indent" },
+        hcl = { "terraform_fmt" },
+        lua = { "stylua" },
+        go = { "gofumpt" },
+        markdown = { "prettier", "injected" },
+        proto = { "buf" },
+        sh = { "shfmt" },
+        yaml = { "prettier" },
+      },
+    },
   },
 }

@@ -1,7 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
-  version = false,
+  branch = "0.1.x",
   dependencies = {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",

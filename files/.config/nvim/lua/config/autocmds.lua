@@ -8,7 +8,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
-  callback = function(args)
+  callback = function()
     require("utils").format({})
   end,
 })
+
+-- vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+--   pattern = "*",
+--   callback = function()
+--     if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
+--       vim.bo.filetype = "gotmpl"
+--     end
+--   end,
+-- })

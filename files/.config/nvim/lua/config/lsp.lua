@@ -8,10 +8,10 @@ M.servers = {
     },
   },
   gopls = {
+    filetypes = { "go", "gomod", "gowork", "gotmpl", "gohtml" },
     settings = {
       gopls = {
-        ["gofumpt"] = true,
-        ["local"] = "github.com/itsdalmo,github.com/telia-oss",
+        templateExtensions = { "gotmpl", "gohtml" },
       },
     },
   },
@@ -49,7 +49,11 @@ M.servers = {
       completions = { completeFunctionCalls = true },
     },
   },
-  yamlls = { settings = { yaml = { keyOrdering = false } } },
+  yamlls = {
+    settings = {
+      yaml = { keyOrdering = false },
+    },
+  },
 }
 
 return M

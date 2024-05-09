@@ -25,6 +25,7 @@ return {
       "gitignore",
       "go",
       "gomod",
+      "gosum",
       "gowork",
       "hcl",
       "html",
@@ -89,5 +90,6 @@ return {
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
+    vim.treesitter.language.register("html", "gohtml")
   end,
 }

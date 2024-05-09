@@ -103,11 +103,11 @@ in {
     gopls
     lua-language-server
     nil
+    nodePackages.typescript-language-server
     terraform-ls
     tflint
     vscode-langservers-extracted # markdown, eslint, css, json, html
     yaml-language-server
-    nodePackages.typescript-language-server
 
     # Installed another way (brew/package manager):
     # vscode
