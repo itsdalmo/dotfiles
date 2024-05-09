@@ -83,7 +83,9 @@ in {
     lazygit
     neovim
     nerdfonts
+    nixpkgs-fmt
     nodePackages.prettier
+    nodePackages.sql-formatter
     ripgrep
     shellcheck
     shfmt

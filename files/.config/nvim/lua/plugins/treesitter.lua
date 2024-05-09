@@ -42,6 +42,7 @@ return {
       "python",
       "query",
       "regex",
+      "sql",
       "terraform",
       "toml",
       "tsx",
