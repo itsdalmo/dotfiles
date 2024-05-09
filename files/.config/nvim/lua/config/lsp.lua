@@ -15,7 +15,9 @@ M.servers = {
       },
     },
   },
-  html = {},
+  html = {
+    filetypes = { "html", "gohtml" },
+  },
   cssls = {},
   jsonls = {},
   nil_ls = {},
