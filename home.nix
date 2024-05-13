@@ -66,7 +66,6 @@ in {
   home.packages = with pkgs; [
     aws-vault
     awscli2
-    buf
     eza
     fd
     gh
@@ -74,23 +73,13 @@ in {
     gnumake
     go
     go-task
-    gofumpt
-    golangci-lint
     goreleaser
     jetbrains-mono
     jq
-    kics
     lazygit
     neovim
     nerdfonts
-    nixpkgs-fmt
-    nodePackages.prettier
-    nodePackages.sql-formatter
     ripgrep
-    shellcheck
-    shfmt
-    stylua
-    tfcheck
     tfswitch
     typescript
     yubikey-manager
@@ -100,13 +89,23 @@ in {
     gcc
     nodejs
 
-    # Language servers 
+    # LSPs/linters/formatters
+    buf
     dockerfile-language-server-nodejs
+    gofumpt
+    golangci-lint
     gopls
+    kics
     lua-language-server
     nil
+    nixpkgs-fmt
+    nodePackages.prettier
     nodePackages.typescript-language-server
+    shellcheck
+    shfmt
+    stylua
     terraform-ls
+    tfcheck
     tflint
     vscode-langservers-extracted # markdown, eslint, css, json, html
     yaml-language-server
