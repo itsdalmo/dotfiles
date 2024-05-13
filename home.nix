@@ -24,20 +24,16 @@ in {
   home.file =
     let
       files = [
-        { path = ./files/.ssh/config; permissions = "600"; }
-        { path = ./files/.ssh/allowed_signers; permissions = "644"; }
-        { path = ./files/.ssh/authorized_keys; permissions = "600"; }
+        { name = ".ssh/config"; permissions = "600"; }
+        { name = ".ssh/allowed_signers"; permissions = "644"; }
+        { name = ".ssh/authorized_keys"; permissions = "600"; }
       ];
       copy = file:
-        let
-          filename = builtins.baseNameOf file.path;
-          permission = file.permissions;
-        in
         {
-          name = ".ssh/${filename}_source";
+          name = file.name + "_source";
           value = {
-            source = file.path;
-            onChange = ''cat ~/.ssh/${filename}_source > ~/.ssh/${filename} && chmod ${permission} ~/.ssh/${filename}'';
+            source = ./files + ("/" + file.name);
+            onChange = ''cp $HOME/${file.name}_source $HOME/${file.name} && chmod ${file.permissions} $HOME/${file.name}'';
           };
         };
     in
@@ -51,7 +47,6 @@ in {
     "ideavim".source = ./files/.config/ideavim;
     "wezterm".source = ./files/.config/wezterm;
     "alacritty".source = ./files/.config/alacritty;
-
 
     # Neovim has to be writeable since we use lazyvim to install plugins
     "nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/code/github.com/itsdalmo/dotfiles/files/.config/nvim";
