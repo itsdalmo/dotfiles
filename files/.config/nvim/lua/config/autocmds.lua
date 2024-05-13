@@ -12,12 +12,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     require("utils").format({})
   end,
 })
-
--- vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
---   pattern = "*",
---   callback = function()
---     if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
---       vim.bo.filetype = "gotmpl"
---     end
---   end,
--- })
