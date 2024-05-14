@@ -52,6 +52,7 @@ cfg.keys = {
   { key = "c", mods = super, action = act.CopyTo("Clipboard") },
   { key = "v", mods = super, action = act.PasteFrom("Clipboard") },
   { key = "f", mods = super, action = act.Search("CurrentSelectionOrEmptyString") },
+  { key = "x", mods = super, action = act.ActivateCopyMode },
 
   -- Tabs
   { key = "t", mods = super, action = act.SpawnTab("CurrentPaneDomain") },
@@ -107,6 +108,28 @@ cfg.key_tables = {
     { key = "Enter", mods = "SHIFT", action = act.CopyMode("NextMatch") },
     { key = "r", mods = "SHIFT", action = act.CopyMode("CycleMatchType") },
     { key = "c", mods = "SHIFT", action = act.CopyMode("ClearPattern") },
+  },
+  copy_mode = {
+    { key = "Escape", action = act.CopyMode("Close") },
+    { key = "q", mods = "NONE", action = act.CopyMode("Close") },
+    { key = "h", mods = "NONE", action = act.CopyMode("MoveLeft") },
+    { key = "j", mods = "NONE", action = act.CopyMode("MoveDown") },
+    { key = "k", mods = "NONE", action = act.CopyMode("MoveUp") },
+    { key = "l", mods = "NONE", action = act.CopyMode("MoveRight") },
+    { key = "v", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
+    { key = "V", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Line" }) },
+    { key = "w", mods = "NONE", action = act.CopyMode("MoveForwardWord") },
+    { key = "e", mods = "NONE", action = act.CopyMode("MoveForwardWordEnd") },
+    { key = "b", mods = "NONE", action = act.CopyMode("MoveBackwardWord") },
+    { key = "0", mods = "NONE", action = act.CopyMode("MoveToStartOfLine") },
+    { key = "$", mods = "NONE", action = act.CopyMode("MoveToEndOfLineContent") },
+    { key = "d", mods = "CTRL", action = act.CopyMode({ MoveByPage = 0.5 }) },
+    { key = "u", mods = "CTRL", action = act.CopyMode({ MoveByPage = -0.5 }) },
+    {
+      key = "y",
+      mods = "NONE",
+      action = act.Multiple({ { CopyTo = "ClipboardAndPrimarySelection" }, { CopyMode = "Close" } }),
+    },
   },
 }
 
