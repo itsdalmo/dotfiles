@@ -51,6 +51,7 @@ cfg.keys = {
   { key = "r", mods = super, action = act.ReloadConfiguration },
   { key = "c", mods = super, action = act.CopyTo("Clipboard") },
   { key = "v", mods = super, action = act.PasteFrom("Clipboard") },
+  { key = "f", mods = super, action = act.Search("CurrentSelectionOrEmptyString") },
 
   -- Tabs
   { key = "t", mods = super, action = act.SpawnTab("CurrentPaneDomain") },
@@ -90,18 +91,22 @@ cfg.keys = {
 
 cfg.key_tables = {
   resize_pane = {
+    { key = "Escape", action = "PopKeyTable" },
     { key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
     { key = "l", action = act.AdjustPaneSize({ "Right", 1 }) },
     { key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
     { key = "j", action = act.AdjustPaneSize({ "Down", 1 }) },
-
     { key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 1 }) },
     { key = "RightArrow", action = act.AdjustPaneSize({ "Right", 1 }) },
     { key = "UpArrow", action = act.AdjustPaneSize({ "Up", 1 }) },
     { key = "DownArrow", action = act.AdjustPaneSize({ "Down", 1 }) },
-
-    -- Cancel the mode by pressing escape
-    { key = "Escape", action = "PopKeyTable" },
+  },
+  search_mode = {
+    { key = "Escape", action = act.CopyMode("Close") },
+    { key = "Enter", action = act.CopyMode("PriorMatch") },
+    { key = "Enter", mods = "SHIFT", action = act.CopyMode("NextMatch") },
+    { key = "r", mods = "SHIFT", action = act.CopyMode("CycleMatchType") },
+    { key = "c", mods = "SHIFT", action = act.CopyMode("ClearPattern") },
   },
 }
 
