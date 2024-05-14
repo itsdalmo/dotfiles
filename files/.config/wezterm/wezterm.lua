@@ -76,6 +76,7 @@ cfg.keys = {
   { key = "j", mods = super, action = act.ActivatePaneDirection("Down") },
 
   -- Zoom
+  { key = "z", mods = super, action = act.TogglePaneZoomState },
   { key = "+", mods = super, action = act.IncreaseFontSize },
   { key = "-", mods = super, action = act.DecreaseFontSize },
   { key = "0", mods = super, action = act.ResetFontSize },
