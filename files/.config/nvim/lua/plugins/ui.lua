@@ -68,38 +68,48 @@ return {
     end,
   },
 
+  -- dashboard/splash screen when opening nvim
   {
-    -- dashboard/splash screen when opening nvim
-    "goolord/alpha-nvim",
+    "echasnovski/mini.starter",
     event = "VimEnter",
-    opts = function()
-      local dashboard = require("alpha.themes.dashboard")
+    config = function()
+      local starter = require("mini.starter")
 
-      -- setup footer
-      local function footer()
-        local datetime = os.date("%Y/%m/%d %H:%M:%S")
-        return datetime
-      end
-
-      -- menu
-      dashboard.section.buttons.val = {
-        dashboard.button("n", " New file", "<cmd>ene <BAR> startinsert<CR>"),
-        dashboard.button("f", " Find file", "<cmd> Telescope find_files hidden=true<CR>"),
-        dashboard.button(
-          "r",
-          "  Recent files",
-          ':lua require("telescope.builtin").oldfiles({ only_cwd = true })<CR>'
-        ),
-        dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
-        dashboard.button("l", "󰒲 " .. " Lazy", "<cmd>Lazy<CR>"),
-        dashboard.button("q", " Quit", "<cmd>qa<CR>"),
-      }
-
-      dashboard.section.footer.val = footer()
-      return dashboard
-    end,
-    config = function(_, dashboard)
-      require("alpha").setup(dashboard.opts)
+      starter.setup({
+        items = {
+          {
+            name = "New file",
+            action = "enew | startinsert",
+            section = "Actions",
+          },
+          {
+            name = "Find file",
+            action = "Telescope find_files hidden=true",
+            section = "Actions",
+          },
+          {
+            name = "Recent files",
+            action = 'lua require("telescope.builtin").oldfiles({ only_cwd = true })',
+            section = "Actions",
+          },
+          {
+            name = "Session restore",
+            action = 'lua require("persistence").load()',
+            section = "Actions",
+          },
+          {
+            name = "Lazy",
+            action = "Lazy",
+            section = "Actions",
+          },
+          {
+            name = "Quit",
+            action = "qa",
+            section = "Actions",
+          },
+        },
+        footer = "",
+      })
     end,
   },
 
