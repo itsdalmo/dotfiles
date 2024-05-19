@@ -168,7 +168,7 @@ return {
             { "filetype", colored = false },
           },
         },
-        extensions = { "neo-tree", "lazy" },
+        extensions = { "lazy" },
       }
     end,
   },
