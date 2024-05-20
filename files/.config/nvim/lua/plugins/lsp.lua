@@ -110,10 +110,10 @@ return {
         end
 
         map("n", "<localleader>k", vim.lsp.buf.hover, "Hover")
-        map("n", "<localleader>gr", "<cmd>Trouble lsp_references<cr>", "References")
-        map("n", "<localleader>gD", vim.lsp.buf.declaration, "Goto Declaration")
-        map("n", "<localleader>gi", "<cmd>Trouble lsp_implementations<cr>", "Goto Implementation")
-        map("n", "<localleader>gt", "<cmd>Trouble lsp_type_definitions<cr>", "Goto Type Definition")
+        map("n", "<localleader>gr", [[<cmd>Pick lsp scope="references"<cr>]], "References")
+        map("n", "<localleader>gD", [[<cmd>Pick lsp scope="declaration"<cr>]], "Goto Declaration")
+        map("n", "<localleader>gi", [[<cmd>Pick lsp scope="implementation"<cr>]], "Goto Implementation")
+        map("n", "<localleader>gt", [[<cmd>Pick lsp scope="type_definition"<cr>]], "Goto Type Definition")
 
         if client.server_capabilities.codeActionProvider then
           map({ "n", "v" }, "<localleader>.", vim.lsp.buf.code_action, "Code Action")
@@ -128,7 +128,7 @@ return {
         end
 
         if client.server_capabilities.definitionProvider then
-          map("n", "<localleader>gd", "<cmd>Trouble lsp_definitions<cr>", "Goto Definition")
+          map("n", "<localleader>gd", [[<cmd>Pick lsp scope="definition"<cr>]], "Goto Definition")
         end
       end,
     })
