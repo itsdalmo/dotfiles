@@ -17,6 +17,7 @@ in {
     GOPATH = "$HOME/go";
     AWS_PAGER = "";
     AWS_DEFAULT_REGION = "eu-west-1";
+    RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
   };
 
   # FIXME: Workaround since we cannot set the correct mode on symlinks (see SO answer):
@@ -44,6 +45,7 @@ in {
     "fd".source = ./files/.config/fd;
     "git".source = ./files/.config/git;
     "nix".source = ./files/.config/nix;
+    "ripgrep".source = ./files/.config/ripgrep;
     "ideavim".source = ./files/.config/ideavim;
     "wezterm".source = ./files/.config/wezterm;
     "alacritty".source = ./files/.config/alacritty;

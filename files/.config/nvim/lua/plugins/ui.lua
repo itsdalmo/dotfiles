@@ -101,12 +101,12 @@ return {
           },
           {
             name = "Find file",
-            action = "Telescope find_files hidden=true",
+            action = [[Pick files tool="rg"]],
             section = "Actions",
           },
           {
             name = "Recent files",
-            action = 'lua require("telescope.builtin").oldfiles({ only_cwd = true })',
+            action = [[Pick oldfiles]],
             section = "Actions",
           },
           {
