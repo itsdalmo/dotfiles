@@ -63,27 +63,33 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
   },
-  opts = {
-    diagnostics = {
-      underline = true,
-      update_in_insert = false,
-      virtual_text = {
-        spacing = 4,
-        source = "if_many",
-        prefix = "●",
-      },
-      severity_sort = true,
-    },
-    format = {
-      formatting_options = nil,
-      timeout_ms = nil,
-    },
-  },
-  config = function(_, opts)
-    local utils = require("utils")
-
+  config = function()
+    local icons = require("config.icons")
     -- diagnostics
-    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+    vim.diagnostic.config({
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+        },
+        severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+          },
+        },
+      },
+      format = {
+        formatting_options = nil,
+        timeout_ms = nil,
+      },
+    })
 
     -- signs --TODO: These need to be set irrespective of the LSP now?
     for name, icon in pairs(require("config.icons").diagnostics) do
@@ -92,34 +98,40 @@ return {
     end
 
     -- keybinds
-    utils.lsp_attach_autocmd(function(client, bufnr)
-      local function map(mode, shortcut, command, desc)
-        opts = { desc = desc, noremap = true, buffer = bufnr }
-        vim.keymap.set(mode, shortcut, command, opts)
-      end
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),
+      callback = function(event)
+        local buffer = event.buf
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-      map("n", "<localleader>k", vim.lsp.buf.hover, "Hover")
-      map("n", "<localleader>gr", "<cmd>Trouble lsp_references<cr>", "References")
-      map("n", "<localleader>gD", vim.lsp.buf.declaration, "Goto Declaration")
-      map("n", "<localleader>gi", "<cmd>Trouble lsp_implementations<cr>", "Goto Implementation")
-      map("n", "<localleader>gt", "<cmd>Trouble lsp_type_definitions<cr>", "Goto Type Definition")
+        local function map(mode, shortcut, command, desc)
+          local opts = { desc = desc, noremap = true, buffer = buffer }
+          vim.keymap.set(mode, shortcut, command, opts)
+        end
 
-      if client.server_capabilities.codeActionProvider then
-        map({ "n", "v" }, "<localleader>.", vim.lsp.buf.code_action, "Code Action")
-      end
+        map("n", "<localleader>k", vim.lsp.buf.hover, "Hover")
+        map("n", "<localleader>gr", "<cmd>Trouble lsp_references<cr>", "References")
+        map("n", "<localleader>gD", vim.lsp.buf.declaration, "Goto Declaration")
+        map("n", "<localleader>gi", "<cmd>Trouble lsp_implementations<cr>", "Goto Implementation")
+        map("n", "<localleader>gt", "<cmd>Trouble lsp_type_definitions<cr>", "Goto Type Definition")
 
-      if client.server_capabilities.renameProvider then
-        map("n", "<localleader>r", vim.lsp.buf.rename, "Rename")
-      end
+        if client.server_capabilities.codeActionProvider then
+          map({ "n", "v" }, "<localleader>.", vim.lsp.buf.code_action, "Code Action")
+        end
 
-      if client.server_capabilities.signatureHelpProvider then
-        map("n", "<localleader>s", vim.lsp.buf.signature_help, "Signature Help")
-      end
+        if client.server_capabilities.renameProvider then
+          map("n", "<localleader>r", vim.lsp.buf.rename, "Rename")
+        end
 
-      if client.server_capabilities.definitionProvider then
-        map("n", "<localleader>gd", "<cmd>Trouble lsp_definitions<cr>", "Goto Definition")
-      end
-    end)
+        if client.server_capabilities.signatureHelpProvider then
+          map("n", "<localleader>s", vim.lsp.buf.signature_help, "Signature Help")
+        end
+
+        if client.server_capabilities.definitionProvider then
+          map("n", "<localleader>gd", "<cmd>Trouble lsp_definitions<cr>", "Goto Definition")
+        end
+      end,
+    })
 
     local capabilities = vim.tbl_deep_extend(
       "force",
