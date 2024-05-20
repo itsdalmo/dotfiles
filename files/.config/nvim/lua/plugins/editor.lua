@@ -59,7 +59,6 @@ return {
   -- todo comments
   {
     "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble" },
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       search = {
@@ -81,22 +80,27 @@ return {
       { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
       { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
     },
-    config = true,
-  },
+    config = function(_, opts)
+      local todos = require("todo-comments")
+      todos.setup(opts)
 
-  -- better diagnostics list and others
-  {
-    "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
-    opts = {
-      auto_preview = false,
-      use_diagnostic_signs = true,
-    },
-    keys = {
-      { "<leader>dd", "<cmd>TroubleToggle<cr>", desc = "Show diagnostics" },
-      { "<leader>dl", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "List diagnostics" },
-      { "<leader>dL", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "List workspace diagnostics" },
-    },
+      local pick = require("mini.pick")
+      pick.registry.todos = function()
+        require("todo-comments.search").search(function(comments)
+          local items = {}
+          for _, c in ipairs(comments) do
+            local text = string.format("%s %s:%d:%d", c.text, c.filename, c.lnum, c.col)
+            table.insert(items, {
+              text = text,
+              path = c.filename,
+              lnum = c.lnum,
+              col = c.col,
+            })
+          end
+          pick.start({ source = { items = items } })
+        end)
+      end
+    end,
   },
 
   -- git signs
@@ -224,6 +228,7 @@ return {
       vim.keymap.set("n", "<leader>sb", [[<cmd>Pick buf_lines scope="current"<cr>]], { desc = "Buffer" })
       vim.keymap.set("n", "<leader>sh", [[<cmd>Pick help<cr>]], { desc = "Buffer" })
       vim.keymap.set("n", "<leader>sr", [[<cmd>Pick resume<cr>]], { desc = "Resume" })
+      vim.keymap.set("n", "<leader>st", [[<cmd>Pick todos<cr>]], { desc = "TODO comments" })
       vim.keymap.set("n", "<leader>sd", [[<cmd>Pick diagnostic scope="current"<cr>]], { desc = "Diagnostics (buffer)" })
       vim.keymap.set("n", "<leader>sD", [[<cmd>Pick diagnostic<cr>]], { desc = "Diagnostics (workspace)" })
       vim.keymap.set("n", "<leader>sj", [[<cmd>Pick lsp scope="document_symbol"<cr>]], { desc = "Goto symbol" })
