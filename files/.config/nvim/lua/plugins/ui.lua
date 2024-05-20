@@ -93,83 +93,36 @@ return {
   },
 
   -- notifications
-  { "echasnovski/mini.notify", event = "VeryLazy", config = true },
+  {
+    "echasnovski/mini.notify",
+    event = "VeryLazy",
+    config = function()
+      local notify = require("mini.notify")
+      notify.setup()
+      vim.notify = notify.make_notify()
+    end,
+  },
 
   -- statusline
   {
-    "nvim-lualine/lualine.nvim",
+    "echasnovski/mini.statusline",
     event = "VeryLazy",
-    opts = function()
-      local icons = require("config.icons")
-
-      return {
-        options = {
-          theme = "auto",
-          globalstatus = true,
-          icons_enabled = true,
-          component_separators = "",
-          section_separators = { left = "", right = "" }, -- left = ""
-          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
-        },
-        sections = {
-          lualine_a = { "mode" },
-          lualine_b = {
-            { "branch" }, -- icon = ""
-            {
-              "diff",
-              colored = false,
-              symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
-              },
-            },
-          },
-          lualine_c = {
-            { "filename", path = 1, file_status = false, newfile_status = false },
-            -- stylua: ignore
-            -- {
-            --   function() return require("nvim-navic").get_location() end,
-            --   cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
-            -- },
-          },
-          lualine_x = {
-            {
-              "diagnostics",
-              symbols = {
-                error = icons.diagnostics.Error,
-                warn = icons.diagnostics.Warn,
-                info = icons.diagnostics.Info,
-                hint = icons.diagnostics.Hint,
-              },
-            },
-            {
-              function()
-                local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-                local clients = vim.lsp.get_active_clients()
-                if next(clients) == nil then
-                  return ""
-                end
-                for _, client in ipairs(clients) do
-                  local filetypes = client.config.filetypes
-                  if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                    return " "
-                  end
-                end
-                return ""
-              end,
-            },
-          },
-          lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
-            { "location", padding = { left = 0, right = 1 } },
-          },
-          lualine_z = {
-            { "filetype", colored = false },
-          },
-        },
-        extensions = { "lazy" },
-      }
+    config = function()
+      local statusline = require("mini.statusline")
+      statusline.section_filename = function()
+        return "%f%m%r"
+      end
+      statusline.section_location = function()
+        return "%l:%v"
+      end
+      local inactive = function()
+        return "%#MiniStatuslineInactive#%f%m%r%="
+      end
+      return statusline.setup({
+        content = { inactive = inactive },
+        use_icons = true,
+        set_vim_settings = true,
+      })
     end,
   },
 }

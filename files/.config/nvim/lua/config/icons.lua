@@ -5,11 +5,6 @@ local M = {
     Hint = " ",
     Info = " ",
   },
-  git = {
-    added = " ",
-    modified = " ",
-    removed = " ",
-  },
   kinds = {
     Array = " ",
     Boolean = " ",
