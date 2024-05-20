@@ -13,37 +13,75 @@ return {
 
   -- keybindings
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      plugins = { spelling = true },
-      key_labels = {
-        ["<space>"] = "SPC",
-        ["<cr>"] = "RET",
-        ["<tab>"] = "TAB",
-      },
-      defaults = {
-        mode = { "n", "v" },
-        ["]"] = { name = "+next" },
-        ["["] = { name = "+prev" },
-        ["<leader>b"] = { name = "+buffer" },
-        ["<leader>e"] = { name = "+error/diagnostic" },
-        ["<leader>f"] = { name = "+file/find" },
-        ["<leader>g"] = { name = "+git" },
-        ["<leader>gh"] = { name = "+hunk" },
-        ["<leader>h"] = { name = "+harpoon" },
-        ["<leader>l"] = { name = "+lsp" },
-        ["<leader>q"] = { name = "+quit/session" },
-        ["<leader>s"] = { name = "+search" },
-        ["<leader>t"] = { name = "+toggle" },
-        ["<leader>w"] = { name = "+window" },
-        ["<localleader>g"] = { name = "+goto" },
-      },
-    },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register(opts.defaults)
+    "echasnovski/mini.clue",
+    event = "VimEnter",
+    config = function()
+      local miniclue = require("mini.clue")
+      miniclue.setup({
+        triggers = {
+          -- Leader triggers
+          { mode = "n", keys = "<Leader>" },
+          { mode = "x", keys = "<Leader>" },
+
+          -- Local leader triggers
+          { mode = "n", keys = "<Localleader>" },
+          { mode = "x", keys = "<Localleader>" },
+
+          -- Built-in completion
+          { mode = "i", keys = "<C-x>" },
+
+          -- Brackets
+          { mode = "n", keys = "]" },
+          { mode = "n", keys = "[" },
+
+          -- `g` key
+          { mode = "n", keys = "g" },
+          { mode = "x", keys = "g" },
+
+          -- Marks
+          { mode = "n", keys = "'" },
+          { mode = "n", keys = "`" },
+          { mode = "x", keys = "'" },
+          { mode = "x", keys = "`" },
+
+          -- Registers
+          { mode = "n", keys = '"' },
+          { mode = "x", keys = '"' },
+          { mode = "i", keys = "<C-r>" },
+          { mode = "c", keys = "<C-r>" },
+
+          -- Window commands
+          { mode = "n", keys = "<C-w>" },
+
+          -- `z` key
+          { mode = "n", keys = "z" },
+          { mode = "x", keys = "z" },
+        },
+
+        clues = {
+          -- Enhance this by adding descriptions for <Leader> mapping groups
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.marks(),
+          miniclue.gen_clues.registers(),
+          miniclue.gen_clues.windows(),
+          miniclue.gen_clues.z(),
+
+          -- Custom clues
+          { mode = "n", keys = "<Leader>b", desc = "+Buffers" },
+          { mode = "n", keys = "<Leader>d", desc = "+Diagnostic" },
+          { mode = "n", keys = "<Leader>f", desc = "+Files" },
+          { mode = "n", keys = "<Leader>g", desc = "+Git" },
+          { mode = "n", keys = "<Leader>gh", desc = "+Hunks" },
+          { mode = "n", keys = "<Leader>h", desc = "+Harpoon" },
+          { mode = "n", keys = "<Leader>l", desc = "+LSP" },
+          { mode = "n", keys = "<Leader>q", desc = "+Quit/Session" },
+          { mode = "n", keys = "<Leader>s", desc = "+Search" },
+          { mode = "n", keys = "<Leader>t", desc = "+Toggle" },
+          { mode = "n", keys = "<Leader>w", desc = "+Window" },
+          { mode = "n", keys = "<Localleader>g", desc = "+Goto" },
+        },
+      })
     end,
   },
 
