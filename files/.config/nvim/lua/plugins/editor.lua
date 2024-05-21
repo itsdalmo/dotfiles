@@ -1,36 +1,34 @@
 return {
-  -- automatically close brackets etc.
-  {
-    "windwp/nvim-autopairs",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = { check_ts = true },
-    config = function(_, opts)
-      local found, cmp = pcall(require, "cmp")
-      if found then
-        cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-      end
-      require("nvim-autopairs").setup(opts)
-    end,
-  },
+  -- buffer removal
+  { "echasnovski/mini.bufremove", event = "VeryLazy", config = true },
 
-  -- easily comment out lines/blocks
-  {
-    "numToStr/Comment.nvim",
-    event = "VeryLazy",
-    config = true,
-  },
+  -- textobjects
+  { "echasnovski/mini.ai", event = "VeryLazy", config = true },
+
+  -- automatically close brackets etc.
+  { "echasnovski/mini.pairs", event = "VeryLazy", config = true },
 
   -- act on surrounding pairs
+  { "echasnovski/mini.surround", event = "VeryLazy", config = true },
+
+  -- (un)comment lines/blocks
   {
-    "kylechui/nvim-surround",
-    version = "*",
+    "echasnovski/mini.comment",
     event = "VeryLazy",
-    config = function(_, opts)
-      require("nvim-surround").setup(opts)
-    end,
+    opts = {
+      options = {
+        custom_commentstring = function()
+          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+        end,
+      },
+    },
+  },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    lazy = true,
+    opts = {
+      enable_autocmd = false,
+    },
   },
 
   -- todo comments
@@ -161,7 +159,7 @@ return {
       },
       filesystem = {
         bind_to_cwd = false,
-        follow_current_file = true,
+        follow_current_file = false,
         use_libuv_file_watcher = true,
         filtered_items = {
           visible = true,

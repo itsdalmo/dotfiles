@@ -23,7 +23,7 @@ map("n", "<C-l>", "<cmd>wincmd l<cr>")
 -- Buffers
 map("n", "]b", "<cmd>bprev<cr>", { desc = "Next buffer" })
 map("n", "[b", "<cmd>bnext<cr>", { desc = "Previous buffer" })
-map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Close active buffer" })
+map("n", "<leader>bd", ":lua MiniBufremove.delete()<cr>", { desc = "Close active buffer" })
 
 -- Files
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
