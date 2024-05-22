@@ -56,50 +56,20 @@ return {
     opts = {},
   },
 
-  -- todo comments
+  -- highlight patterns
   {
-    "folke/todo-comments.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      search = {
-        command = "rg",
-        args = {
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-          "--hidden",
-          "--glob=!.git/",
+    "echasnovski/mini.hipatterns",
+    event = "VeryLazy",
+    config = function()
+      local hi_words = require("mini.extra").gen_highlighter.words
+      require("mini.hipatterns").setup({
+        highlighters = {
+          TODO = hi_words({ "TODO", "Todo", "todo" }, "MiniHipatternsTodo"),
+          NOTE = hi_words({ "NOTE", "Note", "note" }, "MiniHipatternsNote"),
+          HACK = hi_words({ "HACK", "Hack", "hack" }, "MiniHipatternsHack"),
+          FIXME = hi_words({ "FIXME", "Fixme", "fixme" }, "MiniHipatternsFixme"),
         },
-      },
-    },
-    -- stylua: ignore
-    keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-    },
-    config = function(_, opts)
-      local todos = require("todo-comments")
-      todos.setup(opts)
-
-      local pick = require("mini.pick")
-      pick.registry.todos = function()
-        require("todo-comments.search").search(function(comments)
-          local items = {}
-          for _, c in ipairs(comments) do
-            local text = string.format("%s %s:%d:%d", c.text, c.filename, c.lnum, c.col)
-            table.insert(items, {
-              text = text,
-              path = c.filename,
-              lnum = c.lnum,
-              col = c.col,
-            })
-          end
-          pick.start({ source = { items = items } })
-        end)
-      end
+      })
     end,
   },
 
@@ -228,7 +198,12 @@ return {
       vim.keymap.set("n", "<leader>sb", [[<cmd>Pick buf_lines scope="current"<cr>]], { desc = "Buffer" })
       vim.keymap.set("n", "<leader>sh", [[<cmd>Pick help<cr>]], { desc = "Buffer" })
       vim.keymap.set("n", "<leader>sr", [[<cmd>Pick resume<cr>]], { desc = "Resume" })
-      vim.keymap.set("n", "<leader>st", [[<cmd>Pick todos<cr>]], { desc = "TODO comments" })
+      vim.keymap.set(
+        "n",
+        "<leader>st",
+        [[<cmd>Pick hipatterns highlighters=TODO,NOTE,HACK,FIXME<cr>]],
+        { desc = "Todo/note/hack/fixme" }
+      )
       vim.keymap.set("n", "<leader>sd", [[<cmd>Pick diagnostic scope="current"<cr>]], { desc = "Diagnostics (buffer)" })
       vim.keymap.set("n", "<leader>sD", [[<cmd>Pick diagnostic<cr>]], { desc = "Diagnostics (workspace)" })
       vim.keymap.set("n", "<leader>sj", [[<cmd>Pick lsp scope="document_symbol"<cr>]], { desc = "Goto symbol" })
