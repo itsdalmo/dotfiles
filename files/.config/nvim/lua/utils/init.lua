@@ -5,9 +5,11 @@ function M.toggle_conceal()
   local current = vim.opt_local["conceallevel"]:get()
   if current == 0 then
     vim.opt_local["conceallevel"] = conceallevel
+    vim.notify("conceal enabled")
   else
     conceallevel = current
     vim.opt_local["conceallevel"] = 0
+    vim.notify("conceal disabled")
   end
 end
 
@@ -16,8 +18,10 @@ function M.toggle_autoformat()
   autoformat = not autoformat
   if autoformat then
     vim.b.autoformat = nil
+    vim.notify("autoformat enabled")
   else
     vim.b.autoformat = false
+    vim.notify("autoformat disabled")
   end
 end
 
@@ -26,8 +30,19 @@ function M.toggle_diagnostics()
   diagnostics = not diagnostics
   if diagnostics then
     vim.diagnostic.enable()
+    vim.notify("diagnostics enabled")
   else
+    vim.notify("diagnostics disabled")
     vim.diagnostic.disable()
+  end
+end
+
+function M.toggle_blame()
+  local blame = require("gitsigns").toggle_current_line_blame()
+  if blame then
+    vim.notify("git blame enabled")
+  else
+    vim.notify("git blame disabled")
   end
 end
 

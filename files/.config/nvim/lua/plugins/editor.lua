@@ -77,7 +77,7 @@ return {
         untracked = { text = "▎" },
       },
       on_attach = function(buffer)
-        local gs = package.loaded.gitsigns
+        local gs = require("gitsigns")
 
         local function map(mode, l, r, desc)
           vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
@@ -92,7 +92,7 @@ return {
         map("n", "<leader>ghd", gs.preview_hunk, "Diff Hunk")
         map("n", "<leader>ghb", function() gs.blame_line() end, "Blame Line")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<cr>", "GitSigns Select Hunk")
-        map("n", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle line blame")
+        map("n", "<leader>tb", function() require("utils").toggle_blame() end, "Line blame")
       end,
     },
   },
