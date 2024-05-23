@@ -57,12 +57,8 @@ local servers = {
 }
 
 return {
-  -- NOTE: Server configuration are defined in config/lsp.lua
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-  },
   config = function()
     local icons = require("config.icons")
     -- diagnostics
@@ -109,6 +105,9 @@ return {
           vim.keymap.set(mode, shortcut, command, opts)
         end
 
+        -- mini.completion
+        vim.bo[buffer].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+
         map("n", "<localleader>k", vim.lsp.buf.hover, "Hover")
         map("n", "<localleader>gr", [[<cmd>Pick lsp scope="references"<cr>]], "References")
         map("n", "<localleader>gD", [[<cmd>Pick lsp scope="declaration"<cr>]], "Goto Declaration")
@@ -133,13 +132,7 @@ return {
       end,
     })
 
-    local capabilities = vim.tbl_deep_extend(
-      "force",
-      {},
-      vim.lsp.protocol.make_client_capabilities(),
-      require("cmp_nvim_lsp").default_capabilities()
-    )
-
+    local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities())
     for server, config in pairs(servers) do
       local cfg = vim.tbl_deep_extend("force", {
         capabilities = vim.deepcopy(capabilities),
