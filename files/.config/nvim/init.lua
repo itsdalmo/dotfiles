@@ -1,3 +1,8 @@
+-- enable experimental loader
+if vim.loader then
+  vim.loader.enable()
+end
+
 require("config.autocmds")
 require("config.options")
 require("config.keymaps")
