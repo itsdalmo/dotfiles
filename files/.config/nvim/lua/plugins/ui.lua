@@ -52,6 +52,7 @@ return {
         ["<leader>f"] = { name = "+file/find" },
         ["<leader>g"] = { name = "+git" },
         ["<leader>gh"] = { name = "+hunk" },
+        ["<leader>h"] = { name = "+harpoon" },
         ["<leader>l"] = { name = "+lsp" },
         ["<leader>q"] = { name = "+quit/session" },
         ["<leader>s"] = { name = "+search" },
