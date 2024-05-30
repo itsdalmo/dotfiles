@@ -27,6 +27,7 @@ local options = {
   number = true,
   numberwidth = 4,
   relativenumber = true,
+  ruler = false,
   scrolloff = 5,
   sessionoptions = { "buffers", "curdir", "tabpages", "winsize" },
   shiftround = true,
@@ -44,6 +45,7 @@ local options = {
   swapfile = false,
   tabstop = 2,
   termguicolors = true,
+  undofile = true,
   wrap = false,
   writebackup = false,
 }
