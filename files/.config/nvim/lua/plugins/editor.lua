@@ -37,38 +37,72 @@ return {
     end,
   },
 
-  -- git signs
+  -- git
   {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
-      },
-      on_attach = function(buffer)
-        local gs = require("gitsigns")
+    "echasnovski/mini-git",
+    main = "mini.git",
+    event = "VeryLazy",
+    config = function()
+      local git = require("mini.git")
+      git.setup()
 
-        local function map(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-        end
+      -- Only include branch name in the git summary
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MiniGitUpdated",
+        callback = function(data)
+          local summary = vim.b[data.buf].minigit_summary
+          vim.b[data.buf].minigit_summary_string = summary.head_name or ""
+        end,
+      })
 
-        -- stylua: ignore start
-        map("n", "]h", gs.next_hunk, "Next Hunk")
-        map("n", "[h", gs.prev_hunk, "Prev Hunk")
-        map({ "n", "v" }, "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk")
-        map({ "n", "v" }, "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk")
-        map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-        map("n", "<leader>ghd", gs.preview_hunk, "Diff Hunk")
-        map("n", "<leader>ghb", function() gs.blame_line() end, "Blame Line")
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<cr>", "GitSigns Select Hunk")
-        map("n", "<leader>tb", function() require("utils").toggle_blame() end, "Line blame")
-      end,
-    },
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MiniGitCommandSplit",
+        callback = function(data)
+          if data.data.git_subcommand ~= "blame" then
+            return
+          end
+
+          -- Align blame output with source
+          local win_src = data.data.win_source
+          vim.wo.wrap = false
+          vim.fn.winrestview({ topline = vim.fn.line("w0", win_src) })
+          vim.api.nvim_win_set_cursor(0, { vim.fn.line(".", win_src), 0 })
+
+          -- Bind both windows so that they scroll together
+          vim.wo[win_src].scrollbind, vim.wo.scrollbind = true, true
+        end,
+      })
+
+      vim.keymap.set("n", "<leader>gb", [[<cmd>vert Git blame -- %<cr>]], { desc = "Blame" })
+      vim.keymap.set("n", "<leader>gs", function()
+        git.show_at_cursor()
+      end, { desc = "Show at cursor" })
+    end,
+  },
+
+  -- git diff
+  {
+    "echasnovski/mini.diff",
+    event = "VeryLazy",
+    config = function()
+      local diff = require("mini.diff")
+      diff.setup({
+        view = {
+          style = "sign",
+          signs = {
+            add = "▎",
+            change = "▎",
+            delete = "",
+          },
+        },
+        options = {
+          wrap_goto = true,
+        },
+      })
+      vim.keymap.set("n", "<leader>gd", function()
+        require("utils").toggle_diff()
+      end, { desc = "Toggle diff overlay" })
+    end,
   },
 
   -- file tree/explorer

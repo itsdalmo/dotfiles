@@ -37,12 +37,14 @@ function M.toggle_diagnostics()
   end
 end
 
-function M.toggle_blame()
-  local blame = require("gitsigns").toggle_current_line_blame()
-  if blame then
-    vim.notify("git blame enabled")
+local diff = false
+function M.toggle_diff()
+  require("mini.diff").toggle_overlay()
+  diff = not diff
+  if diff then
+    vim.notify("git diff enabled")
   else
-    vim.notify("git blame disabled")
+    vim.notify("git diff disabled")
   end
 end
 
