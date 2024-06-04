@@ -88,8 +88,8 @@ _G.cr_action = function()
     -- If popup is not visible, use plain `<CR>`. You might want to customize
     -- according to other plugins. For example, to use 'mini.pairs', replace
     -- next line with `return require('mini.pairs').cr()`
-    -- return require("mini.pairs").cr()
-    return keys["cr"]
+    -- return keys["cr"]
+    return require("mini.pairs").cr()
   end
 end
 
