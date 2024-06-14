@@ -30,7 +30,7 @@ local toggle_terminal = function(_, pane)
   if #panes == 1 then
     pane:split({
       direction = "Bottom",
-      size = 0.4,
+      size = 0.3,
     })
   elseif not panes[1].is_zoomed then
     panes[1].pane:activate()
@@ -85,8 +85,8 @@ cfg.keys = {
 
   -- Leader
   { key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
-  { key = "v", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-  { key = "s", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  { key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  { key = "v", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
   { key = "r", mods = "LEADER", action = act.ActivateKeyTable({ name = "resize_pane", one_shot = false }) },
 }
 
