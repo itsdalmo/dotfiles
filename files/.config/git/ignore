@@ -11,5 +11,6 @@
 # Terraform
 .terraform
 
-# Pyenv
+# Python
+.venv
 .python-version
