@@ -22,7 +22,6 @@ cask "slack"
 cask "spotify"
 cask "visual-studio-code"
 cask "wezterm"
-cask "webex"
 
 # Packages
 brew "mas"
