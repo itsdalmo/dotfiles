@@ -22,9 +22,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set(mode, shortcut, command, opts)
     end
 
-    -- mini.completion
-    vim.bo[buffer].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
-
     map("n", "<localleader>k", vim.lsp.buf.hover, "Hover")
     map("n", "<localleader>gr", [[<cmd>Pick lsp scope="references"<cr>]], "References")
     map("n", "<localleader>gD", [[<cmd>Pick lsp scope="declaration"<cr>]], "Goto Declaration")
@@ -108,9 +105,16 @@ local servers = {
   },
 }
 
+local capabilities = vim.tbl_deep_extend(
+  "force",
+  {},
+  vim.lsp.protocol.make_client_capabilities(),
+  require("cmp_nvim_lsp").default_capabilities()
+)
+
 for server, config in pairs(servers) do
   local cfg = vim.tbl_deep_extend("force", {
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
+    capabilities = vim.deepcopy(capabilities),
   }, config or {})
   require("lspconfig")[server].setup(cfg)
 end

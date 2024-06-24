@@ -48,14 +48,6 @@ return {
   },
 
   {
-    "echasnovski/mini.completion",
-    event = "VeryLazy",
-    config = function()
-      require("plugins.config.mini-completion")
-    end,
-  },
-
-  {
     "echasnovski/mini.pick",
     event = "VeryLazy",
     config = function()
@@ -168,6 +160,20 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("plugins.config.lspconfig")
+    end,
+  },
+
+  {
+    "hrsh7th/nvim-cmp",
+    version = false,
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-buffer",
+    },
+    config = function()
+      require("plugins.config.cmp")
     end,
   },
 
