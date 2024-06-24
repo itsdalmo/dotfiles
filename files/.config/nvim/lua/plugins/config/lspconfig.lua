@@ -69,6 +69,7 @@ local servers = {
   },
   cssls = {},
   jsonls = {},
+  jsonnet_ls = {},
   nil_ls = {},
   lua_ls = {
     settings = {

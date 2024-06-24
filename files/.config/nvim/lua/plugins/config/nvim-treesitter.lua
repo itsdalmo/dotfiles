@@ -22,6 +22,7 @@ local opts = {
     "html",
     "javascript",
     "json",
+    "jsonnet",
     "lua",
     "luadoc",
     "luap",

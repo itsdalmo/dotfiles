@@ -92,6 +92,7 @@ in {
     gofumpt
     golangci-lint
     gopls
+    jsonnet-language-server
     kics
     lua-language-server
     nil
