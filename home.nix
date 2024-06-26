@@ -77,6 +77,7 @@ in {
     neovim
     nerdfonts
     ripgrep
+    teleport
     tfswitch
     typescript
     yubikey-manager
