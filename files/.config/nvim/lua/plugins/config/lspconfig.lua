@@ -43,6 +43,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client.server_capabilities.definitionProvider then
       map("n", "<localleader>gd", [[<cmd>Pick lsp scope="definition"<cr>]], "Goto Definition")
     end
+
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, buffer)
+    end
   end,
 })
 

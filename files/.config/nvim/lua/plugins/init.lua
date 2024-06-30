@@ -164,6 +164,13 @@ return {
   },
 
   {
+    "SmiteshP/nvim-navic",
+    config = function()
+      require("plugins.config.nvim-navic")
+    end,
+  },
+
+  {
     "hrsh7th/nvim-cmp",
     version = false,
     event = "InsertEnter",
