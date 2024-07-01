@@ -34,7 +34,7 @@ in {
           name = file.name + "_source";
           value = {
             source = ./files + ("/" + file.name);
-            onChange = ''cp $HOME/${file.name}_source $HOME/${file.name} && chmod ${file.permissions} $HOME/${file.name}'';
+            onChange = ''cp -f $HOME/${file.name}_source $HOME/${file.name} && chmod ${file.permissions} $HOME/${file.name}'';
           };
         };
     in
