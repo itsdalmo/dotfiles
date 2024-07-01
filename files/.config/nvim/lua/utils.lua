@@ -32,8 +32,8 @@ function M.toggle_diagnostics()
     vim.diagnostic.enable()
     vim.notify("diagnostics enabled")
   else
-    vim.notify("diagnostics disabled")
     vim.diagnostic.disable()
+    vim.notify("diagnostics disabled")
   end
 end
 
@@ -47,6 +47,22 @@ function M.toggle_diff()
     vim.notify("git diff enabled")
   else
     vim.notify("git diff disabled")
+  end
+end
+
+function M.toggle_winbar()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local winbar = not (vim.b[bufnr].winbar_enabled or false)
+  vim.b[bufnr].winbar_enabled = winbar
+
+  if winbar then
+    vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+    vim.b.navic_lazy_update_context = false
+    vim.notify("winbar enabled")
+  else
+    vim.wo.winbar = ""
+    vim.b.navic_lazy_update_context = true
+    vim.notify("winbar disabled")
   end
 end
 

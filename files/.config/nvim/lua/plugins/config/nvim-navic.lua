@@ -3,7 +3,8 @@ navic.setup({
   separator = " ",
   highlight = true,
   depth_limit = 5,
-  -- lazy_update_context = true,
 })
 
-vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+vim.keymap.set("n", "<leader>tw", function()
+  require("utils").toggle_winbar()
+end, { desc = "Toggle winbar" })
