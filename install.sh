@@ -125,7 +125,7 @@ install_flake() {
     ;;
   esac
 
-  nix run github:nix-community/home-manager/release-23.11 -- switch --flake "${_dotfiles_path}#${_user}@${_arch}-${_os}"
+  nix run github:nix-community/home-manager/release-24.05 -- switch --flake "${_dotfiles_path}#${_user}@${_arch}-${_os}"
 }
 
 configure_shell() {
