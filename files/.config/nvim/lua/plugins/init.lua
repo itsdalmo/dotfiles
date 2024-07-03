@@ -40,14 +40,6 @@ return {
   },
 
   {
-    "echasnovski/mini.visits",
-    event = "VeryLazy",
-    config = function()
-      require("mini.visits").setup()
-    end,
-  },
-
-  {
     "echasnovski/mini.pick",
     event = "VeryLazy",
     config = function()

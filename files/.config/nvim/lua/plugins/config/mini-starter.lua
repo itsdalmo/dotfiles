@@ -14,7 +14,7 @@ starter.setup({
     },
     {
       name = "Recent files",
-      action = [[Pick visit_paths]],
+      action = [[Pick oldfiles current_dir=true]],
       section = "Actions",
     },
     {
