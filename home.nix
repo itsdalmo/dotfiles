@@ -89,6 +89,8 @@ in {
     nodejs
 
     # LSPs/linters/formatters
+    ansible-language-server
+    ansible-lint
     buf
     dockerfile-language-server-nodejs
     gofumpt
