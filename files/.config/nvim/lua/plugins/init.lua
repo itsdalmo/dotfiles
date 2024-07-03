@@ -121,6 +121,14 @@ return {
   },
 
   {
+    "echasnovski/mini.icons",
+    lazy = false,
+    config = function()
+      require("mini.icons").setup()
+    end,
+  },
+
+  {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
@@ -207,9 +215,6 @@ return {
       require("nvim-ts-autotag").setup()
     end,
   },
-
-  -- pretty icons
-  { "nvim-tree/nvim-web-devicons", lazy = true },
 
   -- library used by most plugins
   { "nvim-lua/plenary.nvim", lazy = true },
