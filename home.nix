@@ -63,6 +63,7 @@ in {
   home.packages = with pkgs; [
     aws-vault
     awscli2
+    devbox
     eza
     fd
     gh

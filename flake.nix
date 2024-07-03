@@ -15,6 +15,7 @@
       # Overlay some packages form unstable.
       unstableOverlays = final: prev: {
         neovim = (import inputs.nixpkgs-unstable { system = prev.system; config = prev.config; }).neovim;
+        devbox = (import inputs.nixpkgs-unstable { system = prev.system; config = prev.config; }).devbox;
       };
       # Helper function to create package sets
       mkPkgs = system: import nixpkgs {
