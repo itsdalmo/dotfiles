@@ -64,4 +64,7 @@ vim.filetype.add({
     gotmpl = "gotmpl",
     tfstate = "json",
   },
+  filename = {
+    [".envrc"] = "bash",
+  },
 })

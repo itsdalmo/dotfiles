@@ -28,6 +28,7 @@ conform.setup({
     markdown = { "prettier", "injected" },
     nix = { "nixpkgs_fmt" },
     proto = { "buf" },
+    bash = { "shfmt" },
     sh = { "shfmt" },
     sql = { "sql_formatter" },
     yaml = { "prettier" },
