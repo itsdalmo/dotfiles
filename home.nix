@@ -96,6 +96,7 @@ in {
     gofumpt
     golangci-lint
     gopls
+    jsonnet # also provides jsonnetfmt
     jsonnet-language-server
     kics
     lua-language-server
