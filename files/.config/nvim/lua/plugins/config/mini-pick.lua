@@ -18,6 +18,16 @@ pick.registry.buffers = function(local_opts)
   pick.builtin.buffers(local_opts, { mappings = { delete = { char = "<C-d>", func = delete_buffer } } })
 end
 
+-- https://github.com/echasnovski/mini.nvim/issues/830
+pick.registry.files = function()
+  local command = { "fd", "--type=file", "--color=never", "--follow", "--hidden" }
+  local show_with_icons = function(buf_id, items, query)
+    return pick.default_show(buf_id, items, query, { show_icons = true })
+  end
+  local source = { name = "Files (fd)", show = show_with_icons }
+  return pick.builtin.cli({ command = command }, { source = source })
+end
+
 vim.keymap.set("n", "<leader><space>", [[<cmd>Pick commands<cr>]], { desc = "Commands" })
 vim.keymap.set("n", "<leader>:", [[<cmd>Pick history<cr>]], { desc = "Command history" })
 vim.keymap.set("n", "<leader>bb", [[<cmd>Pick buffers<cr>]], { desc = "Show all buffers" })
