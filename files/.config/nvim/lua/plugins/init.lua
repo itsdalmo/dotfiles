@@ -133,7 +133,7 @@ return {
     "folke/persistence.nvim",
     event = "BufReadPre",
     config = function()
-      require("plugins.config.persistence")
+      require("persistence").setup()
     end,
   },
 
