@@ -17,6 +17,9 @@ abbr -a gl 'git log --oneline --graph --max-count 20'
 abbr -a gg lazygit
 abbr -a awsv 'aws-vault exec'
 
+# Alias
+alias k="kubectl"
+
 # Platform specific settings
 switch (uname)
     case Darwin
