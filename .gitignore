@@ -1,0 +1,4 @@
+.direnv
+
+# nix build output symlink
+**/result
