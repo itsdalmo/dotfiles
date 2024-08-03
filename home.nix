@@ -21,7 +21,7 @@ in {
   };
 
   nix = {
-    package = pkgs.nix;
+    # package = pkgs.nix;
 
     settings = {
       # Note: home-manager configures the user's environment, so only set unrestricted Nix options.
