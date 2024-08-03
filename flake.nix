@@ -35,7 +35,7 @@
       # Create home-manager configuration for system/user.
       mkHome = { system, user }: home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs system;
-        modules = [ ./nix/users/dalmo.nix ];
+        modules = [ ./home.nix ];
         extraSpecialArgs = { inherit user; };
       };
 
@@ -71,7 +71,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.dalmo = import ./nix/users/dalmo.nix;
+              home-manager.users.dalmo = import ./home.nix;
               home-manager.extraSpecialArgs = { user = "dalmo"; };
             }
           ];

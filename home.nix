@@ -20,6 +20,18 @@ in {
     RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
   };
 
+  nix = {
+    package = pkgs.nix;
+
+    settings = {
+      # Note: home-manager configures the user's environment, so only set unrestricted Nix options.
+      bash-prompt-prefix = "(nix:$name)\\040";
+      experimental-features = [ "nix-command" "flakes" ];
+      extra-nix-path = [ "nixpkgs=flake:nixpkgs" ];
+    };
+  };
+
+
   # FIXME: Workaround since we cannot set the correct mode on symlinks (see SO answer):
   # https://github.com/nix-community/home-manager/issues/322#issuecomment-1856128020
   home.file =
@@ -44,7 +56,6 @@ in {
   xdg.configFile = {
     "fd".source = ./files/.config/fd;
     "git".source = ./files/.config/git;
-    "nix".source = ./files/.config/nix;
     "ripgrep".source = ./files/.config/ripgrep;
     "ideavim".source = ./files/.config/ideavim;
     "wezterm".source = ./files/.config/wezterm;
