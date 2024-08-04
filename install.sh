@@ -127,7 +127,12 @@ install_flake() {
     exit 1
     ;;
   "arm64-darwin")
-    nix run github:LnL7/nix-darwin -- switch --flake "${_dotfiles_path}#dalmobook"
+    if ! command -v "darwin-rebuild" >/dev/null; then
+      if [ -f /etc/nix/nix.conf ]; then
+        sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
+      fi
+      nix run --extra-experimental-features "nix-command flakes" nix-darwin -- switch --flake "${_dotfiles_path}#dalmobook"
+    fi
     ;;
   *)
     nix run github:nix-community/home-manager/release-24.05 -- switch --flake "${_dotfiles_path}#${_user}@${_arch}-${_os}"
