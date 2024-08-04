@@ -62,7 +62,6 @@ install_darwin() {
   install_brew
   install_nix
   install_flake
-  configure_shell
   configure_nvim
 
   printf " * Configuring osx\n"
@@ -84,9 +83,6 @@ install_brew() {
     printf " * Adding brew to path\n"
     eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
-
-  printf " * Installing brew bundle\n"
-  brew bundle install --global | sed 's/^/    ~ /'
 }
 
 install_nix() {
@@ -125,8 +121,18 @@ install_flake() {
     ;;
   esac
 
-  # nix run github:LnL7/nix-darwin -- switch --flake "${_dotfiles_path}#${_user}@${_arch}-${_os}"
-  nix run github:nix-community/home-manager/release-24.05 -- switch --flake "${_dotfiles_path}#${_user}@${_arch}-${_os}"
+  case "${_arch}-${_os}" in
+  "amd64-darwin")
+    printf "Darwin on amd64 not supported.\n"
+    exit 1
+    ;;
+  "arm64-darwin")
+    nix run github:LnL7/nix-darwin -- switch --flake "${_dotfiles_path}#dalmobook"
+    ;;
+  *)
+    nix run github:nix-community/home-manager/release-24.05 -- switch --flake "${_dotfiles_path}#${_user}@${_arch}-${_os}"
+    ;;
+  esac
 }
 
 configure_shell() {
