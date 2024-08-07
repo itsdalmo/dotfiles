@@ -48,7 +48,6 @@ in {
     "ripgrep".source = ./files/.config/ripgrep;
     "ideavim".source = ./files/.config/ideavim;
     "wezterm".source = ./files/.config/wezterm;
-    "alacritty".source = ./files/.config/alacritty;
 
     # Neovim has to be writeable since we use lazyvim to install plugins
     "nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/code/github.com/itsdalmo/dotfiles/files/.config/nvim";
