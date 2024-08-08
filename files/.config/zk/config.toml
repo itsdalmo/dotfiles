@@ -1,0 +1,56 @@
+# NOTEBOOK SETTINGS
+[notebook]
+dir = "~/code/github.com/itsdalmo/notes"
+
+[note]
+language = "en"
+extension = "md"
+
+# Template used to generate a note's content.
+# If not an absolute path, it is relative to .zk/templates/
+template = "default.md"
+
+# The default title used for new note, if no `--title` flag is provided.
+default-title = "Untitled"
+
+# Template used to generate a note's filename, without extension.
+filename = "notes/{{ format-date now 'timestamp' }}-{{slug title}}"
+
+[group.daily]
+paths = ["daily"]
+
+[group.daily.note]
+filename = "{{ format-date now }}"
+template = "daily.md"
+
+[format.markdown]
+hashtags = true
+colon-tags = true
+
+[tool]
+editor = "nvim"
+pager = "less -FIRX"
+
+# Command used to preview a note during interactive fzf mode.
+fzf-preview = "bat -p --color always {-1}"
+
+[filter]
+recents = "--sort created- --created-after 'last two weeks'"
+standups = "--sort created- --tag standup"
+
+[alias]
+# Edit the last modified note.
+last = "zk edit --limit 1 --sort modified- $@"
+
+# Edit the notes selected interactively among the notes created the last two weeks.
+recent = "zk edit --sort created- --created-after 'last two weeks' --interactive"
+
+# Open the daily
+daily = "zk new daily"
+
+# LSP (EDITOR INTEGRATION)
+[lsp]
+
+[lsp.diagnostics]
+wiki-title = "hint"
+dead-link = "error"

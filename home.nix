@@ -1,8 +1,11 @@
 { config, user, pkgs, ... }:
-let nerdfonts = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; };
-in {
+let
+  nerdfonts = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; };
+  homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
+in
+{
   home.username = user;
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
+  home.homeDirectory = homeDirectory;
   home.stateVersion = "23.11";
 
   home.sessionPath = [ "$HOME/bin" "$HOME/go/bin" ];
@@ -12,12 +15,13 @@ in {
     LC_CTYPE = "en_US.UTF-8";
 
     # Could consider moving these back to fish.config?
-    EDITOR = "nvim";
-    PAGER = "less -FirSwX";
-    GOPATH = "$HOME/go";
-    AWS_PAGER = "";
     AWS_DEFAULT_REGION = "eu-west-1";
+    AWS_PAGER = "";
+    EDITOR = "nvim";
+    GOPATH = "$HOME/go";
+    PAGER = "less -FirSwX";
     RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
+    ZK_NOTEBOOK_DIR = "${homeDirectory}/code/github.com/itsdalmo/notes";
   };
 
   # FIXME: Workaround since we cannot set the correct mode on symlinks (see SO answer):
@@ -44,10 +48,11 @@ in {
   xdg.configFile = {
     "fd".source = ./files/.config/fd;
     "git".source = ./files/.config/git;
+    "ideavim".source = ./files/.config/ideavim;
     "nix".source = ./files/.config/nix;
     "ripgrep".source = ./files/.config/ripgrep;
-    "ideavim".source = ./files/.config/ideavim;
     "wezterm".source = ./files/.config/wezterm;
+    "zk".source = ./files/.config/zk;
 
     # Neovim has to be writeable since we use lazyvim to install plugins
     "nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/code/github.com/itsdalmo/dotfiles/files/.config/nvim";
@@ -62,6 +67,7 @@ in {
   home.packages = with pkgs; [
     aws-vault
     awscli2
+    bat
     devbox
     eza
     fd
@@ -81,6 +87,7 @@ in {
     tfswitch
     typescript
     yubikey-manager
+    zk
 
     # Mason/TS dependencies (neovim)
     cargo

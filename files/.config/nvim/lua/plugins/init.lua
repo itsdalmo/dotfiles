@@ -216,6 +216,14 @@ return {
     end,
   },
 
+  {
+    "zk-org/zk-nvim",
+    event = "VeryLazy",
+    config = function()
+      require("plugins.config.zk")
+    end,
+  },
+
   -- library used by most plugins
   { "nvim-lua/plenary.nvim", lazy = true },
 }
