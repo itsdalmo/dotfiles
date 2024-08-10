@@ -25,6 +25,17 @@ function M.toggle_autoformat()
   end
 end
 
+function M.toggle_wrap()
+  wrap = not vim.opt.wrap:get()
+  if wrap then
+    vim.opt.wrap = true
+    vim.notify("soft wrap enabled")
+  else
+    vim.opt.wrap = false
+    vim.notify("soft wrap disabled")
+  end
+end
+
 local diagnostics = true
 function M.toggle_diagnostics()
   diagnostics = not diagnostics

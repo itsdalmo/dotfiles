@@ -45,6 +45,7 @@ local options = {
   swapfile = false,
   tabstop = 2,
   termguicolors = true,
+  textwidth = 120,
   undofile = true,
   wrap = false,
   writebackup = false,

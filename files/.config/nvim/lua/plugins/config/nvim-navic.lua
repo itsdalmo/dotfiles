@@ -5,6 +5,6 @@ navic.setup({
   depth_limit = 5,
 })
 
-vim.keymap.set("n", "<leader>tw", function()
+vim.keymap.set("n", "<leader>tb", function()
   require("utils").toggle_winbar()
-end, { desc = "Toggle winbar" })
+end, { desc = "Breadcrumbs (navic)" })
