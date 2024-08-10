@@ -19,6 +19,7 @@ abbr -a awsv 'aws-vault exec'
 
 # Alias
 alias k="kubectl"
+alias cat="bat"
 
 # Platform specific settings
 switch (uname)

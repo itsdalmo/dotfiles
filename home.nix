@@ -62,12 +62,14 @@ in
     "fish/osx.fish".source = ./files/.config/fish/osx.fish;
     "fish/linux.fish".source = ./files/.config/fish/linux.fish;
     "fish/functions".source = ./files/.config/fish/functions;
+
+    # Home manager wants to install the theme under the bat directory
+    "bat/config".source = ./files/.config/bat/config;
   };
 
   home.packages = with pkgs; [
     aws-vault
     awscli2
-    bat
     devbox
     eza
     fd
@@ -163,6 +165,21 @@ in
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  programs.bat = {
+    enable = true;
+    themes = {
+      tokyonight = {
+        src = pkgs.fetchFromGitHub {
+          owner = "folke";
+          repo = "tokyonight.nvim";
+          rev = "b0e7c7382a7e8f6456f2a95655983993ffda745e";
+          sha256 = "sha256-Fxakkz4+BTbvDLjRggZUVVhVEbg1b/MuuIC1rGrCwVA=";
+        };
+        file = "extras/sublime/tokyonight_night.tmTheme";
+      };
+    };
   };
 
   programs.direnv = {
