@@ -8,11 +8,12 @@ cfg.initial_cols = 180
 cfg.initial_rows = 48
 cfg.audible_bell = "Disabled"
 cfg.enable_tab_bar = true
+cfg.use_fancy_tab_bar = false
+cfg.tab_max_width = 60
 cfg.enable_scroll_bar = false
 cfg.window_close_confirmation = "NeverPrompt"
-cfg.window_padding = {
-  bottom = 0,
-}
+cfg.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+cfg.window_padding = { bottom = 0 }
 
 -- Colors
 cfg.color_scheme = "tokyonight"
@@ -23,7 +24,13 @@ cfg.font_size = 13.0
 cfg.line_height = 1.2
 cfg.adjust_window_size_when_changing_font_size = false
 
--- Keys
+-- maximize window size on startup
+wezterm.on("gui-startup", function(cmd)
+  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
+
+-- Toggle terminal with cmd+enter
 local toggle_terminal = function(_, pane)
   local tab = pane:tab()
   local panes = tab:panes_with_info()
@@ -41,6 +48,7 @@ local toggle_terminal = function(_, pane)
   end
 end
 
+-- Keymaps
 local super = "SUPER"
 cfg.leader = { key = "a", mods = super }
 
