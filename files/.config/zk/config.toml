@@ -39,7 +39,7 @@ standups = "--sort created- --tag standup"
 
 [alias]
 # Edit the last modified note.
-last = "zk edit --limit 1 --sort modified- $@"
+last = "zk edit --limit 1 --sort modified- $argv"
 
 # Edit the notes selected interactively among the notes created the last two weeks.
 recent = "zk edit --sort created- --created-after 'last two weeks' --interactive"
