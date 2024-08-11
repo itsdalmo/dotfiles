@@ -28,7 +28,7 @@ hashtags = true
 
 [tool]
 editor = "nvim"
-pager = "less -FIRX"
+pager = ""
 
 # Command used to preview a note during interactive fzf mode.
 fzf-preview = "bat -p --color always {-1}"
