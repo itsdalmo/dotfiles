@@ -25,7 +25,6 @@ template = "daily.md"
 
 [format.markdown]
 hashtags = true
-colon-tags = true
 
 [tool]
 editor = "nvim"
