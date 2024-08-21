@@ -75,6 +75,8 @@ cfg.keys = {
   { key = "7", mods = super, action = act.ActivateTab(6) },
   { key = "8", mods = super, action = act.ActivateTab(7) },
   { key = "9", mods = super, action = act.ActivateTab(-1) },
+  { key = "LeftArrow", mods = super, action = act.MoveTabRelative(-1) },
+  { key = "RightArrow", mods = super, action = act.MoveTabRelative(1) },
 
   -- Terminal
   { key = "Enter", mods = super, action = wezterm.action_callback(toggle_terminal) },
