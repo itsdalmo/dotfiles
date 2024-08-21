@@ -21,7 +21,7 @@ in
     GOPATH = "$HOME/go";
     PAGER = "less -FirSwX";
     RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
-    ZK_NOTEBOOK_DIR = "${homeDirectory}/code/github.com/itsdalmo/notes";
+    ZK_NOTEBOOK_DIR = "${homeDirectory}/code/github.com/itsdalmo/notebook";
   };
 
   # FIXME: Workaround since we cannot set the correct mode on symlinks (see SO answer):
@@ -51,6 +51,7 @@ in
     "ideavim".source = ./files/.config/ideavim;
     "nix".source = ./files/.config/nix;
     "ripgrep".source = ./files/.config/ripgrep;
+    "starship.toml".source = ./files/.config/starship.toml;
     "wezterm".source = ./files/.config/wezterm;
     "zk".source = ./files/.config/zk;
 
@@ -180,6 +181,11 @@ in
         file = "extras/sublime/tokyonight_night.tmTheme";
       };
     };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   programs.direnv = {
