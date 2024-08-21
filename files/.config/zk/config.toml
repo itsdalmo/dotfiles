@@ -1,10 +1,13 @@
 # NOTEBOOK SETTINGS
 [notebook]
-dir = "~/code/github.com/itsdalmo/notes"
+dir = "~/code/github.com/itsdalmo/notebook"
 
 [note]
 language = "en"
 extension = "md"
+
+# Exlude the repository README
+exclude = ["README.md"]
 
 # Template used to generate a note's content.
 # If not an absolute path, it is relative to .zk/templates/
