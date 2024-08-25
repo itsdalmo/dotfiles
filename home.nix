@@ -140,6 +140,7 @@ in
       cmp-nvim-lsp
       cmp-path
       conform-nvim
+      lazygit-nvim
       nvim-cmp
       nvim-lint
       nvim-lspconfig

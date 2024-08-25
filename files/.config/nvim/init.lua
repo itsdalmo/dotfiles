@@ -111,3 +111,7 @@ end)
 later(function()
   require("plugins.zk")
 end)
+
+later(function()
+  require("plugins.lazygit")
+end)

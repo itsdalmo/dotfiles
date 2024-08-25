@@ -41,11 +41,6 @@ map("n", "[w", utils.diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 map("n", "]e", utils.diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 map("n", "[e", utils.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 
--- Lazygit
-map("n", "<leader>gg", function()
-  require("utils").float_term({ "lazygit" }, { esc_esc = false })
-end, { desc = "Lazygit" })
-
 -- Quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
