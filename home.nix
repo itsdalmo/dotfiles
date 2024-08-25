@@ -49,14 +49,12 @@ in
     "fd".source = ./files/.config/fd;
     "git".source = ./files/.config/git;
     "ideavim".source = ./files/.config/ideavim;
+    "nvim".source = ./files/.config/nvim;
     "nix".source = ./files/.config/nix;
     "ripgrep".source = ./files/.config/ripgrep;
     "starship.toml".source = ./files/.config/starship.toml;
     "wezterm".source = ./files/.config/wezterm;
     "zk".source = ./files/.config/zk;
-
-    # Neovim has to be writeable since we use lazyvim to install plugins
-    "nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/code/github.com/itsdalmo/dotfiles/files/.config/nvim";
 
     # The root fish config has to be managed by home-manager
     # (in order to add fzf/zoxide/etc)
