@@ -12,22 +12,20 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
-      # Overlay some packages form unstable.
-      unstableOverlays = final: prev: {
-        neovim = (import inputs.nixpkgs-unstable { system = prev.system; config = prev.config; }).neovim;
-        devbox = (import inputs.nixpkgs-unstable { system = prev.system; config = prev.config; }).devbox;
-        zk = (import inputs.nixpkgs-unstable { system = prev.system; config = prev.config; }).zk;
+      # Add unstable packages
+      unstableOverlay = final: prev: {
+        unstable = (import inputs.nixpkgs-unstable { system = prev.system; config = prev.config; });
       };
       # Helper function to create package sets
       mkPkgs = system: import nixpkgs {
         inherit system;
-        overlays = [ (import ./nix/overlays) unstableOverlays ];
+        overlays = [ (import ./nix/overlays) unstableOverlay ];
       };
       # Create home-manager configuration for system/user.
       mkHome = { system, user }: home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs system;
         modules = [ ./home.nix ];
-        extraSpecialArgs = { inherit user; };
+        extraSpecialArgs = { inherit user inputs; };
       };
       # Helper function to add outputs for each supported system.
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];

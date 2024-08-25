@@ -48,6 +48,16 @@ function M.toggle_diagnostics()
   end
 end
 
+local diffthis = false
+function M.toggle_diffthis()
+  diffthis = not diffthis
+  if diffthis then
+    vim.cmd("windo diffthis")
+  else
+    vim.cmd("windo diffoff")
+  end
+end
+
 function M.toggle_diff()
   local bufnr = vim.api.nvim_get_current_buf()
   vim.b[bufnr].diff_enabled = not (vim.b[bufnr].diff_enabled or false)

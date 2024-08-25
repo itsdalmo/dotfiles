@@ -71,7 +71,6 @@ in
   home.packages = with pkgs; [
     aws-vault
     awscli2
-    devbox
     eza
     fd
     gh
@@ -83,44 +82,15 @@ in
     jetbrains-mono
     jq
     lazygit
-    neovim
     nerdfonts
     ripgrep
     teleport
+    tfcheck
     tfswitch
     typescript
+    unstable.devbox
+    unstable.zk
     yubikey-manager
-    zk
-
-    # Mason/TS dependencies (neovim)
-    cargo
-    gcc
-    nodejs
-
-    # LSPs/linters/formatters
-    ansible-language-server
-    ansible-lint
-    buf
-    dockerfile-language-server-nodejs
-    gofumpt
-    golangci-lint
-    gopls
-    jsonnet # also provides jsonnetfmt
-    jsonnet-language-server
-    kics
-    lua-language-server
-    nil
-    nixpkgs-fmt
-    nodePackages.prettier
-    nodePackages.typescript-language-server
-    shellcheck
-    shfmt
-    stylua
-    terraform-ls
-    tfcheck
-    tflint
-    vscode-langservers-extracted # markdown, eslint, css, json, html
-    yaml-language-server
 
     # Installed another way (brew/package manager):
     # vscode
@@ -129,6 +99,7 @@ in
     # fish
     # fisher
     # fzf
+    # neovim
 
     # Use nix.shell instead:
     # apache-maven
@@ -163,6 +134,75 @@ in
     fileWidgetCommand = "fd --follow --hidden .";
   };
 
+  programs.neovim = {
+    enable = true;
+    package = pkgs.unstable.neovim-unwrapped;
+    plugins = with pkgs.unstable.vimPlugins; [
+      cmp-buffer
+      cmp-nvim-lsp
+      cmp-path
+      conform-nvim
+      nvim-cmp
+      nvim-lint
+      nvim-lspconfig
+      nvim-navic
+      nvim-treesitter.withAllGrammars
+      nvim-ts-autotag
+      persistence-nvim
+      plenary-nvim
+      ts-comments-nvim
+      zk-nvim
+
+      (pkgs.unstable.vimUtils.buildVimPlugin {
+        pname = "mini.nvim";
+        version = "2024-08-24";
+        src = pkgs.unstable.fetchFromGitHub {
+          owner = "echasnovski";
+          repo = "mini.nvim";
+          rev = "3cf9265bbde75d1358d126701eb6055034491df6";
+          sha256 = "sha256-GPIZTeLo/PK1+tjSgiNDUnFWGmvhIGf3kdaNBQ4CSSc=";
+        };
+      })
+      (pkgs.unstable.vimUtils.buildVimPlugin {
+        pname = "tokyonight.nvim";
+        version = "2024-07-24";
+        src = pkgs.unstable.fetchFromGitHub {
+          owner = "folke";
+          repo = "tokyonight.nvim";
+          rev = "2cd12582c98a3552032824ffa67fd44b4d81184a";
+          sha256 = "sha256-5QeY3EevOQzz5PHDW2CUVJ7N42TRQdh7QOF9PH1YxkU=";
+        };
+      })
+    ];
+
+    withNodeJs = false;
+    withPython3 = false;
+    extraPackages = with pkgs; [
+      ansible-language-server
+      ansible-lint
+      buf
+      dockerfile-language-server-nodejs
+      gofumpt
+      golangci-lint
+      gopls
+      jsonnet # also provides jsonnetfmt
+      jsonnet-language-server
+      kics
+      lua-language-server
+      nil
+      nixpkgs-fmt
+      nodePackages.prettier
+      nodePackages.typescript-language-server
+      shellcheck
+      shfmt
+      stylua
+      terraform-ls
+      tflint
+      vscode-langservers-extracted # markdown, eslint, css, json, html
+      yaml-language-server
+    ];
+  };
+
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
@@ -176,7 +216,7 @@ in
           owner = "folke";
           repo = "tokyonight.nvim";
           rev = "b0e7c7382a7e8f6456f2a95655983993ffda745e";
-          sha256 = "sha256-Fxakkz4+BTbvDLjRggZUVVhVEbg1b/MuuIC1rGrCwVA=";
+          sha256 = "sha256-5QeY3EevOQzz5PHDW2CUVJ7N42TRQdh7QOF9PH1YxkU=";
         };
         file = "extras/sublime/tokyonight_night.tmTheme";
       };

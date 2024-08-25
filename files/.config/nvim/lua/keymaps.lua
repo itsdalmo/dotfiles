@@ -61,6 +61,7 @@ map("n", "<leader>tf", require("utils").toggle_autoformat, { desc = "Autoformat"
 map("n", "<leader>tc", require("utils").toggle_conceal, { desc = "Conceal" })
 map("n", "<leader>td", require("utils").toggle_diagnostics, { desc = "Diagnostics" })
 map("n", "<leader>tw", require("utils").toggle_wrap, { desc = "Wrap (soft)" })
+map("n", "<leader>tD", require("utils").toggle_diffthis, { desc = "Diffthis" })
 
 -- Window
 map("n", "<leader>wv", "<cmd>vsplit<cr>", { desc = "Split vertical" })
