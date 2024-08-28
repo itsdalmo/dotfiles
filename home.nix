@@ -145,13 +145,24 @@ in
       nvim-lint
       nvim-lspconfig
       nvim-navic
-      nvim-treesitter.withAllGrammars
       nvim-ts-autotag
       persistence-nvim
       plenary-nvim
       ts-comments-nvim
       zk-nvim
 
+      (nvim-treesitter.withPlugins (_: nvim-treesitter.allGrammars ++ [
+        (pkgs.unstable.tree-sitter.buildGrammar {
+          language = "river";
+          version = "eafcdc5";
+          src = pkgs.fetchFromGitHub {
+            owner = "grafana";
+            repo = "tree-sitter-river";
+            rev = "eafcdc5147f985fea120feb670f1df7babb2f79e";
+            sha256 = "sha256-fhuIO++hLr5DqqwgFXgg8QGmcheTpYaYLMo7117rjyk=";
+          };
+        })
+      ]))
       (pkgs.unstable.vimUtils.buildVimPlugin {
         pname = "mini.nvim";
         version = "2024-08-24";
@@ -174,9 +185,8 @@ in
       })
     ];
 
-    withNodeJs = false;
-    withPython3 = false;
-    extraPackages = with pkgs; [
+    extraPackages = with pkgs.unstable; [
+      grafana-alloy
       ansible-language-server
       ansible-lint
       buf
@@ -200,6 +210,11 @@ in
       vscode-langservers-extracted # markdown, eslint, css, json, html
       yaml-language-server
     ];
+
+    withNodeJs = false;
+    withPython3 = false;
+    withRuby = false;
+
   };
 
   programs.zoxide = {

@@ -18,6 +18,12 @@ conform.setup({
         },
       },
     },
+
+    -- Alloy formatter (for river configuration language)
+    alloy = {
+      command = "alloy",
+      args = { "fmt", "$FILENAME" },
+    },
   },
   formatters_by_ft = {
     bash = { "shfmt" },
@@ -31,6 +37,7 @@ conform.setup({
     markdown = { "prettier", "injected" },
     nix = { "nixpkgs_fmt" },
     proto = { "buf" },
+    river = { "alloy" },
     sh = { "shfmt" },
     sql = { "sql_formatter" },
     yaml = { "prettier" },
