@@ -20,10 +20,7 @@ conform.setup({
     },
 
     -- Alloy formatter (for river configuration language)
-    alloy = {
-      command = "alloy",
-      args = { "fmt", "$FILENAME" },
-    },
+    alloy = { command = "alloy", args = { "fmt", "-" } },
   },
   formatters_by_ft = {
     bash = { "shfmt" },
