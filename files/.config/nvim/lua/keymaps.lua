@@ -40,6 +40,8 @@ map("n", "]w", utils.diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", utils.diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 map("n", "]e", utils.diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 map("n", "[e", utils.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+map("n", "]t", "gt", { desc = "Next tab" })
+map("n", "[t", "gT", { desc = "Prev tab" })
 
 -- Quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
