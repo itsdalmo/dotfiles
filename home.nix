@@ -165,12 +165,12 @@ in
       ]))
       (pkgs.unstable.vimUtils.buildVimPlugin {
         pname = "mini.nvim";
-        version = "2024-08-24";
+        version = "2024-09-05";
         src = pkgs.unstable.fetchFromGitHub {
           owner = "echasnovski";
           repo = "mini.nvim";
-          rev = "3cf9265bbde75d1358d126701eb6055034491df6";
-          sha256 = "sha256-GPIZTeLo/PK1+tjSgiNDUnFWGmvhIGf3kdaNBQ4CSSc=";
+          rev = "14f81b96d850d561b6ed0c1e6715fdd724e4447f";
+          sha256 = "sha256-hRlE+3ts0u9QWKldj+vsRPssPeuFpLG4T5NFe7RaLtE=";
         };
       })
       (pkgs.unstable.vimUtils.buildVimPlugin {
