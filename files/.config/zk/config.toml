@@ -44,11 +44,11 @@ standups = "--sort created- --tag standup"
 # Edit the last modified note.
 last = "zk edit --limit 1 --sort modified- $argv"
 
+# Open the daily
+daily = "zk new daily $argv"
+
 # Edit the notes selected interactively among the notes created the last two weeks.
 recent = "zk edit --sort created- --created-after 'last two weeks' --interactive"
-
-# Open the daily
-daily = "zk new daily"
 
 # LSP (EDITOR INTEGRATION)
 [lsp]
