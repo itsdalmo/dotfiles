@@ -1,5 +1,12 @@
 local pick = require("mini.pick")
-pick.setup()
+pick.setup({
+  mappings = {
+    scroll_left = "<C-h>",
+    scroll_down = "<C-j>",
+    scroll_up = "<C-k>",
+    scroll_right = "<C-l>",
+  },
+})
 vim.ui.select = pick.ui_select
 
 pick.registry.buffers = function(local_opts)
