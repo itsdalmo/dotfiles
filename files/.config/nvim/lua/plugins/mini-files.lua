@@ -17,7 +17,7 @@ files.setup({
 local map_split = function(buf_id, lhs, direction)
   local rhs = function()
     local new_target_window
-    vim.api.nvim_win_call(files.get_target_window(), function()
+    vim.api.nvim_win_call(files.get_explorer_state().target_window, function()
       vim.cmd("belowright " .. direction .. " split")
       new_target_window = vim.api.nvim_get_current_win()
     end)
