@@ -89,7 +89,7 @@ local servers = {
   },
   terraformls = {},
   tflint = {},
-  tsserver = {
+  ts_ls = {
     settings = {
       typescript = {
         format = {
