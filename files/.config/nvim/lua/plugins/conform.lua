@@ -23,6 +23,7 @@ conform.setup({
     alloy = { command = "alloy", args = { "fmt", "-" } },
   },
   formatters_by_ft = {
+    alloy = { "alloy" },
     bash = { "shfmt" },
     bzl = { "buildifier" },
     fish = { "fish_indent" },
@@ -34,7 +35,6 @@ conform.setup({
     markdown = { "prettier", "injected" },
     nix = { "nixpkgs_fmt" },
     proto = { "buf" },
-    river = { "alloy" },
     sh = { "shfmt" },
     sql = { "sql_formatter" },
     yaml = { "prettier" },

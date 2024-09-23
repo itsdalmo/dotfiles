@@ -61,7 +61,7 @@ vim.opt.shortmess:append("c")
 -- add filetypes
 vim.filetype.add({
   extension = {
-    alloy = "river",
+    alloy = "alloy",
     gohtml = "gohtml",
     gotmpl = "gotmpl",
     tfstate = "json",

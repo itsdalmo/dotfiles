@@ -20,3 +20,4 @@ local opts = {
 
 require("nvim-treesitter.configs").setup(opts)
 vim.treesitter.language.register("html", "gohtml")
+vim.treesitter.language.register("river", "alloy")
