@@ -57,7 +57,7 @@ later(function()
 end)
 
 later(function()
-  require("plugins.mini-hipatterns")
+  require("plugins.todo-comments")
 end)
 
 later(function()
