@@ -149,7 +149,6 @@ in
       nvim-ts-autotag
       persistence-nvim
       plenary-nvim
-      todo-comments-nvim
       ts-comments-nvim
       zk-nvim
 
