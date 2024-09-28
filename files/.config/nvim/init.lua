@@ -37,7 +37,7 @@ later(function()
 end)
 
 later(function()
-  require("mini.visits").setup()
+  require("plugins.mini-visits")
 end)
 
 later(function()
