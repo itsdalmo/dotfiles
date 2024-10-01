@@ -37,6 +37,10 @@ later(function()
 end)
 
 later(function()
+  require("plugins.mini-bracketed")
+end)
+
+later(function()
   require("plugins.mini-visits")
 end)
 

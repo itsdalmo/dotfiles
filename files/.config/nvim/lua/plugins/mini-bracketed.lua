@@ -1,0 +1,16 @@
+require("mini.bracketed").setup({
+  buffer     = { suffix = 'b', options = {} },
+  comment    = { suffix = 'c', options = {} },
+  conflict   = { suffix = 'x', options = {} },
+  diagnostic = { suffix = 'd', options = {} },
+  indent     = { suffix = 'i', options = {} },
+  oldfile    = { suffix = 'o', options = {} },
+  quickfix   = { suffix = 'q', options = {} },
+  treesitter = { suffix = 't', options = {} },
+  file       = { suffix = '' },
+  jump       = { suffix = '' },
+  location   = { suffix = '' },
+  undo       = { suffix = '' },
+  window     = { suffix = '' },
+  yank       = { suffix = '' },
+})
