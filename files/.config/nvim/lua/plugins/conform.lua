@@ -21,6 +21,18 @@ conform.setup({
 
     -- Alloy formatter (for river configuration language)
     alloy = { command = "alloy", args = { "fmt", "-" } },
+
+    -- Deno formatter (replaces prettier)
+    deno = {
+      command = "deno",
+      args = function(_, ctx)
+        local ext = vim.bo[ctx.buf].filetype
+        if ext == "markdown" then
+          ext = "md"
+        end
+        return { "fmt", "-", "--unstable-yaml", "--line-width", "120", "--ext", ext }
+      end,
+    },
   },
   formatters_by_ft = {
     alloy = { "alloy" },
@@ -32,12 +44,12 @@ conform.setup({
     jsonnet = { "jsonnetfmt" },
     libsonnet = { "jsonnetfmt" },
     lua = { "stylua" },
-    markdown = { "prettier", "injected" },
+    markdown = { "deno", "injected" },
     nix = { "nixpkgs_fmt" },
     proto = { "buf" },
     sh = { "shfmt" },
     sql = { "sql_formatter" },
-    yaml = { "prettier" },
+    yaml = { "deno" },
   },
 })
 

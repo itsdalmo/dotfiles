@@ -187,6 +187,7 @@ in
     ];
 
     extraPackages = with pkgs.unstable; [
+      deno
       grafana-alloy
       ansible-language-server
       ansible-lint
@@ -201,7 +202,6 @@ in
       lua-language-server
       nil
       nixpkgs-fmt
-      nodePackages.prettier
       nodePackages.typescript-language-server
       shellcheck
       shfmt
