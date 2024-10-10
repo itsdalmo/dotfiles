@@ -26,7 +26,7 @@ function M.toggle_autoformat()
 end
 
 function M.toggle_wrap()
-  wrap = not vim.opt.wrap:get()
+  local wrap = not vim.opt.wrap:get()
   if wrap then
     vim.opt.wrap = true
     vim.notify("soft wrap enabled")
