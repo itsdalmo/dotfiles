@@ -13,14 +13,13 @@ function M.toggle_conceal()
   end
 end
 
-local autoformat = true
 function M.toggle_autoformat()
-  autoformat = not autoformat
+  local bufnr = vim.api.nvim_get_current_buf()
+  local autoformat = not (vim.b[bufnr].autoformat ~= false)
+  vim.b[bufnr].autoformat = autoformat
   if autoformat then
-    vim.b.autoformat = nil
     vim.notify("autoformat enabled")
   else
-    vim.b.autoformat = false
     vim.notify("autoformat disabled")
   end
 end
@@ -89,7 +88,7 @@ end
 
 function M.format(opts)
   local buf = vim.api.nvim_get_current_buf()
-  if vim.b.autoformat == false and not (opts and opts.force) then
+  if vim.b[buf].autoformat == false and not (opts and opts.force) then
     return
   end
   require("conform").format({ bufnr = buf, lsp_fallback = true })
