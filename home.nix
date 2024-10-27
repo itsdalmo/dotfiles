@@ -149,6 +149,7 @@ in
       nvim-ts-autotag
       persistence-nvim
       plenary-nvim
+      tokyonight-nvim
       ts-comments-nvim
       zk-nvim
 
@@ -166,22 +167,12 @@ in
       ]))
       (pkgs.unstable.vimUtils.buildVimPlugin {
         pname = "mini.nvim";
-        version = "2024-09-28";
+        version = "2024-10-26";
         src = pkgs.unstable.fetchFromGitHub {
           owner = "echasnovski";
           repo = "mini.nvim";
-          rev = "848c5e8f428faf843051768e0d56104cd02aea1f";
-          sha256 = "sha256-1SHODzMY4fIB5lqv/SMclSJS7S9MlPOYxTXOlZ+nJNg=";
-        };
-      })
-      (pkgs.unstable.vimUtils.buildVimPlugin {
-        pname = "tokyonight.nvim";
-        version = "2024-07-24";
-        src = pkgs.unstable.fetchFromGitHub {
-          owner = "folke";
-          repo = "tokyonight.nvim";
-          rev = "2cd12582c98a3552032824ffa67fd44b4d81184a";
-          sha256 = "sha256-5QeY3EevOQzz5PHDW2CUVJ7N42TRQdh7QOF9PH1YxkU=";
+          rev = "919b953f044d97a2243cc2d1f0b316a199434127";
+          sha256 = "sha256-1FjoegYDYH6J2I6Pkpfa5EuX2oHw2D8Zb+sACZz4UkE=";
         };
       })
     ];
