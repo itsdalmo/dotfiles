@@ -85,7 +85,7 @@
       autohide = true;
       mru-spaces = false;
       show-recents = false;
-      tilesize = 64;
+      tilesize = 54;
       wvous-br-corner = 5;
     };
 
@@ -93,7 +93,6 @@
       askForPassword = true;
       askForPasswordDelay = 0;
     };
-
   };
 
   # Misc

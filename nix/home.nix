@@ -39,7 +39,7 @@ in
           };
         };
     in
-    builtins.listToAttrs (map copy files) // (if pkgs.stdenv.isDarwin then { ".Brewfile".source = ../files/.Brewfile; } else { });
+    builtins.listToAttrs (map copy files);
 
   xdg.enable = true;
   xdg.configFile = {
