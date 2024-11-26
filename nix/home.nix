@@ -206,20 +206,20 @@ in
     enableFishIntegration = true;
   };
 
-  # programs.bat = {
-  #   enable = true;
-  #   themes = {
-  #     tokyonight = {
-  #       src = pkgs.fetchFromGitHub {
-  #         owner = "folke";
-  #         repo = "tokyonight.nvim";
-  #         rev = "b0e7c7382a7e8f6456f2a95655983993ffda745e";
-  #         sha256 = "sha256-5QeY3EevOQzz5PHDW2CUVJ7N42TRQdh7QOF9PH1YxkU=";
-  #       };
-  #       file = "extras/sublime/tokyonight_night.tmTheme";
-  #     };
-  #   };
-  # };
+  programs.bat = {
+    enable = true;
+    themes = {
+      tokyonight = {
+        src = pkgs.fetchFromGitHub {
+          owner = "folke";
+          repo = "tokyonight.nvim";
+          rev = "c2725eb6d086c8c9624456d734bd365194660017";
+          sha256 = "sha256-vKXlFHzga9DihzDn+v+j3pMNDfvhYHcCT8GpPs0Uxgg=";
+        };
+        file = "extras/sublime/tokyonight_night.tmTheme";
+      };
+    };
+  };
 
   programs.starship = {
     enable = true;
