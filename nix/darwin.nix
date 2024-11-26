@@ -82,10 +82,10 @@
     };
 
     dock = {
-      autohide = true;
+      autohide = false;
       mru-spaces = false;
       show-recents = false;
-      tilesize = 54;
+      tilesize = 44;
       wvous-br-corner = 5;
     };
 
