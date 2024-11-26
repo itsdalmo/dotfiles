@@ -163,8 +163,8 @@ in
         src = pkgs.unstable.fetchFromGitHub {
           owner = "echasnovski";
           repo = "mini.nvim";
-          rev = "919b953f044d97a2243cc2d1f0b316a199434127";
-          sha256 = "sha256-1FjoegYDYH6J2I6Pkpfa5EuX2oHw2D8Zb+sACZz4UkE=";
+          rev = "c8922aef8207137e66c80acdb9523668599ba62a";
+          sha256 = "sha256-1WjDwPxUftzKpf/Dpzkj7TaeamkfvEVPZ3ZdbfkbzGs=";
         };
       })
     ];
