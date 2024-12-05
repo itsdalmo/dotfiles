@@ -16,6 +16,12 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Wezterm is broken on main: https://github.com/NixOS/nixpkgs/issues/336069
+    wezterm-nightly = {
+      url = "github:wez/wezterm?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, darwin, ... }@inputs:
