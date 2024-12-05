@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 let
-  platform = "aarch64-darwin";
   hostName = "dalmobook";
   user = "dalmo";
 in
@@ -46,7 +45,4 @@ in
     "Azure VPN Client" = 1553936137;
     "Bear" = 1091189122;
   };
-
-  # Hardware configuration
-  nixpkgs.hostPlatform = lib.mkDefault platform;
 }

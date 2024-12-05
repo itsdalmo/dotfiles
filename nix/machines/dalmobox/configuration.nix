@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  hostName = "nixos-vm";
+  hostName = "dalmobox";
   user = "dalmo";
 in
 {
@@ -30,7 +30,32 @@ in
 
   networking.hostName = hostName;
 
+  # Prevent suspend and hibernation
+  # https://www.freedesktop.org/software/systemd/man/latest/sleep.conf.d.html
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=no
+    AllowHibernation=no
+  '';
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+
+  # Enable hardware graphics
+  hardware.graphics = {
+    enable = true;
+  };
+
+  hardware.nvidia = {
+    open = false;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;
+    nvidiaSettings = true;
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
 }
+
