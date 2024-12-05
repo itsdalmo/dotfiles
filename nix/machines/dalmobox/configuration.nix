@@ -28,6 +28,16 @@ in
     ];
   };
 
+  environment.systemPackages = with pkgs; [
+    _1password
+    _1password-gui
+    brave
+    discord
+    firefox
+    signal-desktop
+    slack
+  ];
+
   networking.hostName = hostName;
 
   # Prevent suspend and hibernation
