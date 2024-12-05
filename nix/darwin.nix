@@ -41,14 +41,14 @@
       "numi"
       "obsidian"
       "postman"
-      "rectangle"
+      "raycast"
       "sensiblesidebuttons"
       "signal"
       "slack"
       "spotify"
+      "tailscale"
       "visual-studio-code"
       "wezterm"
-      "tailscale"
     ];
   };
 
