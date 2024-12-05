@@ -25,7 +25,7 @@
     curl
     git
     unzip
-    wezterm
+    wezterm-nightly # NOTE: Wezterm is broken on main
   ];
 
   # Add fish shell
