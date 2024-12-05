@@ -60,22 +60,21 @@
   };
 
   environment.gnome.excludePackages = (with pkgs; [
-    gedit
-    gnome-photos
-    gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    cheese
-    gnome-music
-    gnome-terminal
-    epiphany
-    geary
-    evince
-    gnome-characters
-    totem
-    tali
-    iagno
-    hitori
     atomix
+    cheese
+    epiphany
+    evince
+    geary
+    gedit
+    gnome-characters
+    gnome-music
+    gnome-photos
+    gnome-terminal
+    gnome-tour
+    hitori
+    iagno
+    tali
+    totem
   ]);
 
   # Enable sound with pipewire
