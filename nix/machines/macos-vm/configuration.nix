@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 let
-  platform = "aarch64-darwin";
   hostName = "macos-vm";
   user = "dalmo";
 in
@@ -41,7 +40,4 @@ in
 
   # No mac apps since we are not logged in
   homebrew.masApps = { };
-
-  # Hardware configuration
-  nixpkgs.hostPlatform = lib.mkDefault platform;
 }
