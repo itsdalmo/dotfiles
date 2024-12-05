@@ -60,22 +60,21 @@
   };
 
   environment.gnome.excludePackages = (with pkgs; [
-    gedit
-    gnome-photos
-    gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    cheese
-    gnome-music
-    gnome-terminal
-    epiphany
-    geary
-    evince
-    gnome-characters
-    totem
-    tali
-    iagno
-    hitori
     atomix
+    cheese
+    epiphany
+    evince
+    geary
+    gedit
+    gnome-characters
+    gnome-music
+    gnome-photos
+    gnome-terminal
+    gnome-tour
+    hitori
+    iagno
+    tali
+    totem
   ]);
 
   # Enable sound with pipewire
@@ -105,5 +104,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

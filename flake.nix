@@ -72,6 +72,13 @@
       };
 
       nixosConfigurations = {
+        dalmobox = nixpkgs.lib.nixosSystem {
+          pkgs = mkPkgs "x86_64-linux";
+          modules = [
+            ./nix/machines/dalmobox/configuration.nix
+            home-manager.nixosModules.home-manager
+          ];
+        };
         nixos-vm = nixpkgs.lib.nixosSystem {
           pkgs = mkPkgs "aarch64-linux";
           modules = [
