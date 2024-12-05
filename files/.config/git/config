@@ -12,10 +12,10 @@
 	excludesfile = ~/.config/git/ignore
 
 [diff]
-	tool = default-difftool
+	tool = nvimdiff
 
-[difftool "default-difftool"]
-	cmd = code --wait --diff $LOCAL $REMOTE
+[difftool "nvimdiff"]
+	cmd = nvim -d $LOCAL $REMOTE
 
 [credential]
 	helper      = !aws codecommit credential-helper $@
@@ -34,6 +34,5 @@
   format = ssh
 
 [gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
   allowedSignersFile = ~/.ssh/allowed_signers
 
