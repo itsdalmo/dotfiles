@@ -5,6 +5,7 @@ local cfg = {}
 
 -- Workaround
 cfg.front_end = "WebGpu"
+cfg.enable_wayland = false
 
 -- General
 cfg.initial_cols = 180
