@@ -53,7 +53,7 @@ in
 
 
   # Enable hardware graphics
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
   };
 
