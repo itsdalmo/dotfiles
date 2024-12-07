@@ -3,6 +3,9 @@ local act = wezterm.action
 
 local cfg = {}
 
+-- Workaround
+cfg.front_end = "WebGpu"
+
 -- General
 cfg.initial_cols = 180
 cfg.initial_rows = 48
