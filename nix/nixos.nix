@@ -25,7 +25,7 @@
     curl
     git
     unzip
-    wezterm-nightly # NOTE: Wezterm is broken on main
+    wezterm
   ];
 
   # Add fish shell
@@ -60,21 +60,22 @@
   };
 
   environment.gnome.excludePackages = (with pkgs; [
-    atomix
-    cheese
-    epiphany
-    evince
-    geary
     gedit
-    gnome-characters
-    gnome-music
     gnome-photos
-    gnome-terminal
     gnome-tour
-    hitori
-    iagno
-    tali
+  ]) ++ (with pkgs.gnome; [
+    cheese
+    gnome-music
+    gnome-terminal
+    epiphany
+    geary
+    evince
+    gnome-characters
     totem
+    tali
+    iagno
+    hitori
+    atomix
   ]);
 
   # Enable sound with pipewire
@@ -104,5 +105,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
