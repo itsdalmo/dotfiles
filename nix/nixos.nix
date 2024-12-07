@@ -34,6 +34,34 @@
   # Enable docker
   virtualisation.docker.enable = true;
 
+  # Run homebridge in a container
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      homebridge = {
+        image = "docker.io/homebridge/homebridge:2024-11-29";
+        volumes = [
+          "/var/lib/homebridge:/homebridge:rw"
+        ];
+        log-driver = "journald";
+        extraOptions = [
+          "--network=host"
+        ];
+        autoStart = true;
+      };
+    };
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [
+      8581 # Homebridge UI
+      51000 # Homebridge
+    ];
+    allowedUDPPorts = [
+      5353 # Homebridge bonjour
+    ];
+  };
+
   # Enable the OpenSSH daemon
   services.openssh = {
     enable = true;
