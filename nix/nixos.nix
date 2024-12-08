@@ -65,6 +65,7 @@
       6443 # k3s API server
       8581 # Homebridge UI
       51000 # Homebridge
+      31348 # Grafana
     ];
     allowedUDPPorts = [
       5353 # Homebridge bonjour
