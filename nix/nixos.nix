@@ -52,8 +52,17 @@
     };
   };
 
+  services.k3s = {
+    enable = true;
+    role = "server";
+    extraFlags = toString [
+      # "--debug" # Optionally add additional args to k3s
+    ];
+  };
+
   networking.firewall = {
     allowedTCPPorts = [
+      6443 # k3s API server
       8581 # Homebridge UI
       51000 # Homebridge
     ];
