@@ -46,8 +46,8 @@ in
     "fd".source = ../files/.config/fd;
     "git".source = ../files/.config/git;
     "ideavim".source = ../files/.config/ideavim;
-    "nvim".source = ../files/.config/nvim;
     "nix".source = ../files/.config/nix;
+    "nvim".source = ../files/.config/nvim;
     "ripgrep".source = ../files/.config/ripgrep;
     "starship.toml".source = ../files/.config/starship.toml;
     "wezterm".source = ../files/.config/wezterm;
@@ -61,6 +61,9 @@ in
 
     # Home manager wants to install the theme under the bat directory
     "bat/config".source = ../files/.config/bat/config;
+
+    # Lazygit stores its state in the directory
+    "lazygit/config.yml".source = ../files/.config/lazygit/config.yml;
   };
 
   home.packages = with pkgs; [
