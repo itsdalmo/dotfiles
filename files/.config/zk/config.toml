@@ -14,10 +14,10 @@ exclude = ["README.md"]
 template = "default.md"
 
 # The default title used for new note, if no `--title` flag is provided.
-default-title = "Untitled"
+default-title = "UNTITLED"
 
 # Template used to generate a note's filename, without extension.
-filename = "notes/{{ format-date now 'timestamp' }}-{{slug title}}"
+filename = "notes/{{format-date now 'timestamp'}}"
 
 [group.daily]
 paths = ["daily"]
