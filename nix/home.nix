@@ -161,6 +161,7 @@ in
       cmp-path
       conform-nvim
       lazygit-nvim
+      mini-nvim
       nvim-cmp
       nvim-lint
       nvim-lspconfig
@@ -184,16 +185,6 @@ in
           };
         })
       ]))
-      (pkgs.unstable.vimUtils.buildVimPlugin {
-        pname = "mini.nvim";
-        version = "2024-10-26";
-        src = pkgs.unstable.fetchFromGitHub {
-          owner = "echasnovski";
-          repo = "mini.nvim";
-          rev = "690a3b4c78c4956f7ecf770124b522d32084b872";
-          sha256 = "sha256-sQmKO8t/REtucqpxwdVW3x0Uq/c0CdUhZgaNqbT2xno=";
-        };
-      })
     ];
 
     extraPackages = with pkgs.unstable; [
