@@ -97,7 +97,7 @@ later(function()
 end)
 
 later(function()
-  require("plugins.cmp")
+  require("plugins.blink")
 end)
 
 later(function()

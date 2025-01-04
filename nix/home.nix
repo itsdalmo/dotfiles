@@ -131,7 +131,6 @@ in
       "--highlight-line"
       "--info=inline-right"
       "--ansi"
-      "--layout=reverse"
       "--border=none"
       "--color=bg+:#283457"
       "--color=bg:#16161e"
@@ -156,13 +155,10 @@ in
     enable = true;
     package = pkgs.unstable.neovim-unwrapped;
     plugins = with pkgs.unstable.vimPlugins; [
-      cmp-buffer
-      cmp-nvim-lsp
-      cmp-path
+      blink-cmp
       conform-nvim
       lazygit-nvim
       mini-nvim
-      nvim-cmp
       nvim-lint
       nvim-lspconfig
       nvim-navic
