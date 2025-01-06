@@ -187,7 +187,7 @@ in
       deno
       grafana-alloy
       ansible-language-server
-      # ansible-lint
+      ansible-lint
       buf
       dockerfile-language-server-nodejs
       gofumpt
