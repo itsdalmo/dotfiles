@@ -15,7 +15,7 @@ vim.keymap.set("n", "<leader>va", function()
 end, { desc = "Add to visits" })
 
 vim.keymap.set("n", "<leader>vd", function()
-  visits.remove_label({ filter = "core" })
+  visits.remove_label("core")
 end, { desc = "Remove from visits" })
 
 vim.keymap.set("n", "<leader>vv", function()
