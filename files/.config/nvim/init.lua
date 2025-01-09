@@ -10,18 +10,27 @@ now(function()
   require("keymaps")
 end)
 
+-- Theme
 now(function()
-  require("mini.icons").setup()
   require("plugins.tokyonight")
+end)
+
+-- Mini
+now(function()
+  require("plugins.mini-notify")
+end)
+
+now(function()
   require("plugins.mini-starter")
 end)
 
-later(function()
-  require("mini.ai").setup()
+now(function()
+  require("plugins.mini-statusline")
 end)
 
-later(function()
-  require("mini.bufremove").setup()
+now(function()
+  require("mini.icons").setup()
+  MiniIcons.mock_nvim_web_devicons()
 end)
 
 later(function()
@@ -29,11 +38,7 @@ later(function()
 end)
 
 later(function()
-  require("mini.pairs").setup()
-end)
-
-later(function()
-  require("mini.surround").setup()
+  require("mini.ai").setup()
 end)
 
 later(function()
@@ -41,15 +46,11 @@ later(function()
 end)
 
 later(function()
-  require("plugins.mini-visits")
+  require("mini.bufremove").setup()
 end)
 
 later(function()
-  require("plugins.mini-pick")
-end)
-
-later(function()
-  require("plugins.mini-git")
+  require("plugins.mini-clue")
 end)
 
 later(function()
@@ -61,21 +62,39 @@ later(function()
 end)
 
 later(function()
+  require("plugins.mini-git")
+end)
+
+later(function()
   require("plugins.mini-hipatterns")
 end)
 
 later(function()
-  require("plugins.mini-clue")
+  require("mini.misc").setup()
+  MiniMisc.setup_auto_root()
 end)
 
 later(function()
-  require("plugins.mini-notify")
+  require("mini.pairs").setup()
 end)
 
 later(function()
-  require("plugins.mini-statusline")
+  require("plugins.mini-pick")
 end)
 
+later(function()
+  require("mini.surround").setup()
+end)
+
+later(function()
+  require("mini.trailspace").setup()
+end)
+
+later(function()
+  require("plugins.mini-visits")
+end)
+
+-- Other
 later(function()
   require("persistence").setup()
 end)
