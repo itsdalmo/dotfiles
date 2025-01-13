@@ -47,10 +47,3 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "gy", yank_path, { buffer = buf_id, desc = "Yank path" })
   end,
 })
-
-vim.keymap.set("n", "<leader>ft", function()
-  files.open(vim.uv.cwd(), true)
-end, { desc = "File Tree (cwd)" })
-vim.keymap.set("n", "<leader>fl", function()
-  files.open(vim.api.nvim_buf_get_name(0), true)
-end, { desc = "Locate active file (in mini.files)" })

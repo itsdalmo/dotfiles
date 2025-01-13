@@ -1,4 +1,5 @@
 local conform = require("conform")
+
 conform.setup({
   format = {
     timeout_ms = 3000,
@@ -52,7 +53,3 @@ conform.setup({
     yaml = { "deno" },
   },
 })
-
-vim.keymap.set("n", "<localleader>=", function()
-  require("utils").format({ force = true })
-end)

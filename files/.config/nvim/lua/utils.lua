@@ -61,8 +61,7 @@ function M.toggle_diff()
   local bufnr = vim.api.nvim_get_current_buf()
   vim.b[bufnr].diff_enabled = not (vim.b[bufnr].diff_enabled or false)
 
-  require("mini.diff").toggle_overlay()
-
+  MiniDiff.toggle_overlay()
   if vim.b[bufnr].diff_enabled then
     vim.notify("git diff enabled")
   else

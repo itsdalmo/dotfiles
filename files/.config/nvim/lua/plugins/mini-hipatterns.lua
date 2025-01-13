@@ -58,8 +58,3 @@ pick.registry.comments = function(local_opts)
   }
   return pick.start({ source = source })
 end
-
-vim.keymap.set("n", "<leader>st", [[<cmd>Pick comments<cr>]], { desc = "Todo/note/hack/fixme (cwd)" })
-vim.keymap.set("n", "<leader>sT", function()
-  pick.registry.comments({ cwd = vim.fn.expand("%:h") })
-end, { desc = "Todo/note/hack/fixme" })

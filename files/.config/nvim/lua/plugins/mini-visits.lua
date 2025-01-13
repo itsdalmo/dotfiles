@@ -6,9 +6,6 @@ visits.setup({
   },
 })
 
-vim.keymap.set("n", "<leader>fr", function()
-  extra.pickers.visit_paths({ filter = require("mini.visits").gen_filter.this_session() })
-end, { desc = "Recent files" })
 
 vim.keymap.set("n", "<leader>va", function()
   visits.add_label("core")

@@ -27,8 +27,3 @@ vim.api.nvim_create_autocmd("User", {
     vim.wo[win_src].scrollbind, vim.wo.scrollbind = true, true
   end,
 })
-
-vim.keymap.set("n", "<leader>gb", [[<cmd>vert Git blame -- %<cr>]], { desc = "Blame" })
-vim.keymap.set("n", "<leader>gs", function()
-  git.show_at_cursor()
-end, { desc = "Show at cursor" })

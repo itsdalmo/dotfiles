@@ -19,12 +19,7 @@ starter.setup({
     },
     {
       name = "Session restore",
-      action = 'lua require("persistence").load()',
-      section = "Actions",
-    },
-    {
-      name = "Lazy",
-      action = "Lazy",
+      action = [[lua require("persistence").load()]],
       section = "Actions",
     },
     {

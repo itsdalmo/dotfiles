@@ -22,33 +22,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local buffer = event.buf
     local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-    local function map(mode, shortcut, command, desc)
-      local opts = { desc = desc, noremap = true, buffer = buffer }
-      vim.keymap.set(mode, shortcut, command, opts)
-    end
-
-    map("n", "<localleader>k", vim.lsp.buf.hover, "Hover")
-    map("n", "<localleader>gr", [[<cmd>Pick lsp scope="references"<cr>]], "References")
-    map("n", "<localleader>gD", [[<cmd>Pick lsp scope="declaration"<cr>]], "Goto Declaration")
-    map("n", "<localleader>gi", [[<cmd>Pick lsp scope="implementation"<cr>]], "Goto Implementation")
-    map("n", "<localleader>gt", [[<cmd>Pick lsp scope="type_definition"<cr>]], "Goto Type Definition")
-
-    if client.server_capabilities.codeActionProvider then
-      map({ "n", "v" }, "<localleader>.", vim.lsp.buf.code_action, "Code Action")
-    end
-
-    if client.server_capabilities.renameProvider then
-      map("n", "<localleader>r", vim.lsp.buf.rename, "Rename")
-    end
-
-    if client.server_capabilities.signatureHelpProvider then
-      map("n", "<localleader>s", vim.lsp.buf.signature_help, "Signature Help")
-    end
-
-    if client.server_capabilities.definitionProvider then
-      map("n", "<localleader>gd", [[<cmd>Pick lsp scope="definition"<cr>]], "Goto Definition")
-    end
-
     if client.server_capabilities.documentSymbolProvider then
       require("nvim-navic").attach(client, buffer)
     end
