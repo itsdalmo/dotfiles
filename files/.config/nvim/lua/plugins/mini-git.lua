@@ -1,5 +1,4 @@
-local git = require("mini.git")
-git.setup()
+require("mini.git").setup()
 
 -- Only include branch name in the git summary
 vim.api.nvim_create_autocmd("User", {

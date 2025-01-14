@@ -2,6 +2,7 @@
 local path_package = vim.fn.stdpath("data") .. "/site/"
 require("mini.deps").setup({ path = { package = path_package } })
 
+---@diagnostic disable: undefined-global
 local now, later = MiniDeps.now, MiniDeps.later
 
 now(function()
@@ -12,12 +13,14 @@ end)
 
 -- Theme
 now(function()
-  require("plugins.tokyonight")
+  require("tokyonight").setup({ style = "night" })
+  vim.cmd([[colorscheme tokyonight]])
 end)
 
 -- Mini
 now(function()
-  require("plugins.mini-notify")
+  require("mini.notify").setup()
+  vim.notify = MiniNotify.make_notify()
 end)
 
 now(function()
@@ -54,7 +57,7 @@ later(function()
 end)
 
 later(function()
-  require("plugins.mini-diff")
+  require("mini.diff").setup({ options = { wrap_goto = true } })
 end)
 
 later(function()
@@ -136,5 +139,6 @@ later(function()
 end)
 
 later(function()
-  require("plugins.lazygit")
+  -- NOTE: LazyGit does not have a setup function
+  require("lazygit")
 end)

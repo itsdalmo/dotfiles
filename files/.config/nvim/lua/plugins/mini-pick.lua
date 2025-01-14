@@ -1,5 +1,5 @@
-local pick = require("mini.pick")
-pick.setup({
+---@diagnostic disable: undefined-global
+require("mini.pick").setup({
   mappings = {
     scroll_left = "<C-h>",
     scroll_down = "<C-j>",
@@ -7,40 +7,122 @@ pick.setup({
     scroll_right = "<C-l>",
   },
 })
-vim.ui.select = pick.ui_select
+vim.ui.select = MiniPick.ui_select
 
-pick.registry.buffers = function(local_opts)
+MiniPick.registry.buffers = function(local_opts)
   local delete_buffer = function()
-    local current = pick.get_picker_matches().current
-    require("mini.bufremove").delete(current.bufnr)
+    local current = MiniPick.get_picker_matches().current
+    MiniBufremove.delete(current.bufnr)
 
     local items = {}
-    for _, item in ipairs(pick.get_picker_items()) do
+    for _, item in ipairs(MiniPick.get_picker_items()) do
       if current.bufnr ~= item.bufnr then
         table.insert(items, item)
       end
     end
-    pick.set_picker_items(items)
+    MiniPick.set_picker_items(items)
   end
-  pick.builtin.buffers(local_opts, { mappings = { delete = { char = "<C-d>", func = delete_buffer } } })
+  MiniPick.builtin.buffers(local_opts, { mappings = { delete = { char = "<C-d>", func = delete_buffer } } })
 end
 
 -- Support specifying the current directory:
 -- https://github.com/echasnovski/mini.nvim/blob/0f93724569ebf27b6b3bc7130d8044a9020a8cc5/doc/mini-pick.txt#L1135-L1140
-pick.registry.grep_live = function(local_opts)
+MiniPick.registry.grep_live = function(local_opts)
   local opts = { source = { cwd = local_opts.cwd } }
   local_opts.cwd = nil
-  return pick.builtin.grep_live(local_opts, opts)
+  return MiniPick.builtin.grep_live(local_opts, opts)
 end
 
 -- Custom picker to show hidden files using fd as the picker tool:
 -- https://github.com/echasnovski/mini.nvim/issues/830
-pick.registry.files = function(local_opts)
+MiniPick.registry.files = function(local_opts)
   local command = { "fd", "--type=file", "--color=never", "--follow", "--hidden" }
   local show_with_icons = function(buf_id, items, query)
-    return pick.default_show(buf_id, items, query, { show_icons = true })
+    return MiniPick.default_show(buf_id, items, query, { show_icons = true })
   end
   local source = { name = "Files (fd)", show = show_with_icons, cwd = local_opts.cwd }
 
-  return pick.builtin.cli({ command = command }, { source = source })
+  return MiniPick.builtin.cli({ command = command }, { source = source })
 end
+
+-- Custom picker for comments
+MiniPick.registry.comments = function(local_opts)
+  local search = function(cb, opts)
+    local ok, Job = pcall(require, "plenary.job")
+    if not ok then
+      error("search requires https://github.com/nvim-lua/plenary.nvim")
+      return
+    end
+
+    Job:new({
+      command = "rg",
+      args = {
+        "--vimgrep",
+        "--only-matching",
+        "--color=never",
+        "(TODO|NOTE|HACK|FIXME).*$",
+        opts.cwd,
+      },
+      on_exit = vim.schedule_wrap(function(j, code)
+        if code == 2 then
+          error("rg" .. " failed with code " .. code .. "\n" .. table.concat(j:stderr_result(), "\n"))
+        end
+        cb(j:result())
+      end),
+    }):start()
+  end
+
+  local callback = function(lines)
+    local items = {}
+    for _, line in pairs(lines) do
+      local file, row, col, text = line:match("^(.+):(%d+):(%d+):(.*)$")
+      if file then
+        table.insert(items, {
+          text = text,
+          path = file,
+          lnum = tonumber(row),
+          col = tonumber(col),
+        })
+      end
+    end
+    MiniPick.set_picker_items(items)
+  end
+
+  local source = {
+    name = "TODO/NOTE/HACK/FIXME",
+    items = search(callback, { cwd = local_opts.cwd or vim.fn.getcwd() }),
+  }
+  return MiniPick.start({ source = source })
+end
+
+-- -- Register a custom 'visit_paths' picker with a <C-d> mapping
+-- MiniPick.registry.visit_paths = function(local_opts)
+--   local remove_label = function()
+--     local current = MiniPick.get_picker_matches().current
+--     if current and current.path then
+--       visits.remove_label("core", current.path)
+--
+--       local items = {}
+--       for _, item in ipairs(MiniPick.get_picker_items()) do
+--         if current.path ~= item.path then
+--           table.insert(items, item)
+--         end
+--       end
+--       MiniPick.set_picker_items(items)
+--     else
+--       vim.notify("No valid selection to delete the 'core' label.", vim.log.levels.WARN)
+--     end
+--     return false
+--   end
+--
+--   -- Invoke the original visit_paths picker with the custom <C-d> mapping
+--   extra.pickers.visit_paths(local_opts, {
+--     mappings = {
+--       -- Define a new action named 'delete' bound to <C-d>
+--       delete = {
+--         char = "<C-d>",
+--         func = remove_label,
+--       },
+--     },
+--   })
+-- end

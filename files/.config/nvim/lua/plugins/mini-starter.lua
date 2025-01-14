@@ -1,6 +1,4 @@
-local starter = require("mini.starter")
-
-starter.setup({
+require("mini.starter").setup({
   items = {
     {
       name = "New file",

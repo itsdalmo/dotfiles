@@ -1,2 +1,0 @@
--- NOTE: lazygit does not have a setup function
--- require("lazygit").setup()

@@ -1,11 +1,14 @@
 ---@diagnostic disable: undefined-global
-local statusline = require("mini.statusline")
+require("mini.statusline").setup({
+  use_icons = true,
+  set_vim_settings = true,
+})
 
-statusline.section_diff = function()
+MiniStatusline.section_diff = function()
   return ""
 end
 
-statusline.section_filename = function()
+MiniStatusline.section_filename = function()
   if vim.bo.buftype == "terminal" then
     return "%t"
   else
@@ -13,7 +16,7 @@ statusline.section_filename = function()
   end
 end
 
-statusline.section_fileinfo = function()
+MiniStatusline.section_fileinfo = function()
   local filetype = vim.bo.filetype
   if filetype == "" then
     return ""
@@ -21,11 +24,6 @@ statusline.section_fileinfo = function()
   return MiniIcons.get("filetype", filetype) .. " " .. filetype
 end
 
-statusline.section_location = function()
+MiniStatusline.section_location = function()
   return "%l:%v"
 end
-
-return statusline.setup({
-  use_icons = true,
-  set_vim_settings = true,
-})
