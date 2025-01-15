@@ -35,7 +35,7 @@ local yank_path = function()
   if path == nil then
     return vim.notify("Cursor is not on valid entry")
   end
-  vim.fn.setreg(vim.v.register, path)
+  vim.fn.setreg(vim.v.register, vim.fn.fnamemodify(path, ":.")) -- Relative path
 end
 
 vim.api.nvim_create_autocmd("User", {
