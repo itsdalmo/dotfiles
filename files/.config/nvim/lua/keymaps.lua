@@ -41,6 +41,7 @@ map("n", "<leader>gs", [[<cmd>lua MiniGit.show_at_cursor()<cr>]], "Show at curso
 map("n", "<leader>gl", [[<cmd>Pick git_commits path="%"<cr>]], "Show log (buffer)")
 map("n", "<leader>gL", [[<cmd>Pick git_commits<cr>]], "Show log (repository)")
 map("n", "<leader>gd", [[<cmd>lua require("utils").toggle_diff()<cr>]], "Toggle diff")
+map("n", "<leader>go", [[<cmd>lua require("utils").open_github()<cr>]], "Open current file on Github")
 map("n", "<leader>gb", [[<cmd>vert Git blame -- %<cr>]], "Blame")
 
 -- LSP

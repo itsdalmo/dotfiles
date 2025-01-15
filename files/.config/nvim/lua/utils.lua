@@ -101,4 +101,21 @@ function M.diagnostic_goto(next, severity)
   end
 end
 
+function M.open_github()
+  local cmd = { "gh", "browse", vim.fn.expand("%:.") }
+  local git = (MiniGit.get_buf_data() or {})
+
+  if git.head_name ~= nil then
+    table.insert(cmd, "--branch")
+    table.insert(cmd, git.head_name)
+  end
+
+  local output = vim.fn.system(cmd)
+  local exit_code = vim.v.shell_error
+
+  if exit_code ~= 0 then
+    vim.notify("Failed to open on github: " .. output, vim.log.levels.ERROR)
+  end
+end
+
 return M
