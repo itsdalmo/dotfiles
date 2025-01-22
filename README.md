@@ -52,3 +52,15 @@ sudo nixos-rebuild switch --flake github:itsdalmo/dotfiles#nixos-vm
 # Rebuild on updates
 ./scripts/vm.sh rebuild
 ```
+
+## Comparing generations
+
+In order to compare generations we can first build the derivation and then look at the diff:
+
+```sh
+# Build the derivation
+darwin-rebuild build --flake .#dalmobook
+
+# Compare with the current system
+nix store diff-closures /run/current-system ./result
+```
