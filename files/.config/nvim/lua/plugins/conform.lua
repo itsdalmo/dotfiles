@@ -28,10 +28,14 @@ conform.setup({
       command = "deno",
       args = function(_, ctx)
         local ext = vim.bo[ctx.buf].filetype
+        local wrap = "always"
         if ext == "markdown" then
           ext = "md"
+
+          -- Don't wrap prose since it messes up rendering in e.g. Obsidian
+          wrap = "never"
         end
-        return { "fmt", "-", "--unstable-yaml", "--line-width", "120", "--ext", ext }
+        return { "fmt", "-", "--unstable-yaml", "--line-width", "120", "--prose-wrap", wrap, "--ext", ext }
       end,
     },
   },
