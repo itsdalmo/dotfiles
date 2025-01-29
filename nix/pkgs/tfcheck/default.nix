@@ -9,21 +9,21 @@ let
     "aarch64-darwin" = "darwin-arm64";
   };
   checksums = {
-    "x86_64-linux" = "2cd27c3a5dd8aca891e92f31a4d89fecb9a9deddc061208ef581f15cb6dd9fae";
-    "aarch64-linux" = "6e503c9ca5f4cffeea3655eadf3bf1840c784b3c5356e5417e0dc190311fa979";
-    "x86_64-darwin" = "59a78d407be2dac9a6919512be663fb9fbaf146924dfc2132d01a05404066bc5";
-    "aarch64-darwin" = "f97a1551984705abf02d7d1a84713202ee21667ce20eb86a9abcce5573bc5c1e";
+    "x86_64-linux" = "17914w9cglh3d0jl7m2jzrnj8y4cil8r75bc879hf8i8940h8bx7";
+    "aarch64-linux" = "0xq9vggmbvxnzbxw0xfrzmv5vzklf0c2zglbxrchsgxff2ynya6b";
+    "x86_64-darwin" = "0f03yw5afda86clwp6bcdlc8d24mz1ad5rgw1qvnv4flzbk1866s";
+    "aarch64-darwin" = "05wgk11c1d1y06mhdamv4dnpkpv6b30bcb60qq8sy44fz13hilys";
   };
   sys = architectures.${system} or (throw "unsupported system: ${system}");
   sha = checksums.${system} or (throw "unsupported system: ${system}");
   src = pkgs.fetchurl {
-    url = "https://github.com/itsdalmo/tfcheck/releases/download/v0.1.1/tfcheck-0.1.1-${sys}.tar.gz";
+    url = "https://github.com/itsdalmo/tfcheck/releases/download/v0.1.2/tfcheck-0.1.2-${sys}.tar.gz";
     sha256 = sha;
   };
 in
 pkgs.stdenv.mkDerivation {
   pname = "tfcheck";
-  version = "0.1.1";
+  version = "0.1.2";
   inherit src;
 
   sourceRoot = ".";
