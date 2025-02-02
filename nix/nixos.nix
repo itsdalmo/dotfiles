@@ -26,7 +26,9 @@
     curl
     git
     unzip
-    wezterm
+    ghostty
+    # Broken on nixos:
+    # wezterm
   ];
 
   # Add fish shell
