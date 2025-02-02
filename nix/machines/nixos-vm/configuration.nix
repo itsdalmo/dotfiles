@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 let
-  platform = "aarch64-linux";
   hostName = "nixos-vm";
   user = "dalmo";
 in
