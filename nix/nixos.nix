@@ -32,8 +32,8 @@
   # Add fish shell
   programs.fish.enable = true;
 
-  # Enable docker
-  virtualisation.docker.enable = true;
+  # Start ssh agent
+  programs.ssh.startAgent = true;
 
   # Enable the OpenSSH daemon
   services.openssh = {
@@ -41,6 +41,9 @@
     settings.PasswordAuthentication = true;
     settings.PermitRootLogin = "no";
   };
+
+  # Enable docker
+  virtualisation.docker.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
