@@ -94,7 +94,7 @@ map("n", "<leader>tD", [[<cmd>lua require("utils").toggle_diffthis()<cr>]], "Dif
 map("n", "<leader>tb", [[<cmd>lua require("utils").toggle_winbar()<cr>]], "Breadcrumbs (navic)")
 
 -- Visits
-map("n", "<leader>vv", [[<cmd>Pick visit_paths recency_weight=1 filter="core"<cr>]], "Select visits")
+map("n", "<leader>vv", [[<cmd>Pick visit_paths recency_weight=0 filter="core"<cr>]], "Select visits")
 map("n", "<leader>va", [[<cmd>lua MiniVisits.add_label("core")<cr>]], "Add to visits")
 map("n", "<leader>vd", [[<cmd>lua MiniVisits.remove_label("core")<cr>]], "Remove from visits")
 

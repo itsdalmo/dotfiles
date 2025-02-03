@@ -6,9 +6,10 @@ visits.setup({
 })
 
 -- https://github.com/echasnovski/mini.nvim/blob/fcf982a66df4c9e7ebb31a6a01c604caee2cd488/doc/mini-visits.txt#L304-L317
-local sort_latest = MiniVisits.gen_sort.default({ recency_weight = 1 })
+-- NOTE: core_sort does not use recency, and does not manually register visits, which means it is manually sorted
+local core_sort = MiniVisits.gen_sort.default({ recency_weight = 0 })
 local map_iterate_core = function(lhs, direction, desc)
-  local opts = { filter = "core", sort = sort_latest, wrap = false }
+  local opts = { filter = "core", sort = core_sort, wrap = false }
   local rhs = function()
     MiniVisits.iterate_paths(direction, vim.fn.getcwd(), opts)
   end
@@ -21,7 +22,7 @@ map_iterate_core("]]", "backward", "Core label (later)")
 -- Add c-1 ... 9 shortcuts for the paths with the core label
 map_shortcut = function(lhs, index, desc)
   local rhs = function()
-    MiniVisits.iterate_paths("first", nil, { filter = "core", sort = sort_latest, n_times = index, wrap = false })
+    MiniVisits.iterate_paths("first", nil, { filter = "core", sort = core_sort, n_times = index, wrap = false })
   end
   vim.keymap.set("n", lhs, rhs, { desc = desc })
 end
