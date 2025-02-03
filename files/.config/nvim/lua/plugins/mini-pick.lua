@@ -95,34 +95,29 @@ MiniPick.registry.comments = function(local_opts)
   return MiniPick.start({ source = source })
 end
 
--- -- Register a custom 'visit_paths' picker with a <C-d> mapping
--- MiniPick.registry.visit_paths = function(local_opts)
---   local remove_label = function()
---     local current = MiniPick.get_picker_matches().current
---     if current and current.path then
---       visits.remove_label("core", current.path)
---
---       local items = {}
---       for _, item in ipairs(MiniPick.get_picker_items()) do
---         if current.path ~= item.path then
---           table.insert(items, item)
---         end
---       end
---       MiniPick.set_picker_items(items)
---     else
---       vim.notify("No valid selection to delete the 'core' label.", vim.log.levels.WARN)
---     end
---     return false
---   end
---
---   -- Invoke the original visit_paths picker with the custom <C-d> mapping
---   extra.pickers.visit_paths(local_opts, {
---     mappings = {
---       -- Define a new action named 'delete' bound to <C-d>
---       delete = {
---         char = "<C-d>",
---         func = remove_label,
---       },
---     },
---   })
--- end
+-- Register a custom 'visit_paths' picker with a <C-d> mapping
+MiniPick.registry.visit_paths = function(local_opts)
+  local remove_label = function()
+    local current = MiniPick.get_picker_matches().current
+    MiniVisits.remove_label("core", current)
+
+    local items = {}
+    for _, item in ipairs(MiniPick.get_picker_items()) do
+      if current ~= item then
+        table.insert(items, item)
+      end
+    end
+    MiniPick.set_picker_items(items)
+  end
+
+  -- Invoke the original visit_paths picker with the custom <C-d> mapping
+  MiniExtra.pickers.visit_paths(local_opts, {
+    mappings = {
+      -- Define a new action named 'delete' bound to <C-d>
+      delete = {
+        char = "<C-d>",
+        func = remove_label,
+      },
+    },
+  })
+end
