@@ -18,7 +18,8 @@
 
   fonts.packages = with pkgs; [
     jetbrains-mono
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; })
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
   ];
 
   environment.systemPackages = with pkgs; [

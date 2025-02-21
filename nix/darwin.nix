@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  # Manage the nix-daemon
-  services.nix-daemon.enable = true;
+  # manage nix (and the nix daemon)
+  nix.enable = true;
+
+
+  # TODO: Should not need this?
+  ids.gids.nixbld = 30000;
 
   # nix-daemon should trust the admin users
   nix.settings.trusted-users = [ "root" "@admin" ];
@@ -12,7 +16,8 @@
 
   fonts.packages = with pkgs; [
     jetbrains-mono
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; })
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
   ];
 
   homebrew = {

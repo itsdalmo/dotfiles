@@ -85,8 +85,8 @@ in
     tfcheck
     tfswitch
     typescript
-    unstable.devbox
-    unstable.zk
+    devbox
+    zk
     yubikey-manager
 
     # Installed another way (brew/package manager):
@@ -153,8 +153,8 @@ in
 
   programs.neovim = {
     enable = true;
-    package = pkgs.unstable.neovim-unwrapped;
-    plugins = with pkgs.unstable.vimPlugins; [
+    package = pkgs.neovim-unwrapped;
+    plugins = with pkgs.vimPlugins; [
       blink-cmp
       conform-nvim
       lazygit-nvim
@@ -170,7 +170,7 @@ in
       zk-nvim
 
       (nvim-treesitter.withPlugins (_: nvim-treesitter.allGrammars ++ [
-        (pkgs.unstable.tree-sitter.buildGrammar {
+        (pkgs.tree-sitter.buildGrammar {
           language = "river";
           version = "eafcdc5";
           src = pkgs.fetchFromGitHub {
@@ -183,7 +183,7 @@ in
       ]))
     ];
 
-    extraPackages = with pkgs.unstable; [
+    extraPackages = with pkgs; [
       deno
       grafana-alloy
       ansible-language-server
