@@ -157,7 +157,6 @@ in
     plugins = with pkgs.vimPlugins; [
       blink-cmp
       conform-nvim
-      lazygit-nvim
       mini-nvim
       nvim-lint
       nvim-lspconfig
@@ -165,6 +164,7 @@ in
       nvim-ts-autotag
       persistence-nvim
       plenary-nvim
+      snacks-nvim
       tokyonight-nvim
       ts-comments-nvim
       zk-nvim
@@ -212,7 +212,6 @@ in
     withNodeJs = false;
     withPython3 = false;
     withRuby = false;
-
   };
 
   programs.zoxide = {

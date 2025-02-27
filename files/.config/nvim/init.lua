@@ -143,6 +143,7 @@ later(function()
 end)
 
 later(function()
-  -- NOTE: LazyGit does not have a setup function
-  require("lazygit")
+  require("snacks").setup({
+    lazygit = { enabled = true },
+  })
 end)
