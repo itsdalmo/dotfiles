@@ -157,17 +157,41 @@ in
     plugins = with pkgs.vimPlugins; [
       blink-cmp
       conform-nvim
-      mini-nvim
       nvim-lint
       nvim-lspconfig
       nvim-navic
       nvim-ts-autotag
       persistence-nvim
       plenary-nvim
-      snacks-nvim
       tokyonight-nvim
       ts-comments-nvim
       zk-nvim
+
+      (pkgs.vimUtils.buildVimPlugin {
+        pname = "mini.nvim";
+        version = "2025-02-28";
+        src = pkgs.fetchFromGitHub {
+          owner = "echasnovski";
+          repo = "mini.nvim";
+          rev = "3a354c754656538ad76d1add93ca21e75b7f3181";
+          sha256 = "sha256-sTD0pFDgc+VOJOw1zroNzwYLOB6Tc1qXJLJ0q0W96kA=";
+        };
+      })
+
+      (pkgs.vimUtils.buildVimPlugin rec {
+        pname = "snacks.nvim";
+        version = "2.22.0";
+        src = pkgs.fetchFromGitHub {
+          owner = "folke";
+          repo = "snacks.nvim";
+          rev = "v${version}";
+          sha256 = "sha256-iXfOTmeTm8/BbYafoU6ZAstu9+rMDfQtuA2Hwq0jdcE=";
+        };
+
+        # nixpkgs also skips these checks:
+        # https://github.com/NixOS/nixpkgs/blob/5135c59491985879812717f4c9fea69604e7f26f/pkgs/applications/editors/vim/plugins/overrides.nix#L2882-L2910
+        doCheck = false;
+      })
 
       (nvim-treesitter.withPlugins (_: nvim-treesitter.allGrammars ++ [
         (pkgs.tree-sitter.buildGrammar {
