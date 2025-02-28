@@ -69,6 +69,7 @@ in
   home.packages = with pkgs; [
     aws-vault
     awscli2
+    devbox
     dive
     eza
     fd
@@ -83,11 +84,11 @@ in
     ripgrep
     teleport
     tfcheck
+    tflint
     tfswitch
     typescript
-    devbox
-    zk
     yubikey-manager
+    zk
 
     # Installed another way (brew/package manager):
     # vscode
