@@ -26,14 +26,16 @@
     curl
     git
     unzip
-    wezterm
+    ghostty
+    # Broken on nixos:
+    # wezterm
   ];
 
   # Add fish shell
   programs.fish.enable = true;
 
-  # Enable docker
-  virtualisation.docker.enable = true;
+  # Start ssh agent
+  programs.ssh.startAgent = true;
 
   # Enable the OpenSSH daemon
   services.openssh = {
@@ -41,6 +43,9 @@
     settings.PasswordAuthentication = true;
     settings.PermitRootLogin = "no";
   };
+
+  # Enable docker
+  virtualisation.docker.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -50,36 +55,13 @@
       layout = "us";
       variant = "";
     };
-
-    displayManager = {
-      gdm.enable = true;
-    };
-
-    desktopManager = {
-      gnome.enable = true;
-    };
   };
 
-  environment.gnome.excludePackages = (with pkgs; [
-    atomix
-    cheese
-    epiphany
-    evince
-    geary
-    gedit
-    gnome-characters
-    gnome-music
-    gnome-photos
-    gnome-terminal
-    gnome-tour
-    hitori
-    iagno
-    tali
-    totem
-  ]);
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Enable sound with pipewire
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

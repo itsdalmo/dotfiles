@@ -44,6 +44,7 @@ in
   xdg.enable = true;
   xdg.configFile = {
     "fd".source = ../files/.config/fd;
+    "ghostty".source = ../files/.config/ghostty;
     "git".source = ../files/.config/git;
     "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;

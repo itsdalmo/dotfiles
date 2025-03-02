@@ -28,12 +28,24 @@ in
     ];
   };
 
+  users.users.nixremote = {
+    home = "/home/nixremote";
+    group = "nogroup";
+    isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpzKUQYSMv5mPaSrGHZQm7ULswMe/li7osfQjAPSNMJ"
+    ];
+  };
+  nix.settings.trusted-users = lib.mkAfter [ "nixremote" ];
+
+
   environment.systemPackages = with pkgs; [
     _1password-cli
     _1password-gui
     brave
     discord
     firefox
+    protonup
     signal-desktop
     slack
   ];
@@ -67,6 +79,24 @@ in
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  # Steam and game mode
+  programs.steam = {
+    enable = true;
+
+    gamescopeSession = {
+      enable = true;
+    };
+  };
+  programs.gamemode = {
+    enable = true;
+  };
+
+  services.libinput.mouse.accelProfile = "flat";
+  services.libinput.mouse.accelSpeed = "-0.60";
+
+  # Install tailscale
+  services.tailscale.enable = true;
 
   # Run homebridge in a container
   virtualisation.oci-containers = {
