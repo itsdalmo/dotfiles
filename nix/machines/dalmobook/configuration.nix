@@ -17,6 +17,16 @@ in
     extraSpecialArgs = { user = user; };
   };
 
+  nix.buildMachines = [{
+    hostName = "dalmobox";
+    system = "x86_64-linux";
+    sshKey = "/var/root/.ssh/id_nixremote";
+    sshUser = "nixremote";
+    publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxEN2lBeWwyVE1Ld2ZUcEZFcU4yeS9zQ2lGWmUrSDZDWWJuaThVa2NwRSsgcm9vdEBkYWxtb2JveAo=";
+    maxJobs = 4;
+  }];
+  nix.distributedBuilds = true;
+
   users.users."${user}" = {
     shell = pkgs.fish;
 
