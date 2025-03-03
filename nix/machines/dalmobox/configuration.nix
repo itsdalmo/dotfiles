@@ -63,6 +63,9 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Enable aarch64-linux emulation
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.addEmulatedSystemsToNixSandbox = true;
 
   # Enable hardware graphics
   hardware.graphics = {
