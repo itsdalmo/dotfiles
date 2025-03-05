@@ -12,7 +12,7 @@
   nix.settings.trusted-users = [ "root" "@admin" ];
 
   # Easier sudo
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   fonts.packages = with pkgs; [
     jetbrains-mono
