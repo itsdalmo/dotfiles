@@ -84,6 +84,9 @@ in
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # Steam and game mode
+  programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
+
   programs.steam = {
     enable = true;
 
@@ -91,9 +94,7 @@ in
       enable = true;
     };
   };
-  programs.gamemode = {
-    enable = true;
-  };
+
 
   services.libinput.mouse.accelProfile = "flat";
   services.libinput.mouse.accelSpeed = "-0.60";
