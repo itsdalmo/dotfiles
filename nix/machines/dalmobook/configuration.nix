@@ -24,6 +24,7 @@ in
     publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxEN2lBeWwyVE1Ld2ZUcEZFcU4yeS9zQ2lGWmUrSDZDWWJuaThVa2NwRSsgcm9vdEBkYWxtb2JveAo=";
     maxJobs = 4;
     systems = [ "aarch64-linux" "x86_64-linux" ];
+    supportedFeatures = [ "kvm" ];
   }];
   nix.distributedBuilds = true;
 
