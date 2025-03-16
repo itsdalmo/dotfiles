@@ -40,8 +40,8 @@ map("n", "<leader>gg", [[<cmd>lua Snacks.lazygit.open()<cr>]], "Lazygit")
 map("n", "<leader>gs", [[<cmd>lua MiniGit.show_at_cursor()<cr>]], "Show at cursor")
 map("n", "<leader>gl", [[<cmd>lua Snacks.lazygit.log_file()<cr>]], "Show log (buffer)")
 map("n", "<leader>gL", [[<cmd>lua Snacks.lazygit.log()<cr>]], "Show log (repository)")
-map("n", "<leader>gd", [[<cmd>lua require("utils").toggle_diff()<cr>]], "Toggle diff")
-map("n", "<leader>go", [[<cmd>lua require("utils").open_github()<cr>]], "Open current file on Github")
+map("n", "<leader>gd", [[<cmd>lua require("dalmovim.utils").toggle_diff()<cr>]], "Toggle diff")
+map("n", "<leader>go", [[<cmd>lua require("dalmovim.utils").open_github()<cr>]], "Open current file on Github")
 map("n", "<leader>gb", [[<cmd>vert Git blame -- %<cr>]], "Blame")
 
 -- LSP
@@ -50,7 +50,7 @@ map("n", "<leader>lr", [[<cmd>LspRestart<cr>]], "Restart")
 
 -- Major
 map({ "n", "v" }, "<localleader>.", [[<cmd>lua vim.lsp.buf.code_action()<cr>]], "Code Action")
-map("n", "<localleader>=", [[<cmd>lua require("utils").format({ force = true })<cr>]], "Format")
+map("n", "<localleader>=", [[<cmd>lua require("dalmovim.utils").format({ force = true })<cr>]], "Format")
 map("n", "<localleader>k", [[<cmd>lua vim.lsp.buf.hover()<cr>]], "Hover")
 map("n", "<localleader>r", [[<cmd>lua vim.lsp.buf.rename()<cr>]], "Rename")
 map("n", "<localleader>s", [[<cmd>lua vim.lsp.buf.signature_help()<cr>]], "Signature Help")
@@ -86,12 +86,12 @@ map("n", "<leader>sT", [[<cmd>Pick comments cwd=vim.fn.expand("%:h")<cr>]], "Tod
 map("n", "<leader>s:", [[<cmd>Pick history scope=":"<cr>]], "Command history")
 
 -- Toggles
-map("n", "<leader>tf", [[<cmd>lua require("utils").toggle_autoformat()<cr>]], "Autoformat")
-map("n", "<leader>tc", [[<cmd>lua require("utils").toggle_conceal()<cr>]], "Conceal")
-map("n", "<leader>td", [[<cmd>lua require("utils").toggle_diagnostics()<cr>]], "Diagnostics")
-map("n", "<leader>tw", [[<cmd>lua require("utils").toggle_wrap()<cr>]], "Wrap (soft)")
-map("n", "<leader>tD", [[<cmd>lua require("utils").toggle_diffthis()<cr>]], "Diffthis")
-map("n", "<leader>tb", [[<cmd>lua require("utils").toggle_winbar()<cr>]], "Breadcrumbs (navic)")
+map("n", "<leader>tf", [[<cmd>lua require("dalmovim.utils").toggle_autoformat()<cr>]], "Autoformat")
+map("n", "<leader>tc", [[<cmd>lua require("dalmovim.utils").toggle_conceal()<cr>]], "Conceal")
+map("n", "<leader>td", [[<cmd>lua require("dalmovim.utils").toggle_diagnostics()<cr>]], "Diagnostics")
+map("n", "<leader>tw", [[<cmd>lua require("dalmovim.utils").toggle_wrap()<cr>]], "Wrap (soft)")
+map("n", "<leader>tD", [[<cmd>lua require("dalmovim.utils").toggle_diffthis()<cr>]], "Diffthis")
+map("n", "<leader>tb", [[<cmd>lua require("dalmovim.utils").toggle_winbar()<cr>]], "Breadcrumbs (navic)")
 
 -- Visits
 map("n", "<leader>vv", [[<cmd>Pick visit_paths recency_weight=0 filter="core"<cr>]], "Select visits")

@@ -9,6 +9,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function()
-    require("utils").format({})
+    require("dalmovim.utils").format({})
   end,
 })

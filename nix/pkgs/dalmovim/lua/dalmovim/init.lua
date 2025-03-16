@@ -6,9 +6,9 @@ require("mini.deps").setup({ path = { package = path_package } })
 local now, later = MiniDeps.now, MiniDeps.later
 
 now(function()
-  require("commands")
-  require("options")
-  require("keymaps")
+  require("dalmovim.commands")
+  require("dalmovim.options")
+  require("dalmovim.keymaps")
 end)
 
 -- Theme
@@ -24,11 +24,11 @@ now(function()
 end)
 
 now(function()
-  require("plugins.mini-starter")
+  require("dalmovim.plugins.mini-starter")
 end)
 
 now(function()
-  require("plugins.mini-statusline")
+  require("dalmovim.plugins.mini-statusline")
 end)
 
 now(function()
@@ -45,7 +45,7 @@ later(function()
 end)
 
 later(function()
-  require("plugins.mini-bracketed")
+  require("dalmovim.plugins.mini-bracketed")
 end)
 
 later(function()
@@ -53,7 +53,7 @@ later(function()
 end)
 
 later(function()
-  require("plugins.mini-clue")
+  require("dalmovim.plugins.mini-clue")
 end)
 
 later(function()
@@ -61,15 +61,15 @@ later(function()
 end)
 
 later(function()
-  require("plugins.mini-files")
+  require("dalmovim.plugins.mini-files")
 end)
 
 later(function()
-  require("plugins.mini-git")
+  require("dalmovim.plugins.mini-git")
 end)
 
 later(function()
-  require("plugins.mini-hipatterns")
+  require("dalmovim.plugins.mini-hipatterns")
 end)
 
 later(function()
@@ -86,7 +86,7 @@ later(function()
 end)
 
 later(function()
-  require("plugins.mini-pick")
+  require("dalmovim.plugins.mini-pick")
 end)
 
 later(function()
@@ -98,7 +98,7 @@ later(function()
 end)
 
 later(function()
-  require("plugins.mini-visits")
+  require("dalmovim.plugins.mini-visits")
 end)
 
 -- Other
@@ -107,7 +107,7 @@ later(function()
 end)
 
 later(function()
-  require("plugins.nvim-treesitter")
+  require("dalmovim.plugins.nvim-treesitter")
 end)
 
 later(function()
@@ -115,23 +115,23 @@ later(function()
 end)
 
 later(function()
-  require("plugins.lspconfig")
+  require("dalmovim.plugins.lspconfig")
 end)
 
 later(function()
-  require("plugins.nvim-navic")
+  require("dalmovim.plugins.nvim-navic")
 end)
 
 later(function()
-  require("plugins.blink")
+  require("dalmovim.plugins.blink")
 end)
 
 later(function()
-  require("plugins.conform")
+  require("dalmovim.plugins.conform")
 end)
 
 later(function()
-  require("plugins.lint")
+  require("dalmovim.plugins.lint")
 end)
 
 later(function()
@@ -139,7 +139,7 @@ later(function()
 end)
 
 later(function()
-  require("plugins.zk")
+  require("dalmovim.plugins.zk")
 end)
 
 later(function()

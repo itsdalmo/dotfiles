@@ -39,6 +39,10 @@
     {
       formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
+      packages = forEachSystem (pkgs: {
+        dalmovim = pkgs.dalmovim;
+      });
+
       homeConfigurations = {
         "dalmo@arm64-darwin" = mkHome {
           system = "aarch64-darwin";
