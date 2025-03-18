@@ -15,14 +15,13 @@ style = "blue"
 
 [git_branch]
 style = "bright-black"
-symbol = ""
 
 [git_state]
 style = "bright-black"
 
 [kubernetes]
 disabled = false
-format = "on [$symbol$context\\($namespace\\)]($style) "
+format = "on [$symbol$context]($style) "
 style = "blue"
 
 [azure]
