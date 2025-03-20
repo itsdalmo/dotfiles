@@ -104,7 +104,7 @@ in
 
   # Run homebridge in a container
   virtualisation.oci-containers = {
-    backend = "docker";
+    backend = "podman";
     containers = {
       homebridge = {
         image = "docker.io/homebridge/homebridge:2024-11-29";
