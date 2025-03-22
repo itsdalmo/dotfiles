@@ -16,9 +16,13 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mini-nvim = {
+      url = "github:echasnovski/mini.nvim/main";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, ... }@inputs:
+  outputs = { nixpkgs, home-manager, darwin, ... }@inputs:
     let
       # Helper function to create package sets
       mkPkgs = system: import nixpkgs {

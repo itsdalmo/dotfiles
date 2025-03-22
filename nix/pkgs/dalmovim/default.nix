@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, mini, ... }:
 
 let
   plugins = with pkgs.vimPlugins; [
@@ -27,13 +27,8 @@ let
 
     (pkgs.vimUtils.buildVimPlugin {
       pname = "mini.nvim";
-      version = "2025-02-28";
-      src = pkgs.fetchFromGitHub {
-        owner = "echasnovski";
-        repo = "mini.nvim";
-        rev = "3a354c754656538ad76d1add93ca21e75b7f3181";
-        sha256 = "sha256-sTD0pFDgc+VOJOw1zroNzwYLOB6Tc1qXJLJ0q0W96kA=";
-      };
+      version = "latest";
+      src = mini;
     })
 
     (pkgs.vimUtils.buildVimPlugin rec {
