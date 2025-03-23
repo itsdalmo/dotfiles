@@ -85,6 +85,16 @@ function M.toggle_winbar()
   end
 end
 
+local zoom = false
+function M.toggle_zoom()
+  zoom = not zoom
+  if zoom then
+    vim.api.nvim_input("<C-w>_<C-w>|")
+  else
+    vim.api.nvim_input("<C-w>=")
+  end
+end
+
 function M.format(opts)
   local buf = vim.api.nvim_get_current_buf()
   if vim.b[buf].autoformat == false and not (opts and opts.force) then
