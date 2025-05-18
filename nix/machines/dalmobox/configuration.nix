@@ -83,6 +83,12 @@ in
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # Enable bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   # Steam and game mode
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
