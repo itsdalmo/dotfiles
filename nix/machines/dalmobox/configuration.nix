@@ -48,6 +48,7 @@ in
     protonup
     signal-desktop
     slack
+    spotify
   ];
 
   networking.hostName = hostName;
