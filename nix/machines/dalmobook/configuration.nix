@@ -28,6 +28,9 @@ in
   }];
   nix.distributedBuilds = true;
 
+
+  system.primaryUser = user;
+
   users.users."${user}" = {
     shell = pkgs.fish;
 
