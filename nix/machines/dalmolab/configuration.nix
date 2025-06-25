@@ -10,13 +10,6 @@ in
     ./hardware-configuration.nix
   ];
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users."${user}" = import ../../home.nix;
-    extraSpecialArgs = { user = user; };
-  };
-
   users.users."${user}" = {
     home = "/home/${user}";
     shell = pkgs.fish;
