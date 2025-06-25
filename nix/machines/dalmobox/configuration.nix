@@ -114,7 +114,7 @@ in
     backend = "podman";
     containers = {
       homebridge = {
-        image = "docker.io/homebridge/homebridge:2024-11-29";
+        image = "docker.io/homebridge/homebridge:2025-06-10";
         volumes = [
           "/var/lib/homebridge:/homebridge:rw"
         ];
