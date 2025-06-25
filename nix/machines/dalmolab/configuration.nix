@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  hostName = "dalmobox";
+  hostName = "dalmolab";
   user = "dalmo";
 in
 {
@@ -37,60 +37,7 @@ in
     ];
   };
   nix.settings.trusted-users = lib.mkAfter [ "nixremote" ];
-
-
-  environment.systemPackages = with pkgs; [
-    _1password-cli
-    _1password-gui
-    brave
-    discord
-    firefox
-    ghostty
-    # Broken on nixos:
-    # wezterm
-    protonup
-    signal-desktop
-    slack
-    spotify
-  ];
-
   networking.hostName = hostName;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-  };
-
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
-  # Enable sound with pipewire
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  fonts.packages = with pkgs; [
-    jetbrains-mono
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.symbols-only
-  ];
-
-  # Prevent suspend and hibernation
-  # https://www.freedesktop.org/software/systemd/man/latest/sleep.conf.d.html
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-  '';
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -100,43 +47,11 @@ in
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.binfmt.addEmulatedSystemsToNixSandbox = true;
 
-  # Enable hardware graphics
-  hardware.graphics = {
-    enable = true;
-  };
-
-  hardware.nvidia = {
-    open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;
-    nvidiaSettings = true;
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
   # Enable bluetooth
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
-
-  # Steam and game mode
-  programs.gamemode.enable = true;
-  programs.gamescope.enable = true;
-
-  programs.steam = {
-    enable = true;
-
-    gamescopeSession = {
-      enable = true;
-    };
-  };
-
-
-  services.libinput.mouse.accelProfile = "flat";
-  services.libinput.mouse.accelSpeed = "-0.60";
 
   # Install tailscale
   services.tailscale.enable = true;
@@ -146,7 +61,7 @@ in
     backend = "podman";
     containers = {
       homebridge = {
-        image = "docker.io/homebridge/homebridge:2025-06-10";
+        image = "docker.io/homebridge/homebridge:2024-11-29";
         volumes = [
           "/var/lib/homebridge:/homebridge:rw"
         ];

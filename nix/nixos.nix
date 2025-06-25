@@ -16,19 +16,10 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  fonts.packages = with pkgs; [
-    jetbrains-mono
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.symbols-only
-  ];
-
   environment.systemPackages = with pkgs; [
     curl
     git
     unzip
-    ghostty
-    # Broken on nixos:
-    # wezterm
   ];
 
   # Add fish shell
@@ -46,29 +37,6 @@
 
   # Enable docker
   virtualisation.docker.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-  };
-
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
-  # Enable sound with pipewire
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
