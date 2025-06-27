@@ -135,49 +135,10 @@ in
     };
   };
 
-
   services.libinput.mouse.accelProfile = "flat";
   services.libinput.mouse.accelSpeed = "-0.60";
 
   # Install tailscale
   services.tailscale.enable = true;
-
-  # Run homebridge in a container
-  virtualisation.oci-containers = {
-    backend = "podman";
-    containers = {
-      homebridge = {
-        image = "docker.io/homebridge/homebridge:2025-06-10";
-        volumes = [
-          "/var/lib/homebridge:/homebridge:rw"
-        ];
-        log-driver = "journald";
-        extraOptions = [
-          "--network=host"
-        ];
-        autoStart = true;
-      };
-    };
-  };
-
-  services.k3s = {
-    enable = true;
-    role = "server";
-    extraFlags = toString [
-      # "--debug" # Optionally add additional args to k3s
-    ];
-  };
-
-  networking.firewall = {
-    allowedTCPPorts = [
-      6443 # k3s API server
-      8581 # Homebridge UI
-      51000 # Homebridge
-      31348 # Grafana
-    ];
-    allowedUDPPorts = [
-      5353 # Homebridge bonjour
-    ];
-  };
 }
 
