@@ -33,7 +33,8 @@ in
     group = "nogroup";
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpzKUQYSMv5mPaSrGHZQm7ULswMe/li7osfQjAPSNMJ"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpzKUQYSMv5mPaSrGHZQm7ULswMe/li7osfQjAPSNMJ" # dalmobook
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEbwlUPZF+2rANW8NjYRgRm9lA4kZmKwJjE1cGtBR+hG" # dalmolab
     ];
   };
   nix.settings.trusted-users = lib.mkAfter [ "nixremote" ];

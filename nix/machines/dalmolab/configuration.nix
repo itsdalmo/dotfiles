@@ -10,6 +10,24 @@ in
     ./hardware-configuration.nix
   ];
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users."${user}" = import ../../home.nix;
+    extraSpecialArgs = { user = user; };
+  };
+
+  nix.buildMachines = [{
+    hostName = "dalmobox";
+    sshKey = "/root/.ssh/id_nixremote";
+    sshUser = "nixremote";
+    publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxEN2lBeWwyVE1Ld2ZUcEZFcU4yeS9zQ2lGWmUrSDZDWWJuaThVa2NwRSsgcm9vdEBkYWxtb2JveAo=";
+    maxJobs = 4;
+    systems = [ "aarch64-linux" "x86_64-linux" ];
+    supportedFeatures = [ "kvm" ];
+  }];
+  nix.distributedBuilds = true;
+
   users.users."${user}" = {
     home = "/home/${user}";
     shell = pkgs.fish;
@@ -21,15 +39,6 @@ in
     ];
   };
 
-  users.users.nixremote = {
-    home = "/home/nixremote";
-    group = "nogroup";
-    isNormalUser = true;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpzKUQYSMv5mPaSrGHZQm7ULswMe/li7osfQjAPSNMJ"
-    ];
-  };
-  nix.settings.trusted-users = lib.mkAfter [ "nixremote" ];
   networking.hostName = hostName;
 
   # Use the systemd-boot EFI boot loader.
