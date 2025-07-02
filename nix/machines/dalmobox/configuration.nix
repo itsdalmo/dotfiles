@@ -53,6 +53,7 @@ in
     signal-desktop
     slack
     spotify
+    wl-clipboard
   ];
 
   networking.hostName = hostName;
