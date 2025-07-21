@@ -101,7 +101,7 @@
   };
 
   # Misc
-  system.defaults.alf.globalstate = 1;
+  networking.applicationFirewall.enable = true;
   system.defaults.controlcenter.Sound = true;
   system.defaults.".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
   system.defaults.NSGlobalDomain."com.apple.swipescrolldirection" = false;
