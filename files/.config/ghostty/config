@@ -1,13 +1,17 @@
-font-family = "JetBrainsMono Nerd Font"
-font-size = 13.0
-font-style = "Regular"
-font-thicken = true
-font-feature = "-calt"
-
+# General
+title = ""
+maximize = true
+macos-titlebar-style = "tabs"
 shell-integration-features = no-cursor
 cursor-style = block
 cursor-style-blink = false
 
+# Font
+font-family = ""
+font-family = "JetBrainsMono Nerd Font"
+font-size = 13.0
+
+# Theme (tokyonight)
 palette = 0=#15161e
 palette = 1=#f7768e
 palette = 2=#9ece6a
@@ -30,3 +34,35 @@ foreground = #c0caf5
 cursor-color = #c0caf5
 selection-background = #283457
 selection-foreground = #c0caf5
+
+# Keybindings
+keybind = clear
+keybind = opt+enter=toggle_fullscreen
+keybind = opt+q=quit
+keybind = opt+t=new_tab
+keybind = opt+w=close_surface
+keybind = opt+h=goto_split:left
+keybind = opt+l=goto_split:right
+keybind = opt+j=goto_split:down
+keybind = opt+k=goto_split:up
+keybind = opt+a>v=new_split:right
+keybind = opt+a>s=new_split:down
+keybind = opt+z=toggle_split_zoom
+keybind = opt+up=resize_split:up,10
+keybind = opt+down=resize_split:down,10
+keybind = opt+left=resize_split:left,10
+keybind = opt+right=resize_split:right,10
+
+keybind = opt+one=goto_tab:1
+keybind = opt+two=goto_tab:2
+keybind = opt+three=goto_tab:3
+keybind = opt+four=goto_tab:4
+keybind = opt+five=goto_tab:5
+keybind = opt+six=goto_tab:6
+keybind = opt+seven=goto_tab:7
+keybind = opt+eight=goto_tab:8
+keybind = opt+nine=goto_tab:9
+
+keybind = ctrl+zero=reset_font_size
+keybind = ctrl+equal=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
