@@ -51,7 +51,7 @@
       "signal"
       "slack"
       "spotify"
-      "tailscale"
+      "tailscale-app"
       "visual-studio-code"
       "wezterm"
     ];
