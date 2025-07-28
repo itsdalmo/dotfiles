@@ -4,7 +4,6 @@
   # manage nix (and the nix daemon)
   nix.enable = true;
 
-
   # TODO: Should not need this?
   ids.gids.nixbld = 30000;
 
@@ -41,6 +40,7 @@
       "discord"
       "docker"
       "firefox"
+      "ghostty"
       "jetbrains-toolbox"
       "keybase"
       "numi"
