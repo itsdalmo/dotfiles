@@ -82,6 +82,7 @@ in
     goreleaser
     jq
     lazygit
+    podman
     ripgrep
     teleport
     tfcheck
