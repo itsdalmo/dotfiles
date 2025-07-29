@@ -9,6 +9,7 @@
 
   # Networking
   networking.networkmanager.enable = true;
+  networking.useDHCP = false;
 
   # Set your time zone.
   time.timeZone = "Europe/Oslo";

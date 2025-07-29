@@ -58,6 +58,10 @@ in
 
   networking.hostName = hostName;
 
+  # Enable DHCP on our network interfaces
+  networking.interfaces.enp4s0.useDHCP = true;
+  networking.interfaces.wlo1.useDHCP = true;
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
