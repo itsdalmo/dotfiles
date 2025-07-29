@@ -55,8 +55,6 @@ in
   homebrew.masApps = {
     "1Password for Safari" = 1569813296;
     "AdGuard for Safari" = 1440147259;
-    "Agenda" = 1287445660;
     "Azure VPN Client" = 1553936137;
-    "Bear" = 1091189122;
   };
 }
