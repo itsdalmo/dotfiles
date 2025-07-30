@@ -23,9 +23,6 @@ in
     initialPassword = "";
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSRWGrBG1gY2Sz8CdPqnqKiJJXqpG1+RgJ5cHXZluIU"
-    ];
   };
 
   users.users.nixremote = {
@@ -33,7 +30,7 @@ in
     group = "nogroup";
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpzKUQYSMv5mPaSrGHZQm7ULswMe/li7osfQjAPSNMJ" # dalmobook
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEzoYhB8nTLlVgNljnBLdfrZtR+srK95wDeSmm3ix5BP" # dalmobook
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEbwlUPZF+2rANW8NjYRgRm9lA4kZmKwJjE1cGtBR+hG" # dalmolab
     ];
   };
