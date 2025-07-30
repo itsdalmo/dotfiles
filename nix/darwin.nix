@@ -34,7 +34,7 @@
       "1password"
       "1password-cli"
       "brave-browser"
-      "docker"
+      "docker-desktop"
       "firefox"
       "ghostty"
       "jetbrains-toolbox"
