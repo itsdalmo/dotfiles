@@ -63,6 +63,11 @@ keybind = opt+seven=goto_tab:7
 keybind = opt+eight=goto_tab:8
 keybind = opt+nine=goto_tab:9
 
-keybind = ctrl+zero=reset_font_size
-keybind = ctrl+equal=increase_font_size:1
-keybind = ctrl+minus=decrease_font_size:1
+keybind = opt+zero=reset_font_size
+keybind = opt+equal=increase_font_size:1
+keybind = opt+minus=decrease_font_size:1
+
+keybind = opt+c=copy_to_clipboard
+keybind = opt+v=paste_from_clipboard
+keybind = opt+shift+c=copy_to_clipboard
+keybind = opt+shift+v=paste_from_clipboard
