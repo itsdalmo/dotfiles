@@ -18,7 +18,7 @@ in
   };
 
   nix.buildMachines = [{
-    hostName = "dalmobox";
+    hostName = "dalmobox.wombat-woodpecker.ts.net";
     sshKey = "/root/.ssh/id_nixremote";
     sshUser = "nixremote";
     publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxEN2lBeWwyVE1Ld2ZUcEZFcU4yeS9zQ2lGWmUrSDZDWWJuaThVa2NwRSsgcm9vdEBkYWxtb2JveAo=";
