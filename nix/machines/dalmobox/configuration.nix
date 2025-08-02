@@ -95,6 +95,9 @@ in
     AllowHibernation=no
   '';
 
+  # Prevent USB devices from being suspended (and interfering with wake from sleep)
+  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
