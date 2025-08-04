@@ -50,7 +50,15 @@ local servers = {
   cssls = {},
   jsonls = {},
   jsonnet_ls = {},
-  nil_ls = {},
+  nil_ls = {
+    settings = {
+      nix = {
+        flake = {
+          autoArchive = false,
+        },
+      },
+    },
+  },
   lua_ls = {
     settings = {
       Lua = {
