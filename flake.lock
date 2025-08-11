@@ -21,6 +21,24 @@
         "type": "github"
       }
     },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1749398372,
+        "narHash": "sha256-tYBdgS56eXYaWVW3fsnPQ/nFlgWi/Z2Ymhyu21zVM98=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "9305fe4e5c2a6fcf5ba6a3ff155720fbe4076569",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -75,6 +93,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1748740939,
+        "narHash": "sha256-rQaysilft1aVMwF14xIdGS3sj1yHlI6oKQNBRTF40cc=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "656a64127e9d791a334452c6b6606d17539476e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1751274312,
@@ -91,13 +124,35 @@
         "type": "github"
       }
     },
+    "opencode-flake": {
+      "inputs": {
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754893149,
+        "narHash": "sha256-REYPW2/WwUmZAzzp07frkdyMZBvOl+sM//mAWeEG/KU=",
+        "owner": "mikael-lindstrom",
+        "repo": "opencode-flake",
+        "rev": "aa568ac85ee111cd3bb4c0e3eeebabd5858f0ead",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mikael-lindstrom",
+        "repo": "opencode-flake",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "darwin": "darwin",
         "home-manager": "home-manager",
         "mini-nvim": "mini-nvim",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-stable": "nixpkgs-stable"
+        "nixpkgs-stable": "nixpkgs-stable",
+        "opencode-flake": "opencode-flake"
       }
     }
   },

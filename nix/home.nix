@@ -52,6 +52,7 @@ in
     "starship.toml".source = ../files/.config/starship.toml;
     "wezterm".source = ../files/.config/wezterm;
     "zk".source = ../files/.config/zk;
+    "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
 
     # The root fish config has to be managed by home-manager
     # (in order to add fzf/zoxide/etc)
@@ -82,6 +83,7 @@ in
     goreleaser
     jq
     lazygit
+    opencode
     podman
     ripgrep
     teleport
