@@ -65,6 +65,7 @@ vim.filetype.add({
     gohtml = "gohtml",
     gotmpl = "gotmpl",
     tfstate = "json",
+    tmpl = "gotmpl",
   },
   filename = {
     [".envrc"] = "bash",

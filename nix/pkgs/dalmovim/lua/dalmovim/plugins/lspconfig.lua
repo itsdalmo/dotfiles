@@ -37,7 +37,7 @@ local servers = {
     },
   },
   gopls = {
-    filetypes = { "go", "gomod", "gowork", "gotmpl", "gohtml" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl", "gohtml", "tmpl" },
     settings = {
       gopls = {
         templateExtensions = { "gotmpl", "gohtml" },
