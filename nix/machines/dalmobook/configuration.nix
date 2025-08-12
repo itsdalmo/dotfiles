@@ -13,7 +13,13 @@ in
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users."${user}" = import ../../home.nix;
+    users."${user}" = {
+      imports = [ ../../home.nix ];
+
+      home.sessionVariables = {
+        NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt";
+      };
+    };
     extraSpecialArgs = { user = user; };
   };
 
