@@ -2,6 +2,7 @@
 let
   hostName = "dalmobook";
   user = "dalmo";
+  certs = "/etc/ssl/certs/ca-certificates.crt";
 in
 {
   imports = [
@@ -17,7 +18,9 @@ in
       imports = [ ../../home.nix ];
 
       home.sessionVariables = {
-        NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt";
+        NODE_EXTRA_CA_CERTS = certs;
+        REQUESTS_CA_BUNDLE = certs;
+        SSL_CERT_FILE = certs;
       };
     };
     extraSpecialArgs = { user = user; };
