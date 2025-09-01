@@ -5,7 +5,4 @@ inputs: final: prev: {
   # Custom packages
   dalmovim = final.callPackage ../pkgs/dalmovim { mini = inputs.mini-nvim; };
   tfcheck = final.callPackage ../pkgs/tfcheck { };
-
-  # Override packages
-  opencode = inputs.opencode-flake.packages.${prev.system}.default;
 }

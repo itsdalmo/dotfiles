@@ -20,10 +20,6 @@
       url = "github:echasnovski/mini.nvim/main";
       flake = false;
     };
-    opencode-flake = {
-      url = "github:mikael-lindstrom/opencode-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = { nixpkgs, home-manager, darwin, ... }@inputs:
