@@ -48,6 +48,7 @@
       "tailscale-app"
       "visual-studio-code"
       "wezterm"
+      "zoom"
     ];
   };
 
