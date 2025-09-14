@@ -28,12 +28,15 @@ in
   }];
   nix.distributedBuilds = true;
 
+  # Create a group which will have read access to the k3s config
+  users.groups.k3s = { };
+
   users.users."${user}" = {
     home = "/home/${user}";
     shell = pkgs.fish;
     initialPassword = "";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "k3s" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSRWGrBG1gY2Sz8CdPqnqKiJJXqpG1+RgJ5cHXZluIU"
     ];
@@ -79,8 +82,9 @@ in
   services.k3s = {
     enable = true;
     role = "server";
-    extraFlags = toString [
-      # "--debug" # Optionally add additional args to k3s
+    extraFlags = [
+      "--write-kubeconfig-mode=0640"
+      "--write-kubeconfig-group=k3s"
     ];
   };
 
