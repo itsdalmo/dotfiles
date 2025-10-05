@@ -64,7 +64,7 @@ let
     deno
     grafana-alloy
     buf
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     gofumpt
     golangci-lint
     gopls
