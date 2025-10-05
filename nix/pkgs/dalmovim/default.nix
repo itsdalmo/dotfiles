@@ -63,8 +63,6 @@ let
   packages = with pkgs; [
     deno
     grafana-alloy
-    ansible-language-server
-    ansible-lint
     buf
     dockerfile-language-server-nodejs
     gofumpt
