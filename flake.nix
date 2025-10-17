@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mini-nvim = {
-      url = "github:echasnovski/mini.nvim/main";
+      url = "github:nvim-mini/mini.nvim/main";
       flake = false;
     };
   };
