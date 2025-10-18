@@ -2,7 +2,6 @@
 
 let
   plugins = with pkgs.vimPlugins; [
-    blink-cmp
     conform-nvim
     nvim-lint
     nvim-lspconfig
