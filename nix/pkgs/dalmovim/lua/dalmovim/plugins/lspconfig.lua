@@ -16,18 +16,6 @@ vim.diagnostic.config({
   },
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),
-  callback = function(event)
-    local buffer = event.buf
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-    if client.server_capabilities.documentSymbolProvider then
-      require("nvim-navic").attach(client, buffer)
-    end
-  end,
-})
-
 local servers = {
   dockerls = {},
   eslint = {
