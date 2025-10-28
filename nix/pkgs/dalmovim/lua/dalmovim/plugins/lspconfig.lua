@@ -36,7 +36,19 @@ local servers = {
   },
   cssls = {},
   jsonls = {},
-  jsonnet_ls = {},
+  jsonnet_ls = {
+    cmd = function(dispatchers, config)
+      local paths = {
+        config.root_dir .. "/lib",
+        config.root_dir .. "/vendor",
+      }
+      return vim.lsp.rpc.start(
+        { "jsonnet-language-server" },
+        dispatchers,
+        { cwd = config.root_dir, env = { JSONNET_PATH = table.concat(paths, ":") } }
+      )
+    end,
+  },
   nil_ls = {
     settings = {
       nix = {
