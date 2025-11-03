@@ -131,6 +131,7 @@ later(function()
   end
   require("mini.completion").setup({
     lsp_completion = { source_func = "omnifunc", auto_setup = false, process_items = process_items },
+    fallback_action = "<C-x><C-f>",
   })
 
   -- Set up LSP part of completion
