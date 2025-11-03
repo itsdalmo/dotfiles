@@ -46,7 +46,7 @@ in
     ghostty
     # Broken on nixos:
     # wezterm
-    protonup
+    protonup-ng
     signal-desktop
     slack
     spotify
