@@ -86,7 +86,6 @@ in
     opencode
     podman
     ripgrep
-    teleport
     tfcheck
     tflint
     tfswitch
