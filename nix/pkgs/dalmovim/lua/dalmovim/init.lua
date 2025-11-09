@@ -74,6 +74,10 @@ later(function()
 end)
 
 later(function()
+  require("mini.indentscope").setup()
+end)
+
+later(function()
   require("mini.misc").setup()
   MiniMisc.setup_auto_root()
 end)
