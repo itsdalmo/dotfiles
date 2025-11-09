@@ -51,6 +51,7 @@ map("n", "<leader>lr", [[<cmd>LspRestart<cr>]], "Restart")
 -- Major
 map({ "n", "v" }, "<localleader>.", [[<cmd>lua vim.lsp.buf.code_action()<cr>]], "Code Action")
 map("n", "<localleader>=", [[<cmd>lua require("dalmovim.utils").format({ force = true })<cr>]], "Format")
+map("n", "<localleader>+", [[<cmd>lua MiniTrailspace.trim()<cr>]], "Trim whitespace")
 map("n", "<localleader>k", [[<cmd>lua vim.lsp.buf.hover()<cr>]], "Hover")
 map("n", "<localleader>r", [[<cmd>lua vim.lsp.buf.rename()<cr>]], "Rename")
 map("n", "<localleader>s", [[<cmd>lua vim.lsp.buf.signature_help()<cr>]], "Signature Help")
