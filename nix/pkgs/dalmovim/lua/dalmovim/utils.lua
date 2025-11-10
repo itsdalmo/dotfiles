@@ -103,14 +103,6 @@ function M.format(opts)
   require("conform").format({ bufnr = buf, lsp_fallback = true })
 end
 
-function M.diagnostic_goto(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
-  end
-end
-
 function M.open_github()
   local cmd = { "gh", "browse", vim.fn.expand("%:.") }
   local git = (MiniGit.get_buf_data() or {})
