@@ -106,7 +106,7 @@
   system.defaults.dock.persistent-apps = [
     "/Applications/Brave Browser.app"
     "/Applications/Slack.app"
-    "/Applications/WezTerm.app"
+    "/Applications/Ghostty.app"
     "/Applications/Obsidian.app"
     "/Applications/1Password.app"
     "/Applications/Spotify.app"
