@@ -14,6 +14,7 @@ in
     # Could consider moving these back to fish.config?
     AWS_DEFAULT_REGION = "eu-west-1";
     AWS_PAGER = "";
+    DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_8_0}/share/dotnet";
     EDITOR = "nvim";
     GOPATH = "$HOME/go";
     PAGER = "less -FirSwX";
@@ -82,24 +83,23 @@ in
     go-task
     goreleaser
     jq
+    kind
+    kubectl
+    kubernetes-helm
     lazygit
+    nodejs_24
     opencode
     podman
     ripgrep
+    teleport
     tfcheck
     tflint
     tfswitch
     typescript
     yubikey-manager
     zk
-
-    # Installed another way (brew/package manager):
-    # vscode
-
-    # Installed/managed by home-manager:
-    # fish
-    # fisher
-    # fzf
+    dotnetCorePackages.sdk_8_0
+    omnisharp-roslyn
 
     # Use nix.shell instead:
     # apache-maven
@@ -108,7 +108,6 @@ in
     # kubectl
     # kubectx
     # kustomize
-    # nodejs
     # nvm
     # packer
     # protobuf
