@@ -37,7 +37,6 @@
       "docker-desktop"
       "firefox"
       "ghostty"
-      "jetbrains-toolbox"
       "numi"
       "obsidian"
       "postman"
