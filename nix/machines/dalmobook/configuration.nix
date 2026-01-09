@@ -27,7 +27,7 @@ in
         "colima/_templates/default.yaml".text = ''
           cpu: 6
           disk: 100
-          memory: 16
+          memory: 8
 
           arch: host
           runtime: docker
