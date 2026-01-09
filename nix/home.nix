@@ -71,7 +71,9 @@ in
   home.packages = with pkgs; [
     aws-vault
     awscli2
+    colima
     dalmovim
+    docker-client
     devbox
     dive
     eza
@@ -105,8 +107,6 @@ in
     # apache-maven
     # helm
     # hugo
-    # kubectl
-    # kubectx
     # kustomize
     # nvm
     # packer

@@ -34,7 +34,6 @@
       "1password"
       "1password-cli"
       "brave-browser"
-      "docker-desktop"
       "firefox"
       "ghostty"
       "numi"
