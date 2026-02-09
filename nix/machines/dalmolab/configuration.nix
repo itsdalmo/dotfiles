@@ -67,7 +67,7 @@ in
     backend = "podman";
     containers = {
       homebridge = {
-        image = "docker.io/homebridge/homebridge:2025-09-14";
+        image = "docker.io/homebridge/homebridge:2025-09-14@sha256:c008d43c907eed9cae6488b9b2fe702371d0dbfd2b93933431a2988db29ad60d";
         volumes = [
           "/var/lib/homebridge:/homebridge:rw"
         ];
@@ -90,7 +90,7 @@ in
     ];
   };
 
-  # Automatic system updates at 4 AM
+  # Automatic system updates at 5 AM
   system.autoUpgrade = {
     enable = true;
     flake = "github:itsdalmo/dotfiles#dalmolab";
