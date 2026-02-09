@@ -1,0 +1,27 @@
+name: Update flake.lock
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # Daily at 6 AM UTC
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a # v21
+        with: { determinate: false }
+      - name: "Configure Git with PR user"
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Update flake.lock
+        run: nix flake update --commit-lock-file
+      - name: Build dalmobox
+        run: nix build .#nixosConfigurations.dalmobox.config.system.build.toplevel
+      - name: Build dalmobook
+        run: nix build .#darwinConfigurations.dalmobook.system
+      - name: Push
+        if: github.ref == 'refs/heads/main'
+        run: git push
