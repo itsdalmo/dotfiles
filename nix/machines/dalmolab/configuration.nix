@@ -27,6 +27,7 @@ in
     supportedFeatures = [ "kvm" ];
   }];
   nix.distributedBuilds = true;
+  nix.settings.max-jobs = 0; # Force all builds to use remote builders
 
   # Create a group which will have read access to the k3s config
   users.groups.k3s = { };
@@ -79,25 +80,23 @@ in
     };
   };
 
-  services.k3s = {
-    enable = true;
-    role = "server";
-    extraFlags = [
-      "--write-kubeconfig-mode=0640"
-      "--write-kubeconfig-group=k3s"
-    ];
-  };
-
   networking.firewall = {
     allowedTCPPorts = [
-      6443 # k3s API server
       8581 # Homebridge UI
       51000 # Homebridge
-      31348 # Grafana
     ];
     allowedUDPPorts = [
       5353 # Homebridge bonjour
     ];
+  };
+
+  # Automatic system updates at 4 AM
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:itsdalmo/dotfiles#dalmolab";
+    dates = "05:00";
+    operation = "boot";
+    allowReboot = true;
   };
 }
 

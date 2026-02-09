@@ -36,7 +36,6 @@ in
   };
   nix.settings.trusted-users = lib.mkAfter [ "nixremote" ];
 
-
   environment.systemPackages = with pkgs; [
     _1password-cli
     _1password-gui
@@ -145,5 +144,14 @@ in
 
   # Install tailscale
   services.tailscale.enable = true;
+
+  # Automatic system updates at 4 AM
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:itsdalmo/dotfiles#dalmobox";
+    dates = "04:00";
+    operation = "boot";
+    allowReboot = true;
+  };
 }
 
