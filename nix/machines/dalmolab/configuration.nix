@@ -94,7 +94,7 @@ in
   system.autoUpgrade = {
     enable = true;
     flake = "github:itsdalmo/dotfiles#dalmolab";
-    dates = "05:00";
+    dates = "06:00";
     operation = "boot";
     allowReboot = true;
   };

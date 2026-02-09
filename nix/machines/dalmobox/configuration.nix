@@ -149,7 +149,7 @@ in
   system.autoUpgrade = {
     enable = true;
     flake = "github:itsdalmo/dotfiles#dalmobox";
-    dates = "04:00";
+    dates = "05:00";
     operation = "boot";
     allowReboot = true;
   };
