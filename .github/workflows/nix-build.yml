@@ -7,10 +7,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            target: "dalmo@amd64-linux"
+          - runner: ubuntu-24.04-arm
+            target: "dalmo@arm64-linux"
+          - runner: macos-15
+            target: "dalmo@arm64-darwin"
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: DeterminateSystems/nix-installer-action@c5a866b6ab867e88becbed4467b93592bce69f8a # v21
         with: { determinate: false }
-      - name: Build dalmolab
-        run: nix build .#nixosConfigurations.dalmolab.config.system.build.toplevel
+      - name: Build Home Manager config
+        run: nix build .#homeConfigurations."${{ matrix.target }}".activationPackage --option builders ""
