@@ -72,6 +72,7 @@ in
     aws-vault
     awscli2
     colima
+    cosign
     dalmovim
     docker-client
     devbox
@@ -88,20 +89,26 @@ in
     kind
     kubectl
     kubernetes-helm
+    k9s
     lazygit
     nodejs_24
     opencode
+    oras
     podman
+    postgresql
     ripgrep
     teleport
+    terraform
     tfcheck
     tflint
     tfswitch
+    trivy
     typescript
     yubikey-manager
     zk
     dotnetCorePackages.sdk_8_0
     omnisharp-roslyn
+    presenterm
 
     # Use nix.shell instead:
     # apache-maven
