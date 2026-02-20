@@ -4,6 +4,8 @@ let
 in
 {
   home.stateVersion = "23.11";
+  home.username = user;
+  home.homeDirectory = homeDirectory;
 
   home.sessionPath = [ "$HOME/bin" "$HOME/go/bin" ];
   home.sessionVariables = {
