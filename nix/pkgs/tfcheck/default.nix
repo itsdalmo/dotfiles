@@ -30,7 +30,6 @@ pkgs.stdenv.mkDerivation {
   dontStrip = pkgs.lib.strings.hasSuffix "darwin" system;
   nativeBuildInputs = [ pkgs.gzip ];
   installPhase = ''
-    mkdir -p $out/bin
-    mv tfcheck $out/bin
+    install -Dm755 tfcheck $out/bin/tfcheck
   '';
 }
