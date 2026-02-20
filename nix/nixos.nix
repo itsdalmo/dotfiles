@@ -1,9 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  # TODO: manage nix daemon somehow?
-  nix.settings.trusted-users = [ "root" "@wheel" ];
-
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
 
@@ -32,7 +29,7 @@
   # Enable the OpenSSH daemon
   services.openssh = {
     enable = true;
-    settings.PasswordAuthentication = true;
+    settings.PasswordAuthentication = false;
     settings.PermitRootLogin = "no";
   };
 

@@ -4,9 +4,6 @@
   # manage nix (and the nix daemon)
   nix.enable = true;
 
-  # nix-daemon should trust the admin users
-  nix.settings.trusted-users = [ "root" "@admin" ];
-
   # Easier sudo
   security.pam.services.sudo_local.touchIdAuth = true;
 
