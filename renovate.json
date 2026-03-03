@@ -9,7 +9,9 @@
     "enabled": true,
     "schedule": [
       "at any time"
-    ]
+    ],
+    "recreateWhen": "always",
+    "rebaseWhen": "behind-base-branch"
   },
   "extends": [
     "config:recommended"
@@ -20,7 +22,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
+      "managerFilePatterns": [
         "nix/machines/.*/configuration\\.nix$"
       ],
       "matchStrings": [
