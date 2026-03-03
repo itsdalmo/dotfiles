@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   hostName = "nixos-vm";
   user = "dalmo";
@@ -14,7 +19,9 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     users."${user}" = import ../../home.nix;
-    extraSpecialArgs = { user = user; };
+    extraSpecialArgs = {
+      user = user;
+    };
   };
 
   users.users."${user}" = {
@@ -22,7 +29,11 @@ in
     shell = pkgs.fish;
     initialPassword = "";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+    ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSRWGrBG1gY2Sz8CdPqnqKiJJXqpG1+RgJ5cHXZluIU"
     ];

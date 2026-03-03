@@ -1,4 +1,9 @@
-{ config, user, pkgs, ... }:
+{
+  config,
+  user,
+  pkgs,
+  ...
+}:
 let
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
 in
@@ -7,7 +12,10 @@ in
   home.username = user;
   home.homeDirectory = homeDirectory;
 
-  home.sessionPath = [ "$HOME/bin" "$HOME/go/bin" ];
+  home.sessionPath = [
+    "$HOME/bin"
+    "$HOME/go/bin"
+  ];
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
@@ -29,18 +37,26 @@ in
   home.file =
     let
       files = [
-        { name = ".ssh/config"; permissions = "600"; }
-        { name = ".ssh/allowed_signers"; permissions = "644"; }
-        { name = ".ssh/authorized_keys"; permissions = "600"; }
-      ];
-      copy = file:
         {
-          name = file.name + "_source";
-          value = {
-            source = ../files + ("/" + file.name);
-            onChange = ''cp -f $HOME/${file.name}_source $HOME/${file.name} && chmod ${file.permissions} $HOME/${file.name}'';
-          };
+          name = ".ssh/config";
+          permissions = "600";
+        }
+        {
+          name = ".ssh/allowed_signers";
+          permissions = "644";
+        }
+        {
+          name = ".ssh/authorized_keys";
+          permissions = "600";
+        }
+      ];
+      copy = file: {
+        name = file.name + "_source";
+        value = {
+          source = ../files + ("/" + file.name);
+          onChange = "cp -f $HOME/${file.name}_source $HOME/${file.name} && chmod ${file.permissions} $HOME/${file.name}";
         };
+      };
     in
     builtins.listToAttrs (map copy files);
 
@@ -98,6 +114,7 @@ in
     oras
     podman
     postgresql
+    renovate
     ripgrep
     teleport
     terraform
@@ -195,4 +212,3 @@ in
     # enableFishIntegration = true;
   };
 }
-

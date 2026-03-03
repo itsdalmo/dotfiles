@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   hostName = "dalmobook";
   user = "dalmo";
@@ -41,27 +46,33 @@ in
             - mode: system
               script: |
                 cat <<EOF > /usr/local/share/ca-certificates/zscaler.crt
-                ${builtins.replaceStrings ["\n"] ["\n      "] (builtins.readFile ./zscaler.crt)}
+                ${builtins.replaceStrings [ "\n" ] [ "\n      " ] (builtins.readFile ./zscaler.crt)}
                 EOF
                 update-ca-certificates
                 service docker restart
         '';
       };
     };
-    extraSpecialArgs = { user = user; };
+    extraSpecialArgs = {
+      user = user;
+    };
   };
 
-  nix.buildMachines = [{
-    hostName = "dalmobox.wombat-woodpecker.ts.net";
-    sshKey = "/var/root/.ssh/id_nixremote";
-    sshUser = "nixremote";
-    publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxEN2lBeWwyVE1Ld2ZUcEZFcU4yeS9zQ2lGWmUrSDZDWWJuaThVa2NwRSsgcm9vdEBkYWxtb2JveAo=";
-    maxJobs = 4;
-    systems = [ "aarch64-linux" "x86_64-linux" ];
-    supportedFeatures = [ "kvm" ];
-  }];
+  nix.buildMachines = [
+    {
+      hostName = "dalmobox.wombat-woodpecker.ts.net";
+      sshKey = "/var/root/.ssh/id_nixremote";
+      sshUser = "nixremote";
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxEN2lBeWwyVE1Ld2ZUcEZFcU4yeS9zQ2lGWmUrSDZDWWJuaThVa2NwRSsgcm9vdEBkYWxtb2JveAo=";
+      maxJobs = 4;
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
+      supportedFeatures = [ "kvm" ];
+    }
+  ];
   nix.distributedBuilds = true;
-
 
   system.primaryUser = user;
 

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   hostName = "dalmolab";
   user = "dalmo";
@@ -14,18 +19,25 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     users."${user}" = import ../../home.nix;
-    extraSpecialArgs = { user = user; };
+    extraSpecialArgs = {
+      user = user;
+    };
   };
 
-  nix.buildMachines = [{
-    hostName = "dalmobox.wombat-woodpecker.ts.net";
-    sshKey = "/root/.ssh/id_nixremote";
-    sshUser = "nixremote";
-    publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxEN2lBeWwyVE1Ld2ZUcEZFcU4yeS9zQ2lGWmUrSDZDWWJuaThVa2NwRSsgcm9vdEBkYWxtb2JveAo=";
-    maxJobs = 4;
-    systems = [ "aarch64-linux" "x86_64-linux" ];
-    supportedFeatures = [ "kvm" ];
-  }];
+  nix.buildMachines = [
+    {
+      hostName = "dalmobox.wombat-woodpecker.ts.net";
+      sshKey = "/root/.ssh/id_nixremote";
+      sshUser = "nixremote";
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxEN2lBeWwyVE1Ld2ZUcEZFcU4yeS9zQ2lGWmUrSDZDWWJuaThVa2NwRSsgcm9vdEBkYWxtb2JveAo=";
+      maxJobs = 4;
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
+      supportedFeatures = [ "kvm" ];
+    }
+  ];
   nix.distributedBuilds = true;
   nix.settings.max-jobs = 0; # Force all builds to use remote builders
 
@@ -37,7 +49,12 @@ in
     shell = pkgs.fish;
     initialPassword = "";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "k3s" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+      "k3s"
+    ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSRWGrBG1gY2Sz8CdPqnqKiJJXqpG1+RgJ5cHXZluIU"
     ];
@@ -99,4 +116,3 @@ in
     allowReboot = true;
   };
 }
-

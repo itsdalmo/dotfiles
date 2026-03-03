@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   hostName = "dalmobox";
   user = "dalmo";
@@ -14,7 +19,9 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     users."${user}" = import ../../home.nix;
-    extraSpecialArgs = { user = user; };
+    extraSpecialArgs = {
+      user = user;
+    };
   };
 
   users.users."${user}" = {
@@ -22,7 +29,11 @@ in
     shell = pkgs.fish;
     initialPassword = "";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+    ];
   };
 
   users.users.nixremote = {
@@ -154,4 +165,3 @@ in
     allowReboot = true;
   };
 }
-

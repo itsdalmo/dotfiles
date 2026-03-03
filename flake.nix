@@ -22,22 +22,39 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, darwin, ... }@inputs:
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      darwin,
+      ...
+    }@inputs:
     let
       # Helper function to create package sets
-      mkPkgs = system: import nixpkgs {
-        inherit system;
-        config = { allowUnfree = true; };
-        overlays = [ (import ./nix/overlays inputs) ];
-      };
+      mkPkgs =
+        system:
+        import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+          };
+          overlays = [ (import ./nix/overlays inputs) ];
+        };
       # Create home-manager configuration for system/user.
-      mkHome = { system, user }: home-manager.lib.homeManagerConfiguration {
-        pkgs = mkPkgs system;
-        modules = [ ./nix/home.nix ];
-        extraSpecialArgs = { inherit user inputs; };
-      };
+      mkHome =
+        { system, user }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = mkPkgs system;
+          modules = [ ./nix/home.nix ];
+          extraSpecialArgs = { inherit user inputs; };
+        };
       # Helper function to add outputs for each supported system.
-      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
       forEachSystem = f: nixpkgs.lib.genAttrs systems (system: f (mkPkgs system));
     in
     {

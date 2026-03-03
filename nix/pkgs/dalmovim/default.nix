@@ -45,18 +45,22 @@ let
       doCheck = false;
     })
 
-    (nvim-treesitter.withPlugins (_: nvim-treesitter.allGrammars ++ [
-      (pkgs.tree-sitter.buildGrammar {
-        language = "river";
-        version = "eafcdc5";
-        src = pkgs.fetchFromGitHub {
-          owner = "grafana";
-          repo = "tree-sitter-river";
-          rev = "eafcdc5147f985fea120feb670f1df7babb2f79e";
-          sha256 = "sha256-fhuIO++hLr5DqqwgFXgg8QGmcheTpYaYLMo7117rjyk=";
-        };
-      })
-    ]))
+    (nvim-treesitter.withPlugins (
+      _:
+      nvim-treesitter.allGrammars
+      ++ [
+        (pkgs.tree-sitter.buildGrammar {
+          language = "river";
+          version = "eafcdc5";
+          src = pkgs.fetchFromGitHub {
+            owner = "grafana";
+            repo = "tree-sitter-river";
+            rev = "eafcdc5147f985fea120feb670f1df7babb2f79e";
+            sha256 = "sha256-fhuIO++hLr5DqqwgFXgg8QGmcheTpYaYLMo7117rjyk=";
+          };
+        })
+      ]
+    ))
   ];
 
   packages = with pkgs; [
