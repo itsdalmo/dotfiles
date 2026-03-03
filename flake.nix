@@ -41,7 +41,7 @@
       forEachSystem = f: nixpkgs.lib.genAttrs systems (system: f (mkPkgs system));
     in
     {
-      formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+      formatter = forEachSystem (pkgs: pkgs.nixfmt);
 
       packages = forEachSystem (pkgs: {
         dalmovim = pkgs.dalmovim;

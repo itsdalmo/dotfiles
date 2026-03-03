@@ -50,7 +50,7 @@ conform.setup({
     libsonnet = { "jsonnetfmt" },
     lua = { "stylua" },
     markdown = { "deno", "injected" },
-    nix = { "nixpkgs_fmt" },
+    nix = { "nixfmt" },
     proto = { "buf" },
     sh = { "shfmt" },
     sql = { "sql_formatter" },

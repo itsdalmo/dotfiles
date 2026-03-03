@@ -72,7 +72,7 @@ let
     kics
     lua-language-server
     nil
-    nixpkgs-fmt
+    nixfmt
     nodePackages.typescript-language-server
     shellcheck
     shfmt
