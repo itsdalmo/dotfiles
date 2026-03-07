@@ -92,9 +92,9 @@ in
     colima
     cosign
     dalmovim
-    docker-client
-    devbox
     dive
+    docker-client
+    dotnetCorePackages.sdk_8_0
     eza
     fd
     gh
@@ -107,15 +107,16 @@ in
     kind
     kubectl
     kubernetes-helm
-    k9s
     lazygit
     nodejs_24
-    opencode
+    omnisharp-roslyn
+    unstable.opencode
     oras
-    podman
     postgresql
+    presenterm
     renovate
     ripgrep
+    skopeo
     teleport
     terraform
     tfcheck
@@ -125,20 +126,6 @@ in
     typescript
     yubikey-manager
     zk
-    dotnetCorePackages.sdk_8_0
-    omnisharp-roslyn
-    presenterm
-
-    # Use nix.shell instead:
-    # apache-maven
-    # helm
-    # hugo
-    # kustomize
-    # nvm
-    # packer
-    # protobuf
-    # typescript
-    # vhs
   ];
 
   # Let Home Manager install and manage itself.
