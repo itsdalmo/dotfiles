@@ -15,7 +15,7 @@ jobs:
             target: "dalmo@amd64-linux"
           - runner: ubuntu-24.04-arm
             target: "dalmo@arm64-linux"
-          - runner: macos-15
+          - runner: macos-26
             target: "dalmo@arm64-darwin"
     runs-on: ${{ matrix.runner }}
     steps:
