@@ -89,7 +89,7 @@ in
   home.packages = with pkgs; [
     aws-vault
     awscli2
-    colima
+    unstable.colima
     cosign
     dalmovim
     dive
