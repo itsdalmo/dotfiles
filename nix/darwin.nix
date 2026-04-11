@@ -8,7 +8,6 @@
   security.pam.services.sudo_local.touchIdAuth = true;
 
   fonts.packages = with pkgs; [
-    jetbrains-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
   ];
