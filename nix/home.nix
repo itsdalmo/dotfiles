@@ -79,22 +79,30 @@ in
   xdg.enable = true;
   xdg.configFile = {
     "fd".source = ../files/.config/fd;
-    "ghostty".source = ../files/.config/ghostty;
+    "ghostty/config".source = ../files/.config/ghostty/config;
     "git".source = ../files/.config/git;
     "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;
+    "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
     "ripgrep".source = ../files/.config/ripgrep;
     "starship.toml".source = ../files/.config/starship.toml;
     "wezterm".source = ../files/.config/wezterm;
     "zk".source = ../files/.config/zk;
-    "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
 
     # Home manager wants to install the theme under the bat directory
     "bat/config".source = ../files/.config/bat/config;
 
     # Lazygit stores its state in the directory
     "lazygit/config.yml".source = ../files/.config/lazygit/config.yml;
-  };
+  }
+  // (
+    if pkgs.stdenv.isDarwin then
+      {
+        "ghostty/macos".source = ../files/.config/ghostty/macos;
+      }
+    else
+      { }
+  );
 
   home.packages = with pkgs; [
     aws-vault
