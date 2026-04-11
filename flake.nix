@@ -5,16 +5,23 @@
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-25.11";
     };
+    nixpkgs-darwin = {
+      url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    };
     nixpkgs-unstable = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "github:nixos/nixpkgs/nixpkgs-unstable";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager-darwin = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
     darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
     mini-nvim = {
       url = "github:nvim-mini/mini.nvim/main";
@@ -25,15 +32,19 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-darwin,
       home-manager,
+      home-manager-darwin,
       darwin,
       ...
     }@inputs:
     let
+      isDarwin = system: (nixpkgs.lib.systems.elaborate system).isDarwin;
+
       # Helper function to create package sets
       mkPkgs =
         system:
-        import nixpkgs {
+        import (if isDarwin system then nixpkgs-darwin else nixpkgs) {
           inherit system;
           config = {
             allowUnfree = true;
@@ -43,7 +54,7 @@
       # Create home-manager configuration for system/user.
       mkHome =
         { system, user }:
-        home-manager.lib.homeManagerConfiguration {
+        (if isDarwin system then home-manager-darwin else home-manager).lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
           modules = [ ./nix/home.nix ];
           extraSpecialArgs = { inherit user inputs; };
@@ -84,14 +95,14 @@
           pkgs = mkPkgs "aarch64-darwin";
           modules = [
             ./nix/machines/dalmobook/configuration.nix
-            home-manager.darwinModules.home-manager
+            home-manager-darwin.darwinModules.home-manager
           ];
         };
         macos-vm = darwin.lib.darwinSystem {
           pkgs = mkPkgs "aarch64-darwin";
           modules = [
             ./nix/machines/macos-vm/configuration.nix
-            home-manager.darwinModules.home-manager
+            home-manager-darwin.darwinModules.home-manager
           ];
         };
       };
