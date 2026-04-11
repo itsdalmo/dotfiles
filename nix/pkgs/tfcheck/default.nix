@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  inherit (pkgs) system;
+  system = pkgs.stdenv.hostPlatform.system;
   architectures = {
     "x86_64-linux" = "linux-amd64";
     "aarch64-linux" = "linux-arm64";
