@@ -32,6 +32,22 @@ in
     ZK_NOTEBOOK_DIR = "${homeDirectory}/code/github.com/itsdalmo/notebook";
   };
 
+  home.shellAliases = {
+    awsv = "aws-vault exec";
+    cat = "bat";
+    g = "git";
+    ga = "git add -p";
+    gc = "git checkout";
+    gg = "lazygit";
+    gl = "git log --oneline --graph --max-count 20";
+    gp = "git pull";
+    gr = "git stash && git pull --rebase && git stash pop";
+    gs = "git status";
+    k = "kubectl";
+    l = "ll";
+    tf = "terraform";
+  };
+
   # FIXME: Workaround since we cannot set the correct mode on symlinks (see SO answer):
   # https://github.com/nix-community/home-manager/issues/322#issuecomment-1856128020
   home.file =
@@ -72,12 +88,6 @@ in
     "wezterm".source = ../files/.config/wezterm;
     "zk".source = ../files/.config/zk;
     "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
-
-    # The root fish config has to be managed by home-manager
-    # (in order to add fzf/zoxide/etc)
-    "fish/osx.fish".source = ../files/.config/fish/osx.fish;
-    "fish/linux.fish".source = ../files/.config/fish/linux.fish;
-    "fish/functions".source = ../files/.config/fish/functions;
 
     # Home manager wants to install the theme under the bat directory
     "bat/config".source = ../files/.config/bat/config;
@@ -133,12 +143,91 @@ in
 
   programs.fish = {
     enable = true;
-    shellInit = builtins.readFile ../files/.config/fish/config.fish;
+    interactiveShellInit = ''
+      set fish_greeting ""
+
+      if test (uname) = Darwin
+          switch (uname -m)
+              case arm64
+                  eval (/opt/homebrew/bin/brew shellenv)
+              case x86_64
+                  eval (/usr/local/bin/brew shellenv)
+          end
+      end
+    '';
+    functions = {
+      ll = ''
+        eza -la --icons --group-directories-first $argv
+      '';
+      tree = ''
+        eza -l --tree --icons --only-dirs --level 2 $argv
+      '';
+      fish_user_key_bindings = ''
+        fish_vi_key_bindings
+        fzf_key_bindings
+      '';
+    };
+  };
+
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      case "$(uname)" in
+        Darwin)
+          case "$(uname -m)" in
+            arm64)
+              eval "$(/opt/homebrew/bin/brew shellenv)"
+              ;;
+            x86_64)
+              eval "$(/usr/local/bin/brew shellenv)"
+              ;;
+          esac
+
+          ;;
+      esac
+
+      ll() {
+        eza -la --icons --group-directories-first "$@"
+      }
+
+      tree() {
+        eza -l --tree --icons --only-dirs --level 2 "$@"
+      }
+
+    '';
+  };
+
+  programs.zsh = {
+    enable = true;
+    initContent = ''
+      case "$(uname)" in
+        Darwin)
+          case "$(uname -m)" in
+            arm64)
+              eval "$(/opt/homebrew/bin/brew shellenv)"
+              ;;
+            x86_64)
+              eval "$(/usr/local/bin/brew shellenv)"
+              ;;
+          esac
+          ;;
+      esac
+
+      ll() {
+        eza -la --icons --group-directories-first "$@"
+      }
+
+      tree() {
+        eza -l --tree --icons --only-dirs --level 2 "$@"
+      }
+    '';
   };
 
   programs.fzf = {
     enable = true;
+    enableBashIntegration = true;
     enableFishIntegration = true;
+    enableZshIntegration = true;
     defaultCommand = "fd --follow --hidden";
     fileWidgetCommand = "fd --follow --hidden .";
     fileWidgetOptions = [ "--preview 'bat --color=always {}' --preview-window '~3'" ];
@@ -168,7 +257,9 @@ in
 
   programs.zoxide = {
     enable = true;
+    enableBashIntegration = true;
     enableFishIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.bat = {
@@ -188,12 +279,16 @@ in
 
   programs.starship = {
     enable = true;
+    enableBashIntegration = true;
     enableFishIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
 
     # https://github.com/NixOS/nixpkgs/issues/507531
     package = pkgs.unstable.direnv;
