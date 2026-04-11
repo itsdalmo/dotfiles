@@ -25,8 +25,9 @@
     unzip
   ];
 
-  # Add fish shell
+  # Add shells
   programs.fish.enable = true;
+  programs.zsh.enable = true;
 
   # Start ssh agent
   programs.ssh.startAgent = true;

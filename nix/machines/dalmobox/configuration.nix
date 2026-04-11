@@ -26,7 +26,7 @@ in
 
   users.users."${user}" = {
     home = "/home/${user}";
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     initialPassword = "";
     isNormalUser = true;
     extraGroups = [
