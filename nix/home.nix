@@ -195,6 +195,9 @@ in
     enable = true;
     nix-direnv.enable = true;
 
+    # https://github.com/NixOS/nixpkgs/issues/507531
+    package = pkgs.unstable.direnv;
+
     # Read-only as it is enabled by default:
     # enableFishIntegration = true;
   };
