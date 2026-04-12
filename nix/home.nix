@@ -74,7 +74,6 @@ in
   xdg.enable = true;
   xdg.configFile = {
     "ghostty/config".source = ../files/.config/ghostty/config;
-    "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;
     "wezterm".source = ../files/.config/wezterm;
     "zk".source = ../files/.config/zk;
