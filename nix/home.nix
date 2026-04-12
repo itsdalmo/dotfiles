@@ -79,9 +79,6 @@ in
     "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
     "wezterm".source = ../files/.config/wezterm;
     "zk".source = ../files/.config/zk;
-
-    # Home manager wants to install the theme under the bat directory
-    "bat/config".source = ../files/.config/bat/config;
   }
   // (
     if pkgs.stdenv.isDarwin then
@@ -364,6 +361,10 @@ in
 
   programs.bat = {
     enable = true;
+    config = {
+      theme = "tokyonight";
+      paging = "never";
+    };
     themes = {
       tokyonight = {
         src = pkgs.fetchFromGitHub {
