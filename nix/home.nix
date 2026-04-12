@@ -20,8 +20,6 @@ in
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
     LC_CTYPE = "en_US.UTF-8";
-
-    # Could consider moving these back to fish.config?
     AWS_DEFAULT_REGION = "eu-west-1";
     AWS_PAGER = "";
     DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_8_0}/share/dotnet";
@@ -36,12 +34,9 @@ in
     awsv = "aws-vault exec";
     cat = "bat";
     g = "git";
-    ga = "git add -p";
     gc = "git checkout";
     gg = "lazygit";
     gl = "git log --oneline --graph --max-count 20";
-    gp = "git pull";
-    gr = "git stash && git pull --rebase && git stash pop";
     gs = "git status";
     k = "kubectl";
     l = "ll";
