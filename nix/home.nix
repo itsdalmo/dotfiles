@@ -77,7 +77,6 @@ in
     "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;
     "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
-    "starship.toml".source = ../files/.config/starship.toml;
     "wezterm".source = ../files/.config/wezterm;
     "zk".source = ../files/.config/zk;
 
@@ -383,6 +382,56 @@ in
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
+    settings = {
+      format = ''
+        $directory\
+        $git_branch\
+        $git_state\
+        $kubernetes\
+        $azure\
+        $cmd_duration\
+        $line_break\
+        $username\
+        $hostname\
+        $character'';
+
+      directory.style = "blue";
+      git_branch.style = "bright-black";
+      git_state.style = "bright-black";
+
+      kubernetes = {
+        disabled = false;
+        format = "on [$symbol$context]($style) ";
+        style = "blue";
+      };
+
+      azure = {
+        disabled = false;
+        format = "on [$symbol\\($subscription\\)]($style) ";
+        style = "blue";
+      };
+
+      cmd_duration = {
+        format = "[$duration]($style)";
+        style = "yellow";
+      };
+
+      username = {
+        format = "[$user]($style)";
+        style_user = "bright-black";
+      };
+
+      hostname = {
+        format = "[@$hostname]($style) ";
+        style = "bright-black";
+      };
+
+      character = {
+        success_symbol = "[❯](purple)";
+        error_symbol = "[❯](red)";
+        vimcmd_symbol = "[❮](green)";
+      };
+    };
   };
 
   programs.direnv = {
