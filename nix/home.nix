@@ -8,6 +8,13 @@ let
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
 in
 {
+  imports = [
+    ./home/bash.nix
+    ./home/fd.nix
+    ./home/fish.nix
+    ./home/zsh.nix
+  ];
+
   home.stateVersion = "23.11";
   home.username = user;
   home.homeDirectory = homeDirectory;
@@ -228,110 +235,8 @@ in
     ];
   };
 
-  programs.fd = {
-    enable = true;
-    ignores = [
-      ".git"
-      "Desktop"
-      "Documents"
-      "Downloads"
-      "Library"
-      "Movies"
-      "Music"
-      "Pictures"
-      "Public"
-    ];
-  };
-
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting ""
-
-      if test (uname) = Darwin
-          switch (uname -m)
-              case arm64
-                  eval (/opt/homebrew/bin/brew shellenv)
-              case x86_64
-                  eval (/usr/local/bin/brew shellenv)
-          end
-      end
-    '';
-    functions = {
-      ll = ''
-        eza -la --icons --group-directories-first $argv
-      '';
-      tree = ''
-        eza -l --tree --icons --only-dirs --level 2 $argv
-      '';
-      fish_user_key_bindings = ''
-        fish_vi_key_bindings
-        fzf_key_bindings
-      '';
-    };
-  };
-
-  programs.bash = {
-    enable = true;
-    initExtra = ''
-      case "$(uname)" in
-        Darwin)
-          case "$(uname -m)" in
-            arm64)
-              eval "$(/opt/homebrew/bin/brew shellenv)"
-              ;;
-            x86_64)
-              eval "$(/usr/local/bin/brew shellenv)"
-              ;;
-          esac
-
-          ;;
-      esac
-
-      ll() {
-        eza -la --icons --group-directories-first "$@"
-      }
-
-      tree() {
-        eza -l --tree --icons --only-dirs --level 2 "$@"
-      }
-
-    '';
-  };
-
-  programs.zsh = {
-    enable = true;
-    initContent = ''
-      case "$(uname)" in
-        Darwin)
-          case "$(uname -m)" in
-            arm64)
-              eval "$(/opt/homebrew/bin/brew shellenv)"
-              ;;
-            x86_64)
-              eval "$(/usr/local/bin/brew shellenv)"
-              ;;
-          esac
-          ;;
-      esac
-
-      ll() {
-        eza -la --icons --group-directories-first "$@"
-      }
-
-      tree() {
-        eza -l --tree --icons --only-dirs --level 2 "$@"
-      }
-    '';
-  };
-
   programs.fzf = {
     enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-    enableZshIntegration = true;
-    defaultCommand = "fd --follow --hidden";
-    fileWidgetCommand = "fd --follow --hidden .";
     fileWidgetOptions = [ "--preview 'bat --color=always {}' --preview-window '~3'" ];
     defaultOptions = [
       "--highlight-line"
@@ -359,9 +264,6 @@ in
 
   programs.zoxide = {
     enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-    enableZshIntegration = true;
   };
 
   programs.bat = {
@@ -385,9 +287,6 @@ in
 
   programs.starship = {
     enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-    enableZshIntegration = true;
     settings = {
       format = ''
         $directory\
@@ -443,8 +342,6 @@ in
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
 
     # https://github.com/NixOS/nixpkgs/issues/507531
     package = pkgs.unstable.direnv;
