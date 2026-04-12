@@ -73,7 +73,6 @@ in
 
   xdg.enable = true;
   xdg.configFile = {
-    "fd".source = ../files/.config/fd;
     "ghostty/config".source = ../files/.config/ghostty/config;
     "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;
@@ -104,7 +103,6 @@ in
     docker-client
     dotnetCorePackages.sdk_8_0
     eza
-    fd
     gh
     gnumake
     go
@@ -226,6 +224,21 @@ in
       "--smart-case"
       "--hidden"
       "--glob=!.git/"
+    ];
+  };
+
+  programs.fd = {
+    enable = true;
+    ignores = [
+      ".git"
+      "Desktop"
+      "Documents"
+      "Downloads"
+      "Library"
+      "Movies"
+      "Music"
+      "Pictures"
+      "Public"
     ];
   };
 
