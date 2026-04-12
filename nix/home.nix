@@ -20,8 +20,6 @@ in
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
     LC_CTYPE = "en_US.UTF-8";
-
-    # Could consider moving these back to fish.config?
     AWS_DEFAULT_REGION = "eu-west-1";
     AWS_PAGER = "";
     DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_8_0}/share/dotnet";
@@ -30,6 +28,19 @@ in
     PAGER = "less -FirSwX";
     RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
     ZK_NOTEBOOK_DIR = "${homeDirectory}/code/github.com/itsdalmo/notebook";
+  };
+
+  home.shellAliases = {
+    awsv = "aws-vault exec";
+    cat = "bat";
+    g = "git";
+    gc = "git checkout";
+    gg = "lazygit";
+    gl = "git log --oneline --graph --max-count 20";
+    gs = "git status";
+    k = "kubectl";
+    l = "ll";
+    tf = "terraform";
   };
 
   # FIXME: Workaround since we cannot set the correct mode on symlinks (see SO answer):
@@ -63,28 +74,30 @@ in
   xdg.enable = true;
   xdg.configFile = {
     "fd".source = ../files/.config/fd;
-    "ghostty".source = ../files/.config/ghostty;
+    "ghostty/config".source = ../files/.config/ghostty/config;
     "git".source = ../files/.config/git;
     "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;
+    "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
     "ripgrep".source = ../files/.config/ripgrep;
     "starship.toml".source = ../files/.config/starship.toml;
     "wezterm".source = ../files/.config/wezterm;
     "zk".source = ../files/.config/zk;
-    "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
-
-    # The root fish config has to be managed by home-manager
-    # (in order to add fzf/zoxide/etc)
-    "fish/osx.fish".source = ../files/.config/fish/osx.fish;
-    "fish/linux.fish".source = ../files/.config/fish/linux.fish;
-    "fish/functions".source = ../files/.config/fish/functions;
 
     # Home manager wants to install the theme under the bat directory
     "bat/config".source = ../files/.config/bat/config;
 
     # Lazygit stores its state in the directory
     "lazygit/config.yml".source = ../files/.config/lazygit/config.yml;
-  };
+  }
+  // (
+    if pkgs.stdenv.isDarwin then
+      {
+        "ghostty/macos".source = ../files/.config/ghostty/macos;
+      }
+    else
+      { }
+  );
 
   home.packages = with pkgs; [
     aws-vault
@@ -133,12 +146,91 @@ in
 
   programs.fish = {
     enable = true;
-    shellInit = builtins.readFile ../files/.config/fish/config.fish;
+    interactiveShellInit = ''
+      set fish_greeting ""
+
+      if test (uname) = Darwin
+          switch (uname -m)
+              case arm64
+                  eval (/opt/homebrew/bin/brew shellenv)
+              case x86_64
+                  eval (/usr/local/bin/brew shellenv)
+          end
+      end
+    '';
+    functions = {
+      ll = ''
+        eza -la --icons --group-directories-first $argv
+      '';
+      tree = ''
+        eza -l --tree --icons --only-dirs --level 2 $argv
+      '';
+      fish_user_key_bindings = ''
+        fish_vi_key_bindings
+        fzf_key_bindings
+      '';
+    };
+  };
+
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      case "$(uname)" in
+        Darwin)
+          case "$(uname -m)" in
+            arm64)
+              eval "$(/opt/homebrew/bin/brew shellenv)"
+              ;;
+            x86_64)
+              eval "$(/usr/local/bin/brew shellenv)"
+              ;;
+          esac
+
+          ;;
+      esac
+
+      ll() {
+        eza -la --icons --group-directories-first "$@"
+      }
+
+      tree() {
+        eza -l --tree --icons --only-dirs --level 2 "$@"
+      }
+
+    '';
+  };
+
+  programs.zsh = {
+    enable = true;
+    initContent = ''
+      case "$(uname)" in
+        Darwin)
+          case "$(uname -m)" in
+            arm64)
+              eval "$(/opt/homebrew/bin/brew shellenv)"
+              ;;
+            x86_64)
+              eval "$(/usr/local/bin/brew shellenv)"
+              ;;
+          esac
+          ;;
+      esac
+
+      ll() {
+        eza -la --icons --group-directories-first "$@"
+      }
+
+      tree() {
+        eza -l --tree --icons --only-dirs --level 2 "$@"
+      }
+    '';
   };
 
   programs.fzf = {
     enable = true;
+    enableBashIntegration = true;
     enableFishIntegration = true;
+    enableZshIntegration = true;
     defaultCommand = "fd --follow --hidden";
     fileWidgetCommand = "fd --follow --hidden .";
     fileWidgetOptions = [ "--preview 'bat --color=always {}' --preview-window '~3'" ];
@@ -168,7 +260,9 @@ in
 
   programs.zoxide = {
     enable = true;
+    enableBashIntegration = true;
     enableFishIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.bat = {
@@ -188,12 +282,16 @@ in
 
   programs.starship = {
     enable = true;
+    enableBashIntegration = true;
     enableFishIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
 
     # https://github.com/NixOS/nixpkgs/issues/507531
     package = pkgs.unstable.direnv;

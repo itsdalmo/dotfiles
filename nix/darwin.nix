@@ -46,9 +46,13 @@
     ];
   };
 
-  # Add fish to /etc/shells
+  # Add fish and zsh to /etc/shells
   programs.fish.enable = true;
-  environment.shells = [ pkgs.fish ];
+  programs.zsh.enable = true;
+  environment.shells = [
+    pkgs.fish
+    pkgs.zsh
+  ];
 
   system.defaults = {
     NSGlobalDomain = {

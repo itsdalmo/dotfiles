@@ -25,7 +25,7 @@ in
   };
 
   users.users."${user}" = {
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
 
     # nix-darwin requires these to be set even if the user already exists
     uid = 501;

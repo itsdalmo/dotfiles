@@ -1,0 +1,2 @@
+# Make super (cmd) act as alt (opt) on macos
+key-remap = super=alt
