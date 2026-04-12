@@ -85,9 +85,6 @@ in
 
     # Home manager wants to install the theme under the bat directory
     "bat/config".source = ../files/.config/bat/config;
-
-    # Lazygit stores its state in the directory
-    "lazygit/config.yml".source = ../files/.config/lazygit/config.yml;
   }
   // (
     if pkgs.stdenv.isDarwin then
@@ -118,7 +115,6 @@ in
     kind
     kubectl
     kubernetes-helm
-    lazygit
     nodejs_24
     omnisharp-roslyn
     unstable.opencode
@@ -176,6 +172,52 @@ in
       gpg = {
         format = "ssh";
         ssh.allowedSignersFile = "~/.ssh/allowed_signers";
+      };
+    };
+  };
+
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      gui = {
+        nerdFontsVersion = "3";
+        theme = {
+          activeBorderColor = [
+            "#ff9e64"
+            "bold"
+          ];
+          inactiveBorderColor = [
+            "#27a1b9"
+          ];
+          searchingActiveBorderColor = [
+            "#ff9e64"
+            "bold"
+          ];
+          optionsTextColor = [
+            "#7aa2f7"
+          ];
+          selectedLineBgColor = [
+            "#283457"
+          ];
+          cherryPickedCommitFgColor = [
+            "#7aa2f7"
+          ];
+          cherryPickedCommitBgColor = [
+            "#bb9af7"
+          ];
+          markedBaseCommitFgColor = [
+            "#7aa2f7"
+          ];
+          markedBaseCommitBgColor = [
+            "#e0af68"
+          ];
+          unstagedChangesColor = [
+            "#db4b4b"
+          ];
+          defaultFgColor = [
+            "#c0caf5"
+          ];
+        };
       };
     };
   };
