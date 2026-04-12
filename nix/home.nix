@@ -76,7 +76,6 @@ in
     "ghostty/config".source = ../files/.config/ghostty/config;
     "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;
-    "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
     "wezterm".source = ../files/.config/wezterm;
     "zk".source = ../files/.config/zk;
   }
@@ -110,7 +109,6 @@ in
     kubernetes-helm
     nodejs_24
     omnisharp-roslyn
-    unstable.opencode
     oras
     postgresql
     presenterm
@@ -211,6 +209,14 @@ in
           ];
         };
       };
+    };
+  };
+
+  programs.opencode = {
+    enable = true;
+    package = pkgs.unstable.opencode;
+    settings = {
+      theme = "tokyonight";
     };
   };
 
