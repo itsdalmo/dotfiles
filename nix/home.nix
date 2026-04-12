@@ -75,7 +75,6 @@ in
   xdg.configFile = {
     "fd".source = ../files/.config/fd;
     "ghostty/config".source = ../files/.config/ghostty/config;
-    "git".source = ../files/.config/git;
     "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;
     "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
@@ -111,7 +110,6 @@ in
     eza
     fd
     gh
-    git
     gnumake
     go
     go-task
@@ -143,6 +141,44 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.git = {
+    enable = true;
+    userName = "itsdalmo";
+    userEmail = "kristian@dalmo.me";
+    aliases = {
+      unstage = "reset HEAD";
+      uncommit = "reset --soft HEAD^";
+    };
+    ignores = [
+      ".DS_Store"
+      ".vscode"
+      "*.code-workspace"
+      ".idea"
+      ".terraform"
+      ".venv"
+      ".python-version"
+    ];
+    signing = {
+      key = "~/.ssh/id_ed25519.pub";
+      signByDefault = true;
+    };
+    extraConfig = {
+      core.editor = "nvim";
+      diff.tool = "nvimdiff";
+      difftool.nvimdiff.cmd = "nvim -d $LOCAL $REMOTE";
+      credential = {
+        helper = "!aws codecommit credential-helper $@";
+        UseHttpPath = true;
+      };
+      pull.ff = "only";
+      tag.gpgSign = true;
+      gpg = {
+        format = "ssh";
+        ssh.allowedSignersFile = "~/.ssh/allowed_signers";
+      };
+    };
+  };
 
   programs.fish = {
     enable = true;
