@@ -100,9 +100,9 @@ in
   );
 
   home.packages = with pkgs; [
+    apko
     aws-vault
     awscli2
-    unstable.colima
     cosign
     dalmovim
     dive
@@ -121,9 +121,9 @@ in
     kubectl
     kubernetes-helm
     lazygit
+    melange
     nodejs_24
     omnisharp-roslyn
-    unstable.opencode
     oras
     postgresql
     presenterm
@@ -137,6 +137,8 @@ in
     tfswitch
     trivy
     typescript
+    unstable.colima
+    unstable.opencode
     yubikey-manager
     zk
   ];
