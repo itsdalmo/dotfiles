@@ -61,6 +61,7 @@ in
     slack
     spotify
     wl-clipboard
+    zed-editor
   ];
 
   networking.hostName = hostName;
