@@ -218,6 +218,8 @@ in
           ;;
       esac
 
+      unalias ll 2>/dev/null || true
+
       ll() {
         eza -la --icons --group-directories-first "$@"
       }
