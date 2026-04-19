@@ -14,10 +14,7 @@
     "rebaseWhen": "behind-base-branch"
   },
   "extends": [
-    "config:recommended"
-  ],
-  "ignorePaths": [
-    ".github/workflows/**"
+    "config:best-practices"
   ],
   "customManagers": [
     {
