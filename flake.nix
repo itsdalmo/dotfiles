@@ -23,10 +23,6 @@
       url = "github:LnL7/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
-    mini-nvim = {
-      url = "github:nvim-mini/mini.nvim/main";
-      flake = false;
-    };
   };
 
   outputs =

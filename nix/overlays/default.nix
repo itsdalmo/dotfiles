@@ -10,6 +10,6 @@ inputs: final: prev: {
   fish = final.unstable.fish;
 
   # Custom packages
-  dalmovim = final.callPackage ../pkgs/dalmovim { mini = inputs.mini-nvim; };
+  dalmovim = final.callPackage ../pkgs/dalmovim { };
   tfcheck = final.callPackage ../pkgs/tfcheck { };
 }

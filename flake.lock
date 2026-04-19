@@ -63,23 +63,6 @@
         "type": "github"
       }
     },
-    "mini-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1775985067,
-        "narHash": "sha256-M/oekdxoGF/8IrI/3sdBVn7v7M7G7QuwT32na9PfTfI=",
-        "owner": "nvim-mini",
-        "repo": "mini.nvim",
-        "rev": "c67822c53e8e282fe863343e88aa0a8ca3534059",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-mini",
-        "ref": "main",
-        "repo": "mini.nvim",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1775811116,
@@ -133,7 +116,6 @@
         "darwin": "darwin",
         "home-manager": "home-manager",
         "home-manager-darwin": "home-manager-darwin",
-        "mini-nvim": "mini-nvim",
         "nixpkgs": "nixpkgs",
         "nixpkgs-darwin": "nixpkgs-darwin",
         "nixpkgs-unstable": "nixpkgs-unstable"
