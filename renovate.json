@@ -20,7 +20,7 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "nix/machines/.*/configuration\\.nix$"
+        "/^nix\\/machines\\/dalmolab\\/configuration\\.nix$/"
       ],
       "matchStrings": [
         "image\\s*=\\s*\"(?<depName>[^:]+):(?<currentValue>[^@]+)@(?<currentDigest>sha256:[^\"]+)\""
