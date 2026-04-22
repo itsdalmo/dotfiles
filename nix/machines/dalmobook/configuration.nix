@@ -107,8 +107,8 @@ in
   nix.settings.ssl-cert-file = certs;
 
   homebrew.masApps = {
-    "1Password for Safari" = 1569813296;
-    "AdGuard for Safari" = 1440147259;
-    "Azure VPN Client" = 1553936137;
+    # "1Password for Safari" = 1569813296;
+    # "AdGuard for Safari" = 1440147259;
+    # "Azure VPN Client" = 1553936137;
   };
 }
