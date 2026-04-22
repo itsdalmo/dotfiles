@@ -6,6 +6,26 @@
 }:
 let
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
+
+  opencodeWrapped = pkgs.symlinkJoin {
+    name = "opencode-wrapped";
+    paths = [ pkgs.unstable.opencode ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/opencode \
+        --prefix PATH : ${
+          pkgs.lib.makeBinPath [
+            pkgs.deno
+            pkgs.gofumpt
+            pkgs.grafana-alloy
+            pkgs.jsonnet
+            pkgs.shfmt
+            pkgs.stylua
+            pkgs.terraform
+          ]
+        }
+    '';
+  };
 in
 {
   home.stateVersion = "23.11";
@@ -123,6 +143,7 @@ in
     lazygit
     melange
     nodejs_24
+    opencodeWrapped
     omnisharp-roslyn
     oras
     postgresql
@@ -138,7 +159,6 @@ in
     trivy
     typescript
     unstable.colima
-    unstable.opencode
     yubikey-manager
     zk
   ];

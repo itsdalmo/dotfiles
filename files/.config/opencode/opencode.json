@@ -1,4 +1,49 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "tokyonight"
+  "theme": "tokyonight",
+  "default_agent": "plan",
+  "autoupdate": false,
+  "formatter": {
+    "biome": {
+      "disabled": true
+    },
+    "oxfmt": {
+      "disabled": true
+    },
+    "prettier": {
+      "disabled": true
+    },
+    "gofmt": {
+      "command": ["gofumpt", "-w", "$FILE"],
+      "extensions": [".go"]
+    },
+    "alloy": {
+      "command": ["alloy", "fmt", "$FILE"],
+      "extensions": [".alloy"]
+    },
+    "terraform": {
+      "command": ["terraform", "fmt", "$FILE"],
+      "extensions": [".hcl", ".tf", ".tfvars"]
+    },
+    "jsonnetfmt": {
+      "command": ["jsonnetfmt", "-i", "$FILE"],
+      "extensions": [".jsonnet", ".libsonnet"]
+    },
+    "stylua": {
+      "command": ["stylua", "$FILE"],
+      "extensions": [".lua"]
+    },
+    "deno-markdown": {
+      "command": ["deno", "fmt", "--line-width", "120", "--prose-wrap", "never", "$FILE"],
+      "extensions": [".md"]
+    },
+    "deno-yaml": {
+      "command": ["deno", "fmt", "--unstable-yaml", "--line-width", "120", "--prose-wrap", "always", "$FILE"],
+      "extensions": [".yaml", ".yml"]
+    },
+    "shfmt": {
+      "command": ["shfmt", "-w", "$FILE"],
+      "extensions": [".sh", ".bash"]
+    }
+  }
 }
