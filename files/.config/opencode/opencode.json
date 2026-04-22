@@ -3,6 +3,12 @@
   "theme": "tokyonight",
   "default_agent": "plan",
   "autoupdate": false,
+  "permission": {
+    "external_directory": {
+      "*": "ask",
+      "/tmp/**": "allow"
+    },
+  },
   "formatter": {
     "biome": {
       "disabled": true
