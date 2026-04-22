@@ -1,0 +1,160 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "n": [
+        "workspace::SendKeystrokes",
+        "n z z"
+      ],
+      "shift-n": [
+        "workspace::SendKeystrokes",
+        "shift-n z z"
+      ],
+      "] t": [
+        "workspace::SendKeystrokes",
+        "g t"
+      ],
+      "[ t": [
+        "workspace::SendKeystrokes",
+        "g shift-t"
+      ],
+      "space b b": [
+        "workspace::SendKeystrokes",
+        ":ls enter"
+      ],
+      "space b d": [
+        "workspace::SendKeystrokes",
+        ":bd enter"
+      ],
+      "space f n": [
+        "workspace::SendKeystrokes",
+        ":tabnew enter"
+      ],
+      "space f f": "file_finder::Toggle",
+      "space f r": "command_palette::Toggle",
+      "space f t": [
+        "workspace::SendKeystrokes",
+        ":Explore enter"
+      ],
+      "space f l": [
+        "workspace::SendKeystrokes",
+        ":Explore enter"
+      ],
+      "space g g": [
+        "workspace::SendKeystrokes",
+        ":Git enter"
+      ],
+      "space g s": [
+        "workspace::SendKeystrokes",
+        ":Git enter"
+      ],
+      "space g l": [
+        "workspace::SendKeystrokes",
+        ":Git enter"
+      ],
+      "space g d": [
+        "workspace::SendKeystrokes",
+        ":diffupdate enter"
+      ],
+      "space g b": [
+        "workspace::SendKeystrokes",
+        ":Git enter"
+      ],
+      "space q q": [
+        "workspace::SendKeystrokes",
+        ":qa enter"
+      ],
+      "space s s": [
+        "workspace::SendKeystrokes",
+        "g /"
+      ],
+      "space s b": "buffer_search::Deploy",
+      "space s h": "command_palette::Toggle",
+      "space s r": "command_palette::Toggle",
+      "space s d": [
+        "workspace::SendKeystrokes",
+        ":clist enter"
+      ],
+      "space s shift-d": [
+        "workspace::SendKeystrokes",
+        ":clist enter"
+      ],
+      "space s j": [
+        "workspace::SendKeystrokes",
+        "g s"
+      ],
+      "space s shift-j": [
+        "workspace::SendKeystrokes",
+        "g shift-s"
+      ],
+      "space s :": "command_palette::Toggle",
+      "space w v": [
+        "workspace::SendKeystrokes",
+        ":vsplit enter"
+      ],
+      "space w s": [
+        "workspace::SendKeystrokes",
+        ":split enter"
+      ],
+      "space w left": "workspace::ActivatePaneLeft",
+      "space w right": "workspace::ActivatePaneRight",
+      "space w up": "workspace::ActivatePaneUp",
+      "space w down": "workspace::ActivatePaneDown"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      ", .": [
+        "workspace::SendKeystrokes",
+        "g ."
+      ],
+      ", =": "editor::Format",
+      ", k": [
+        "workspace::SendKeystrokes",
+        "g h"
+      ],
+      ", r": [
+        "workspace::SendKeystrokes",
+        "c d"
+      ],
+      ", s": [
+        "workspace::SendKeystrokes",
+        "g h"
+      ],
+      ", d": [
+        "workspace::SendKeystrokes",
+        "g h"
+      ],
+      ", g r": [
+        "workspace::SendKeystrokes",
+        "g shift-a"
+      ],
+      ", g d": [
+        "workspace::SendKeystrokes",
+        "g d"
+      ],
+      ", g shift-d": [
+        "workspace::SendKeystrokes",
+        "g shift-d"
+      ],
+      ", g i": [
+        "workspace::SendKeystrokes",
+        "g shift-i"
+      ],
+      ", g t": [
+        "workspace::SendKeystrokes",
+        "g y"
+      ]
+    }
+  }
+]

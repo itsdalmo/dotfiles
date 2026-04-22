@@ -40,7 +40,7 @@
       "slack"
       "spotify"
       "tailscale-app"
-      "visual-studio-code"
+      "zed"
       "wezterm"
       "zoom"
     ];
@@ -105,6 +105,7 @@
     "/Applications/Brave Browser.app"
     "/Applications/Slack.app"
     "/Applications/Ghostty.app"
+    "/Applications/Zed.app"
     "/Applications/Obsidian.app"
     "/Applications/1Password.app"
     "/Applications/Spotify.app"

@@ -102,6 +102,8 @@ in
     "ripgrep".source = ../files/.config/ripgrep;
     "starship.toml".source = ../files/.config/starship.toml;
     "wezterm".source = ../files/.config/wezterm;
+    "zed/keymap.json".source = ../files/.config/zed/keymap.json;
+    "zed/settings.json".source = ../files/.config/zed/settings.json;
     "zk".source = ../files/.config/zk;
 
     # Home manager wants to install the theme under the bat directory
