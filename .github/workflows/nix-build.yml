@@ -9,6 +9,8 @@ on:
       - "flake.nix"
       - "flake.lock"
 
+permissions: {}
+
 jobs:
   build:
     timeout-minutes: 30
@@ -22,8 +24,12 @@ jobs:
           - runner: macos-26
             target: "dalmo@arm64-darwin"
     runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
         with: { determinate: false }
       - name: Build Home Manager config
