@@ -125,6 +125,7 @@ in
     apko
     aws-vault
     awscli2
+    chart-testing
     cosign
     dalmovim
     dive
@@ -145,8 +146,8 @@ in
     lazygit
     melange
     nodejs_24
-    opencodeWrapped
     omnisharp-roslyn
+    opencodeWrapped
     oras
     postgresql
     presenterm
