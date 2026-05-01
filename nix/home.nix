@@ -99,6 +99,7 @@ in
     "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;
     "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
+    "opencode/tui.json".source = ../files/.config/opencode/tui.json;
     "ripgrep".source = ../files/.config/ripgrep;
     "starship.toml".source = ../files/.config/starship.toml;
     "wezterm".source = ../files/.config/wezterm;
