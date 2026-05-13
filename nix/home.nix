@@ -126,6 +126,7 @@ in
     apko
     aws-vault
     awscli2
+    azure-cli
     chart-testing
     cosign
     dalmovim
