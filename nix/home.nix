@@ -15,10 +15,10 @@ let
       wrapProgram $out/bin/opencode \
         --prefix PATH : ${
           pkgs.lib.makeBinPath [
-            pkgs.deno
             pkgs.gofumpt
             pkgs.grafana-alloy
             pkgs.jsonnet
+            pkgs.prettier
             pkgs.shfmt
             pkgs.stylua
             pkgs.terraform

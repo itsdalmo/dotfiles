@@ -23,20 +23,8 @@ conform.setup({
     -- Alloy formatter (for river configuration language)
     alloy = { command = "alloy", args = { "fmt", "-" } },
 
-    -- Deno formatter (replaces prettier)
-    deno = {
-      command = "deno",
-      args = function(_, ctx)
-        local ext = vim.bo[ctx.buf].filetype
-        local wrap = "always"
-        if ext == "markdown" then
-          ext = "md"
-
-          -- Don't wrap prose since it messes up rendering in e.g. Obsidian
-          wrap = "never"
-        end
-        return { "fmt", "-", "--unstable-yaml", "--line-width", "120", "--prose-wrap", wrap, "--ext", ext }
-      end,
+    prettier = {
+      args = { "--stdin-filepath", "$FILENAME", "--print-width", "120", "--prose-wrap", "never" },
     },
   },
   formatters_by_ft = {
@@ -46,14 +34,16 @@ conform.setup({
     fish = { "fish_indent" },
     go = { "gofumpt" },
     hcl = { "terraform_fmt" },
+    json = { "prettier" },
+    jsonc = { "prettier" },
     jsonnet = { "jsonnetfmt" },
     libsonnet = { "jsonnetfmt" },
     lua = { "stylua" },
-    markdown = { "deno", "injected" },
+    markdown = { "prettier", "injected" },
     nix = { "nixfmt" },
     proto = { "buf" },
     sh = { "shfmt" },
     sql = { "sql_formatter" },
-    yaml = { "deno" },
+    yaml = { "prettier" },
   },
 })

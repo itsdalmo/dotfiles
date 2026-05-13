@@ -69,7 +69,6 @@ let
   ];
 
   packages = with pkgs; [
-    deno
     grafana-alloy
     buf
     dockerfile-language-server
@@ -82,6 +81,7 @@ let
     lua-language-server
     nil
     nixfmt
+    prettier
     nodePackages.typescript-language-server
     shellcheck
     shfmt

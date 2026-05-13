@@ -15,7 +15,22 @@
       "disabled": true
     },
     "prettier": {
-      "disabled": true
+      "command": [
+        "prettier",
+        "--write",
+        "--print-width",
+        "120",
+        "--prose-wrap",
+        "never",
+        "$FILE"
+      ],
+      "extensions": [
+        ".json",
+        ".jsonc",
+        ".md",
+        ".yaml",
+        ".yml"
+      ]
     },
     "gofmt": {
       "command": [
@@ -67,36 +82,6 @@
       ],
       "extensions": [
         ".lua"
-      ]
-    },
-    "deno-markdown": {
-      "command": [
-        "deno",
-        "fmt",
-        "--line-width",
-        "120",
-        "--prose-wrap",
-        "never",
-        "$FILE"
-      ],
-      "extensions": [
-        ".md"
-      ]
-    },
-    "deno-yaml": {
-      "command": [
-        "deno",
-        "fmt",
-        "--unstable-yaml",
-        "--line-width",
-        "120",
-        "--prose-wrap",
-        "always",
-        "$FILE"
-      ],
-      "extensions": [
-        ".yaml",
-        ".yml"
       ]
     },
     "shfmt": {
