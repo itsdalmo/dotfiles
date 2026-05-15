@@ -98,6 +98,7 @@ in
     "git".source = ../files/.config/git;
     "ideavim".source = ../files/.config/ideavim;
     "nix".source = ../files/.config/nix;
+    "opencode/commands".source = ../files/.config/opencode/commands;
     "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
     "opencode/tui.json".source = ../files/.config/opencode/tui.json;
     "ripgrep".source = ../files/.config/ripgrep;
