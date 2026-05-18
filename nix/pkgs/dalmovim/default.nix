@@ -85,6 +85,7 @@ let
     nodePackages.typescript-language-server
     shellcheck
     shfmt
+    sql-formatter
     stylua
     terraform-ls
     tflint
