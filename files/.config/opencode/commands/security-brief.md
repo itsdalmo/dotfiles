@@ -4,10 +4,10 @@ description: Summarize recent security posts from Socket, StepSecurity, Snyk, an
 
 Create a concise security bulletin from the latest blog posts from these sources:
 
-- Socket: https://socket.dev/blog/category/security-news
+- Socket: https://socket.dev/blog
 - StepSecurity: https://www.stepsecurity.io/blog?category=Threat+Intel
-- Snyk: https://snyk.io/blog/?topic=vulnerability-insights
-- Wiz: https://www.wiz.io/blog/tag/security
+- Snyk: https://snyk.io/blog
+- Wiz: https://www.wiz.io/blog
 
 For each source:
 
