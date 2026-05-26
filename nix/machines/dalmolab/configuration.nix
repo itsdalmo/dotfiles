@@ -84,7 +84,7 @@ in
     backend = "podman";
     containers = {
       homebridge = {
-        image = "docker.io/homebridge/homebridge:2026-04-20@sha256:79c95b078973b187d8985385f012b477320c57dc49911f70746eb72ea8d39eed";
+        image = "docker.io/homebridge/homebridge:2026-05-22@sha256:fd937bf36f4b49e88fb539b0ea705a047affba5a6655862df275454c76914c12";
         volumes = [
           "/var/lib/homebridge:/homebridge:rw"
         ];
