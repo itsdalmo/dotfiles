@@ -165,6 +165,7 @@ in
     trivy
     typescript
     unstable.colima
+    unstable.zizmor
     yubikey-manager
     zk
   ];
