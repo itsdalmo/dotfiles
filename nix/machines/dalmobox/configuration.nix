@@ -99,13 +99,6 @@ in
     nerd-fonts.symbols-only
   ];
 
-  # Prevent suspend and hibernation
-  # https://www.freedesktop.org/software/systemd/man/latest/sleep.conf.d.html
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-  '';
-
   # Prevent USB devices from being suspended (and interfering with wake from sleep)
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
 
