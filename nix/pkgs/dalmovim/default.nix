@@ -82,7 +82,7 @@ let
     nil
     nixfmt
     prettier
-    nodePackages.typescript-language-server
+    typescript-language-server
     shellcheck
     shfmt
     sql-formatter

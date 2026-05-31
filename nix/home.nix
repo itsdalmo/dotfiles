@@ -164,8 +164,8 @@ in
     tfswitch
     trivy
     typescript
-    unstable.colima
-    unstable.zizmor
+    colima
+    zizmor
     yubikey-manager
     zk
   ];
@@ -231,6 +231,7 @@ in
 
   programs.zsh = {
     enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
     initContent = ''
       case "$(uname)" in
         Darwin)
@@ -323,9 +324,7 @@ in
     nix-direnv.enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
-
-    # https://github.com/NixOS/nixpkgs/issues/507531
-    package = pkgs.unstable.direnv;
+    package = pkgs.direnv;
 
     # Read-only as it is enabled by default:
     # enableFishIntegration = true;
