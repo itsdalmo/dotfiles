@@ -99,6 +99,13 @@ in
     nerd-fonts.symbols-only
   ];
 
+  # Prevent suspend and hibernation
+  # https://wiki.nixos.org/wiki/Power_Management
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = "no";
+    AllowHibernation = "no";
+  };
+
   # Prevent USB devices from being suspended (and interfering with wake from sleep)
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
 
