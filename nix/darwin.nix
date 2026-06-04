@@ -24,6 +24,11 @@
       autoUpdate = true;
       upgrade = true;
       cleanup = "zap";
+
+      # HACK: https://github.com/nix-darwin/nix-darwin/issues/1787
+      extraFlags = [
+        "--force-cleanup"
+      ];
     };
 
     casks = [
