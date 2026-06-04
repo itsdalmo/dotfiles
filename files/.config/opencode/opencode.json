@@ -1,5 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "openai": {
+      "options": {
+        "headerTimeout": 30000
+      }
+    }
+  },
   "autoupdate": false,
   "permission": {
     "external_directory": {
@@ -15,85 +22,32 @@
       "disabled": true
     },
     "prettier": {
-      "command": [
-        "prettier",
-        "--write",
-        "--print-width",
-        "120",
-        "--prose-wrap",
-        "never",
-        "$FILE"
-      ],
-      "extensions": [
-        ".json",
-        ".jsonc",
-        ".md",
-        ".yaml",
-        ".yml"
-      ]
+      "command": ["prettier", "--write", "--print-width", "120", "--prose-wrap", "never", "$FILE"],
+      "extensions": [".json", ".jsonc", ".md", ".yaml", ".yml"]
     },
     "gofmt": {
-      "command": [
-        "gofumpt",
-        "-w",
-        "$FILE"
-      ],
-      "extensions": [
-        ".go"
-      ]
+      "command": ["gofumpt", "-w", "$FILE"],
+      "extensions": [".go"]
     },
     "alloy": {
-      "command": [
-        "alloy",
-        "fmt",
-        "$FILE"
-      ],
-      "extensions": [
-        ".alloy"
-      ]
+      "command": ["alloy", "fmt", "$FILE"],
+      "extensions": [".alloy"]
     },
     "terraform": {
-      "command": [
-        "terraform",
-        "fmt",
-        "$FILE"
-      ],
-      "extensions": [
-        ".hcl",
-        ".tf",
-        ".tfvars"
-      ]
+      "command": ["terraform", "fmt", "$FILE"],
+      "extensions": [".hcl", ".tf", ".tfvars"]
     },
     "jsonnetfmt": {
-      "command": [
-        "jsonnetfmt",
-        "-i",
-        "$FILE"
-      ],
-      "extensions": [
-        ".jsonnet",
-        ".libsonnet"
-      ]
+      "command": ["jsonnetfmt", "-i", "$FILE"],
+      "extensions": [".jsonnet", ".libsonnet"]
     },
     "stylua": {
-      "command": [
-        "stylua",
-        "$FILE"
-      ],
-      "extensions": [
-        ".lua"
-      ]
+      "command": ["stylua", "$FILE"],
+      "extensions": [".lua"]
     },
     "shfmt": {
-      "command": [
-        "shfmt",
-        "-w",
-        "$FILE"
-      ],
-      "extensions": [
-        ".sh",
-        ".bash"
-      ]
+      "command": ["shfmt", "-w", "$FILE"],
+      "extensions": [".sh", ".bash"]
     }
   }
 }
