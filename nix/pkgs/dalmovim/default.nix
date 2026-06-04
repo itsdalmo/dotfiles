@@ -69,12 +69,12 @@ let
   ];
 
   packages = with pkgs; [
-    grafana-alloy
     buf
     dockerfile-language-server
     gofumpt
     golangci-lint
     gopls
+    grafana-alloy
     jsonnet # also provides jsonnetfmt
     jsonnet-language-server
     kics
@@ -82,15 +82,16 @@ let
     nil
     nixfmt
     prettier
-    typescript-language-server
     shellcheck
     shfmt
     sql-formatter
     stylua
     terraform-ls
     tflint
+    typescript-language-server
     vscode-langservers-extracted # markdown, eslint, css, json, html
     yaml-language-server
+    lua51Packages.tree-sitter-cli
   ];
 
 in
