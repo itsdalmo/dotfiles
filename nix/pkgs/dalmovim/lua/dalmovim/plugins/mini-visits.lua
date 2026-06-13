@@ -16,8 +16,8 @@ local map_iterate_core = function(lhs, direction, desc)
   vim.keymap.set("n", lhs, rhs, { desc = desc })
 end
 
-map_iterate_core("[[", "forward", "Core label (earlier)")
-map_iterate_core("]]", "backward", "Core label (later)")
+map_iterate_core("[v", "forward", "Core label (earlier)")
+map_iterate_core("]v", "backward", "Core label (later)")
 
 -- Add c-1 ... 9 shortcuts for the paths with the core label
 map_shortcut = function(lhs, index, desc)
