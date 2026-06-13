@@ -232,6 +232,11 @@ in
   programs.zsh = {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
+    history = {
+      append = true;
+      size = 100000;
+      save = 100000;
+    };
     initContent = ''
       case "$(uname)" in
         Darwin)
