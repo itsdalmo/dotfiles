@@ -60,6 +60,10 @@ in
     ];
   };
 
+  environment.systemPackages = with pkgs; [
+    ghostty
+  ];
+
   networking.hostName = hostName;
 
   # Use the systemd-boot EFI boot loader.
