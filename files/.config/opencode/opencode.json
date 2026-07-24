@@ -8,6 +8,7 @@
     }
   },
   "autoupdate": false,
+  "lsp": true,
   "permission": {
     "external_directory": {
       "*": "ask",

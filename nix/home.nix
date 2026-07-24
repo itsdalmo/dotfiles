@@ -13,8 +13,11 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/opencode \
+        --set OPENCODE_EXPERIMENTAL_LSP_TOOL true \
+        --set OPENCODE_DISABLE_LSP_DOWNLOAD true \
         --prefix PATH : ${
           pkgs.lib.makeBinPath [
+            pkgs.gopls
             pkgs.gofumpt
             pkgs.grafana-alloy
             pkgs.jsonnet

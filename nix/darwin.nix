@@ -45,8 +45,8 @@
       "slack"
       "spotify"
       "tailscale-app"
-      "zed"
       "wezterm"
+      "zed"
       "zoom"
     ];
   };
