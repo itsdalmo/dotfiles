@@ -132,6 +132,7 @@ in
     awscli2
     azure-cli
     chart-testing
+    colima
     cosign
     dalmovim
     dive
@@ -157,6 +158,7 @@ in
     oras
     postgresql
     presenterm
+    python3
     renovate
     ripgrep
     skopeo
@@ -167,9 +169,8 @@ in
     tfswitch
     trivy
     typescript
-    colima
-    zizmor
     yubikey-manager
+    zizmor
     zk
   ];
 
