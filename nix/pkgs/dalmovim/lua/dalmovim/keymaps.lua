@@ -66,7 +66,9 @@ map("n", "<localleader>gt", [[<cmd>Pick lsp scope="type_definition"<cr>]], "Goto
 map("n", "<leader>nn", [[<cmd>ZkNew { } <cr>]], "New note")
 map("n", "<leader>nf", [[<cmd>ZkNotes { sort = { 'modified' } }<cr>]], "Find note")
 map("n", "<leader>nd", [[<cmd>ZkNew { dir = "daily" }<cr>]], "Open daily note")
+map("n", "<leader>nm", [[<cmd>ZkNew { template = "meeting.md" }<cr>]], "New meeting note")
 map("n", "<leader>nt", [[<cmd>ZkNew { dir = "daily", date = "tomorrow" }<cr>]], "Open tomorrows daily note")
+map("n", "<leader>ny", [[<cmd>ZkNew { dir = "daily", date = "yesterday" }<cr>]], "Open yesterdays daily note")
 
 -- Quit
 map("n", "<leader>qq", [[<cmd>qa<cr>]], "Quit all")

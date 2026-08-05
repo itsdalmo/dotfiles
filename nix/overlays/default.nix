@@ -9,6 +9,7 @@ inputs: final: prev: {
 
   # Custom packages
   dalmovim = final.callPackage ../pkgs/dalmovim { };
+  github-work = final.callPackage ../pkgs/github-work { };
   mattpocock-skills = final.callPackage ../pkgs/mattpocock-skills { };
   tfcheck = final.callPackage ../pkgs/tfcheck { };
 }

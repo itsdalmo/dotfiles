@@ -6,6 +6,8 @@ tags:
 
 # {{ format-date now '%Y-%m-%d %A' }}
 
+## TODO
+
 ## Log
 
 ## Notes

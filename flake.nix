@@ -69,6 +69,7 @@
 
       packages = forEachSystem (pkgs: {
         dalmovim = pkgs.dalmovim;
+        github-work = pkgs.github-work;
       });
 
       homeConfigurations = {

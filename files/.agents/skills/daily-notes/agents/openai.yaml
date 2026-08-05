@@ -1,0 +1,4 @@
+interface:
+  display_name: "Daily Notes"
+  short_description: "Read and synchronize daily work notes"
+  default_prompt: "Use $daily-notes to work with my daily notes."

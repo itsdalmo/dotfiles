@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Work"
+  short_description: "Discover GitHub logs, items, and TODO work"
+  default_prompt: "Use $github-work to summarize my GitHub activity today."

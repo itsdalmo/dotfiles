@@ -1,0 +1,4 @@
+interface:
+  display_name: "Standup"
+  short_description: "Draft standups from canonical daily notes"
+  default_prompt: "Use $standup to prepare my standup from my daily notes."

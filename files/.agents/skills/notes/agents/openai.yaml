@@ -1,4 +1,4 @@
 interface:
   display_name: "Notes"
-  short_description: "Manage notes and reconcile daily logs"
+  short_description: "Search, create, connect, and review notes"
   default_prompt: "Use $notes to work with my notebook."

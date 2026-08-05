@@ -1,27 +1,31 @@
 ---
 name: notes
-description: Notebook workflows for a zk Zettelkasten. Use when the user wants to search notes, preserve knowledge, review the notebook, or reconcile completed work into a daily log; also use when another skill needs notebook reads or note-file changes.
+description: Manage durable notes in a zk notebook. Use when asked to search, create, connect, review, or answer from notes, including meeting notes. Use daily-notes for daily notes.
 ---
 
 # Notes
 
-Use the requested workflow. This skill owns notebook reads and note-file changes delegated by other skills.
+Choose the workflow from the request:
+
+- Search or answer from the notebook: **Search notes**.
+- Preserve knowledge: **Create notes**.
+- Record a meeting: **Create meeting notes**.
+- Review the notebook: **Review notes**.
 
 Requires `zk`, Git, `ZK_NOTEBOOK_DIR`, filesystem access to the configured notebook, and a POSIX-compatible shell.
 
 ## Prepare
 
 1. Use `ZK_NOTEBOOK_DIR` as the root for filesystem and Git operations. Run `zk` directly so it uses the configured notebook. If access is restricted, request access only to that root.
-2. Read the notebook's `AGENTS.md` and `README.md` when they exist. Notebook-local instructions override the fallback conventions below.
-3. Run `zk index`. For a write workflow, inspect Git status and identify every pre-existing change so it can be preserved.
+2. Run `zk index`. For a write workflow, inspect Git status and identify every pre-existing change so it can be preserved.
 
-Preparation is complete when the notebook is indexed, its local instructions are known, and pre-existing changes are accounted for before any edit.
+Preparation is complete when the notebook is indexed and pre-existing changes are accounted for before any edit.
 
 ## Conventions
 
 - Search before creating or substantially editing a note.
 - Preserve the notebook author's concise voice. Write only supplied or verified facts, identify inference and uncertainty, and omit credentials, tokens, personal customer information, and unrelated conversation details.
-- When notebook-local instructions do not assign a type, match each note to its primary purpose:
+- When the request does not assign a type, match each note to its primary purpose:
   - **Command:** How to perform an operation, including context and important caveats.
   - **Meeting:** What happened at a particular time, including discussion, decisions, and actions.
   - **Reference:** Facts, terminology, links, examples, or procedures to look up again.
@@ -46,7 +50,8 @@ Keep this workflow read-only; `zk index` may refresh index metadata.
    - `zk list --link-to <note-path>` for backlinks
    - `zk list --linked-by <note-path>` for outgoing links
 5. Read every note needed to support the answer. Follow links while they materially improve it.
-6. Answer directly and cite the most relevant note paths. Distinguish direct statements from inference, mention conflicts or dated information, and report the attempted query variants when nothing useful is found.
+6. Read linked GitHub issues or pull requests with the github-work **Fetch** workflow only when the user asks for current or verified GitHub context, or required context is absent from the notebook. Fetch only the exact links needed. Distinguish live GitHub evidence from notebook content.
+7. Answer directly and cite the most relevant note paths. Distinguish direct statements, live GitHub evidence, and inference; mention conflicts or dated information, and report the attempted query variants when nothing useful is found.
 
 The search is complete when the answer is supported by the cited notes, or plausible query variants are exhausted and reported.
 
@@ -54,21 +59,22 @@ The search is complete when the answer is supported by the cited notes, or plaus
 
 1. Identify only the knowledge the user wants preserved, then follow steps 1-5 of **Search notes** to find existing and related notes.
 2. Update an existing note when it already owns the subject. Otherwise create one with `zk new --title "<title>" --print-path`, then edit the generated file. Let the configured template supply its path, timestamp, and frontmatter.
-3. Keep command and reference notes easy to scan. Give permanent notes a title that states their idea. Retain provenance when extracting an idea from a meeting, daily note, or supplied source.
+3. Keep command and reference notes easy to scan. Give permanent notes a title that states their idea. For meeting notes, follow **Create meeting notes**. Retain provenance when extracting an idea from a meeting, daily note, or supplied source.
 4. Remove `inbox` when the resulting note is complete; retain it when the note still needs processing.
 5. Run `zk index` again. Inspect every changed note and report each created or updated path.
 
 Creation is complete when every requested piece of knowledge is preserved once, every changed note has been inspected, and all changed paths are reported.
 
-## Reconcile a daily log
+## Create meeting notes
 
-1. Use the user-supplied date, or the current local date when none is supplied. Find that date's daily note and read it in full; if it is absent, create it using the notebook's daily-note convention.
-2. Inventory the supplied work. Classify an item as completed only when it is supplied as fact or independently verified; classify the rest as unresolved.
-3. Search the daily note and related task notes for each item. Merge with an existing entry when it records the same outcome.
-4. Add one concise `Log` entry for each distinct completed outcome. Preserve useful issue, pull-request, commit, or note links; keep supporting detail in a linked task note when one already owns it.
-5. Run `zk index` again. Inspect the complete daily note and every other changed note, then report their paths and any item left unresolved.
+1. Identify the meeting title and any supplied content, then follow steps 1-5 of **Search notes** to find related notes and determine whether the meeting note already exists.
+2. Create a distinct note with `zk new --title "<title>" --template meeting.md --print-path`, then edit the generated file. Keep the template's lightweight `Discussion`, `Decisions`, and `Actions` structure; do not add attendee, purpose, agenda, or other metadata unless the user requests it.
+3. When creating the meeting note from an existing note, leave the source content intact. Copy the relevant content into the meeting note under the appropriate headings, add a contextual link from the meeting note to the source, and add a contextual link from the source to the meeting note. Do not replace source content with a link.
+4. Use `[Title](<note-id>)` for both links and describe the relationship in the surrounding sentence. Avoid adding a duplicate link when either relationship is already recorded.
+5. Remove `inbox` only when the resulting meeting note is complete; retain it when the note still needs processing.
+6. Run `zk index` again. Inspect the complete meeting note and every linked source note changed by the workflow, then report each path.
 
-Reconciliation is complete when every supplied or verified work item is represented once in the daily log or reported as unresolved with a reason.
+Meeting creation is complete when the meeting uses `meeting.md`, all supplied content is represented, every source remains intact, and each source-meeting relationship is linked in both directions exactly once.
 
 ## Review notes
 

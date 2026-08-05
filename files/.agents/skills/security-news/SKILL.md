@@ -1,6 +1,6 @@
 ---
 name: security-news
-description: Security incident briefing. Use when the user asks for a time-bounded roundup of observed attacks.
+description: Brief observed security incidents from trusted research sources. Use when asked for a cited, time-bounded roundup of attacks, compromises, malicious packages, active exploitation, or related campaigns.
 ---
 
 # Security News
