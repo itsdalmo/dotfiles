@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security News"
+  short_description: "Research incidents and produce a cited briefing"
+  default_prompt: "Use $security-news to brief me on security incidents from the last seven days."
