@@ -103,6 +103,7 @@ in
     "nix".source = ../files/.config/nix;
     "opencode/commands".source = ../files/.config/opencode/commands;
     "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
+    "opencode/skills".source = ../files/.config/opencode/skills;
     "opencode/tui.json".source = ../files/.config/opencode/tui.json;
     "ripgrep".source = ../files/.config/ripgrep;
     "starship.toml".source = ../files/.config/starship.toml;
