@@ -9,5 +9,6 @@ inputs: final: prev: {
 
   # Custom packages
   dalmovim = final.callPackage ../pkgs/dalmovim { };
+  mattpocock-skills = final.callPackage ../pkgs/mattpocock-skills { };
   tfcheck = final.callPackage ../pkgs/tfcheck { };
 }

@@ -7,6 +7,14 @@
 let
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
 
+  mergedSkills = pkgs.symlinkJoin {
+    name = "agent-skills";
+    paths = [
+      ../files/.agents/skills
+      pkgs.mattpocock-skills
+    ];
+  };
+
   opencodeWrapped = pkgs.symlinkJoin {
     name = "opencode-wrapped";
     paths = [ pkgs.unstable.opencode ];
@@ -92,7 +100,10 @@ in
         };
       };
     in
-    builtins.listToAttrs (map copy files);
+    builtins.listToAttrs (map copy files)
+    // {
+      ".agents/skills".source = mergedSkills;
+    };
 
   xdg.enable = true;
   xdg.configFile = {
@@ -103,7 +114,6 @@ in
     "nix".source = ../files/.config/nix;
     "opencode/commands".source = ../files/.config/opencode/commands;
     "opencode/opencode.json".source = ../files/.config/opencode/opencode.json;
-    "opencode/skills".source = ../files/.config/opencode/skills;
     "opencode/tui.json".source = ../files/.config/opencode/tui.json;
     "ripgrep".source = ../files/.config/ripgrep;
     "starship.toml".source = ../files/.config/starship.toml;
