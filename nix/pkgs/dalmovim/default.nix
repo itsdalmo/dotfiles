@@ -30,7 +30,7 @@ let
       src = pkgs.fetchFromGitHub {
         owner = "nvim-mini";
         repo = "mini.nvim";
-        rev = "418ef4930ddabe80f449c6f1323f8b6abb172d1c";
+        rev = "629bf6792187e11b4829411c1648f86f28df3963";
         sha256 = "sha256-bHEFu4XZI9QHP41h11sSNgRG43PDSkdgTyzmJt64gLk=";
       };
     })
