@@ -1,0 +1,4 @@
+interface:
+  display_name: "Go Development"
+  short_description: "Build maintainable, idiomatic Go software"
+  default_prompt: "Use $go-development to implement this Go change with explicit design and focused tests."
