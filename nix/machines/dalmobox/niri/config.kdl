@@ -1,0 +1,151 @@
+// Niri configuration for dalmobox. Keep this file declarative: Home Manager
+// validates it with the locked Niri package before activating a generation.
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+
+    mouse {
+        accel-speed -0.6
+        accel-profile "flat"
+    }
+
+    focus-follows-mouse max-scroll-amount="0%"
+}
+
+layout {
+    gaps 10
+    center-focused-column "never"
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        off
+    }
+
+    border {
+        on
+        width 2
+        active-color "#7aa2f7"
+        inactive-color "#414868"
+    }
+
+    shadow {
+        on
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+prefer-no-csd
+
+window-rule {
+    geometry-corner-radius 6
+    clip-to-geometry true
+}
+
+// Named workspaces keep the number bindings stable despite Niri's dynamic
+// workspace model. The scratchpad is a normal named workspace in Niri.
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "scratchpad"
+
+binds {
+    // Applications and Noctalia surfaces.
+    Mod+Return repeat=false { spawn "ghostty"; }
+    Mod+Shift+Return repeat=false { spawn "brave"; }
+    Mod+Shift+F repeat=false { spawn "nautilus"; }
+    Mod+Space repeat=false { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+Escape repeat=false { spawn "noctalia" "msg" "panel-toggle" "session"; }
+    Mod+Ctrl+L repeat=false { spawn "noctalia" "msg" "session" "lock"; }
+    Mod+Ctrl+C repeat=false { spawn "noctalia" "msg" "screenshot-region"; }
+    Mod+Ctrl+A repeat=false { spawn "noctalia" "msg" "panel-toggle" "control-center" "audio"; }
+    Mod+Ctrl+B repeat=false { spawn "noctalia" "msg" "panel-toggle" "control-center" "bluetooth"; }
+    Mod+Ctrl+N repeat=false { spawn "noctalia" "msg" "nightlight-toggle"; }
+    Mod+Ctrl+T repeat=false { spawn "ghostty" "-e" "btop"; }
+    Mod+Ctrl+V repeat=false { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+    Mod+Ctrl+W repeat=false { spawn "noctalia" "msg" "panel-toggle" "control-center" "network"; }
+
+    // Window state and layout.
+    Mod+W repeat=false { close-window; }
+    Mod+T repeat=false { toggle-window-floating; }
+    Mod+J repeat=false { toggle-column-tabbed-display; }
+    Mod+O repeat=false { toggle-overview; }
+    Mod+P repeat=false { switch-preset-column-width; }
+    Mod+F repeat=false { fullscreen-window; }
+
+    // Clipboard shortcuts for applications which prefer Insert variants.
+    Mod+C repeat=false { spawn "wtype" "-M" "ctrl" "-P" "Insert" "-p" "Insert" "-m" "ctrl"; }
+    Mod+V repeat=false { spawn "wtype" "-M" "shift" "-P" "Insert" "-p" "Insert" "-m" "shift"; }
+    Mod+X repeat=false { spawn "wtype" "-M" "ctrl" "-P" "x" "-p" "x" "-m" "ctrl"; }
+
+    Mod+Slash repeat=false { spawn "cycle-monitor-scale"; }
+    Mod+Alt+Slash repeat=false { spawn "cycle-monitor-scale" "--reverse"; }
+
+    Mod+Left { focus-column-or-monitor-left; }
+    Mod+Down { focus-window-or-monitor-down; }
+    Mod+Up { focus-window-or-monitor-up; }
+    Mod+Right { focus-column-or-monitor-right; }
+
+    Mod+Shift+Left { move-column-left-or-to-monitor-left; }
+    Mod+Shift+Down { move-window-down; }
+    Mod+Shift+Up { move-window-up; }
+    Mod+Shift+Right { move-column-right-or-to-monitor-right; }
+
+    // Workspaces.
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace "4"; }
+    Mod+Shift+1 { move-window-to-workspace "1"; }
+    Mod+Shift+2 { move-window-to-workspace "2"; }
+    Mod+Shift+3 { move-window-to-workspace "3"; }
+    Mod+Shift+4 { move-window-to-workspace "4"; }
+    Mod+Shift+Alt+1 { move-window-to-workspace "1" focus=false; }
+    Mod+Shift+Alt+2 { move-window-to-workspace "2" focus=false; }
+    Mod+Shift+Alt+3 { move-window-to-workspace "3" focus=false; }
+    Mod+Shift+Alt+4 { move-window-to-workspace "4" focus=false; }
+
+    Mod+Tab { focus-workspace-down; }
+    Mod+Shift+Tab { focus-workspace-up; }
+    Mod+Ctrl+Tab { focus-workspace-previous; }
+
+    Mod+Equal { set-column-width "-100"; }
+    Mod+Minus { set-column-width "+100"; }
+    Mod+Shift+Equal { set-window-height "+100"; }
+    Mod+Shift+Minus { set-window-height "-100"; }
+
+    Mod+G repeat=false { toggle-column-tabbed-display; }
+    Mod+Alt+G repeat=false { expel-window-from-column; }
+    Mod+Alt+Tab { focus-window-down-or-top; }
+
+    Mod+S { focus-workspace "scratchpad"; }
+    Mod+Alt+S { move-window-to-workspace "scratchpad"; }
+
+    Alt+Tab { focus-column-right-or-first; }
+    Alt+Shift+Tab { focus-column-left-or-last; }
+
+    // Noctalia owns audio and brightness state and displays the matching OSD.
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-down"; }
+    XF86AudioMute allow-when-locked=true repeat=false { spawn "noctalia" "msg" "volume-mute"; }
+    XF86AudioMicMute allow-when-locked=true repeat=false { spawn "noctalia" "msg" "mic-mute"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "noctalia" "msg" "brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "noctalia" "msg" "brightness-down"; }
+
+    XF86AudioPlay allow-when-locked=true repeat=false { spawn "playerctl" "play-pause"; }
+    XF86AudioPause allow-when-locked=true repeat=false { spawn "playerctl" "play-pause"; }
+    XF86AudioNext allow-when-locked=true repeat=false { spawn "playerctl" "next"; }
+    XF86AudioPrev allow-when-locked=true repeat=false { spawn "playerctl" "previous"; }
+    XF86AudioStop allow-when-locked=true repeat=false { spawn "playerctl" "stop"; }
+}
