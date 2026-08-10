@@ -1,11 +1,15 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 let
   hostName = "dalmobox";
+  startHyprland = pkgs.writeShellScript "start-hyprland" ''
+    exec ${pkgs.uwsm}/bin/uwsm start hyprland.desktop
+  '';
   user = "dalmo";
 in
 {
@@ -18,8 +22,14 @@ in
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users."${user}" = import ../../home.nix;
+    users."${user}" = {
+      imports = [
+        ../../home.nix
+        ./hyprland.nix
+      ];
+    };
     extraSpecialArgs = {
+      inherit inputs;
       user = user;
     };
   };
@@ -50,10 +60,16 @@ in
   environment.systemPackages = with pkgs; [
     _1password-cli
     _1password-gui
-    brave
+    (brave.override {
+      commandLineArgs = "--password-store=gnome-libsecret";
+    })
+    ddcutil
     discord
+    file-roller
     firefox
     ghostty
+    libsecret
+    nautilus
     # Broken on nixos:
     # wezterm
     protonup-ng
@@ -66,22 +82,46 @@ in
 
   networking.hostName = hostName;
 
-  # Enable DHCP on our network interfaces
-  networking.interfaces.enp4s0.useDHCP = true;
-  networking.interfaces.wlo1.useDHCP = true;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
+  programs.hyprland = {
     enable = true;
+    withUWSM = true;
+  };
+  programs.noctalia = {
+    enable = true;
+    package = null;
+    recommendedServices.enable = true;
+  };
+  programs.gnome-disks.enable = true;
 
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
+  xdg.portal.config.hyprland = {
+    default = [
+      "hyprland"
+      "gtk"
+    ];
+    "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+    "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
   };
 
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.greetd = {
+    enable = true;
+    useTextGreeter = true;
+    settings.default_session.command = lib.concatStringsSep " " [
+      "${pkgs.tuigreet}/bin/tuigreet"
+      "--time"
+      "--remember"
+      "--remember-session"
+      "--sessions /run/current-system/sw/share/wayland-sessions"
+      "--cmd ${startHyprland}"
+    ];
+  };
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  services.gnome.gcr-ssh-agent.enable = false;
+  services.gnome.sushi.enable = true;
 
   # Enable sound with pipewire
   services.pulseaudio.enable = false;
@@ -121,6 +161,9 @@ in
   hardware.graphics = {
     enable = true;
   };
+
+  # Allow DDC/CI tools to control external monitor settings such as brightness.
+  hardware.i2c.enable = true;
 
   hardware.nvidia = {
     open = false;

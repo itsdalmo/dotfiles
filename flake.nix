@@ -23,6 +23,9 @@
       url = "github:LnL7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/v5.0.0-beta.7";
+    };
   };
 
   outputs =
@@ -107,9 +110,14 @@
       nixosConfigurations = {
         dalmobox = nixpkgs.lib.nixosSystem {
           pkgs = mkPkgs "x86_64-linux";
+          specialArgs = { inherit inputs; };
           modules = [
             ./nix/machines/dalmobox/configuration.nix
             home-manager.nixosModules.home-manager
+            inputs.noctalia.nixosModules.default
+            {
+              home-manager.sharedModules = [ inputs.noctalia.homeModules.default ];
+            }
           ];
         };
         dalmolab = nixpkgs.lib.nixosSystem {
