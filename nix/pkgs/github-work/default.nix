@@ -1,18 +1,19 @@
 {
-  coreutils,
+  buildGoModule,
   gh,
-  jq,
-  writeShellApplication,
+  makeWrapper,
 }:
 
-writeShellApplication {
-  name = "github-work";
+buildGoModule {
+  pname = "github-work";
+  version = "0.2.0";
+  src = ./.;
+  vendorHash = null;
 
-  runtimeInputs = [
-    coreutils
-    gh
-    jq
-  ];
+  nativeBuildInputs = [ makeWrapper ];
 
-  text = builtins.readFile ./github-work.sh;
+  postInstall = ''
+    wrapProgram $out/bin/github-work \
+      --prefix PATH : ${gh}/bin
+  '';
 }

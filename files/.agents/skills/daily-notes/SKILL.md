@@ -1,74 +1,84 @@
 ---
 name: daily-notes
-description: Read or synchronize daily notes in a zk notebook. Use when asked about a daily note, today's TODO or Log, work on a date, or to update one or more dailies from GitHub.
+description: Read or synchronize daily notes in a zk notebook. Use for a daily note, today's TODO or Log, work recorded on a date, or updating dailies from GitHub.
 ---
 
 # Daily Notes
 
-Choose one workflow:
-
-- Answer from existing dailies: **Read**.
-- Synchronize today: **Update current**.
-- Synchronize past dates: **Update historical**.
-- Synchronize multiple dates: capture once for their combined range, then apply the appropriate update to each date.
-
-Requires `zk`, Git, `jq`, `github-work`, `ZK_NOTEBOOK_DIR`, notebook filesystem access, and a POSIX-compatible shell. Default to `Europe/Oslo` when the request has no timezone.
-
-## Conventions
-
-- Use `ZK_NOTEBOOK_DIR` as the root for filesystem and Git operations. Run `zk` directly so it uses the configured notebook.
-- Daily sections are `## TODO`, `## Log`, then `## Notes`. Preserve unrelated manual content and its position.
-- GitHub-managed top-level items use `- `; grouped children use exactly `  - `. Render grouping supplied by `github-work` with this indentation instead of preserving its presentation. Remove task-list markers from GitHub-managed items.
-- Format GitHub references as `<description>: [#N](URL)`, with comma-separated links and no colon without a link. Link only reference labels.
-- Match existing entries by GitHub URL first and meaning second. Inventory absence is not evidence of completion or lost ownership.
-- Use the ISO-8601 frontmatter field `github_work_updated_at`. Set it only after the requested synchronization completes.
-- Daily synchronization uses only `github-work log` and `github-work todo`. It does not use `github-work fetch`.
-
-## Prepare an update
-
-1. Resolve every requested date and its local-day boundaries. Use today when no date is supplied.
-2. Run `zk index`, inspect Git status, and account for every pre-existing change.
-3. For each date, run `zk daily --date=<YYYY-MM-DD> --print-path --no-input` once, read the returned path in full, and restore the conventional section order without moving content between sections.
-
-Preparation is complete when every daily is loaded, boundaries are known, and pre-existing changes are accounted for.
-
-## Capture evidence
-
-1. Create one request-scoped directory with `mktemp -d "${TMPDIR:-/tmp}/daily-notes-github-work.XXXXXX"`.
-2. Run `github-work log` once for the smallest contiguous range covering every requested date and save the complete JSON output as `log.json`.
-3. If today is requested, run `github-work todo` once and save the complete JSON output as `todo.json`. Historical-only updates skip TODO.
-4. Use `jq` against those files for all filtering and date partitioning. Do not rerun a captured command.
-
-Capture is complete when each required command ran once and every date can use evidence within its own local boundaries. Remove the temporary directory after all dailies are inspected; do not store evidence in the notebook.
-
-## Reconcile Log
-
-1. Retain only github-work outcomes attributable to the requested local date. Match them to Log and TODO entries by URL first and meaning second.
-2. Rewrite matched GitHub-managed entries with canonical outcome wording. Enrich a likely manual Log match instead of duplicating it.
-3. Add each unmatched outcome once under `## Log`. Preserve github-work groups and require a `Renovate PRs (N total):` group to contain exactly `N` linked children. Order verified outcomes by earliest event without moving timestamp-free manual items unnecessarily.
-4. Remove a matching TODO only after its successful outcome is present in Log. Otherwise leave it unchanged.
-
-Log reconciliation is complete when every verified outcome appears once, completed work is absent from TODO, grouping is complete, and manual content is preserved.
-
-## Update current
-
-1. Prepare today's daily and use the request's captured Log and TODO evidence. Capture it now only for a single-date update that has not already captured evidence.
-2. Reconcile Log.
-3. Reconcile `## TODO` with the current inventory. Add each candidate once, refresh still-open wording, preserve useful groups, and preserve unlinked manual entries. Leave an existing linked TODO unchanged when neither Log nor inventory proves a transition.
-4. Set `github_work_updated_at` to the current ISO-8601 timestamp. Run `zk index`, inspect the full daily, verify that every grouped child begins with exactly `  - `, and report its path and unresolved items.
-
-The update is complete when verified outcomes and current candidates each appear once, completed work is absent from TODO, manual content remains intact, and `github_work_updated_at` records the completed synchronization.
-
-## Update historical
-
-1. Prepare each requested historical daily and use the request's captured Log evidence. Capture it now only for a historical-only update that has not already captured evidence.
-2. Reconcile Log. Do not add TODO candidates or reconstruct historical plans.
-3. Set `github_work_updated_at` to the current ISO-8601 timestamp for each successfully reconciled daily. Run `zk index`, inspect every changed daily, verify that every grouped child begins with exactly `  - `, and report each path and unresolved item.
-
-The update is complete when every verified outcome appears once, completed outcomes are absent from TODO, unrelated TODO and manual content remain intact, and each changed daily records the completed synchronization.
+Use `ZK_NOTEBOOK_DIR` as the notebook and Git root. Daily files are
+`daily/YYYY-MM-DD.md`; their conventional sections are `## TODO`, `## Log`,
+then `## Notes`. Preserve manual content and any existing `## Blockers` section.
+Default to `Europe/Oslo` when no timezone is supplied.
 
 ## Read
 
-Resolve each requested date, use today when absent, and read `daily/YYYY-MM-DD.md` directly. Answer only from existing content. Do not create or update a daily, invoke `github-work`, or use freshness metadata to trigger synchronization. Report a missing daily instead of reconstructing it.
+Read each requested daily directly, using today when no date is given. Answer
+only from the file. Report a missing daily instead of creating it or querying
+GitHub.
 
-The read is complete when the answer identifies its source dates and accurately reports requested, missing, or absent content.
+## Synchronize
+
+1. Run `zk index`, inspect Git status, and account for pre-existing changes.
+2. Resolve each requested date. Create or locate it once with:
+
+   ```bash
+   zk daily --date=<YYYY-MM-DD> --print-path --no-input
+   ```
+
+   Read the whole file before editing it.
+3. Capture each date's evidence once:
+
+   ```bash
+   github-work log --from <YYYY-MM-DD> --to <YYYY-MM-DD> --timezone <IANA-zone>
+   ```
+
+   For today only, also run `github-work todo` once. Use these results directly;
+   the CLI has already decided attribution, outcomes, relations, and groups.
+4. Reconcile `## Log`. Match existing entries by GitHub URL first and meaning
+   second, enrich likely manual matches, and add every unmatched result. Mirror
+   CLI groups and their complete child lists; a PR duplicated across different
+   workstream groups is intentional. When the CLI changes a generated item's
+   group, move the matching entry and remove generated groups left empty; this
+   does not authorize removing manual content. Order verified work by its
+   earliest activity without needlessly moving timestamp-free manual entries.
+5. Reconcile `## TODO`:
+   - If today's TODO is empty, bootstrap it from the complete `github-work todo`
+     result using unchecked task markers.
+   - Once populated, TODO is user-owned. Change it only when explicitly asked,
+     except to check a matching item whose Log has a successful, non-review
+     outcome.
+   - For historical dates, only that completion rule may change TODO.
+   - Normalize legacy TODO bullets to task markers: plain entries become
+     unchecked and struck entries become checked, with the strikethrough
+     removed. Preserve an existing checked state.
+   Inventory absence never proves completion or lost ownership.
+6. Set `github_work_updated_at` to the current ISO-8601 timestamp, run
+   `zk index`, and inspect every changed daily before reporting its path.
+
+## Rendering GitHub work
+
+Render Log entries with `- ` and group children with exactly `  - `. Render
+TODO entries with `- [ ] ` or `- [x] ` and grouped TODO children with exactly
+`  - [ ] ` or `  - [x] `. Check an item only from a matching successful,
+non-review Log outcome; for a synthetic group without its own GitHub URL, check
+the parent when every child is checked. Format links as
+`<description>: [#N](URL)`, using comma-separated links when needed and omitting
+the colon when there is no link.
+
+Write semantic outcomes rather than copying conventional-commit scaffolding:
+
+- Merged PRs and completed issues: state the result without `Merged` or
+  `Closed`.
+- Closed-unmerged PRs and `not_planned` issues: prefix `Closed`.
+- Review-only work: prefix `Reviewed`.
+- Reopened work: prefix `Reopened` when that is the final outcome.
+- Ongoing work: describe the concrete work; use `Opened`, `Commented`, or
+  `Committed` only when that action is itself meaningful.
+
+Preserve concrete components, versions, purpose, draft status, and links.
+Reviewed and Renovate group titles must keep their reported totals and every
+child. Do not regroup reviewed children beneath issues mentioned in their pull
+request bodies. Finish only
+when each verified result is represented, TODO uses task markers, matching
+completions are checked rather than removed, manual content is intact, and
+synchronization metadata was written after successful reconciliation.

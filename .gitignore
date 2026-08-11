@@ -1,4 +1,6 @@
 .direnv
+.kilo
+.kilocodeignore
 
 # nix build output symlink
 **/result

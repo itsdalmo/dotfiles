@@ -1,48 +1,64 @@
 ---
 name: standup
-description: Prepare a Slack-ready standup from daily notes. Use when asked for a standup, a yesterday-and-today update, or the latest working-day summary.
+description: Prepare a Slack-ready standup from daily notes. Use for a standup, a yesterday-and-today update, or the latest working-day summary.
 ---
 
 # Standup
 
-Build a standup from canonical daily notes. Invoke daily-notes only with its read workflow. Do not update notes, invoke `github-work`, or save the rendered standup.
+Read canonical daily files directly from
+`$ZK_NOTEBOOK_DIR/daily/YYYY-MM-DD.md`. Do not change notes, query GitHub, or
+save the standup. Default to `Europe/Oslo`.
 
 ## Gather
 
-1. Resolve today in the request timezone, defaulting to `Europe/Oslo`. The previous workday is the nearest preceding Monday-Friday date; skip weekends, not holidays.
-2. Invoke daily-notes to read that workday's daily in full.
-3. If its Log has no completed non-review work, inspect at most four earlier weekday dailies and select the first with completed non-review Log work. Do not create a missing daily or refresh a stale one.
-4. Invoke daily-notes to read today's daily in full.
+1. Read today's daily and the nearest preceding Monday-Friday daily.
+2. If that earlier Log has no completed, non-review work, inspect at most four
+   earlier weekdays and use the first that does. Report a missing required daily
+   instead of creating or refreshing it.
 
-Gathering is complete when the selected historical daily and today's daily have been read without changing the notebook.
+## Select
 
-## Compose
+- Build the historical section from the selected Log. Keep substantive
+  completed outcomes and workstream groups. Omit reviews, tests, superseded or
+  unresolved work, and low-signal maintenance. Omit complete `Reviewed PRs`
+  groups along with their children.
+- Keep every retained Renovate group complete: preserve its parent and original
+  total, and include every child regardless of component or update type. This
+  overrides the low-signal maintenance filter for Renovate children.
+- Keep notable children beneath other retained workstream parents. Never repeat
+  a child as a top-level item.
+- Build `Today` only from today's unchecked top-level TODO entries and without
+  filtering. Strip the `[ ]` marker while preserving each entry's wording and
+  links. Exclude checked top-level entries. For an unchecked Renovate group,
+  include every source child instead of rendering only its parent. An empty
+  TODO stays empty.
+- Use today's `## Blockers` or blockers supplied by the user; otherwise use
+  `None`.
 
-- Build the historical section from top-level completed Log outcomes in the selected daily. Exclude every review-only item, including grouped review entries. Do not promote a grouped child to a top-level standup bullet.
-- Build `Today` from top-level, non-struck TODO items. Exclude stale struck items and unrelated Notes content. Do not promote a grouped child to a top-level standup bullet.
-- Preserve each retained item's description and links from the daily note. Do not paraphrase, change tense, or replace its wording with a child description.
-- From both sections, omit routine dependency maintenance regardless of author or grouping: GitHub Actions bumps, digest-only updates, dependency pins, language runtimes, SDKs, libraries, and development tooling. Retain dependency work for deployed services or operational platform components.
-- Render every retained Renovate group as the count-only top-level bullet `Renovate PRs (N total)`, using the parent's original total. Omit the trailing colon and every child from the standup, even when some children would otherwise be retained.
-- Use blockers explicitly supplied by the user or recorded under today's `## Blockers`; otherwise use `None`.
-- Label yesterday as `Yesterday`, the preceding Friday on Monday as `Friday`, and other dates with their weekday name.
+Preserve the daily's wording and links. Label the historical section
+`Yesterday`, `Friday` on Monday, or the relevant weekday otherwise.
 
 ## Render
 
-Return exactly one fenced code block containing raw Slack-compatible Markdown:
+Return exactly one fenced `markdown` code block and no text outside it. The
+fence is part of the output contract: it keeps the Markdown source copyable for
+Slack instead of letting the client render it. Put this shape inside the fence,
+with every heading and top-level bullet shown:
 
-```text
-*REPORT_LABEL:*
+```markdown
+**Yesterday:**
+- Outcome: [#1](URL)
+    - Group child: [#2](URL)
 
-* Database module cleanup: [#3967](https://github.com/AidnAS/platform/pull/3967)
-* Renovate PRs (5 total)
+**Today:**
+- Planned work: [#3](URL)
 
-*Today:*
-
-* Continue refactoring Alloy: [#3975](https://github.com/AidnAS/platform/pull/3975)
-
-*Blockers:*
-
-* None
+**Blockers:**
+- None
 ```
 
-Use `*` for headings and top-level bullets and `: [#N](URL)` for references. Before returning, verify all three sections, source dates, review exclusion, blockers, source wording and links, top-level selection, and each Renovate total. The result must not contain a grouped child or a four-space-indented bullet. If a required daily is missing, report that it must be updated instead of invoking GitHub or creating the note.
+Use exactly four spaces before group children. Before returning, verify the
+source dates, all three sections, exclusions, complete parent/child structure,
+every Renovate child and its parent's original total, unchanged Today wording
+and links, blockers, the opening and closing fences, and the absence of prose
+outside them.
