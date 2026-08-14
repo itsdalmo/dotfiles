@@ -120,7 +120,9 @@ type graphEvent struct {
 }
 
 // Client reads GitHub data by invoking the authenticated gh CLI.
-type Client struct{}
+type Client struct {
+	runOverride func(context.Context, ...string) ([]byte, error)
+}
 
 // AuthenticatedUser returns the login for the active gh account.
 func (c Client) AuthenticatedUser(ctx context.Context) (string, error) {
@@ -178,10 +180,14 @@ func (c Client) ResolveIssues(ctx context.Context, urls []string) (map[string]gi
 	query.WriteString("}")
 
 	out, err := c.run(ctx, "api", "graphql", "-f", "query="+query.String())
-	if err != nil {
+	resolved, decodeErr := decodeResolvedIssues(urls, out)
+	if err != nil && decodeErr != nil {
 		return nil, fmt.Errorf("fetch grouping issues: %w", err)
 	}
-	return decodeResolvedIssues(urls, out)
+	if decodeErr != nil {
+		return nil, decodeErr
+	}
+	return resolved, nil
 }
 
 func decodeResolvedIssues(urls []string, data []byte) (map[string]githubwork.GroupIssue, error) {
@@ -189,9 +195,18 @@ func decodeResolvedIssues(urls []string, data []byte) (map[string]githubwork.Gro
 		Data map[string]struct {
 			Issue *graphGroupIssue
 		} `json:"data"`
+		Errors []struct {
+			Type    string `json:"type"`
+			Message string `json:"message"`
+		} `json:"errors"`
 	}
 	if err := json.Unmarshal(data, &response); err != nil {
 		return nil, fmt.Errorf("decode grouping issues: %w", err)
+	}
+	for _, graphErr := range response.Errors {
+		if graphErr.Type != "NOT_FOUND" {
+			return nil, fmt.Errorf("resolve grouping issues: GraphQL %s: %s", graphErr.Type, graphErr.Message)
+		}
 	}
 	resolved := make(map[string]githubwork.GroupIssue)
 	for index := range urls {
@@ -209,6 +224,9 @@ func decodeResolvedIssues(urls []string, data []byte) (map[string]githubwork.Gro
 }
 
 func (c Client) run(ctx context.Context, args ...string) ([]byte, error) {
+	if c.runOverride != nil {
+		return c.runOverride(ctx, args...)
+	}
 	cmd := exec.CommandContext(ctx, "gh", args...)
 	var stderr bytes.Buffer
 	cmd.Stderr = &stderr
@@ -216,9 +234,9 @@ func (c Client) run(ctx context.Context, args ...string) ([]byte, error) {
 	if err != nil {
 		message := strings.TrimSpace(stderr.String())
 		if message != "" {
-			return nil, fmt.Errorf("gh: %s: %w", message, err)
+			return out, fmt.Errorf("gh: %s: %w", message, err)
 		}
-		return nil, fmt.Errorf("gh: %w", err)
+		return out, fmt.Errorf("gh: %w", err)
 	}
 	return out, nil
 }

@@ -1,6 +1,8 @@
 package github
 
 import (
+	"context"
+	"errors"
 	"reflect"
 	"testing"
 	"time"
@@ -64,6 +66,42 @@ func TestDecodeResolvedIssuesOmitsMissingIssues(t *testing.T) {
 func TestDecodeResolvedIssuesRejectsMalformedResponse(t *testing.T) {
 	if _, err := decodeResolvedIssues([]string{"issue-url"}, []byte(`{"data":`)); err == nil {
 		t.Fatal("expected malformed response error")
+	}
+}
+
+func TestResolveIssuesKeepsPartialResultsWhenAnIssueIsMissing(t *testing.T) {
+	urls := []string{
+		"https://github.com/AidnAS/platform/issues/42",
+		"https://github.com/AidnAS/other/issues/42",
+	}
+	response := []byte(`{
+		"data": {
+			"i0": {"issue": {"title": "Parent", "state": "OPEN", "url": "https://github.com/AidnAS/platform/issues/42", "parent": {"url": ""}}},
+			"i1": {"issue": null}
+		},
+		"errors": [{"type": "NOT_FOUND", "path": ["i1", "issue"], "message": "Could not resolve to an Issue with the number of 42."}]
+	}`)
+	client := Client{runOverride: func(context.Context, ...string) ([]byte, error) {
+		return response, errors.New("gh exited with status 1")
+	}}
+
+	issues, err := client.ResolveIssues(context.Background(), urls)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(issues) != 1 || issues[urls[0]].Title != "Parent" {
+		t.Fatalf("issues = %#v", issues)
+	}
+}
+
+func TestResolveIssuesRejectsUnexpectedPartialErrors(t *testing.T) {
+	response := []byte(`{"data":{},"errors":[{"type":"FORBIDDEN","message":"Resource not accessible"}]}`)
+	client := Client{runOverride: func(context.Context, ...string) ([]byte, error) {
+		return response, errors.New("gh exited with status 1")
+	}}
+
+	if _, err := client.ResolveIssues(context.Background(), []string{"https://github.com/AidnAS/platform/issues/42"}); err == nil {
+		t.Fatal("expected unexpected GraphQL error")
 	}
 }
 

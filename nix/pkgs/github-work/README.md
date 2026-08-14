@@ -132,6 +132,8 @@ queried, so the PR body is the single source of grouping semantics. Native
 issue-parent metadata only removes redundant ancestor membership; it never
 creates a group. Review-only grouping takes precedence over Renovate and
 workstream grouping; Renovate grouping takes precedence over workstream groups.
+Referenced issues that do not exist or are not accessible are omitted without
+discarding other valid groups from the same GitHub response.
 
 Cozy Janitor items omit `body` because generated dependency descriptions are
 large and the Log and TODO workflows need only their title, state, URL, and
