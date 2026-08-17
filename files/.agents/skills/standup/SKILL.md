@@ -46,18 +46,19 @@ Slack instead of letting the client render it. Put this shape inside the fence,
 with every heading and top-level bullet shown:
 
 ```markdown
-**Yesterday:**
+*Yesterday:*
 - Outcome: [#1](URL)
     - Group child: [#2](URL)
 
-**Today:**
+*Today:*
 - Planned work: [#3](URL)
 
-**Blockers:**
+*Blockers:*
 - None
 ```
 
-Use exactly four spaces before group children. Before returning, verify the
+Use Slack mrkdwn's single asterisks for bold headings and exactly four spaces
+before group children. Before returning, verify the
 source dates, all three sections, exclusions, complete parent/child structure,
 every Renovate child and its parent's original total, unchanged Today wording
 and links, blockers, the opening and closing fences, and the absence of prose
