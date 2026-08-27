@@ -49,17 +49,7 @@ local servers = {
       )
     end,
   },
-  nil_ls = {
-    settings = {
-      ["nil"] = {
-        nix = {
-          flake = {
-            autoArchive = false,
-          },
-        },
-      },
-    },
-  },
+  nixd = {},
   lua_ls = {
     settings = {
       Lua = {

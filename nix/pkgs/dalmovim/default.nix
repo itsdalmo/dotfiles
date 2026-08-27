@@ -79,7 +79,7 @@ let
     jsonnet-language-server
     kics
     lua-language-server
-    nil
+    nixd
     nixfmt
     prettier
     shellcheck
