@@ -51,9 +51,11 @@ local servers = {
   },
   nil_ls = {
     settings = {
-      nix = {
-        flake = {
-          autoArchive = false,
+      ["nil"] = {
+        nix = {
+          flake = {
+            autoArchive = false,
+          },
         },
       },
     },
