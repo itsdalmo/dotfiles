@@ -203,7 +203,7 @@ in
   # Automatic system updates at 4 AM
   system.autoUpgrade = {
     enable = true;
-    flake = "github:itsdalmo/dotfiles#dalmobox";
+    flake = "github:itsdalmo/dotfiles/dalmobox-hyprland#dalmobox";
     dates = "05:00";
     operation = "boot";
     allowReboot = true;
