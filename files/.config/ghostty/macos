@@ -1,2 +1,5 @@
+# Preserve Option for macOS Unicode input (for example, Option+O = ø).
+macos-option-as-alt = false
+
 # Make super (cmd) act as alt (opt) on macos
 key-remap = super=alt
