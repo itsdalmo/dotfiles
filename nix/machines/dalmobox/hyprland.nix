@@ -159,6 +159,18 @@ in
     fi
   '';
 
+  # Noctalia persists UI edits in a state-side overlay which wins over the
+  # declarative config. Drop only lock-screen settings from that overlay so the
+  # Nix-managed appearance below remains authoritative without disturbing any
+  # unrelated settings changed through the UI.
+  home.activation.clearNoctaliaLockscreenOverrides = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    state_file=${lib.escapeShellArg "${config.xdg.stateHome}/noctalia/settings.toml"}
+
+    if [ -f "$state_file" ]; then
+      $DRY_RUN_CMD ${lib.getExe pkgs.yq-go} -i 'del(.lockscreen, .lockscreen_widgets)' "$state_file"
+    fi
+  '';
+
   home.packages = with pkgs; [
     btop
     cycleMonitorScale
@@ -273,7 +285,7 @@ in
         fingerprint = false;
         allow_empty_password = false;
         blurred_desktop = false;
-        blur_intensity = 0.0;
+        blur_intensity = 0.35;
         tint_intensity = 0.25;
         wallpaper = wallpaper;
       };
@@ -281,9 +293,9 @@ in
       lockscreen_widgets = {
         enabled = true;
         schema_version = 2;
-        widget_order = [ "login" ];
+        widget_order = [ "lockscreen-login-box@DP-3" ];
 
-        widget.login = {
+        widget."lockscreen-login-box@DP-3" = {
           type = "login_box";
           output = "DP-3";
           cx = 1200.0;
