@@ -170,7 +170,7 @@ in
 
   # UWSM creates this compositor-specific target. Using it rather than the
   # generic graphical-session.target keeps Noctalia tied to Hyprland.
-  wayland.systemd.target = "wayland-session@Hyprland.target";
+  wayland.systemd.target = "wayland-session@hyprland.desktop.target";
 
   wayland.windowManager.hyprland = {
     enable = true;
