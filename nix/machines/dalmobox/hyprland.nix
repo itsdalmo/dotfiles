@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -45,9 +44,9 @@ let
     ${pkgs.hyprland}/bin/Hyprland --config "$out/hyprland.lua" --verify-config
   '';
 
-  wallpaper = builtins.path {
-    name = "noctalia-wallpaper.png";
-    path = inputs.noctalia + "/assets/noctalia-wallpaper.png";
+  wallpaper = pkgs.fetchurl {
+    url = "https://w.wallhaven.cc/full/jx/wallhaven-jxjm1m.png";
+    hash = "sha256-RjWKdXzuAly3+DnXR0PudRfSaE4XqrBEe2dfbPSQQ8s=";
   };
 
   cycleMonitorScale = pkgs.writeShellApplication {
@@ -311,6 +310,8 @@ in
         enabled = [ ];
         auto_update = false;
       };
+
+      widget.network.show_label = false;
 
       bar.main = {
         position = "top";
