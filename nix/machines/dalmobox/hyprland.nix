@@ -323,15 +323,11 @@ in
         ];
         center = [ "clock" ];
         end = [
-          "media"
           "tray"
           "notifications"
-          "clipboard"
-          "network"
           "bluetooth"
+          "network"
           "volume"
-          "brightness"
-          "control-center"
           "session"
         ];
       };
