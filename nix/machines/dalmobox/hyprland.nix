@@ -273,7 +273,40 @@ in
         fingerprint = false;
         allow_empty_password = false;
         blurred_desktop = false;
+        blur_intensity = 0.0;
+        tint_intensity = 0.25;
         wallpaper = wallpaper;
+      };
+
+      lockscreen_widgets = {
+        enabled = true;
+        schema_version = 2;
+        widget_order = [ "login" ];
+
+        widget.login = {
+          type = "login_box";
+          output = "DP-3";
+          cx = 1200.0;
+          cy = 1125.0;
+          enabled = true;
+
+          settings = {
+            layout = "compact";
+            show_session_buttons = false;
+            show_media = false;
+            show_weather = false;
+            show_login_button = false;
+            show_unlock_hint = false;
+            show_caps_lock = true;
+            show_keyboard_layout = false;
+            input_opacity = 0.72;
+            input_radius = 16;
+            center_password_text = true;
+            background_color = "surface_variant";
+            background_opacity = 0.50;
+            background_radius = 18;
+          };
+        };
       };
 
       brightness = {
