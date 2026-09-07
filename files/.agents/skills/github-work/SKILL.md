@@ -24,12 +24,10 @@ github-work todo
   found; do not infer a transition from absence.
 - Use `todo` for the current open inventory.
 
-The result is an array of `issue`, `pr`, and `group` values. Use `summary` for
-the reduced outcome, `activity` for dated evidence, and `relations` for the
-explicit PR-body wording that linked an item. A group is complete: retain its
-children when presenting it. The same PR may intentionally occur in multiple
-workstream groups when its body references multiple issues. Preserve URLs and
-report command failures or empty results without inventing missing work.
+The result is an array of `issue`, `pr`, and `group` values. Preserve URLs,
+titles, groups, and every group child exactly as returned. Use `summary` for the
+reduced outcome, `activity` for dated evidence, and `relations` for explicit
+PR-body links. Report failures or empty results without inventing missing work.
 
 Complete the request by answering at the user's requested level of detail from
 the returned data. Do not re-filter attribution, regroup items, or supplement
