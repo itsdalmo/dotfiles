@@ -7,8 +7,8 @@
 }:
 let
   hostName = "dalmobox";
-  startHyprland = pkgs.writeShellScript "start-hyprland" ''
-    exec ${pkgs.uwsm}/bin/uwsm start hyprland.desktop
+  startNiri = pkgs.writeShellScript "start-niri" ''
+    exec ${pkgs.niri}/bin/niri-session
   '';
   user = "dalmo";
 in
@@ -25,7 +25,7 @@ in
     users."${user}" = {
       imports = [
         ../../home.nix
-        ./hyprland.nix
+        ./niri.nix
       ];
     };
     extraSpecialArgs = {
@@ -77,30 +77,19 @@ in
     slack
     spotify
     wl-clipboard
+    xwayland-satellite
     zed-editor
   ];
 
   networking.hostName = hostName;
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-  };
+  programs.niri.enable = true;
   programs.noctalia = {
     enable = true;
     package = null;
     recommendedServices.enable = true;
   };
   programs.gnome-disks.enable = true;
-
-  xdg.portal.config.hyprland = {
-    default = [
-      "hyprland"
-      "gtk"
-    ];
-    "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-    "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-  };
 
   services.greetd = {
     enable = true;
@@ -111,11 +100,14 @@ in
       "--remember"
       "--remember-session"
       "--sessions /run/current-system/sw/share/wayland-sessions"
-      "--cmd ${startHyprland}"
+      "--cmd ${startNiri}"
     ];
   };
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    GDK_SCALE = "2";
+    NIXOS_OZONE_WL = "1";
+  };
 
   services.gvfs.enable = true;
   services.udisks2.enable = true;
@@ -174,6 +166,31 @@ in
     nvidiaSettings = true;
   };
 
+  # Work around NVIDIA retaining a large pool of freed Wayland buffers.
+  environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-niri.json".text =
+    builtins.toJSON {
+      rules = [
+        {
+          pattern = {
+            feature = "procname";
+            matches = "niri";
+          };
+          profile = "Limit free buffer pool in Niri";
+        }
+      ];
+      profiles = [
+        {
+          name = "Limit free buffer pool in Niri";
+          settings = [
+            {
+              key = "GLVidHeapReuseRatio";
+              value = 0;
+            }
+          ];
+        }
+      ];
+    };
+
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable bluetooth
@@ -203,7 +220,7 @@ in
   # Automatic system updates at 4 AM
   system.autoUpgrade = {
     enable = true;
-    flake = "github:itsdalmo/dotfiles/dalmobox-hyprland#dalmobox";
+    flake = "github:itsdalmo/dotfiles/dalmobox-niri#dalmobox";
     dates = "05:00";
     operation = "boot";
     allowReboot = true;

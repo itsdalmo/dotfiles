@@ -21,27 +21,16 @@ let
       Name=${name}
       GenericName=${genericName}
       Comment=Open ${name} as a desktop application
-      Exec=uwsm app -- brave --app=${url}
+      Exec=brave --app=${url}
       Icon=${icon}
       Terminal=false
       StartupNotify=true
       Categories=${lib.concatStringsSep ";" categories};
     '';
 
-  hyprlandConfig = pkgs.runCommand "hyprland-config" { } ''
-    mkdir -p "$out"
-    cp ${./hyprland/hyprland.lua} "$out/hyprland.lua"
-    cp ${./hyprland/config.lua} "$out/config.lua"
-    cp ${./hyprland/monitors.lua} "$out/monitors.lua"
-    cp ${./hyprland/bindings.lua} "$out/bindings.lua"
-
-    export HOME="$TMPDIR/home"
-    export XDG_CONFIG_HOME="$out"
-    export XDG_RUNTIME_DIR="$TMPDIR/runtime"
-    export XDG_STATE_HOME="$TMPDIR/state"
-    mkdir -p "$HOME" "$XDG_RUNTIME_DIR" "$XDG_STATE_HOME"
-
-    ${pkgs.hyprland}/bin/Hyprland --config "$out/hyprland.lua" --verify-config
+  niriConfig = pkgs.runCommand "niri-config.kdl" { } ''
+    ${lib.getExe pkgs.niri} validate --config ${./niri/config.kdl}
+    cp ${./niri/config.kdl} "$out"
   '';
 
   wallpaper = pkgs.fetchurl {
@@ -54,21 +43,24 @@ let
     runtimeInputs = with pkgs; [
       coreutils
       gawk
-      hyprland
       jq
       libnotify
+      niri
     ];
     text = ''
-      monitor_info=$(hyprctl monitors -j | jq -e -c '.[] | select(.focused == true)')
+      monitor_info=$(niri msg --json focused-output | jq -e -c '.')
 
       active_monitor=$(printf '%s' "$monitor_info" | jq -r '.name')
-      description=$(printf '%s' "$monitor_info" | jq -r '.description')
-      current_scale=$(printf '%s' "$monitor_info" | jq -r '.scale')
-      width=$(printf '%s' "$monitor_info" | jq -r '.width')
-      height=$(printf '%s' "$monitor_info" | jq -r '.height')
-      refresh_rate=$(printf '%s' "$monitor_info" | jq -r '.refreshRate')
+      identifier=$(printf '%s' "$monitor_info" | jq -r '
+        if .make == "Unknown" and .model == "Unknown" and .serial == null then
+          .name
+        else
+          [.make, .model, (.serial // "Unknown")] | join(" ")
+        end
+      ')
+      current_scale=$(printf '%s' "$monitor_info" | jq -r '.logical.scale')
 
-      if [ -z "$description" ] || [ "$description" = "null" ]; then
+      if [ -z "$identifier" ] || [ "$identifier" = "null" ]; then
         notify-send "Display scaling unavailable" "The focused monitor has no physical description"
         exit 1
       fi
@@ -99,47 +91,26 @@ let
         new_index=$(( (current_index + 1) % ''${#scales[@]} ))
       fi
 
-      requested_scale="''${scales[$new_index]}"
-      # Hyprland scales must produce whole logical pixels. Round the selected
-      # preset up to the nearest valid 1/120 increment for this monitor mode.
-      new_scale=$(awk -v scale="$requested_scale" -v width="$width" -v height="$height" '
-        function gcd(left, right, remainder) {
-          while (right) {
-            remainder = left % right
-            left = right
-            right = remainder
-          }
-          return left
-        }
-        BEGIN {
-          common = gcd(width * 120, height * 120)
-          increment = int(scale * 120 + 0.5)
-          if (increment > common) increment = common
-          while (common % increment != 0) increment++
-          printf "%g\n", increment / 120
-        }
-      ')
+      new_scale="''${scales[$new_index]}"
+      niri msg output "$identifier" scale "$new_scale"
 
-      mode="''${width}x''${height}@''${refresh_rate}"
-      hyprctl eval "hl.monitor({ output = \"$active_monitor\", mode = \"$mode\", position = \"auto\", scale = $new_scale })"
-
-      # Persist by EDID description rather than connector. DP-1/DP-2 names can
+      # Persist by EDID identity rather than connector. DP-1/DP-2 names can
       # change after hotplug, while the physical monitor identity remains stable.
-      state_directory="''${XDG_STATE_HOME:-$HOME/.local/state}/hypr"
+      state_directory="''${XDG_STATE_HOME:-$HOME/.local/state}/niri"
       state_file="$state_directory/monitor-scales.tsv"
       mkdir -p "$state_directory"
       touch "$state_file"
 
       temporary_file=$(mktemp "$state_directory/.monitor-scales.XXXXXX")
-      awk -F '\t' -v description="$description" -v scale="$new_scale" '
-        $1 == description {
-          printf "%s\t%s\n", description, scale
+      awk -F '\t' -v identifier="$identifier" -v scale="$new_scale" '
+        $1 == identifier {
+          printf "%s\t%s\n", identifier, scale
           found = 1
           next
         }
         { print }
         END {
-          if (!found) printf "%s\t%s\n", description, scale
+          if (!found) printf "%s\t%s\n", identifier, scale
         }
       ' "$state_file" > "$temporary_file"
       mv "$temporary_file" "$state_file"
@@ -147,10 +118,78 @@ let
       notify-send "Display scaling set to ''${new_scale}x" "$active_monitor"
     '';
   };
+
+  applyNiriMonitorConfig = pkgs.writeShellApplication {
+    name = "apply-niri-monitor-config";
+    runtimeInputs = with pkgs; [
+      coreutils
+      gawk
+      jq
+      niri
+    ];
+    text = ''
+      state_file="''${XDG_STATE_HOME:-$HOME/.local/state}/niri/monitor-scales.tsv"
+
+      # Register saved physical-display scales with Niri. This also covers
+      # displays which are disconnected now and connected later in the session.
+      while IFS=$'\t' read -r identifier scale; do
+        if [ -n "$identifier" ] && [ -n "$scale" ]; then
+          niri msg output "$identifier" scale "$scale"
+        fi
+      done < "$state_file"
+
+      outputs=$(niri msg --json outputs)
+      while IFS=$'\t' read -r identifier model current_width current_height current_scale; do
+        if [ "$model" != "M28U" ]; then
+          continue
+        fi
+
+        # Keep the M28U on its highest-refresh 4K mode. Omitting the refresh
+        # makes Niri select the highest one advertised at this resolution.
+        if [ "$current_width" != "3840" ] || [ "$current_height" != "2160" ]; then
+          niri msg output "$identifier" mode "3840x2160"
+        fi
+
+        saved_scale=$(awk -F '\t' -v identifier="$identifier" '
+          $1 == identifier { scale = $2 }
+          END { print scale }
+        ' "$state_file")
+        target_scale="''${saved_scale:-1.5}"
+
+        if awk -v current="$current_scale" -v target="$target_scale" '
+          BEGIN {
+            difference = current - target
+            if (difference < 0) difference = -difference
+            exit !(difference > 0.0001)
+          }
+        '; then
+          niri msg output "$identifier" scale "$target_scale"
+        fi
+      done < <(
+        printf '%s' "$outputs" | jq -r '
+          to_entries[]
+          | .value as $output
+          | ($output.current_mode // -1) as $mode_index
+          | [
+              (if $output.make == "Unknown" and $output.model == "Unknown" and $output.serial == null then
+                 $output.name
+               else
+                 [$output.make, $output.model, ($output.serial // "Unknown")] | join(" ")
+               end),
+              $output.model,
+              (if $mode_index >= 0 then $output.modes[$mode_index].width else 0 end),
+              (if $mode_index >= 0 then $output.modes[$mode_index].height else 0 end),
+              ($output.logical.scale // 0)
+            ]
+          | @tsv
+        '
+      )
+    '';
+  };
 in
 {
-  home.activation.initializeHyprMonitorScales = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    state_directory=${lib.escapeShellArg "${config.xdg.stateHome}/hypr"}
+  home.activation.initializeNiriMonitorScales = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    state_directory=${lib.escapeShellArg "${config.xdg.stateHome}/niri"}
     state_file="$state_directory/monitor-scales.tsv"
 
     $DRY_RUN_CMD mkdir -p "$state_directory"
@@ -177,36 +216,28 @@ in
     evince
     imv
     playerctl
+    wtype
   ];
 
-  # UWSM creates this compositor-specific target. Using it rather than the
-  # generic graphical-session.target keeps Noctalia tied to Hyprland.
-  wayland.systemd.target = "wayland-session@hyprland.desktop.target";
+  # Niri runs as this user service and owns graphical-session.target.
+  wayland.systemd.target = "niri.service";
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    configType = "lua";
-    package = null;
-    portalPackage = null;
-
-    # UWSM owns the graphical session and its systemd targets.
-    systemd.enable = false;
-    extraConfig = builtins.readFile ./hyprland/hyprland.lua;
+  systemd.user.services.niri-monitor-config = {
+    Unit = {
+      Description = "Apply saved Niri monitor configuration";
+      PartOf = [ "niri.service" ];
+      After = [ "niri.service" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = lib.getExe applyNiriMonitorConfig;
+    };
+    Install.WantedBy = [ "niri.service" ];
   };
 
-  xdg.configFile = {
-    # GTK only supports integer application scaling. Keep this scoped to the
-    # UWSM-managed Hyprland session rather than every graphical environment.
-    "uwsm/env-hyprland".text = ''
-      export GDK_SCALE=2
-    '';
-
-    # Sourcing these files from the validated derivation makes the validation
-    # a dependency of the Home Manager generation.
-    "hypr/config.lua".source = "${hyprlandConfig}/config.lua";
-    "hypr/monitors.lua".source = "${hyprlandConfig}/monitors.lua";
-    "hypr/bindings.lua".source = "${hyprlandConfig}/bindings.lua";
-  };
+  # Sourcing from the validated derivation makes validation a dependency of
+  # the Home Manager generation.
+  xdg.configFile."niri/config.kdl".source = niriConfig;
 
   xdg.dataFile."applications/gmail.desktop".text = webApp {
     name = "Gmail";
@@ -249,7 +280,7 @@ in
           }
           {
             action = "logout";
-            command = "uwsm stop";
+            command = "niri msg action quit --skip-confirmation";
             enabled = true;
           }
           {
@@ -339,12 +370,12 @@ in
 
       idle.behavior = {
         lock = {
-          timeout = 300;
+          timeout = 900;
           action = "lock";
           enabled = true;
         };
         "screen-off" = {
-          timeout = 600;
+          timeout = 900;
           action = "screen_off";
           enabled = true;
         };
