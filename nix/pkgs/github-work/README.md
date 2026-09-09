@@ -65,7 +65,8 @@ eligible or appear in its compact `activity` array.
 
 ## TODO inventory
 
-`todo` returns exactly these current open inventories:
+`todo` returns exactly these current open inventories from non-archived
+repositories:
 
 - Issues assigned to the authenticated user.
 - Pull requests authored by the authenticated user.

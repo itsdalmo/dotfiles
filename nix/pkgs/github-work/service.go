@@ -240,8 +240,8 @@ type todoQuery struct {
 func todoQueries(now time.Time) []todoQuery {
 	renovateCutoff := now.Add(-30 * 24 * time.Hour).UTC().Format(time.RFC3339)
 	return []todoQuery{
-		{search: "org:" + organization + " is:pr is:open author:@me"},
-		{search: "org:" + organization + " is:issue is:open assignee:@me"},
+		{search: "org:" + organization + " archived:false is:pr is:open author:@me"},
+		{search: "org:" + organization + " archived:false is:issue is:open assignee:@me"},
 		{search: `org:` + organization + ` archived:false is:pr is:open author:"cozy-janitor[bot]" review-requested:@me updated:>=` + renovateCutoff, renovate: true},
 	}
 }

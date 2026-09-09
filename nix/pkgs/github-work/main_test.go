@@ -21,6 +21,15 @@ func TestTodoRenovateQueryUsesRollingThirtyDayCutoff(t *testing.T) {
 	}
 }
 
+func TestTodoQueriesExcludeArchivedRepositories(t *testing.T) {
+	queries := todoQueries(instant("2026-08-13T12:00:00+02:00"))
+	for _, query := range queries {
+		if !strings.Contains(query.search, "archived:false") {
+			t.Errorf("TODO query includes archived repositories: %q", query.search)
+		}
+	}
+}
+
 func TestParseGitHubURL(t *testing.T) {
 	reference, err := ParseURL("https://github.com/AidnAS/platform/pull/123")
 	if err != nil {
