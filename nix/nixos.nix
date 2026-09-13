@@ -10,6 +10,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   # Networking
+  networking.dhcpcd.enable = false;
   networking.networkmanager.enable = true;
   networking.useDHCP = false;
 
