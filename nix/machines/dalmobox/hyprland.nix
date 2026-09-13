@@ -6,28 +6,6 @@
 }:
 
 let
-  webApp =
-    {
-      name,
-      url,
-      icon,
-      genericName,
-      categories ? [ "Network" ],
-    }:
-    ''
-      [Desktop Entry]
-      Version=1.0
-      Type=Application
-      Name=${name}
-      GenericName=${genericName}
-      Comment=Open ${name} as a desktop application
-      Exec=uwsm app -- brave --app=${url}
-      Icon=${icon}
-      Terminal=false
-      StartupNotify=true
-      Categories=${lib.concatStringsSep ";" categories};
-    '';
-
   hyprlandConfig = pkgs.runCommand "hyprland-config" { } ''
     mkdir -p "$out"
     cp ${./hyprland/hyprland.lua} "$out/hyprland.lua"
@@ -149,16 +127,6 @@ let
   };
 in
 {
-  home.activation.initializeHyprMonitorScales = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    state_directory=${lib.escapeShellArg "${config.xdg.stateHome}/hypr"}
-    state_file="$state_directory/monitor-scales.tsv"
-
-    $DRY_RUN_CMD mkdir -p "$state_directory"
-    if [ ! -e "$state_file" ]; then
-      $DRY_RUN_CMD touch "$state_file"
-    fi
-  '';
-
   # Noctalia persists UI edits in a state-side overlay which wins over the
   # declarative config. Drop only lock-screen settings from that overlay so the
   # Nix-managed appearance below remains authoritative without disturbing any
@@ -208,11 +176,14 @@ in
     "hypr/bindings.lua".source = "${hyprlandConfig}/bindings.lua";
   };
 
-  xdg.dataFile."applications/gmail.desktop".text = webApp {
+  xdg.desktopEntries.gmail = {
     name = "Gmail";
     genericName = "Email Client";
-    url = "https://mail.google.com/";
+    comment = "Open Gmail as a desktop application";
+    exec = "uwsm app -- brave --app=https://mail.google.com/";
     icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/gmail.svg";
+    terminal = false;
+    startupNotify = true;
     categories = [
       "Network"
       "Email"
