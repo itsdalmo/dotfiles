@@ -8,12 +8,11 @@ let
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}";
 
   # Codex follows symlinked skill directories, but skips a SKILL.md that is
-  # itself a symlink. Materialize the merged tree so every skill definition is
+  # itself a symlink. Materialize the skill tree so every skill definition is
   # a regular file in the store output.
-  mergedSkills = pkgs.runCommand "agent-skills" { } ''
+  agentSkills = pkgs.runCommand "agent-skills" { } ''
     mkdir -p "$out"
     cp -RL ${../files/.agents/skills}/. "$out/"
-    cp -RL ${pkgs.mattpocock-skills}/. "$out/"
   '';
 
   opencodeWrapped = pkgs.symlinkJoin {
@@ -103,7 +102,7 @@ in
     in
     builtins.listToAttrs (map copy files)
     // {
-      ".agents/skills".source = mergedSkills;
+      ".agents/skills".source = agentSkills;
     };
 
   xdg.enable = true;
