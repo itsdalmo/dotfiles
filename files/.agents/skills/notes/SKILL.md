@@ -50,8 +50,7 @@ Keep this workflow read-only; `zk index` may refresh index metadata.
    - `zk list --link-to <note-path>` for backlinks
    - `zk list --linked-by <note-path>` for outgoing links
 5. Read every note needed to support the answer. Follow links while they materially improve it.
-6. Read linked GitHub issues or pull requests with the github-work **Fetch** workflow only when the user asks for current or verified GitHub context, or required context is absent from the notebook. Fetch only the exact links needed. Distinguish live GitHub evidence from notebook content.
-7. Answer directly and cite the most relevant note paths. Distinguish direct statements, live GitHub evidence, and inference; mention conflicts or dated information, and report the attempted query variants when nothing useful is found.
+6. Answer directly and cite the most relevant note paths. Distinguish direct statements from inference; mention conflicts or dated information, and report the attempted query variants when nothing useful is found.
 
 The search is complete when the answer is supported by the cited notes, or plausible query variants are exhausted and reported.
 
