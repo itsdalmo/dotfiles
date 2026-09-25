@@ -75,6 +75,47 @@ func TestRunRoutesCommandsAndWritesJSON(t *testing.T) {
 	}
 }
 
+func TestRunWritesMarkdownLists(t *testing.T) {
+	output := []githubwork.OutputItem{
+		{Type: "group", Title: "Payments", URL: "https://github.com/AidnAS/platform/issues/7", Items: []githubwork.OutputItem{
+			{Type: "pr", Title: "Add retries", URL: "https://github.com/AidnAS/platform/pull/8"},
+		}},
+		{Type: "group", Title: "Reviewed PRs", Items: []githubwork.OutputItem{
+			{Type: "pr", Title: "Fix typo", URL: "https://github.com/AidnAS/other/pull/3"},
+		}},
+		{Type: "issue", Title: "Standalone", URL: "https://github.com/AidnAS/platform/issues/9"},
+	}
+	tests := []struct {
+		name string
+		args []string
+		want string
+	}{
+		{name: "log", args: []string{"log", "--markdown", "--timezone", "UTC"}, want: `- Payments: [#7](https://github.com/AidnAS/platform/issues/7)
+  - Add retries: [#8](https://github.com/AidnAS/platform/pull/8)
+- Reviewed PRs
+  - Fix typo: [#3](https://github.com/AidnAS/other/pull/3)
+- Standalone: [#9](https://github.com/AidnAS/platform/issues/9)
+`},
+		{name: "todo", args: []string{"todo", "--markdown"}, want: `- [ ] Payments: [#7](https://github.com/AidnAS/platform/issues/7)
+  - [ ] Add retries: [#8](https://github.com/AidnAS/platform/pull/8)
+- [ ] Reviewed PRs
+  - [ ] Fix typo: [#3](https://github.com/AidnAS/other/pull/3)
+- [ ] Standalone: [#9](https://github.com/AidnAS/platform/issues/9)
+`},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			var stdout bytes.Buffer
+			if err := Run(context.Background(), test.args, &fakeService{output: output}, &stdout, io.Discard); err != nil {
+				t.Fatal(err)
+			}
+			if got := stdout.String(); got != test.want {
+				t.Fatalf("stdout = %q, want %q", got, test.want)
+			}
+		})
+	}
+}
+
 func TestRunHelpDoesNotCallService(t *testing.T) {
 	service := &fakeService{}
 	var stdout bytes.Buffer
@@ -96,7 +137,7 @@ func TestRunRejectsInvalidCommandsAndArguments(t *testing.T) {
 		want string
 	}{
 		{name: "unknown command", args: []string{"wat"}, want: `unknown command "wat"`},
-		{name: "todo arguments", args: []string{"todo", "extra"}, want: "todo does not accept arguments"},
+		{name: "todo arguments", args: []string{"todo", "extra"}, want: "todo accepts only --markdown"},
 		{name: "missing fetch URL", args: []string{"fetch"}, want: "fetch requires one GitHub issue or pull-request URL"},
 		{name: "invalid date", args: []string{"log", "--from", "yesterday"}, want: "invalid --from"},
 		{name: "invalid timezone", args: []string{"log", "--timezone", "Moon/Base"}, want: `invalid timezone "Moon/Base"`},
@@ -126,7 +167,7 @@ func TestRunReturnsServiceErrorWithoutWritingJSON(t *testing.T) {
 
 func TestParseLogDateUsesTimezoneAndInclusiveToDate(t *testing.T) {
 	now := time.Date(2026, time.March, 29, 12, 0, 0, 0, time.UTC)
-	window, err := parseLogFlags([]string{"--from", "2026-03-29", "--to", "2026-03-29", "--timezone", "Europe/Oslo"}, io.Discard, now)
+	window, _, err := parseLogFlags([]string{"--from", "2026-03-29", "--to", "2026-03-29", "--timezone", "Europe/Oslo"}, io.Discard, now)
 	if err != nil {
 		t.Fatal(err)
 	}

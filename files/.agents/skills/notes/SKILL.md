@@ -12,7 +12,7 @@ Choose the workflow from the request:
 - Record a meeting: **Create meeting notes**.
 - Review the notebook: **Review notes**.
 
-Requires `zk`, Git, `ZK_NOTEBOOK_DIR`, filesystem access to the configured notebook, and a POSIX-compatible shell.
+Requires `zk`, Git, `ZK_NOTEBOOK_DIR`, and filesystem access to the configured notebook.
 
 ## Prepare
 

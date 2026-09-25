@@ -1,4 +1,4 @@
-// Package cli adapts command-line arguments and JSON streams to githubwork.
+// Package cli adapts command-line arguments and output streams to githubwork.
 package cli
 
 import (
@@ -8,6 +8,8 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"path"
+	"strings"
 	"time"
 
 	githubwork "github.com/itsdalmo/dotfiles/github-work"
@@ -25,6 +27,10 @@ Options for log:
   --to <value>         Inclusive date or exclusive date-time (default: now)
   --timezone <value>   IANA timezone for date boundaries (default: Europe/Oslo)
 
+Options for log and todo:
+  --markdown           Emit a markdown list for daily notes instead of JSON;
+                       todo items are unchecked tasks
+
 All commands emit the same compact JSON union of issues, pull requests, and
 deterministic groups, with relevant activity and extracted relations.`
 
@@ -34,7 +40,7 @@ type workService interface {
 	Fetch(context.Context, string) ([]githubwork.OutputItem, error)
 }
 
-// Run executes args and writes either help text or JSON to stdout.
+// Run executes args and writes help text, markdown, or JSON to stdout.
 func Run(ctx context.Context, args []string, service workService, stdout, stderr io.Writer) error {
 	if len(args) == 0 || args[0] == "-h" || args[0] == "--help" {
 		_, err := fmt.Fprintln(stdout, usageText)
@@ -44,17 +50,26 @@ func Run(ctx context.Context, args []string, service workService, stdout, stderr
 	var (
 		output []githubwork.OutputItem
 		err    error
+		// markdownPrefix is the list marker for markdown output; empty means JSON.
+		markdownPrefix string
 	)
 	switch args[0] {
 	case "log":
-		window, parseErr := parseLogFlags(args[1:], stderr, time.Now())
+		window, markdown, parseErr := parseLogFlags(args[1:], stderr, time.Now())
 		if parseErr != nil {
 			return parseErr
 		}
+		if markdown {
+			markdownPrefix = "- "
+		}
 		output, err = service.Log(ctx, window.from, window.to)
 	case "todo":
-		if len(args) != 1 {
-			return errors.New("todo does not accept arguments")
+		switch {
+		case len(args) == 1:
+		case len(args) == 2 && args[1] == "--markdown":
+			markdownPrefix = "- [ ] "
+		default:
+			return errors.New("todo accepts only --markdown")
 		}
 		output, err = service.Todo(ctx)
 	case "fetch":
@@ -68,10 +83,33 @@ func Run(ctx context.Context, args []string, service workService, stdout, stderr
 	if err != nil {
 		return err
 	}
+	if markdownPrefix != "" {
+		return writeMarkdown(stdout, output, markdownPrefix)
+	}
 
 	encoder := json.NewEncoder(stdout)
 	encoder.SetEscapeHTML(false)
 	return encoder.Encode(output)
+}
+
+// writeMarkdown renders items as a list, indenting group children by two spaces.
+func writeMarkdown(w io.Writer, items []githubwork.OutputItem, prefix string) error {
+	var b strings.Builder
+	for _, item := range items {
+		b.WriteString(prefix + markdownEntry(item) + "\n")
+		for _, child := range item.Items {
+			b.WriteString("  " + prefix + markdownEntry(child) + "\n")
+		}
+	}
+	_, err := io.WriteString(w, b.String())
+	return err
+}
+
+func markdownEntry(item githubwork.OutputItem) string {
+	if item.URL == "" {
+		return item.Title
+	}
+	return fmt.Sprintf("%s: [#%s](%s)", item.Title, path.Base(item.URL), item.URL)
 }
 
 type interval struct {
@@ -79,20 +117,26 @@ type interval struct {
 	to   time.Time
 }
 
-func parseLogFlags(args []string, stderr io.Writer, now time.Time) (interval, error) {
+func parseLogFlags(args []string, stderr io.Writer, now time.Time) (interval, bool, error) {
 	flags := flag.NewFlagSet("log", flag.ContinueOnError)
 	flags.SetOutput(stderr)
 	var fromValue, toValue, timezone string
+	var markdown bool
 	flags.StringVar(&fromValue, "from", "", "inclusive start")
 	flags.StringVar(&toValue, "to", "", "exclusive end")
 	flags.StringVar(&timezone, "timezone", "Europe/Oslo", "IANA timezone")
+	flags.BoolVar(&markdown, "markdown", false, "emit a markdown list")
 	if err := flags.Parse(args); err != nil {
-		return interval{}, err
+		return interval{}, false, err
 	}
 	if flags.NArg() != 0 {
-		return interval{}, errors.New("unexpected positional argument for log")
+		return interval{}, false, errors.New("unexpected positional argument for log")
 	}
+	window, err := resolveInterval(fromValue, toValue, timezone, now)
+	return window, markdown, err
+}
 
+func resolveInterval(fromValue, toValue, timezone string, now time.Time) (interval, error) {
 	location, err := time.LoadLocation(timezone)
 	if err != nil {
 		return interval{}, fmt.Errorf("invalid timezone %q: %w", timezone, err)

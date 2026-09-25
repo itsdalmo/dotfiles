@@ -15,32 +15,33 @@ note. Do not create or update a note for a read-only request.
 
 ## Update
 
-1. Resolve the date: today for "update my daily" and the previous calendar day
-   for "update yesterday's daily".
+1. Resolve the date: the date the user names, today for "update my daily", or
+   the previous calendar day for "update yesterday's daily".
 2. If the daily is missing, create it with:
 
    ```bash
    zk daily --date=<YYYY-MM-DD> --print-path --no-input
    ```
 
-   Only for a newly created daily, run `github-work todo` and populate its empty
-   `## TODO` with the complete result. Use `- [ ] ` for items and `  - [ ] ` for
-   group children. After this initial population, `## TODO` is user-managed.
+   Only for a newly created daily, run `github-work todo --markdown` and
+   populate its empty `## TODO` with its complete output. After this initial
+   population, `## TODO` is user-managed.
 3. Read the entire daily, then run:
 
    ```bash
-   github-work log --from <YYYY-MM-DD> --to <YYYY-MM-DD> --timezone <IANA-zone>
+   github-work log --markdown --from <YYYY-MM-DD> --to <YYYY-MM-DD> --timezone <IANA-zone>
    ```
 
 4. Update only `## Log`. Merge the command output with existing entries without
-   duplicating GitHub URLs or removing manual entries. Preserve the CLI's groups,
-   children, titles, and links.
+   duplicating GitHub URLs or removing manual entries. Keep the output's lines
+   verbatim, including every group child.
 5. Apart from initializing a new daily's TODO, leave frontmatter and every other
    section unchanged. Run `zk index`, inspect the changed daily, and report its
    path.
 
-## Rendering GitHub work
+## GitHub work
 
-Render top-level entries with `- ` and group children with `  - `. Format links
-as `<title>: [#N](URL)`, omitting the colon when there is no link. Use titles
-verbatim and keep every child returned in a group.
+Both commands print a ready-to-use markdown list. Use only their output. If a
+command fails, report the error and stop; do not fall back to `gh` or other
+GitHub queries, and do not re-filter, regroup, reformat, or supplement its
+result.

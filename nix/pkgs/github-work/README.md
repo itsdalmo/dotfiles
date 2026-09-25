@@ -147,13 +147,18 @@ singleton group. `todo` omits activity because it represents current inventory.
 Labels, reviews, review threads, and timeline events are used internally but
 are not returned directly.
 
+With `--markdown`, `log` and `todo` instead print a markdown list for daily
+notes. Top-level entries use `- ` and group children `  - `; `todo` uses
+unchecked tasks (`- [ ] ` and `  - [ ] `). An entry is `<title>: [#N](<url>)`,
+where `N` is the last URL path segment, or `<title>` alone when it has no URL.
+
 ## Package layout
 
 - The root `githubwork` package owns the domain types, relation extraction,
   activity reduction, grouping, and use-case interface.
 - `github` adapts the external `gh` command and GraphQL responses to the root
   package's domain language.
-- `internal/cli` adapts command-line arguments and JSON streams.
+- `internal/cli` adapts command-line arguments and renders markdown or JSON.
 - `cmd/github-work` is the composition root and contains only process wiring.
 
 ## GitHub limits
