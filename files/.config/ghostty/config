@@ -1,7 +1,7 @@
 # General
 title = ""
 maximize = true
-macos-titlebar-style = "tabs"
+macos-titlebar-style = "native"
 shell-integration-features = no-cursor
 cursor-style = block
 cursor-style-blink = false
