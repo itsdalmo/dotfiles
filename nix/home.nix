@@ -173,6 +173,7 @@ in
     renovate
     ripgrep
     skopeo
+    tanka
     teleport
     terraform
     tfcheck
