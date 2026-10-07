@@ -1,5 +1,15 @@
 local M = {}
 
+function M.toggle_inline_completion()
+  local enabled = not vim.lsp.inline_completion.is_enabled()
+  vim.lsp.inline_completion.enable(enabled)
+  if enabled then
+    vim.notify("inline completion enabled")
+  else
+    vim.notify("inline completion disabled")
+  end
+end
+
 local conceallevel = 3
 function M.toggle_conceal()
   local current = vim.opt_local["conceallevel"]:get()

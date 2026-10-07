@@ -48,6 +48,17 @@ map("n", "<leader>gb", [[<cmd>vert Git blame -- %<cr>]], "Blame")
 map("n", "<leader>li", [[<cmd>LspInfo<cr>]], "Info")
 map("n", "<leader>lr", [[<cmd>LspRestart<cr>]], "Restart")
 
+-- Inline completion (keep Tab and Enter for mini.completion)
+map("i", "<C-g>a", function()
+  vim.lsp.inline_completion.get()
+end, "Accept inline completion")
+map("i", "<C-g>n", function()
+  vim.lsp.inline_completion.select({ count = 1 })
+end, "Next inline completion")
+map("i", "<C-g>p", function()
+  vim.lsp.inline_completion.select({ count = -1 })
+end, "Previous inline completion")
+
 -- Major
 map({ "n", "v" }, "<localleader>.", [[<cmd>lua vim.lsp.buf.code_action()<cr>]], "Code Action")
 map("n", "<localleader>=", [[<cmd>lua require("dalmovim.utils").format({ force = true })<cr>]], "Format")
@@ -89,6 +100,7 @@ map("n", "<leader>sT", [[<cmd>Pick comments cwd=vim.fn.expand("%:h")<cr>]], "Tod
 map("n", "<leader>s:", [[<cmd>Pick history scope=":"<cr>]], "Command history")
 
 -- Toggles
+map("n", "<leader>ti", [[<cmd>lua require("dalmovim.utils").toggle_inline_completion()<cr>]], "Inline completion")
 map("n", "<leader>tf", [[<cmd>lua require("dalmovim.utils").toggle_autoformat()<cr>]], "Autoformat")
 map("n", "<leader>tc", [[<cmd>lua require("dalmovim.utils").toggle_conceal()<cr>]], "Conceal")
 map("n", "<leader>td", [[<cmd>lua require("dalmovim.utils").toggle_diagnostics()<cr>]], "Diagnostics")
