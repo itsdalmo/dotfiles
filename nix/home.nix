@@ -151,8 +151,8 @@ in
     eza
     fd
     gh
-    github-work
     git
+    github-work
     gnumake
     go
     go-task
@@ -181,6 +181,7 @@ in
     tfswitch
     trivy
     typescript
+    unstable.claude-code
     yubikey-manager
     zizmor
     zk
