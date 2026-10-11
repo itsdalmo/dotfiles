@@ -200,9 +200,17 @@ in
   # Install tailscale
   services.tailscale.enable = true;
 
-  # Automatic system updates at 4 AM
+  # Web apps (itsdalmo/apps) run with Docker Compose. Traefik uses host networking,
+  # so this decides where they are reachable: only over Tailscale.
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
+    80
+    443
+  ];
+
+  # Automatic system updates at 5 AM. Disabled for now: it builds from GitHub,
+  # so local changes that are not pushed yet would be dropped at the next boot.
   system.autoUpgrade = {
-    enable = true;
+    enable = false;
     flake = "github:itsdalmo/dotfiles#dalmobox";
     dates = "05:00";
     operation = "boot";
