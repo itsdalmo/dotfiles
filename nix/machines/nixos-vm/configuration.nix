@@ -41,6 +41,9 @@ in
 
   networking.hostName = hostName;
 
+  # Allow automated rebuilds over SSH without a password prompt.
+  security.sudo.wheelNeedsPassword = false;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

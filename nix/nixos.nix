@@ -6,9 +6,6 @@
 }:
 
 {
-  # Don't require password for sudo
-  security.sudo.wheelNeedsPassword = false;
-
   # Networking
   networking.dhcpcd.enable = false;
   networking.networkmanager.enable = true;
