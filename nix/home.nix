@@ -181,11 +181,23 @@ in
     tfswitch
     trivy
     typescript
-    unstable.claude-code
     yubikey-manager
     zizmor
     zk
   ];
+
+  programs.claude-code = {
+    enable = true;
+    package = pkgs.unstable.claude-code;
+    settings = {
+      theme = "dark";
+      # No co-author trailer on commits or footer on pull requests.
+      attribution = {
+        commit = "";
+        pr = "";
+      };
+    };
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
