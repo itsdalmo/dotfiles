@@ -44,6 +44,9 @@ in
       "networkmanager"
       "docker"
     ];
+    openssh.authorizedKeys.keys = [
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPzEKT/ZL+7hKaS/7wvH2UKuTUJVeX4FMUc6jMx5UfN52UukTBrRkkk3yJkM8Bw90T5CW1pNifFvjCkXQY0Zr8A=" # dalmophone17 (Termius)
+    ];
   };
 
   users.users.nixremote = {
