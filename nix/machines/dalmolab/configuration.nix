@@ -92,12 +92,16 @@ in
   networking.firewall = {
     allowedTCPPorts = [
       51000 # Homebridge
-      51827 # Salus HomeKit bridge
     ];
     allowedUDPPorts = [
       5353 # Homebridge bonjour
     ];
   };
+
+  # The Salus HomeKit bridge, only from the LAN, where Apple Home connects.
+  networking.firewall.interfaces.enp1s0.allowedTCPPorts = [
+    51827
+  ];
 
   # Web apps (itsdalmo/apps) run with Docker Compose. Traefik uses host networking,
   # so this decides where they are reachable: only over Tailscale.
