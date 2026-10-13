@@ -97,6 +97,13 @@ in
     ];
   };
 
+  # Web apps (itsdalmo/apps) run with Docker Compose. Traefik uses host networking,
+  # so this decides where they are reachable: only over Tailscale.
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
+    80
+    443
+  ];
+
   # Automatic system updates at 5 AM
   system.autoUpgrade = {
     enable = true;
