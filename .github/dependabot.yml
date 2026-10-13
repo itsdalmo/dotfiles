@@ -1,0 +1,25 @@
+version: 2
+
+# Weekly PRs, for releases that are at least seven days old. The homebridge
+# image in nix/machines/dalmolab/configuration.nix is not covered and is
+# updated by hand.
+updates:
+  - package-ecosystem: nix
+    directory: "/"
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      flake:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
