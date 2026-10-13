@@ -85,12 +85,14 @@ in
   # Install tailscale
   services.tailscale.enable = true;
 
-  # Homebridge runs in Docker Compose (itsdalmo/apps, homebridge/) with host
-  # networking, so it can advertise itself over mDNS on the LAN. Its UI is
-  # reached through Traefik (homebridge.app.dalmo.me), so 8581 stays closed.
+  # Homebridge and the Salus HomeKit bridge run in Docker Compose (itsdalmo/apps,
+  # homebridge/ and salus/) with host networking, so they can advertise
+  # themselves over mDNS on the LAN. Homebridge's UI is reached through Traefik
+  # (homebridge.app.dalmo.me), so 8581 stays closed.
   networking.firewall = {
     allowedTCPPorts = [
       51000 # Homebridge
+      51827 # Salus HomeKit bridge
     ];
     allowedUDPPorts = [
       5353 # Homebridge bonjour
