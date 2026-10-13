@@ -1,6 +1,6 @@
 version: 2
 
-# Weekly PRs, for releases that are at least three days old. The homebridge
+# Weekly PRs, for releases that are at least seven days old. The homebridge
 # image in nix/machines/dalmolab/configuration.nix is not covered and is
 # updated by hand.
 updates:
@@ -9,7 +9,7 @@ updates:
     schedule:
       interval: weekly
     cooldown:
-      default-days: 3
+      default-days: 7
     groups:
       flake:
         patterns: ["*"]
@@ -19,7 +19,7 @@ updates:
     schedule:
       interval: weekly
     cooldown:
-      default-days: 3
+      default-days: 7
     groups:
       actions:
         patterns: ["*"]
