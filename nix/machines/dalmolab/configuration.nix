@@ -85,24 +85,8 @@ in
   # Install tailscale
   services.tailscale.enable = true;
 
-  # Run homebridge in a container
-  virtualisation.oci-containers = {
-    backend = "podman";
-    containers = {
-      homebridge = {
-        image = "docker.io/homebridge/homebridge:2026-04-20@sha256:79c95b078973b187d8985385f012b477320c57dc49911f70746eb72ea8d39eed";
-        volumes = [
-          "/var/lib/homebridge:/homebridge:rw"
-        ];
-        log-driver = "journald";
-        extraOptions = [
-          "--network=host"
-        ];
-        autoStart = true;
-      };
-    };
-  };
-
+  # Homebridge runs in Docker Compose (itsdalmo/apps, homebridge/) with host
+  # networking, so it can advertise itself over mDNS on the LAN.
   networking.firewall = {
     allowedTCPPorts = [
       8581 # Homebridge UI
