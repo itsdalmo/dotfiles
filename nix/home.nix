@@ -53,7 +53,7 @@ in
     LC_CTYPE = "en_US.UTF-8";
     AWS_DEFAULT_REGION = "eu-west-1";
     AWS_PAGER = "";
-    DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_8_0}/share/dotnet";
+    DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
     EDITOR = "nvim";
     GOPATH = "$HOME/go";
     PAGER = "less -FirSwX";
@@ -147,7 +147,7 @@ in
     dalmovim
     dive
     docker-client
-    dotnetCorePackages.sdk_8_0
+    dotnetCorePackages.sdk_10_0
     eza
     fd
     gh
