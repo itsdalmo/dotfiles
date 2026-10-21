@@ -105,6 +105,15 @@ in
 
   security.pki.certificates = [ (builtins.readFile ./zscaler.crt) ];
 
+  # Roots with compromised eMudhra intermediates (CVE-2026-111943). Mirrors
+  # NixOS/nixpkgs#576390, which only patched the NixOS module, not nix-darwin.
+  security.pki.caCertificateBlacklist = [
+    "Comodo AAA Services root"
+    "emSign ECC Root CA - G3"
+    "emSign Root CA - C1"
+    "emSign ECC Root CA - C3"
+  ];
+
   nix.settings.ssl-cert-file = certs;
 
   homebrew.masApps = {
