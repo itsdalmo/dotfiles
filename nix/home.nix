@@ -59,7 +59,17 @@ in
     PAGER = "less -FirSwX";
     RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
     ZK_NOTEBOOK_DIR = "${homeDirectory}/code/github.com/itsdalmo/notebook";
-  };
+  }
+  // (
+    if pkgs.stdenv.isDarwin then
+      { }
+    else
+      {
+        # gnome-keyring asks for its password in a window, which doesn't show
+        # over ssh. The file backend asks in the terminal instead.
+        AWS_VAULT_BACKEND = "file";
+      }
+  );
 
   home.shellAliases = {
     awsv = "aws-vault exec";
