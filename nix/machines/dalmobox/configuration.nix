@@ -49,16 +49,23 @@ in
     ];
   };
 
-  users.users.nixremote = {
-    home = "/home/nixremote";
-    group = "nogroup";
-    isNormalUser = true;
-    openssh.authorizedKeys.keys = [
+  # Remote builder for dalmobook and dalmolab. nix-ssh is not a trusted user (a
+  # trusted user is root-equivalent): over ssh-ng the build hook sends only the
+  # derivation, which dalmobox builds in its own sandbox. Inputs it is sent must
+  # be content-addressed or signed by a trusted key, so dalmobox signs what it
+  # builds and trusts its own key, for when it gets its own (garbage collected)
+  # outputs back from a client.
+  nix.sshServe = {
+    enable = true;
+    protocol = "ssh-ng";
+    keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEzoYhB8nTLlVgNljnBLdfrZtR+srK95wDeSmm3ix5BP" # dalmobook
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEbwlUPZF+2rANW8NjYRgRm9lA4kZmKwJjE1cGtBR+hG" # dalmolab
     ];
   };
-  nix.settings.trusted-users = lib.mkAfter [ "nixremote" ];
+  # Generated with: nix key generate-secret --key-name dalmobox-1 > /var/lib/nix/dalmobox.sec
+  nix.settings.secret-key-files = [ "/var/lib/nix/dalmobox.sec" ];
+  nix.settings.extra-trusted-public-keys = [ "dalmobox-1:G/9TBw1Ja2XZ2493xzKQWviF/NAui1DYBRnppHnfi2U=" ];
 
   environment.systemPackages = with pkgs; [
     _1password-cli
