@@ -65,7 +65,7 @@ in
   };
   # Generated with: nix key generate-secret --key-name dalmobox-1 > /var/lib/nix/dalmobox.sec
   nix.settings.secret-key-files = [ "/var/lib/nix/dalmobox.sec" ];
-  nix.settings.extra-trusted-public-keys = [ "dalmobox-1:TODO" ];
+  nix.settings.extra-trusted-public-keys = [ "dalmobox-1:G/9TBw1Ja2XZ2493xzKQWviF/NAui1DYBRnppHnfi2U=" ];
 
   environment.systemPackages = with pkgs; [
     _1password-cli
