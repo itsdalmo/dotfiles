@@ -85,23 +85,17 @@ in
   # Install tailscale
   services.tailscale.enable = true;
 
-  # Homebridge and the Salus HomeKit bridge run in Docker Compose (itsdalmo/apps,
-  # homebridge/ and salus/) with host networking, so they can advertise
-  # themselves over mDNS on the LAN. Homebridge's UI is reached through Traefik
-  # (homebridge.app.dalmo.me), so 8581 stays closed.
-  networking.firewall = {
+  # The Salus HomeKit bridge runs in Docker Compose (itsdalmo/apps, salus/) with
+  # host networking, so it can advertise itself over mDNS on the LAN. Only open
+  # on the LAN, where Apple Home connects.
+  networking.firewall.interfaces.enp1s0 = {
     allowedTCPPorts = [
-      51000 # Homebridge
+      51827 # HomeKit
     ];
     allowedUDPPorts = [
-      5353 # Homebridge bonjour
+      5353 # mDNS
     ];
   };
-
-  # The Salus HomeKit bridge, only from the LAN, where Apple Home connects.
-  networking.firewall.interfaces.enp1s0.allowedTCPPorts = [
-    51827
-  ];
 
   # Web apps (itsdalmo/apps) run with Docker Compose. Traefik uses host networking,
   # so this decides where they are reachable: only over Tailscale.
