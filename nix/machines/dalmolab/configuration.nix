@@ -28,7 +28,8 @@ in
     {
       hostName = "dalmobox.wombat-woodpecker.ts.net";
       sshKey = "/root/.ssh/id_nixremote";
-      sshUser = "nixremote";
+      sshUser = "nix-ssh";
+      protocol = "ssh-ng";
       publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxEN2lBeWwyVE1Ld2ZUcEZFcU4yeS9zQ2lGWmUrSDZDWWJuaThVa2NwRSsgcm9vdEBkYWxtb2JveAo=";
       maxJobs = 4;
       systems = [
@@ -40,6 +41,7 @@ in
     }
   ];
   nix.distributedBuilds = true;
+  nix.settings.builders-use-substitutes = true;
   nix.settings.max-jobs = 0; # Force all builds to use remote builders
 
   # Create a group which will have read access to the k3s config
