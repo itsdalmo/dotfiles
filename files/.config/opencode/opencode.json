@@ -34,8 +34,8 @@
       "command": ["alloy", "fmt", "$FILE"],
       "extensions": [".alloy"]
     },
-    "terraform": {
-      "command": ["terraform", "fmt", "$FILE"],
+    "tofu": {
+      "command": ["tofu", "fmt", "$FILE"],
       "extensions": [".hcl", ".tf", ".tfvars"]
     },
     "jsonnetfmt": {
