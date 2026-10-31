@@ -32,7 +32,7 @@ let
             pkgs.prettier
             pkgs.shfmt
             pkgs.stylua
-            pkgs.terraform
+            pkgs.opentofu
           ]
         }
     '';
@@ -71,7 +71,7 @@ in
     gs = "git status";
     k = "kubectl";
     l = "ll";
-    tf = "terraform";
+    tf = "tofu";
   };
 
   # FIXME: Workaround since we cannot set the correct mode on symlinks (see SO answer):
@@ -166,6 +166,7 @@ in
     nodejs_24
     omnisharp-roslyn
     opencodeWrapped
+    opentofu
     oras
     postgresql
     presenterm
@@ -175,7 +176,6 @@ in
     skopeo
     tanka
     teleport
-    terraform
     tfcheck
     tflint
     tfswitch

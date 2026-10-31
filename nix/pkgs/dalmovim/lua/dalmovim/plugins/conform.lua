@@ -33,7 +33,7 @@ conform.setup({
     bzl = { "buildifier" },
     fish = { "fish_indent" },
     go = { "gofumpt" },
-    hcl = { "terraform_fmt" },
+    hcl = { "tofu_fmt" },
     json = { "prettier" },
     jsonc = { "prettier" },
     jsonnet = { "jsonnetfmt" },
