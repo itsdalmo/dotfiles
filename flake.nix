@@ -68,6 +68,9 @@
       forEachSystem = f: nixpkgs.lib.genAttrs systems (system: f (mkPkgs system));
     in
     {
+      # Share the same platform-specific package sets used by the machines.
+      legacyPackages = forEachSystem (pkgs: pkgs);
+
       formatter = forEachSystem (pkgs: pkgs.nixfmt);
 
       packages = forEachSystem (pkgs: {

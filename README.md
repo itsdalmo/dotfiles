@@ -64,3 +64,38 @@ darwin-rebuild build --flake .#dalmobook
 # Compare with the current system
 nix store diff-closures /run/current-system ./result
 ```
+
+## Shared packages in other repositories
+
+Use `legacyPackages.${system}` to get the same package set as the machine
+configurations, including `allowUnfree`, custom packages, and `pkgs.unstable`.
+Linux uses the locked `nixpkgs` input; macOS uses `nixpkgs-darwin`.
+Both platforms use the shared `nixpkgs-unstable` input for `pkgs.unstable`.
+The current unstable pin does not support Intel Macs (`x86_64-darwin`); use
+stable packages on that platform.
+
+A project can expose development shells for all supported systems without its
+own nixpkgs input or platform selection:
+
+```nix
+{
+  inputs.dotfiles.url = "github:itsdalmo/dotfiles";
+
+  outputs = { dotfiles, ... }: {
+    devShells = builtins.mapAttrs (system: pkgs: {
+      default = pkgs.mkShell {
+        packages = [ pkgs.git pkgs.go ];
+      };
+    }) dotfiles.legacyPackages;
+  };
+}
+```
+
+Run `nix develop` to select the shell for the current system. If a project already
+has a per-system helper, use `pkgs = dotfiles.legacyPackages.${system};` inside it.
+
+Commit the project's `flake.lock`. Updating dotfiles does not automatically
+change existing project locks; run `nix flake update dotfiles` in each project
+to adopt a newer revision. Projects share the pins when they lock the same
+dotfiles revision. Inputs of third-party flakes may still need their own
+`follows` declarations when compatible.
