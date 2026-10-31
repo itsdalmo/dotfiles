@@ -20,6 +20,12 @@ let
     url = "https://github.com/itsdalmo/tfcheck/releases/download/v0.1.2/tfcheck-0.1.2-${sys}.tar.gz";
     sha256 = sha;
   };
+  # tfcheck runs `terraform` from PATH, with no option to use another binary.
+  # Only tfcheck sees this name: there is no `terraform` on the user's PATH.
+  tofuShim = pkgs.runCommand "tfcheck-tofu-shim" { } ''
+    mkdir -p $out/bin
+    ln -s ${pkgs.lib.getExe pkgs.opentofu} $out/bin/terraform
+  '';
 in
 pkgs.stdenv.mkDerivation {
   pname = "tfcheck";
@@ -28,8 +34,12 @@ pkgs.stdenv.mkDerivation {
 
   sourceRoot = ".";
   dontStrip = pkgs.lib.strings.hasSuffix "darwin" system;
-  nativeBuildInputs = [ pkgs.gzip ];
+  nativeBuildInputs = [
+    pkgs.gzip
+    pkgs.makeWrapper
+  ];
   installPhase = ''
     install -Dm755 tfcheck $out/bin/tfcheck
+    wrapProgram $out/bin/tfcheck --prefix PATH : ${tofuShim}/bin
   '';
 }
