@@ -16,10 +16,7 @@ vim.diagnostic.config({
   },
 })
 
-vim.lsp.inline_completion.enable(true)
-
 local servers = {
-  copilot = {},
   dockerls = {},
   eslint = {
     settings = {
