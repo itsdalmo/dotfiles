@@ -80,7 +80,7 @@ own nixpkgs input or platform selection:
   inputs.dotfiles.url = "github:itsdalmo/dotfiles";
 
   outputs = { dotfiles, ... }: {
-    devShells = builtins.mapAttrs (system: pkgs: {
+    devShells = builtins.mapAttrs (_: pkgs: {
       default = pkgs.mkShell {
         packages = [ pkgs.git pkgs.go ];
       };
@@ -99,4 +99,6 @@ dotfiles revision.
 
 `legacyPackages` only covers packages. Projects that need `nixpkgs.lib` (e.g.
 `nixosSystem`) or third-party flakes that take a nixpkgs input should follow the
-pins instead, e.g. `inputs.nixpkgs.follows = "dotfiles/nixpkgs";`.
+pins instead, e.g. `inputs.nixpkgs.follows = "dotfiles/nixpkgs";`. That is the
+Linux pin, so projects that also run on macOS need
+`inputs.nixpkgs-darwin.follows = "dotfiles/nixpkgs-darwin";` as well.
