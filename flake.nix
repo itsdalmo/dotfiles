@@ -54,7 +54,7 @@
       mkHome =
         { system, user }:
         (if isDarwin system then home-manager-darwin else home-manager).lib.homeManagerConfiguration {
-          pkgs = mkPkgs system;
+          pkgs = pkgsFor.${system};
           modules = [ ./nix/home.nix ];
           extraSpecialArgs = { inherit user inputs; };
         };
@@ -62,12 +62,15 @@
       systems = [
         "x86_64-linux"
         "aarch64-linux"
-        "x86_64-darwin"
         "aarch64-darwin"
       ];
-      forEachSystem = f: nixpkgs.lib.genAttrs systems (system: f (mkPkgs system));
+      pkgsFor = nixpkgs.lib.genAttrs systems mkPkgs;
+      forEachSystem = f: nixpkgs.lib.mapAttrs (_: f) pkgsFor;
     in
     {
+      # Share the same platform-specific package sets used by the machines.
+      legacyPackages = pkgsFor;
+
       formatter = forEachSystem (pkgs: pkgs.nixfmt);
 
       packages = forEachSystem (pkgs: {
@@ -92,14 +95,14 @@
 
       darwinConfigurations = {
         dalmobook = darwin.lib.darwinSystem {
-          pkgs = mkPkgs "aarch64-darwin";
+          pkgs = pkgsFor.aarch64-darwin;
           modules = [
             ./nix/machines/dalmobook/configuration.nix
             home-manager-darwin.darwinModules.home-manager
           ];
         };
         macos-vm = darwin.lib.darwinSystem {
-          pkgs = mkPkgs "aarch64-darwin";
+          pkgs = pkgsFor.aarch64-darwin;
           modules = [
             ./nix/machines/macos-vm/configuration.nix
             home-manager-darwin.darwinModules.home-manager
@@ -109,7 +112,7 @@
 
       nixosConfigurations = {
         dalmobox = nixpkgs.lib.nixosSystem {
-          pkgs = mkPkgs "x86_64-linux";
+          pkgs = pkgsFor.x86_64-linux;
           specialArgs = { inherit inputs; };
           modules = [
             ./nix/machines/dalmobox/configuration.nix
@@ -121,14 +124,14 @@
           ];
         };
         dalmolab = nixpkgs.lib.nixosSystem {
-          pkgs = mkPkgs "x86_64-linux";
+          pkgs = pkgsFor.x86_64-linux;
           modules = [
             ./nix/machines/dalmolab/configuration.nix
             home-manager.nixosModules.home-manager
           ];
         };
         nixos-vm = nixpkgs.lib.nixosSystem {
-          pkgs = mkPkgs "aarch64-linux";
+          pkgs = pkgsFor.aarch64-linux;
           modules = [
             ./nix/machines/nixos-vm/configuration.nix
             home-manager.nixosModules.home-manager
