@@ -70,7 +70,6 @@ let
 
   packages = with pkgs; [
     buf
-    copilot-language-server
     dockerfile-language-server
     gofumpt
     golangci-lint
