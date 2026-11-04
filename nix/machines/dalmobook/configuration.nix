@@ -77,6 +77,12 @@ in
   nix.distributedBuilds = true;
   nix.settings.builders-use-substitutes = true;
 
+  # Keep host-side VMs and remote sessions running while plugged in.
+  # nix-darwin's power.sleep.computer cannot target AC power only.
+  system.activationScripts.power.text = lib.mkAfter ''
+    /usr/bin/pmset -c sleep 0
+  '';
+
   system.primaryUser = user;
 
   users.users."${user}" = {
