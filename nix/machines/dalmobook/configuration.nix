@@ -58,6 +58,18 @@ in
     };
   };
 
+  # ChatGPT Remote Control needs macOS Keychain CAs behind Zscaler.
+  # Reapply at login because launchctl's environment is session-local.
+  launchd.user.agents.node-system-ca.serviceConfig = {
+    ProgramArguments = [
+      "/bin/launchctl"
+      "setenv"
+      "NODE_USE_SYSTEM_CA"
+      "1"
+    ];
+    RunAtLoad = true;
+  };
+
   nix.buildMachines = [
     {
       hostName = "dalmobox.wombat-woodpecker.ts.net";
