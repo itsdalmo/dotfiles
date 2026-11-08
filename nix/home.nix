@@ -53,6 +53,9 @@ in
     LC_CTYPE = "en_US.UTF-8";
     AWS_DEFAULT_REGION = "eu-west-1";
     AWS_PAGER = "";
+    # The keychain and gnome-keyring ask for their password in a window, which
+    # doesn't show over ssh. The file backend asks in the terminal instead.
+    AWS_VAULT_BACKEND = "file";
     DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
     EDITOR = "nvim";
     GOPATH = "$HOME/go";
