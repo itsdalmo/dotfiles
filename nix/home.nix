@@ -53,23 +53,16 @@ in
     LC_CTYPE = "en_US.UTF-8";
     AWS_DEFAULT_REGION = "eu-west-1";
     AWS_PAGER = "";
+    # The keychain and gnome-keyring ask for their password in a window, which
+    # doesn't show over ssh. The file backend asks in the terminal instead.
+    AWS_VAULT_BACKEND = "file";
     DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
     EDITOR = "nvim";
     GOPATH = "$HOME/go";
     PAGER = "less -FirSwX";
     RIPGREP_CONFIG_PATH = "${config.xdg.configHome}/ripgrep/ripgreprc";
     ZK_NOTEBOOK_DIR = "${homeDirectory}/code/github.com/itsdalmo/notebook";
-  }
-  // (
-    if pkgs.stdenv.isDarwin then
-      { }
-    else
-      {
-        # gnome-keyring asks for its password in a window, which doesn't show
-        # over ssh. The file backend asks in the terminal instead.
-        AWS_VAULT_BACKEND = "file";
-      }
-  );
+  };
 
   home.shellAliases = {
     awsv = "aws-vault exec";
