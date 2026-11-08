@@ -178,7 +178,6 @@ in
     teleport
     tfcheck
     tflint
-    tfswitch
     trivy
     typescript
     yubikey-manager
