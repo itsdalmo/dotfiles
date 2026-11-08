@@ -59,8 +59,11 @@ local servers = {
       },
     },
   },
-  terraformls = {},
   tflint = {},
+  tofu_ls = {
+    -- nvim-lspconfig leaves out terraform-vars, the filetype of .tfvars files.
+    filetypes = { "opentofu", "opentofu-vars", "terraform", "terraform-vars" },
+  },
   ts_ls = {
     settings = {
       typescript = {

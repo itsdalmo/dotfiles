@@ -86,8 +86,8 @@ let
     shfmt
     sql-formatter
     stylua
-    terraform-ls
     tflint
+    tofu-ls
     typescript-language-server
     vscode-langservers-extracted # markdown, eslint, css, json, html
     yaml-language-server
