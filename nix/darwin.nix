@@ -38,9 +38,7 @@
       "chatgpt"
       "firefox"
       "ghostty"
-      "numi"
       "obsidian"
-      "postman"
       "raycast"
       "sensiblesidebuttons"
       "slack"
@@ -48,7 +46,6 @@
       "tailscale-app"
       "wezterm"
       "zed"
-      "zoom"
     ];
   };
 
