@@ -106,6 +106,20 @@ in
     443
   ];
 
+  # The OpenTelemetry Collector (itsdalmo/apps, observability/) uses host
+  # networking and receives OTLP/HTTP on the gateway of the apps-telemetry
+  # bridge, so only containers on that network can send telemetry.
+  networking.firewall.interfaces.br-otel.allowedTCPPorts = [ 4318 ];
+
+  # The Collector reads the containers' logs from Docker's JSON files (the
+  # NixOS default is journald). Existing containers keep their driver until
+  # they are recreated.
+  virtualisation.docker.logDriver = "json-file";
+  virtualisation.docker.daemon.settings.log-opts = {
+    max-size = "10m";
+    max-file = "3";
+  };
+
   # Automatic system updates at 5 AM
   system.autoUpgrade = {
     enable = true;
