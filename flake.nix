@@ -24,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
     noctalia = {
-      url = "github:noctalia-dev/noctalia/v5.5.0";
+      url = "github:noctalia-dev/noctalia/v5.6.0";
     };
   };
 
