@@ -133,8 +133,6 @@ in
 
   nix.settings.ssl-cert-file = certs;
 
-  homebrew.casks = [ "claude" ];
-
   homebrew.masApps = {
     # "1Password for Safari" = 1569813296;
     # "AdGuard for Safari" = 1440147259;
