@@ -36,6 +36,7 @@
       "1password-cli"
       "brave-browser"
       "chatgpt"
+      "claude"
       "firefox"
       "ghostty"
       "obsidian"
