@@ -73,8 +73,6 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
-    _1password-cli
-    _1password-gui
     (brave.override {
       commandLineArgs = "--password-store=gnome-libsecret";
     })
@@ -94,6 +92,12 @@ in
     wl-clipboard
     zed-editor
   ];
+
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ user ];
+  };
 
   networking.hostName = hostName;
 
@@ -204,9 +208,6 @@ in
       enable = true;
     };
   };
-
-  services.libinput.mouse.accelProfile = "flat";
-  services.libinput.mouse.accelSpeed = "-0.60";
 
   # Install tailscale
   services.tailscale.enable = true;

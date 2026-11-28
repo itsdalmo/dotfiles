@@ -193,7 +193,7 @@ in
   programs.noctalia = {
     enable = true;
     systemd.enable = true;
-    validateConfig = true;
+    checkConfig = true;
     settings = {
       shell = {
         font_family = "JetBrainsMono Nerd Font";
