@@ -34,17 +34,11 @@ in
       "networkmanager"
       "docker"
     ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSRWGrBG1gY2Sz8CdPqnqKiJJXqpG1+RgJ5cHXZluIU"
-    ];
+    openssh.authorizedKeys.keyFiles = [ ../../../files/.ssh/authorized_keys ];
   };
 
   networking.hostName = hostName;
 
   # Allow automated rebuilds over SSH without a password prompt.
   security.sudo.wheelNeedsPassword = false;
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 }

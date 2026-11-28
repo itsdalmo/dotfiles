@@ -6,6 +6,14 @@
 }:
 
 {
+  # Use the systemd-boot EFI boot loader with a generation cap so /boot does
+  # not fill up across automatic upgrades.
+  boot.loader.systemd-boot = {
+    enable = lib.mkDefault true;
+    configurationLimit = lib.mkDefault 10;
+  };
+  boot.loader.efi.canTouchEfiVariables = lib.mkDefault true;
+
   # Networking
   networking.dhcpcd.enable = false;
   networking.networkmanager.enable = true;
@@ -19,6 +27,7 @@
 
   environment.systemPackages = with pkgs; [
     curl
+    ghostty.terminfo
     git
     unzip
   ];
@@ -33,6 +42,7 @@
   # Enable the OpenSSH daemon
   services.openssh = {
     enable = true;
+    settings.KbdInteractiveAuthentication = false;
     settings.PasswordAuthentication = false;
     settings.PermitRootLogin = "no";
   };
