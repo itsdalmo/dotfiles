@@ -44,9 +44,6 @@ in
   nix.settings.builders-use-substitutes = true;
   nix.settings.max-jobs = 0; # Force all builds to use remote builders
 
-  # Create a group which will have read access to the k3s config
-  users.groups.k3s = { };
-
   users.users."${user}" = {
     home = "/home/${user}";
     shell = pkgs.zsh;
@@ -56,7 +53,6 @@ in
       "wheel"
       "networkmanager"
       "docker"
-      "k3s"
     ];
     openssh.authorizedKeys = {
       keyFiles = [ ../../../files/.ssh/authorized_keys ];
@@ -113,8 +109,14 @@ in
     max-size = "10m";
     max-file = "3";
   };
+  # Prune dangling images left behind by deploys without touching volumes or
+  # recently stopped containers.
+  virtualisation.docker.autoPrune = {
+    enable = true;
+    flags = [ "--filter=until=168h" ];
+  };
 
-  # Automatic system updates at 5 AM
+  # Automatic system updates at 6 AM
   system.autoUpgrade = {
     enable = true;
     flake = "github:itsdalmo/dotfiles#dalmolab";
