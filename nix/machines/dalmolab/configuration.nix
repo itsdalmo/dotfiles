@@ -58,21 +58,15 @@ in
       "docker"
       "k3s"
     ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSRWGrBG1gY2Sz8CdPqnqKiJJXqpG1+RgJ5cHXZluIU"
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPzEKT/ZL+7hKaS/7wvH2UKuTUJVeX4FMUc6jMx5UfN52UukTBrRkkk3yJkM8Bw90T5CW1pNifFvjCkXQY0Zr8A=" # dalmophone17 (Termius)
-    ];
+    openssh.authorizedKeys = {
+      keyFiles = [ ../../../files/.ssh/authorized_keys ];
+      keys = [
+        "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPzEKT/ZL+7hKaS/7wvH2UKuTUJVeX4FMUc6jMx5UfN52UukTBrRkkk3yJkM8Bw90T5CW1pNifFvjCkXQY0Zr8A=" # dalmophone17 (Termius)
+      ];
+    };
   };
 
-  environment.systemPackages = with pkgs; [
-    ghostty
-  ];
-
   networking.hostName = hostName;
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable aarch64-linux emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

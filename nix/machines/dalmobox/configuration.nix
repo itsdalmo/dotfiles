@@ -44,9 +44,12 @@ in
       "networkmanager"
       "docker"
     ];
-    openssh.authorizedKeys.keys = [
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPzEKT/ZL+7hKaS/7wvH2UKuTUJVeX4FMUc6jMx5UfN52UukTBrRkkk3yJkM8Bw90T5CW1pNifFvjCkXQY0Zr8A=" # dalmophone17 (Termius)
-    ];
+    openssh.authorizedKeys = {
+      keyFiles = [ ../../../files/.ssh/authorized_keys ];
+      keys = [
+        "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPzEKT/ZL+7hKaS/7wvH2UKuTUJVeX4FMUc6jMx5UfN52UukTBrRkkk3yJkM8Bw90T5CW1pNifFvjCkXQY0Zr8A=" # dalmophone17 (Termius)
+      ];
+    };
   };
 
   # Remote builder for dalmobook and dalmolab. nix-ssh is not a trusted user (a
@@ -65,7 +68,9 @@ in
   };
   # Generated with: nix key generate-secret --key-name dalmobox-1 > /var/lib/nix/dalmobox.sec
   nix.settings.secret-key-files = [ "/var/lib/nix/dalmobox.sec" ];
-  nix.settings.extra-trusted-public-keys = [ "dalmobox-1:G/9TBw1Ja2XZ2493xzKQWviF/NAui1DYBRnppHnfi2U=" ];
+  nix.settings.extra-trusted-public-keys = [
+    "dalmobox-1:G/9TBw1Ja2XZ2493xzKQWviF/NAui1DYBRnppHnfi2U="
+  ];
 
   environment.systemPackages = with pkgs; [
     _1password-cli
@@ -158,10 +163,6 @@ in
 
   # Prevent USB devices from being suspended (and interfering with wake from sleep)
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable aarch64-linux emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
