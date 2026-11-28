@@ -28,7 +28,7 @@ After rebooting, complete the following manual steps:
 
 ```sh
 # Run the bootstrap script
-nix-shell -p curl --run /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/refs/heads/master/scripts/bootstrap_nixos.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/refs/heads/master/scripts/bootstrap_nixos.sh)"
 
 # Run the initial install with a reboot
 nixos-rebuild boot --flake github:itsdalmo/dotfiles#nixos-vm && reboot

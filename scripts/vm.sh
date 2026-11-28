@@ -43,9 +43,8 @@ install() {
   local ADDR
   ADDR=$(prlctl list -f -j "${VMNAME}" | jq -r '.[].ip_configured')
 
-  ssh -p 22 -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "root@${ADDR}" " \
-    nix-shell -p curl --run /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/refs/heads/master/scripts/bootstrap_nixos.sh)\"
-  "
+  ssh -p 22 -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "root@${ADDR}" \
+    'bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsdalmo/dotfiles/refs/heads/master/scripts/bootstrap_nixos.sh)"'
 }
 
 rebuild_and_reboot() {
